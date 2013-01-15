@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
-namespace iseconds
+namespace iSeconds.Android.App
 {
 	[Activity (Label = "iseconds", MainLauncher = true)]
 	public class MainActivity : Activity

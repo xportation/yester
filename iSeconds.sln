@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroidUnitTesting", "MonoDroidUnitTesting\MonoDroidUnitTesting.csproj", "{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSeconds.Android.App", "iSeconds.Android.App\iSeconds.Android.App.csproj", "{D4C3A003-2E45-4E6E-B42F-A47E90911D55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSeconds.Android.Test", "iSeconds.Android.Test\iSeconds.Android.Test.csproj", "{37848C4B-F3C3-464D-BE23-2B9787608517}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSeconds.Domain", "iSeconds.Domain\iSeconds.Domain.csproj", "{50EE0B1B-58F6-4CF8-BF44-4196D017744C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSeconds.Domain.Test", "iSeconds.Domain.Test\iSeconds.Domain.Test.csproj", "{1971851B-A591-4E36-8705-90C074C86FDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Default|Any CPU = Default|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = iSeconds.Domain.Test\iSeconds.Domain.Test.csproj
+	EndGlobalSection
+EndGlobal

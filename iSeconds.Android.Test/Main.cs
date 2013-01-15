@@ -9,7 +9,7 @@ using Android.OS;
 using MonoDroidUnitTesting;
 using System.Reflection;
 
-namespace android_test
+namespace iSeconds.Android.Test
 {
 	[Activity(Label = "MonoDroidUnit", MainLauncher = true, Icon = "@drawable/icon")]
 	public class Main : GuiTestRunnerActivity {

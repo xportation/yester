@@ -11,7 +11,7 @@
 
 [assembly: Android.Runtime.ResourceDesignerAttribute("iseconds.Resource", IsApplication=true)]
 
-namespace iseconds
+namespace iSeconds.Android.App
 {
 	
 	
