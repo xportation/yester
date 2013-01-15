@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: Android.Runtime.ResourceDesignerAttribute("iseconds.Resource", IsApplication=true)]
+[assembly: Android.Runtime.ResourceDesignerAttribute("iSeconds.Android.App.Resource", IsApplication=true)]
 
 namespace iSeconds.Android.App
 {

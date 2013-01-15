@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace iSeconds.Android.App
 {
-	[Activity (Label = "iseconds", MainLauncher = true)]
+	[Activity (Label = "iSeconds.Android.App", MainLauncher = true)]
 	public class MainActivity : Activity
 	{
 		int count = 1;
