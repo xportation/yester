@@ -3,18 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "android_app", "android_app\android_app.csproj", "{D4C3A003-2E45-4E6E-B42F-A47E90911D55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "android_test", "android_test\android_test.csproj", "{37848C4B-F3C3-464D-BE23-2B9787608517}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroidUnitTesting", "MonoDroidUnitTesting\MonoDroidUnitTesting.csproj", "{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37848C4B-F3C3-464D-BE23-2B9787608517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4C3A003-2E45-4E6E-B42F-A47E90911D55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = android_app\android_app.csproj
+		StartupItem = android_test\android_test.csproj
 	EndGlobalSection
 EndGlobal
