@@ -4,17 +4,20 @@ using iSeconds.Domain;
 
 namespace iSeconds.Domain.Test
 {
-	[TestFixture]
+	[TestFixture()]
 	public class UserTest
 	{
-		[Test]
+		[Test()]
 		public void TestUserShouldHaveTimelines()
 		{
 			User user = new User();
-			user.CreateTimeline();
-			
+			user.CreateTimeline();			
 			Assert.AreEqual(1, user.GetTimelineCount());
+
+			user.CreateTimeline();
+			Assert.AreEqual(2, user.GetTimelineCount());
 		}
+
 	}
 }
 

@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1971851B-A591-4E36-8705-90C074C86FDC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>common_test</RootNamespace>
-    <AssemblyName>common_test</AssemblyName>
+    <RootNamespace>iSeconds.Domain.Test</RootNamespace>
+    <AssemblyName>iSeconds.Domain.Test</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -41,7 +41,9 @@
     <Compile Include="..\iSeconds.Domain\User.cs">
       <Link>User.cs</Link>
     </Compile>
-    <Compile Include="c:\Users\Aniceto\workspace\iseconds\trunk\iSeconds.Domain.Test\UserTest.cs" />
+    <Compile Include="UserTest.cs" />
+    <Compile Include="TimelineTest.cs" />
+    <Compile Include="..\iSeconds.Domain\DayInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
