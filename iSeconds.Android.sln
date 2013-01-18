@@ -18,12 +18,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Default|Any CPU.ActiveCfg = Debug|Any CPU
@@ -42,17 +42,17 @@ Global
 		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = iSeconds.Android.Application\iSeconds.Android.Application.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = iSeconds.Domain.Test\iSeconds.Domain.Test.csproj
 	EndGlobalSection
 EndGlobal

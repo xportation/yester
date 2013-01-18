@@ -21,7 +21,7 @@ namespace android_test
 		
 		public static void UpdateIdValues()
 		{
-			iseconds_domain.Resource.String.library_name = android_test.Resource.String.library_name;
+			iSeconds.Domain.Resource.String.library_name = android_test.Resource.String.library_name;
 		}
 		
 		public partial class Attribute

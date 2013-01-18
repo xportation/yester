@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: Android.Runtime.ResourceDesignerAttribute("iseconds_domain.Resource", IsApplication=false)]
+[assembly: Android.Runtime.ResourceDesignerAttribute("iSeconds.Domain.Resource", IsApplication=false)]
 
-namespace iseconds_domain
+namespace iSeconds.Domain
 {
 	
 	

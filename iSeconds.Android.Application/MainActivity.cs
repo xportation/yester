@@ -5,18 +5,33 @@ using Android.Content.PM;
 using Android.Graphics;
 using Android.Widget;
 using Android.OS;
+using iSeconds.Domain;
 using Xamarin.Media;
 using Path = System.IO.Path;
+using Android.Content;
 
-namespace iSeconds
+namespace iSeconds.Android.Application
 {
 	[Activity (Label = "iSeconds", MainLauncher = true, Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.Orientation)]
 	public class MainActivity : Activity
 	{
+		// um usuario de teste
+		User userTest = new User();
+
+		int CREATE_TIMELINE_RESULT = 1;
+
+		const string TIMELINE_NAME_EXTRA = "TIMELINE_NAME_EXTRA";
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Main);
+
+			Button createTimelineButton = FindViewById<Button>(Resource.Id.createTimeline);
+			createTimelineButton.Click += delegate {
+				this.StartActivityForResult(typeof(CreateTimelineActivity), CREATE_TIMELINE_RESULT);
+			};
+				
 			ImageView image = FindViewById<ImageView> (Resource.Id.image);
 			VideoView videoView  = FindViewById<VideoView>(Resource.Id.surfacevideoview);
 			
@@ -34,6 +49,8 @@ namespace iSeconds
 				// and videos
 				//
 				var picker = new MediaPicker (this);
+
+
 
 				// We can check to make sure the device has a camera
 				// and supports dealing with video.
@@ -66,7 +83,7 @@ namespace iSeconds
 					// we can use ContinueWith to run more code
 					// after the user finishes recording the video
 					//
-					RunOnUiThread (() =>
+					RunOnUiThread (delegate
 					{
 						//
 						// Toggle the visibility of the image and videoviews
@@ -117,7 +134,7 @@ namespace iSeconds
 						return;
 
 					Bitmap b = BitmapFactory.DecodeFile (t.Result.Path);
-					RunOnUiThread (() =>
+					RunOnUiThread (delegate
 					{
 						//
 						// Toggle the visibility of the image and video views
@@ -171,7 +188,7 @@ namespace iSeconds
 					// we can use ContinueWith to run more code
 					// after the user finishes recording the video
 					//
-					RunOnUiThread (() =>
+					RunOnUiThread (delegate
 					{
 						//
 						// Toggle the visibility of the image and video views
@@ -221,7 +238,7 @@ namespace iSeconds
 						return;
 
 					Bitmap b = BitmapFactory.DecodeFile (t.Result.Path);
-					RunOnUiThread (() =>
+					RunOnUiThread (delegate
 					{
 						//
 						// Toggle the visibility of the image and video views
@@ -241,6 +258,22 @@ namespace iSeconds
 			};
 		}
 
+		protected override void OnActivityResult (int requestCode, Result resultCode, Intent data)
+		{
+			if (requestCode == CREATE_TIMELINE_RESULT) 
+			{
+				if (resultCode == Result.Ok) 
+				{
+					string timelineName = data.GetStringExtra(TIMELINE_NAME_EXTRA);
+					Toast toast = Toast.MakeText(this, timelineName, ToastLength.Short);
+					toast.Show();
+					// TODO: parei aqui
+					//userTest.CreateTimeline(timelineName);
+				}
+
+			}
+		}
+
 		private Toast unsupportedToast;
 		private void ShowUnsupported()
 		{
@@ -249,9 +282,12 @@ namespace iSeconds
 				this.unsupportedToast.Cancel();
 				this.unsupportedToast.Dispose();
 			}
-
+			
 			this.unsupportedToast = Toast.MakeText (this, "Your device does not support this feature", ToastLength.Long);
 			this.unsupportedToast.Show();
 		}
+	
 	}
+
+		
 }
