@@ -23,9 +23,8 @@ namespace iSeconds.Domain.Test
 		{
 			bool wasCalled = false;
 			User user = new User();
-			user.OnNewTimeline += (object source, EventArgs e) => {
-				GenericEventArgs<Timeline> args = (GenericEventArgs<Timeline>)e;
-				Assert.AreEqual("my life", args.Value.Name);
+			user.OnNewTimeline += (object source, GenericEventArgs<Timeline> e) => {
+				Assert.AreEqual("my life", e.Value.Name);
 				wasCalled = true;
 			};
 			user.CreateTimeline("my life");

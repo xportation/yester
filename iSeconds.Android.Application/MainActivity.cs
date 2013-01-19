@@ -7,6 +7,7 @@ using Android.Widget;
 using Android.OS;
 using iSeconds.Domain;
 using Android.Content;
+using Android.Views;
 
 namespace iSeconds
 {
@@ -30,13 +31,7 @@ namespace iSeconds
 				this.StartActivityForResult (typeof(iSeconds.Android.Application.CreateTimelineActivity), CREATE_TIMELINE_RESULT);
 			};
 
-			Button mediaSandboxButton = FindViewById<Button>(Resource.Id.mediaSandboxButton);
-			mediaSandboxButton.Click += delegate {
-				this.StartActivity(typeof(iSeconds.MediaSandboxActivity));
-			};
-
-			userTest.OnNewTimeline+= (object sender, EventArgs e) => {
-				GenericEventArgs<Timeline> args = (GenericEventArgs<Timeline>) e;
+			userTest.OnNewTimeline+= (object sender, GenericEventArgs<Timeline> args) => {
 				string timelineName = args.Value.Name;
 				TextView label = new TextView(this);
 				label.Text = timelineName;
@@ -62,7 +57,23 @@ namespace iSeconds
 			}
 		}
 
-	
+		public override bool OnCreateOptionsMenu(IMenu menu)
+		{
+			MenuInflater.Inflate(Resource.Menu.MenuItems, menu);
+			return true;
+		}
+
+		public override bool OnOptionsItemSelected(IMenuItem item)
+		{
+			// Handle item selection
+			switch (item.ItemId) {
+			case Resource.Id.menu_media_sandbox:
+				this.StartActivity(typeof(iSeconds.MediaSandboxActivity));
+				return true;			
+			default:
+				return base.OnOptionsItemSelected(item);
+			}
+		}
 	
 	}
 

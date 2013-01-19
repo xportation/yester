@@ -6,7 +6,7 @@ namespace iSeconds.Domain
 {
 	public class User
 	{
-		public event EventHandler OnNewTimeline;
+		public event EventHandler<GenericEventArgs<Timeline>> OnNewTimeline;
 
 		public void CreateTimeline (string timelineName)
 		{

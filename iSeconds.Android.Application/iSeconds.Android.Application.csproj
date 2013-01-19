@@ -69,6 +69,9 @@
     <AndroidResource Include="Resources\Layout\MediaSandbox.axml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\Menu\MenuItems.axml" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
