@@ -4,36 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <Button
-        android:id="@+id/takePhotoButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Take Photo" />
-    <Button
-        android:id="@+id/takeVideoButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Take Video" />
-    <Button
-        android:id="@+id/pickPhotoButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Pick Photo" />
-    <Button
-        android:id="@+id/pickVideoButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Pick Video" />
-    <Button
         android:id="@+id/createTimeline"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/create_timeline" />
-    <ImageView
-        android:id="@+id/image"
+    <Button
+        android:id="@+id/mediaSandboxButton"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-    <VideoView
-        android:id="@+id/surfacevideoview"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Media Sandbox" />
 </LinearLayout>

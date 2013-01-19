@@ -18,6 +18,15 @@ namespace iSeconds.Domain.Test
 			Assert.AreEqual(2, user.GetTimelineCount());
 		}
 
+		[Test()]
+		public void TestUserNotifiesOnNewTimelines()
+		{
+			User user = new User();
+
+			
+			user.CreateTimeline();
+		}
+
 	}
 }
 

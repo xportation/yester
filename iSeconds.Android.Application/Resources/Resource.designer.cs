@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: Android.Runtime.ResourceDesignerAttribute("iSeconds.Android.Application.Resource", IsApplication=true)]
+[assembly: Android.Runtime.ResourceDesignerAttribute("iSeconds.Resource", IsApplication=true)]
 
-namespace iSeconds.Android.Application
+namespace iSeconds
 {
 	
 	
@@ -21,7 +21,7 @@ namespace iSeconds.Android.Application
 		
 		public static void UpdateIdValues()
 		{
-			iSeconds.Domain.Resource.String.library_name = iSeconds.Android.Application.Resource.String.library_name;
+			iSeconds.Domain.Resource.String.library_name = iSeconds.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -46,29 +46,32 @@ namespace iSeconds.Android.Application
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050007
-			public const int createTimeline = 2131034119;
+			// aapt resource value: 0x7f050003
+			public const int createTimeline = 2131034115;
 			
 			// aapt resource value: 0x7f050002
 			public const int create_timeline_button = 2131034114;
 			
-			// aapt resource value: 0x7f050008
-			public const int image = 2131034120;
-			
-			// aapt resource value: 0x7f050005
-			public const int pickPhotoButton = 2131034117;
-			
-			// aapt resource value: 0x7f050006
-			public const int pickVideoButton = 2131034118;
-			
 			// aapt resource value: 0x7f050009
-			public const int surfacevideoview = 2131034121;
-			
-			// aapt resource value: 0x7f050003
-			public const int takePhotoButton = 2131034115;
+			public const int image = 2131034121;
 			
 			// aapt resource value: 0x7f050004
-			public const int takeVideoButton = 2131034116;
+			public const int mediaSandboxButton = 2131034116;
+			
+			// aapt resource value: 0x7f050007
+			public const int pickPhotoButton = 2131034119;
+			
+			// aapt resource value: 0x7f050008
+			public const int pickVideoButton = 2131034120;
+			
+			// aapt resource value: 0x7f05000a
+			public const int surfacevideoview = 2131034122;
+			
+			// aapt resource value: 0x7f050005
+			public const int takePhotoButton = 2131034117;
+			
+			// aapt resource value: 0x7f050006
+			public const int takeVideoButton = 2131034118;
 			
 			// aapt resource value: 0x7f050001
 			public const int timeline_name_edit = 2131034113;
@@ -89,6 +92,9 @@ namespace iSeconds.Android.Application
 			
 			// aapt resource value: 0x7f030001
 			public const int Main = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int MediaSandbox = 2130903042;
 			
 			private Layout()
 			{
