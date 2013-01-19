@@ -34,6 +34,15 @@ namespace iSeconds
 			mediaSandboxButton.Click += delegate {
 				this.StartActivity(typeof(iSeconds.MediaSandboxActivity));
 			};
+
+			userTest.OnNewTimeline+= (object sender, EventArgs e) => {
+				GenericEventArgs<Timeline> args = (GenericEventArgs<Timeline>) e;
+				string timelineName = args.Value.Name;
+				TextView label = new TextView(this);
+				label.Text = timelineName;
+				LinearLayout layout = this.FindViewById<LinearLayout>(Resource.Id.mainLayout);
+				layout.AddView(label);
+			};
 				
 		}
 
@@ -47,7 +56,7 @@ namespace iSeconds
 					Toast toast = Toast.MakeText(this, timelineName, ToastLength.Short);
 					toast.Show();
 					// TODO: parei aqui
-					//userTest.CreateTimeline(timelineName);
+					userTest.CreateTimeline(timelineName);
 				}
 
 			}

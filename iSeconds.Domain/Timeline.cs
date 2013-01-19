@@ -7,6 +7,11 @@ namespace iSeconds.Domain
 {
 	public class Timeline
 	{
+		public Timeline (string name)
+		{
+			this.Name = name;
+		}
+
 		public void AddVideoAt (DateTime date, string url)
 		{
 			if (!days.ContainsKey(date))
@@ -26,6 +31,17 @@ namespace iSeconds.Domain
 				return 0;
 
 			return days[date].GetVideoCount();
+		}
+
+		private string name;
+		public string Name 
+		{
+			get {
+				return name;
+			}
+			set {
+				name = value;
+			}
 		}
 
 		private Dictionary<DateTime, DayInfo> days = new Dictionary<DateTime, DayInfo>();

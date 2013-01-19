@@ -1,12 +1,19 @@
 using System.Collections.Generic;
+using System;
+using iSeconds.Domain;
 
 namespace iSeconds.Domain
 {
 	public class User
 	{
-		public void CreateTimeline ()
+		public event EventHandler OnNewTimeline;
+
+		public void CreateTimeline (string timelineName)
 		{
-			timelines.Add(new Timeline());
+			Timeline timeline = new Timeline(timelineName);
+			timelines.Add(timeline);
+			if (OnNewTimeline != null)
+				OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
 		}
 
 		public int GetTimelineCount ()

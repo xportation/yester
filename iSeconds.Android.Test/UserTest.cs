@@ -15,7 +15,7 @@ namespace iSeconds.Android.Test
 		public void TestUserShouldHaveTimelines()
 		{
 			User user = new User();
-			user.CreateTimeline();
+			user.CreateTimeline("my life");
 
 			Assert.AreEqual(1, user.GetTimelineCount());
 		}
