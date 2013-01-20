@@ -46,8 +46,8 @@ namespace iSeconds
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060004
-			public const int createTimeline = 2131099652;
+			// aapt resource value: 0x7f06000c
+			public const int createTimeline = 2131099660;
 			
 			// aapt resource value: 0x7f060002
 			public const int create_timeline_button = 2131099650;
@@ -58,8 +58,11 @@ namespace iSeconds
 			// aapt resource value: 0x7f060003
 			public const int mainLayout = 2131099651;
 			
-			// aapt resource value: 0x7f06000b
-			public const int menu_media_sandbox = 2131099659;
+			// aapt resource value: 0x7f06000d
+			public const int menu_media_sandbox = 2131099661;
+			
+			// aapt resource value: 0x7f06000e
+			public const int menu_timelines = 2131099662;
 			
 			// aapt resource value: 0x7f060007
 			public const int pickPhotoButton = 2131099655;
@@ -76,11 +79,17 @@ namespace iSeconds
 			// aapt resource value: 0x7f060006
 			public const int takeVideoButton = 2131099654;
 			
+			// aapt resource value: 0x7f060004
+			public const int textView1 = 2131099652;
+			
 			// aapt resource value: 0x7f060001
 			public const int timeline_name_edit = 2131099649;
 			
 			// aapt resource value: 0x7f060000
 			public const int timeline_name_label = 2131099648;
+			
+			// aapt resource value: 0x7f06000b
+			public const int userTimelinesLayout = 2131099659;
 			
 			private Id()
 			{
@@ -98,6 +107,9 @@ namespace iSeconds
 			
 			// aapt resource value: 0x7f030002
 			public const int MediaSandbox = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int UserTimelines = 2130903043;
 			
 			private Layout()
 			{

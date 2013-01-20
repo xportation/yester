@@ -16,6 +16,11 @@ namespace iSeconds.Domain
 				OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
 		}
 
+		public List<Timeline> GetTimelines ()
+		{
+			return timelines;
+		}
+
 		public int GetTimelineCount ()
 		{
 			return timelines.Count;

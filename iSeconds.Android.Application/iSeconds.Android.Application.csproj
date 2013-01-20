@@ -59,6 +59,8 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="CreateTimelineActivity.cs" />
     <Compile Include="MediaSandboxActivity.cs" />
+    <Compile Include="UserTimelinesActivity.cs" />
+    <Compile Include="ISecondsApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -67,6 +69,7 @@
     <AndroidResource Include="Resources\Layout\CreateTimeline.axml" />
     <AndroidResource Include="Resources\Layout\Main.axml" />
     <AndroidResource Include="Resources\Layout\MediaSandbox.axml" />
+    <AndroidResource Include="Resources\Layout\UserTimelines.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Menu\MenuItems.axml" />
