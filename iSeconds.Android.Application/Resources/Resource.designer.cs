@@ -47,7 +47,10 @@ namespace iSeconds
 		{
 			
 			// aapt resource value: 0x7f06000c
-			public const int createTimeline = 2131099660;
+			public const int calendarView2 = 2131099660;
+			
+			// aapt resource value: 0x7f06000e
+			public const int createTimeline = 2131099662;
 			
 			// aapt resource value: 0x7f060002
 			public const int create_timeline_button = 2131099650;
@@ -55,14 +58,17 @@ namespace iSeconds
 			// aapt resource value: 0x7f060009
 			public const int image = 2131099657;
 			
+			// aapt resource value: 0x7f06000b
+			public const int layoutCalendar = 2131099659;
+			
 			// aapt resource value: 0x7f060003
 			public const int mainLayout = 2131099651;
 			
-			// aapt resource value: 0x7f06000d
-			public const int menu_media_sandbox = 2131099661;
+			// aapt resource value: 0x7f06000f
+			public const int menu_media_sandbox = 2131099663;
 			
-			// aapt resource value: 0x7f06000e
-			public const int menu_timelines = 2131099662;
+			// aapt resource value: 0x7f060010
+			public const int menu_timelines = 2131099664;
 			
 			// aapt resource value: 0x7f060007
 			public const int pickPhotoButton = 2131099655;
@@ -88,8 +94,8 @@ namespace iSeconds
 			// aapt resource value: 0x7f060000
 			public const int timeline_name_label = 2131099648;
 			
-			// aapt resource value: 0x7f06000b
-			public const int userTimelinesLayout = 2131099659;
+			// aapt resource value: 0x7f06000d
+			public const int userTimelinesLayout = 2131099661;
 			
 			private Id()
 			{
@@ -109,7 +115,10 @@ namespace iSeconds
 			public const int MediaSandbox = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int UserTimelines = 2130903043;
+			public const int Timeline = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int UserTimelines = 2130903044;
 			
 			private Layout()
 			{

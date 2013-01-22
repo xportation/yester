@@ -61,6 +61,9 @@
     <Compile Include="MediaSandboxActivity.cs" />
     <Compile Include="UserTimelinesActivity.cs" />
     <Compile Include="ISecondsApplication.cs" />
+    <Compile Include="TimelineActivity.cs" />
+    <Compile Include="_controls\CalendarAdapter.cs" />
+    <Compile Include="_controls\CalendarMonthView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -70,6 +73,7 @@
     <AndroidResource Include="Resources\Layout\Main.axml" />
     <AndroidResource Include="Resources\Layout\MediaSandbox.axml" />
     <AndroidResource Include="Resources\Layout\UserTimelines.axml" />
+    <AndroidResource Include="Resources\Layout\Timeline.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Menu\MenuItems.axml" />

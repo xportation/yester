@@ -20,7 +20,6 @@ namespace iSeconds
 			SetContentView (Resource.Layout.Main);
 		}
 
-
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
 			MenuInflater.Inflate(Resource.Menu.MenuItems, menu);

@@ -23,34 +23,32 @@ namespace iSeconds
 
 		private User user = null;
 
+		private LinearLayout layout = null;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
 			this.SetContentView(Resource.Layout.UserTimelines);
 
-			UserService userService = ((ISecondsApplication)this.Application).GetUserService();
-			user = userService.GetActualUser();
-
-			foreach (Timeline timeline in user.GetTimelines())
-			{
-				TextView label = new TextView(this);
-				label.Text = timeline.Name;
-				LinearLayout layout = this.FindViewById<LinearLayout>(Resource.Id.userTimelinesLayout);
-				layout.AddView(label);
-			}
+			layout = this.FindViewById<LinearLayout> (Resource.Id.userTimelinesLayout);
 
 			Button createTimelineButton = FindViewById<Button> (Resource.Id.createTimeline);
 			createTimelineButton.Click += delegate {
 				this.StartActivityForResult (typeof(iSeconds.Android.Application.CreateTimelineActivity), CREATE_TIMELINE_RESULT);
 			};
-			
-			user.OnNewTimeline+= (object sender, GenericEventArgs<Timeline> args) => {
-				string timelineName = args.Value.Name;
-				TextView label = new TextView(this);
-				label.Text = timelineName;
-				LinearLayout layout = this.FindViewById<LinearLayout>(Resource.Id.userTimelinesLayout);
-				layout.AddView(label);
+
+			UserService userService = ((ISecondsApplication)this.Application).GetUserService();
+			user = userService.GetActualUser();
+
+			foreach (Timeline timeline in user.GetTimelines()) 
+			{
+				CreateTimelineButton(timeline);
+			}
+
+			user.OnNewTimeline+= (object sender, GenericEventArgs<Timeline> args) => 
+			{
+				CreateTimelineButton(args.Value);
 			};
 		}
 
@@ -62,14 +60,22 @@ namespace iSeconds
 				{
 					string timelineName = data.GetStringExtra(TIMELINE_NAME_EXTRA);
 					Toast toast = Toast.MakeText(this, timelineName, ToastLength.Short);
-					toast.Show();
-					// TODO: parei aqui
+					toast.Show();				
 					user.CreateTimeline(timelineName);
 				}
-				
 			}
 		}
 
+		void CreateTimelineButton (Timeline timeline)
+		{
+			Button button = new Button (this);
+			button.Text = timeline.Name;
+			button.Click += delegate {
+				this.StartActivity (typeof(iSeconds.TimelineActivity));
+			};
+
+			layout.AddView (button, ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
+		}
 	}
 }
 
