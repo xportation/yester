@@ -17,8 +17,8 @@ namespace iSeconds
 	[Activity (Label = "UserTimelinesActivity")]			
 	public class UserTimelinesActivity : Activity
 	{
-		int CREATE_TIMELINE_RESULT = 1;
-		
+		private const int CREATE_TIMELINE_RESULT = 1;
+
 		const string TIMELINE_NAME_EXTRA = "TIMELINE_NAME_EXTRA";
 
 		private User user = null;

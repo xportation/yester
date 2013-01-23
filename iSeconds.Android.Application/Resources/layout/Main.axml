@@ -7,7 +7,7 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <TextView
-        android:text="As coisas estao no menu agora... A ideia eh deixar aqui ja a visao de um timeline (o calendario)"
+        android:text="As coisas estao no menu agora... A ideia eh deixar aqui ja a visao de um timeline (o calendario) :p"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
