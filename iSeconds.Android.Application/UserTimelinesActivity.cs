@@ -14,13 +14,9 @@ using iSeconds.Domain;
 
 namespace iSeconds
 {
-	[Activity (Label = "UserTimelinesActivity")]			
+	[Activity (Label = "Olá! Você deve criar ou escolher um timeline", Theme = "@android:style/Theme.Dialog")]			
 	public class UserTimelinesActivity : Activity
 	{
-		private const int CREATE_TIMELINE_RESULT = 1;
-
-		const string TIMELINE_NAME_EXTRA = "TIMELINE_NAME_EXTRA";
-
 		private User user = null;
 
 		private LinearLayout layout = null;
@@ -35,11 +31,15 @@ namespace iSeconds
 
 			Button createTimelineButton = FindViewById<Button> (Resource.Id.createTimeline);
 			createTimelineButton.Click += delegate {
-				this.StartActivityForResult (typeof(iSeconds.Android.Application.CreateTimelineActivity), CREATE_TIMELINE_RESULT);
+
+				this.StartActivityForResult (
+					typeof(iSeconds.Android.Application.CreateTimelineActivity), 
+					ISecondsConstants.CREATE_TIMELINE_RESULT
+				);
 			};
 
 			UserService userService = ((ISecondsApplication)this.Application).GetUserService();
-			user = userService.GetActualUser();
+			user = userService.ActualUser;
 
 			foreach (Timeline timeline in user.GetTimelines()) 
 			{
@@ -54,11 +54,11 @@ namespace iSeconds
 
 		protected override void OnActivityResult (int requestCode, Result resultCode, Intent data)
 		{
-			if (requestCode == CREATE_TIMELINE_RESULT) 
+			if (requestCode == ISecondsConstants.CREATE_TIMELINE_RESULT) 
 			{
 				if (resultCode == Result.Ok) 
 				{
-					string timelineName = data.GetStringExtra(TIMELINE_NAME_EXTRA);
+					string timelineName = data.GetStringExtra(ISecondsConstants.TIMELINE_NAME_EXTRA);
 					Toast toast = Toast.MakeText(this, timelineName, ToastLength.Short);
 					toast.Show();				
 					user.CreateTimeline(timelineName);
@@ -71,7 +71,10 @@ namespace iSeconds
 			Button button = new Button (this);
 			button.Text = timeline.Name;
 			button.Click += delegate {
-				this.StartActivity (typeof(iSeconds.TimelineActivity));
+				user.ActualTimeline = timeline;
+				this.SetResult(Result.Ok, this.Intent);
+				this.Finish();
+				//this.StartActivity (typeof(iSeconds.TimelineActivity));
 			};
 
 			layout.AddView (button, ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);

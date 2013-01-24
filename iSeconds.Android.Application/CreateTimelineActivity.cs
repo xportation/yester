@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace iSeconds.Android.Application
 {
-	[Activity (Label = "Create Timeline")]
+	[Activity (Label = "Create Timeline", Theme = "@android:style/Theme.Dialog")]
 	public class CreateTimelineActivity : Activity
 	{
 		protected override void OnCreate (Bundle bundle)
@@ -22,12 +22,18 @@ namespace iSeconds.Android.Application
 
 			SetContentView (Resource.Layout.CreateTimeline);
 			
-			Button button = FindViewById<Button> (Resource.Id.create_timeline_button);
+			Button create = FindViewById<Button> (Resource.Id.create_timeline_button);
 			EditText editText = FindViewById<EditText> (Resource.Id.timeline_name_edit);
+			Button cancel = FindViewById<Button> (Resource.Id.cancel_timeline_creation_button);
 
-			button.Click += delegate {
-				this.Intent.PutExtra("TIMELINE_NAME_EXTRA", editText.Text);
+			create.Click += delegate {
+				this.Intent.PutExtra(ISecondsConstants.TIMELINE_NAME_EXTRA, editText.Text);
 				this.SetResult(Result.Ok, this.Intent);
+				this.Finish();
+			};
+
+			cancel.Click+= delegate {
+				this.SetResult(Result.Canceled, this.Intent);
 				this.Finish();
 			};
 		}

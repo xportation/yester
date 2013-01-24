@@ -62,9 +62,10 @@
     <Compile Include="MediaSandboxActivity.cs" />
     <Compile Include="UserTimelinesActivity.cs" />
     <Compile Include="ISecondsApplication.cs" />
-    <Compile Include="TimelineActivity.cs" />
     <Compile Include="_controls\CalendarAdapter.cs" />
     <Compile Include="_controls\CalendarMonthView.cs" />
+    <Compile Include="ISecondsActivity.cs" />
+    <Compile Include="ISecondsConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

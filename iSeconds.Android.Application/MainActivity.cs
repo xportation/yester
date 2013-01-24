@@ -12,36 +12,88 @@ using Android.Views;
 namespace iSeconds
 {
 	[Activity (Label = "iSeconds", MainLauncher = true, Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.Orientation)]
-	public class MainActivity : Activity
+	public class MainActivity : ISecondsActivity
 	{
+		UserService userService = null;
+		User actualUser = null;
+		LinearLayout layout = null;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Main);
+
+			layout = (LinearLayout)this.FindViewById(Resource.Id.mainLayout);
+
+			userService = ((ISecondsApplication)this.Application).GetUserService ();
+			actualUser = userService.ActualUser;
+			actualUser.OnActualTimelineChanged+= (object sender, GenericEventArgs<Timeline> e) => {
+				invalidateTimeline();
+			};
+			
+			if (actualUser != null) 
+			{
+				if (actualUser.TimelineCount == 0)
+				{
+					this.StartActivityForResult(typeof(iSeconds.UserTimelinesActivity), ISecondsConstants.TIMELINE_CHOOSER_RESULT);
+
+				} else {
+
+					invalidateTimeline();
+
+				}
+
+			} 
+			//else redirecionar para login...
 		}
 
-		public override bool OnCreateOptionsMenu(IMenu menu)
+		TimelineView actualView = null;
+		void invalidateTimeline ()
 		{
-			MenuInflater.Inflate(Resource.Menu.MenuItems, menu);
-			return true;
-		}
-
-		public override bool OnOptionsItemSelected(IMenuItem item)
-		{
-			// Handle item selection
-			switch (item.ItemId) {
-			case Resource.Id.menu_media_sandbox:
-				this.StartActivity(typeof(iSeconds.MediaSandboxActivity));
-				return true;			
-			case Resource.Id.menu_timelines:
-				this.StartActivity(typeof(iSeconds.UserTimelinesActivity));
-				return true;
-			default:
-				return base.OnOptionsItemSelected(item);
+			Timeline timeline = actualUser.ActualTimeline;
+			if (actualView == null || actualView.Timeline != timeline) 
+			{
+				layout.RemoveView(actualView);
+				actualView = new TimelineView (timeline, this);
+				layout.AddView (actualView);
 			}
 		}
-	
+
+		protected override void OnActivityResult (int requestCode, Result resultCode, Intent data)
+		{
+			if (requestCode == ISecondsConstants.TIMELINE_CHOOSER_RESULT) 
+			{
+				if (resultCode == Result.Ok) 
+				{
+					Toast toast = Toast.MakeText(this, actualUser.ActualTimeline.Name, ToastLength.Short);
+					toast.Show();
+
+					//invalidateTimeline();
+				}
+			}
+		}
+
+
 	}
+
+	class TimelineView : LinearLayout
+	{
+		private Timeline timeline = null;
+		public Timeline Timeline {
+			get {
+				return timeline;
+			}
+		}
+
+		public TimelineView (Timeline model, Context context)
+			: base(context, null)
+		{
+			timeline = model;
+
+			View.Inflate(context, Resource.Layout.Timeline, this);
+		}
+	}
+	
 
 		
 }

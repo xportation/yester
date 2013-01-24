@@ -11,12 +11,14 @@ namespace iSeconds.Domain
 	{
 		// TODO: implementar logica de login (se for ter...)
 		private User actualUser = new User();
-
-		public User GetActualUser ()
-		{
-			return actualUser;
+		public User ActualUser {
+			get {
+				return actualUser;
+			}
+			set {
+				actualUser = value;
+			}
 		}
-
 	}
 }
 

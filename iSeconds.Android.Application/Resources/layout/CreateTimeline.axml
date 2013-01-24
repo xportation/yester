@@ -13,9 +13,22 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/timeline_name_edit" />
-    <Button
-        android:text="@string/create_timeline_button"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/create_timeline_button" />
+        android:id="@+id/linearLayout1">
+        <Button
+            android:text="@string/create_timeline_button"
+            android:id="@+id/create_timeline_button"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="fill_parent" />
+        <Button
+            android:text="Cancel"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:id="@+id/cancel_timeline_creation_button" />
+    </LinearLayout>
 </LinearLayout>
