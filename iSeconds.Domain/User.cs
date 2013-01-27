@@ -16,8 +16,6 @@ namespace iSeconds.Domain
 			timelines.Add(timeline);
 			if (OnNewTimeline != null)
 				OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
-
-			ActualTimeline = timeline;
 		}
 
 		public List<Timeline> GetTimelines ()

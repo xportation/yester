@@ -17,6 +17,7 @@ namespace iSeconds
 	{
 		public static int CREATE_TIMELINE_RESULT = 1;
 		public static int TIMELINE_CHOOSER_RESULT = 2;
+		public static int SELECT_PHOTO_RESULT = 3;
 		
 		public static string TIMELINE_NAME_EXTRA = "TIMELINE_NAME_EXTRA";
 

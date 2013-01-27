@@ -7,6 +7,8 @@ namespace iSeconds.Domain
 {
 	public class Timeline
 	{
+		public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
+
 		public Timeline (string name)
 		{
 			this.Name = name;
@@ -18,6 +20,9 @@ namespace iSeconds.Domain
 				days.Add(date, new DayInfo());
 
 			days[date].AddVideo(url);
+
+			if (OnDayChanged != null)
+				OnDayChanged(this, new GenericEventArgs<DayInfo>(days[date]));
 		}
 
 		public bool HasVideoAt (DateTime date)
@@ -31,6 +36,14 @@ namespace iSeconds.Domain
 				return 0;
 
 			return days[date].GetVideoCount();
+		}
+
+		public string GetDayThumbnail (DateTime date)
+		{
+			if (!days.ContainsKey(date))
+				return "";
+
+			return days[date].GetThumbnail();
 		}
 
 		private string name;

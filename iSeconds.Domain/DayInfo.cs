@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace iSeconds.Domain
 {
-	class DayInfo
+	public class DayInfo
 	{
 		public void AddVideo (string url)
 		{
@@ -19,6 +19,12 @@ namespace iSeconds.Domain
 		public int GetVideoCount ()
 		{
 			return videos.Count;
+		}
+
+		public string GetThumbnail ()
+		{
+			// TODO: temporariamente assim.. teriamos que ver o que vamos retornar
+			return !HasVideo() ? "" : videos[0];
 		}
 
 		private List<string> videos = new List<string>();

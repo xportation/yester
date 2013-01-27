@@ -96,7 +96,7 @@ namespace CalendarControl
 		public Color WeekendColor {
 		    get { return adapter.WeekendColor; }
 		    set { adapter.WeekendColor = value;	}
-		}		
+		}
 
 		public CalendarMonthView(Context context, Android.Util.IAttributeSet attr)
 			: base(context)
@@ -119,6 +119,12 @@ namespace CalendarControl
 			
 			AddCalendarHeader(context);
 			UpdateCalendar(adapter.GetDate());
+		}
+
+		public CalendarViewAdapter Adapter {
+			get {
+				return adapter;
+			}
 		}
 		
 		private void OnDateSelectInternal(DateTime date)
@@ -256,6 +262,11 @@ namespace CalendarControl
 			calendarGridView.Adapter = adapter;
 			calendarGridView.InvalidateViews();
 		}		
+
+		public void InvalidateCalendar ()
+		{
+			calendarGridView.InvalidateViews();
+		}
 	}
 }
 

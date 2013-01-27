@@ -34,6 +34,9 @@ namespace CalendarControl
 {
 	class CalendarViewAdapter: BaseAdapter
 	{
+		public delegate TextView CustomizeItemDelegate(TextView textView, DateTime date);
+		public CustomizeItemDelegate CustomizeItem;
+
 		private Context baseContext;
 
 		// Date and month info
@@ -164,45 +167,48 @@ namespace CalendarControl
 				return true;
 		}
 		
-        public override View GetView(int position, View convertView, ViewGroup parent)
-        {
-            TextView textView;
-	        if (convertView == null) {  // if it's not recycled, initialize some attributes
-	            textView = new TextView(baseContext);
+        public override View GetView (int position, View convertView, ViewGroup parent)
+		{
+			TextView textView;
 
-				// TODO: martim: ver uma forma de fazer o grid ocupar o melhor espaco possivel
-				textView.SetHeight(40);
+			if (convertView == null) {  // if it's not recycled, initialize some attributes
+				textView = new TextView (baseContext);
+
+				textView.SetHeight (40); // TODO: martim: ver uma forma de fazer o grid ocupar o melhor espaco possivel
 				textView.Gravity = GravityFlags.Center;
-				textView.SetTextColor(Color.White);
-				textView.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
+				textView.SetTextColor (Color.White);
+				textView.SetTextSize (Android.Util.ComplexUnitType.Dip, 20);
 				textView.Clickable = true; // disable default orangle highlight when cell clicked
 				
 				// Calendar header (Sun, Mon and so on)
 				if (position < 7) {
-					textView.Text = GetDayOfWeekName(position);
+					textView.Text = GetDayOfWeekName (position);
 					/*
 					if (HighlightDayOffInHeader) {
 						if ((position == 5) || (position == 6))
 							textView.SetTextColor(WeekendColor);
 					}*/
 				} else {
+
 					DateTime dateInMonth = DateTime.Now;
-					int dayInCurrentMonth = GetDayInCurrentMonth(position);
-					if (IsCurrentMonthPosition(position)) {
-						textView.Text = (dayInCurrentMonth).ToString();
+					int dayInCurrentMonth = GetDayInCurrentMonth (position);
+
+					// verify if position is in current month
+					if (IsCurrentMonthPosition (position)) {
+						textView.Text = (dayInCurrentMonth).ToString ();
 						textView.Tag = position; // Not the best solution to store position, but the fastest
 					
 						// Highlight available days
-						DateTime date = new DateTime(baseDate.Year, baseDate.Month, dayInCurrentMonth);
+						DateTime date = new DateTime (baseDate.Year, baseDate.Month, dayInCurrentMonth);
 						
 						// If IsDateAvailable func is not null, only date with true result of that function
 						// will be available for selection (and HandleTextViewClick will be called)
-						if (IsDateAvailableOrNull(date)) {
-							textView.SetBackgroundColor(AvailableDateColor);
-							textView.SetTextColor(Color.Black);
+						if (IsDateAvailableOrNull (date)) {
+							textView.SetBackgroundColor (AvailableDateColor);
+							textView.SetTextColor (Color.Black);
 							// Highlight focused date
 							if (date == baseDate) {
-								textView.SetBackgroundColor(FocusedDateColor);
+								textView.SetBackgroundColor (FocusedDateColor);
 								focusedItem = textView;
 							}
 							textView.Click += HandleTextViewClick;					
@@ -212,49 +218,64 @@ namespace CalendarControl
 						
 						// Highligh day off (only for date in current month)
 						if ((HighlightWeekend) && 
-						   //((dateInMonth.DayOfWeek == DayOfWeek.Saturday) || (dateInMonth.DayOfWeek == DayOfWeek.Sunday)))
-						    (WeekendDays.Contains(dateInMonth.DayOfWeek)))
-							textView.SetTextColor(WeekendColor);						
-					}
-					else {
-						int positionNextMonth = PositionInNextMonth(position);
-						if (positionNextMonth > 0) {
-							textView.SetTextColor(Color.DarkGray);
-							DateTime dayInNextMonth = new DateTime(baseDate.Year, baseDate.Month, positionNextMonth).AddMonths(1);
-							textView.Text = dayInNextMonth.Day.ToString();//positionNextMonth.ToString();
+						//((dateInMonth.DayOfWeek == DayOfWeek.Saturday) || (dateInMonth.DayOfWeek == DayOfWeek.Sunday)))
+							(WeekendDays.Contains (dateInMonth.DayOfWeek)))
+							textView.SetTextColor (WeekendColor);						
+					} else {
+
+						// item is not from current month
+						int positionNextMonth = PositionInNextMonth (position);
+						if (positionNextMonth > 0) { 
+							// is next month...
+							textView.SetTextColor (Color.DarkGray);
+							DateTime dayInNextMonth = new DateTime (baseDate.Year, baseDate.Month, positionNextMonth).AddMonths (1);
+							textView.Text = dayInNextMonth.Day.ToString ();//positionNextMonth.ToString();
 							//
 							dateInMonth = dayInNextMonth;
 							textView.Click += delegate {
 								if (OnNextMonthItemClick != null)
-									OnNextMonthItemClick(dateInMonth);
+									OnNextMonthItemClick (dateInMonth);
 							};
+
+							
 						} else {
-							int positionPrevMonth = PositionInPrevMonth(position);
+							// is previou month...
+							int positionPrevMonth = PositionInPrevMonth (position);
 							if (positionPrevMonth < 0) {
-								textView.SetTextColor(Color.DarkGray);
-								DateTime dayInPrevMonth = new DateTime(baseDate.Year, baseDate.Month, 1).AddDays(positionPrevMonth);
-								textView.Text = dayInPrevMonth.Day.ToString();//FirstDateOfMonth.AddDays(positionPrevMonth).Day.ToString();
+								textView.SetTextColor (Color.DarkGray);
+								DateTime dayInPrevMonth = new DateTime (baseDate.Year, baseDate.Month, 1).AddDays (positionPrevMonth);
+								textView.Text = dayInPrevMonth.Day.ToString ();//FirstDateOfMonth.AddDays(positionPrevMonth).Day.ToString();
 								
 								dateInMonth = dayInPrevMonth;
 								textView.Click += delegate {
 									if (OnPrevMonthItemClick != null)
-										OnPrevMonthItemClick(dateInMonth);
+										OnPrevMonthItemClick (dateInMonth);
 								};
 							}
 						}
 					}
+
+					textView = CustomizeItem (textView, dateInMonth);
+
+
 					// Highlight day off in Previous and next months too
 					//if ((HighlightDayOff) && 
 					//   ((dateInMonth.DayOfWeek == DayOfWeek.Saturday) || (dateInMonth.DayOfWeek == DayOfWeek.Sunday)))
 					//	textView.SetTextColor(Color.Red);
 				}
-			} 
-			else
-	            textView = (TextView) convertView;
+			} else {
+				textView = (TextView)convertView;
+				textView = CustomizeItem (textView, GetDateByPosition(position));
+
+			}
 			//Console.WriteLine("Position: {0}", position);
+
+			textView.Tag = position;
 			
 	        return textView;
         }
+
+
 
 		int GetDayInCurrentMonth(int position)
 		{
@@ -303,6 +324,22 @@ namespace CalendarControl
 			
         	//Console.WriteLine((sender as TextView).Text);
         }
+
+		public DateTime GetDateByPosition (int position)
+		{
+			int dayInCurrentMonth = GetDayInCurrentMonth(position);
+			int positionNextMonth = this.PositionInNextMonth(position);
+			int positionPreviousMonth = this.PositionInPrevMonth(position);
+
+			if (IsCurrentMonthPosition(position))
+				return new DateTime(baseDate.Year, baseDate.Month, dayInCurrentMonth);
+			else if (positionNextMonth > 0)
+				return new DateTime(baseDate.Year, baseDate.Month, positionNextMonth).AddMonths(1);
+			else if (positionPreviousMonth < 0)
+				return new DateTime(baseDate.Year, baseDate.Month, 1).AddDays(positionPreviousMonth);
+
+			throw new Exception("cant reach");
+		}
 
         public override int Count
         {
