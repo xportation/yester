@@ -43,7 +43,6 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMediaService.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Timeline.cs" />

@@ -79,6 +79,7 @@ namespace iSeconds
 
 			layout.AddView (button, ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
 		}
+
 	}
 }
 

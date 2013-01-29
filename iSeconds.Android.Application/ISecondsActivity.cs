@@ -8,13 +8,14 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
 
 namespace iSeconds
 {
 	[Activity (Label = "ISecondsActivity")]			
-	public class ISecondsActivity : Activity
+	public class ISecondsActivity : FragmentActivity
 	{
 		protected override void OnCreate (Bundle bundle)
 		{

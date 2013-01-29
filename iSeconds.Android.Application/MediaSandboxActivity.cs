@@ -21,23 +21,15 @@ namespace iSeconds
 	[Activity(Label = "MediaSandboxActivity")]
 	public class MediaSandboxActivity : Activity
 	{
-		private const string MovieDirectoryBase = "iSeconds_Movies";
-		private const string PhotoDirectoryBase = "iSeconds_Photos";
+		private const int RequestCode = 2;
 		
-		private string generatePictureName()
-		{
-			DateTime dateTime = DateTime.Now;
-			string pictureName = "picture_" + dateTime.ToString() + ".jpg";
-			pictureName = pictureName.Replace("/", "_");
-			pictureName = pictureName.Replace(" ", "_");
-			pictureName = pictureName.Replace(":", "_");
-			return pictureName;
-		}
+		private ImageView image;
+		private VideoView videoView;
 
-		private string generateMovieName()
+		private string generateName(string prefix)
 		{
 			DateTime dateTime = DateTime.Now;
-			string movieName = "movie_" + dateTime.ToString();
+			string movieName = prefix + "_" + dateTime.ToString();
 			movieName = movieName.Replace("/", "_");
 			movieName = movieName.Replace(" ", "_");
 			movieName = movieName.Replace(":", "_");
@@ -50,103 +42,95 @@ namespace iSeconds
 
 			SetContentView(Resource.Layout.MediaSandbox);
 
-			ImageView image = FindViewById<ImageView>(Resource.Id.image);
-			VideoView videoView = FindViewById<VideoView>(Resource.Id.surfacevideoview);
+			image = FindViewById<ImageView>(Resource.Id.image);
+			videoView = FindViewById<VideoView>(Resource.Id.surfacevideoview);
 
 			#region Wire up the take a video button
 			Button videoButton = FindViewById<Button>(Resource.Id.takeVideoButton);
 			videoButton.Click += delegate
 				{
-					IMediaService mediaService = new MediaServiceAndroid(this);
-					string mediaFileResult = mediaService.TakeMovie(generateMovieName(), MovieDirectoryBase, 1);
-					if (mediaFileResult.Length == 0)
-					{
-						ShowUnsupported();
-						return;
-					}
-
-					RunOnUiThread(delegate
-						{
-							videoView.SetVideoPath(mediaFileResult);
-							videoView.Start();
-						});
-			};
+					Intent intent = MediaActivity.CreateIntentForMovie(this.generateName("movie"), 3, this);
+					this.StartActivityForResult(intent, RequestCode);
+				};
 			
 			#endregion
 
 			#region Wire up the take a photo button
 			Button photoButton = FindViewById<Button>(Resource.Id.takePhotoButton);
 			photoButton.Click += delegate
-			{				
-				IMediaService mediaService = new MediaServiceAndroid(this);
-				string mediaFileResult = mediaService.TakePicture(generatePictureName(), PhotoDirectoryBase);
-				if (mediaFileResult.Length == 0)
 				{
-					ShowUnsupported();
-					return;
-				}
-
-				Bitmap b = BitmapFactory.DecodeFile(mediaFileResult);
-				RunOnUiThread(delegate
-					{
-						image.SetImageBitmap(b);
-					});
-			};
+					Intent intent = MediaActivity.CreateIntentForPicture(this.generateName("picture"), this);
+					this.StartActivityForResult(intent, RequestCode);
+				};
 			#endregion
 
 			#region Wire up the pick a video button
 			Button pickVideoButton = FindViewById<Button>(Resource.Id.pickVideoButton);
 			pickVideoButton.Click += delegate
-			{
-				IMediaService mediaService = new MediaServiceAndroid(this);
-				string mediaFileResult = mediaService.PickMovie();
-				if (mediaFileResult.Length == 0)
 				{
-					ShowUnsupported();
-					return;
-				}
-
-				RunOnUiThread(delegate
-				{
-					videoView.SetVideoPath(mediaFileResult);
-					videoView.Start();
-				});
-			};
+					Intent intent = MediaActivity.CreateIntentForMovie(string.Empty, 3, this);
+					this.StartActivityForResult(intent, RequestCode);
+				};
 			#endregion
 
 			#region Wire up the pick a photo button
 			Button pickPhotoButton = FindViewById<Button>(Resource.Id.pickPhotoButton);
 			pickPhotoButton.Click += delegate
-			{
-				IMediaService mediaService = new MediaServiceAndroid(this);
-				string mediaFileResult = mediaService.PickPicture();
-				if (mediaFileResult.Length == 0)
 				{
-					ShowUnsupported();
-					return;
-				}
-
-				Bitmap b = BitmapFactory.DecodeFile(mediaFileResult);
-				RunOnUiThread(delegate
-				{
-					image.SetImageBitmap(b);
-				});
-			};
+					Intent intent = MediaActivity.CreateIntentForPicture(string.Empty, this);
+					this.StartActivityForResult(intent, RequestCode);
+				};
 			#endregion
 		}
-
-		private Toast unsupportedToast;
-
-		private void ShowUnsupported()
+		
+		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
 		{
-			if (this.unsupportedToast != null)
+			if (requestCode == RequestCode)
 			{
-				this.unsupportedToast.Cancel();
-				this.unsupportedToast.Dispose();
+				if (resultCode == Result.Ok)
+				{
+					string fileResult = data.GetStringExtra(MediaActivity.FILE_NAME_RESULT);
+					if (data.GetIntExtra(MediaActivity.MEDIA_TYPE, -1) == MediaActivity.MEDIA_TYPE_MOVIE) {
+						RunOnUiThread(() =>
+						{
+							image.Visibility = ViewStates.Gone;
+							videoView.Visibility= ViewStates.Visible;
+							videoView.SetVideoPath(fileResult);
+
+							videoView.Start();
+						});
+					}
+					else {
+						if (data.GetIntExtra(MediaActivity.MEDIA_TYPE, -1) == MediaActivity.MEDIA_TYPE_PICTURE)
+						{
+							Bitmap b = BitmapFactory.DecodeFile(fileResult);
+							RunOnUiThread(() =>
+							{
+								videoView.Visibility = ViewStates.Gone;
+								image.Visibility = ViewStates.Visible;
+
+								image.SetImageBitmap(b);
+							});		
+						}
+					}
+
+					ShowFileResult(fileResult);
+				}	
+			}
+		}
+
+		private Toast fileResultToast;
+
+		private void ShowFileResult(string fileResult)
+		{
+			if (this.fileResultToast != null)
+			{
+				this.fileResultToast.Cancel();
+				this.fileResultToast.Dispose();
 			}
 
-			this.unsupportedToast = Toast.MakeText(this, "Your device does not support this feature", ToastLength.Long);
-			this.unsupportedToast.Show();
+			this.fileResultToast = Toast.MakeText(this, fileResult, ToastLength.Long);
+			this.fileResultToast.Show();
 		}
 	}
 }
