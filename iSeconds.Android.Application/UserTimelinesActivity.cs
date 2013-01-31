@@ -14,7 +14,7 @@ using iSeconds.Domain;
 
 namespace iSeconds
 {
-	[Activity (Label = "Olá! Você deve criar ou escolher um timeline", Theme = "@android:style/Theme.Dialog")]			
+	[Activity (Label = "", Theme = "@android:style/Theme.Dialog")]			
 	public class UserTimelinesActivity : Activity
 	{
 		private User user = null;
@@ -25,6 +25,7 @@ namespace iSeconds
 		{
 			base.OnCreate (bundle);
 
+			this.RequestWindowFeature(WindowFeatures.NoTitle);
 			this.SetContentView(Resource.Layout.UserTimelines);
 
 			layout = this.FindViewById<LinearLayout> (Resource.Id.userTimelinesLayout);

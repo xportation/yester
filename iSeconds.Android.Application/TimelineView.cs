@@ -45,6 +45,8 @@ namespace iSeconds
 		                                  Bundle savedInstanceState) {
 
 			this.layout = new LinearLayout(this.Activity);
+			this.layout.LayoutParameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FillParent, 
+			                                                             LinearLayout.LayoutParams.FillParent);
 
 			if (actualUser != null && actualUser.TimelineCount > 0)
 				invalidateTimeline();

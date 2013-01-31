@@ -19,6 +19,7 @@ namespace iSeconds
 		public override void OnCreate()
 		{
 			base.OnCreate();
+			userService.ActualUser.CreateTimeline("test");
 		}
 
 		public UserService GetUserService ()

@@ -35,7 +35,9 @@ namespace CalendarControl
 		// CONSTS
 		// 
 		private const int textViewCalendarCaptionId = 101;
-		
+
+		private const int HeaderHeight = 30;
+
 		// CONTROLS
 		// 
 		// Header controls
@@ -106,7 +108,7 @@ namespace CalendarControl
 			//SetBackgroundColor(Color.MediumVioletRed);
 
 			
-			adapter = new CalendarViewAdapter(context, DateTime.Now);
+			adapter = new CalendarViewAdapter(context, DateTime.Now, HeaderHeight);
 			calendarGridView = new GridView(context);
 			calendarGridView.Adapter = adapter;
 			calendarGridView.SetNumColumns(7);
@@ -140,7 +142,8 @@ namespace CalendarControl
 			btnPrevMonth = new Button(context);
 			btnPrevMonth.Text = "<";
 			btnPrevMonth.Id = 100;
-	        btnPrevMonth.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent, 1f);
+	        btnPrevMonth.LayoutParameters = new LinearLayout.LayoutParams(
+				ViewGroup.LayoutParams.WrapContent, HeaderHeight, 1f);
 			btnPrevMonth.Click += (sender, e) => {
 				// Attempt #1
 				//setDate(adapter.getDate().AddMonths(-1));
@@ -170,7 +173,8 @@ namespace CalendarControl
 			textViewCaption.Gravity = GravityFlags.Center;
 	        textViewCaption.Id = textViewCalendarCaptionId;
 			// MatchParent, чтобы высота была как у кнопок, а, следовательно, текст по высоте точно выровнен
-	        textViewCaption.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, /*ViewGroup.LayoutParams.WrapContent*/ ViewGroup.LayoutParams.MatchParent, 4f);
+	        textViewCaption.LayoutParameters = new LinearLayout.LayoutParams(
+				ViewGroup.LayoutParams.WrapContent, HeaderHeight, 4f);
 			HeaderTextView = textViewCaption;
 			
 			textViewCaption.Click += delegate {
@@ -192,7 +196,8 @@ namespace CalendarControl
 			btnNextMonth = new Button(context);
 			btnNextMonth.Text = ">";
 			btnNextMonth.Id = 102;
-	        btnNextMonth.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent, 1f);
+	        btnNextMonth.LayoutParameters = new LinearLayout.LayoutParams(
+				ViewGroup.LayoutParams.WrapContent, HeaderHeight, 1f);
 			btnNextMonth.Click += (sender, e) => {
 				// Attempt #1
 				//setDate(adapter.getDate().AddMonths(1));
@@ -218,7 +223,8 @@ namespace CalendarControl
 			//
 			LinearLayout layoutCaption = new LinearLayout(context);
 			layoutCaption.Orientation = Orientation.Horizontal;
-	        layoutCaption.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+	        layoutCaption.LayoutParameters = new LinearLayout.LayoutParams(
+				ViewGroup.LayoutParams.MatchParent, HeaderHeight);
 		
 			layoutCaption.AddView(btnPrevMonth);
 			layoutCaption.AddView(textViewCaption);
@@ -244,7 +250,7 @@ namespace CalendarControl
 			GC.Collect();
 
 			// 3.
-			if (OnDateSelect != null)
+			if (callOnDateSelect && OnDateSelect != null)
 				OnDateSelect(dateTime);
 
 			if (OnMonthChanged != null)

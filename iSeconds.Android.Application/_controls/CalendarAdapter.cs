@@ -29,6 +29,7 @@ using Android.Widget;
 /// Colors in Android
 /// </summary>
 using Android.Graphics;
+using Android.Util;
 
 namespace CalendarControl
 {
@@ -73,11 +74,18 @@ namespace CalendarControl
 		public enum FirstDayOfWeekMode {Sunday = DayOfWeek.Sunday, Monday = DayOfWeek.Monday, Autodetect = -1};
 		public FirstDayOfWeekMode FirstDayOfWeek = FirstDayOfWeekMode.Autodetect;
 		private DayOfWeek dayOfWeek;
+
+		private Android.Views.IWindowManager windowManager;
+
+		private int HeaderHeight;
 		
-	    public CalendarViewAdapter(Context context, DateTime date) 
+	    public CalendarViewAdapter(Context context, DateTime date, int HeaderHeight) 
         {
+			this.HeaderHeight = HeaderHeight;
 			baseContext = context;
 			SetDate(date);
+
+			windowManager = this.baseContext.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
 		}
 		
 		public void SetDate(DateTime date)
@@ -166,7 +174,35 @@ namespace CalendarControl
 			else
 				return true;
 		}
-		
+
+		private int getDisplayHeight ()
+		{
+			// codigo para pegar a altura do display removendo a altura do notification bar e do title bar
+			// http://stackoverflow.com/questions/3600713/size-of-android-notification-bar-and-title-bar
+			DisplayMetrics metrics = new DisplayMetrics ();
+			windowManager.DefaultDisplay.GetMetrics (metrics);
+			int myHeight = 0;
+
+			// multiplicado por 2 pois e o title + notification
+			switch (metrics.DensityDpi) {
+			case DisplayMetricsDensity.High:
+				return windowManager.DefaultDisplay.Height - (48 * 2); 
+			case DisplayMetricsDensity.Medium:
+				return windowManager.DefaultDisplay.Height - (32 * 2);
+			case DisplayMetricsDensity.Low:
+				return windowManager.DefaultDisplay.Height - (24 * 2);
+			default:
+				return myHeight;
+			}
+
+		}
+
+		private int calculateRowHeight ()
+		{
+			// the row height will be the display height minus the header height, divided by the row count (Count/NUM_OF_COLLUMNS)
+			return (getDisplayHeight() - HeaderHeight) / (Count/7);
+		}
+
         public override View GetView (int position, View convertView, ViewGroup parent)
 		{
 			TextView textView;
@@ -174,7 +210,9 @@ namespace CalendarControl
 			if (convertView == null) {  // if it's not recycled, initialize some attributes
 				textView = new TextView (baseContext);
 
-				textView.SetHeight (40); // TODO: martim: ver uma forma de fazer o grid ocupar o melhor espaco possivel
+				// to expand the grid, we measure 
+				textView.SetHeight(calculateRowHeight());
+
 				textView.Gravity = GravityFlags.Center;
 				textView.SetTextColor (Color.White);
 				textView.SetTextSize (Android.Util.ComplexUnitType.Dip, 20);

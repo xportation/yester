@@ -16,6 +16,8 @@ namespace iSeconds.Domain
 			timelines.Add(timeline);
 			if (OnNewTimeline != null)
 				OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
+
+			this.ActualTimeline = timeline;
 		}
 
 		public List<Timeline> GetTimelines ()
@@ -44,7 +46,8 @@ namespace iSeconds.Domain
 			}
 			set {
 				_ActualTimeline = value;
-				this.OnActualTimelineChanged(this, new GenericEventArgs<Timeline>(_ActualTimeline));
+				if (OnActualTimelineChanged != null)
+					OnActualTimelineChanged(this, new GenericEventArgs<Timeline>(_ActualTimeline));
 			}
 		}
 
