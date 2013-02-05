@@ -134,6 +134,18 @@ namespace CalendarControl
 			if (OnDateSelect != null)
 				OnDateSelect(date);
 		}
+
+		public void IncrementMonth ()
+		{
+			DateTime newDate = adapter.GetDate().AddMonths(1);
+			SetDate(newDate, false);
+		}
+
+		public void DecrementMonth()
+		{
+			DateTime newDate = adapter.GetDate().AddMonths(-1);
+			SetDate(newDate, false);
+		}
 		
 		private void AddCalendarHeader(Context context)
 		{
@@ -158,11 +170,12 @@ namespace CalendarControl
 				//	OnMonthChanged(newDate);
 				
 				// Attempt #3
-				DateTime newDate = adapter.GetDate().AddMonths(-1);
-				SetDate(newDate, false);
+
+				this.DecrementMonth();
+
 			};
 			adapter.OnPrevMonthItemClick = delegate(DateTime obj) {
-				SetDate(adapter.GetDate().AddMonths(-1));
+				this.DecrementMonth();
 			};
 			
 			// Header text. Example: "March 2012"
@@ -212,11 +225,10 @@ namespace CalendarControl
 				//	OnMonthChanged(newDate);
 
 				// Attempt #3
-				DateTime newDate = adapter.GetDate().AddMonths(1);
-				SetDate(newDate, false);
+				IncrementMonth();
 			};
 			adapter.OnNextMonthItemClick = delegate(DateTime obj) {
-				SetDate(adapter.GetDate().AddMonths(1));
+				IncrementMonth();
 			};
 			
 			// Combine title elements
