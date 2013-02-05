@@ -30,7 +30,7 @@ using Android.Graphics;
 
 namespace CalendarControl
 {
-	class CalendarMonthView : LinearLayout
+	class CalendarMonthView : LinearLayout, GestureDetector.IOnGestureListener
 	{
 		// CONSTS
 		// 
@@ -48,6 +48,8 @@ namespace CalendarControl
 		// GridView and adapter
 		private GridView calendarGridView;
 		private CalendarViewAdapter adapter;
+
+		private GestureDetector gestureDetector;
 		
 		// HANDLERS
 		// 
@@ -107,6 +109,7 @@ namespace CalendarControl
 			//LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent);
 			//SetBackgroundColor(Color.MediumVioletRed);
 
+			gestureDetector = new GestureDetector(this);
 			
 			adapter = new CalendarViewAdapter(context, DateTime.Now, HeaderHeight);
 			calendarGridView = new GridView(context);
@@ -285,6 +288,46 @@ namespace CalendarControl
 		{
 			calendarGridView.InvalidateViews();
 		}
+
+		public override bool OnInterceptTouchEvent (MotionEvent ev)
+		{
+			gestureDetector.OnTouchEvent(ev);
+			return base.OnInterceptTouchEvent (ev);		
+		}
+		
+		public bool OnDown (MotionEvent e)
+		{
+			return true;
+		}
+		
+		public bool OnFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+		{
+			if (e1.GetX() > e2.GetX()) // right to left
+				DecrementMonth();
+			else
+				IncrementMonth();
+			
+			return true;
+		}
+		
+		public void OnLongPress (MotionEvent e)
+		{
+		}
+		
+		public bool OnScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+		{
+			return true;
+		}
+		
+		public void OnShowPress (MotionEvent e)
+		{
+		}
+		
+		public bool OnSingleTapUp (MotionEvent e)
+		{
+			return true;
+		}	
+
 	}
 }
 

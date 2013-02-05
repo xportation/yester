@@ -111,7 +111,7 @@ namespace iSeconds
 
 	};
 
-	class TimelineView : LinearLayout, GestureDetector.IOnGestureListener
+	class TimelineView : LinearLayout
 	{
 		private Timeline timeline = null;
 
@@ -121,49 +121,8 @@ namespace iSeconds
 			}
 		}
 
-		public override bool OnInterceptTouchEvent (MotionEvent ev)
-		{
-			gestureDetector.OnTouchEvent(ev);
-			return base.OnInterceptTouchEvent (ev);		
-		}
-
-		public bool OnDown (MotionEvent e)
-		{
-			return true;
-		}
-		
-		public bool OnFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
-		{
-			if (e1.GetX() > e2.GetX()) // right to left
-				calendarView.DecrementMonth();
-			else
-				calendarView.IncrementMonth();
-
-			return true;
-		}
-		
-		public void OnLongPress (MotionEvent e)
-		{
-		}
-		
-		public bool OnScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
-		{
-			return true;
-		}
-		
-		public void OnShowPress (MotionEvent e)
-		{
-		}
-		
-		public bool OnSingleTapUp (MotionEvent e)
-		{
-			return true;
-		}	
-
-
-
 		private CalendarMonthView calendarView = null;
-		private GestureDetector gestureDetector;
+
 
 		private Fragment parent = null;
 		
@@ -173,8 +132,6 @@ namespace iSeconds
 			timeline = model;
 
 			this.parent = parent;
-
-			gestureDetector = new GestureDetector(this);
 
 			View.Inflate(context, Resource.Layout.Timeline, this);
 			calendarView = this.FindViewById<CalendarMonthView>(Resource.Id.calendarView2);
