@@ -5,4 +5,5 @@
 	<string name="create_timeline">Create Timeline</string>
 	<string name="timeline_name">Name</string>
 	<string name="create_timeline_button">Create</string>
+	<string name="library_name">iseconds</string>
 </resources>

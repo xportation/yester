@@ -11,6 +11,8 @@ using Android.App;
 using Android.Support.V4.App;
 using Android.Net;
 using Android.Provider;
+using Android.Media;
+using Xamarin.Media;
 
 namespace iSeconds
 {
@@ -18,7 +20,6 @@ namespace iSeconds
 	{
 		private UserService userService = null;
 		private User actualUser = null;
-
 
 		private void actualUserChanged (User newUser)
 		{
@@ -38,6 +39,8 @@ namespace iSeconds
 			
 			if (userService.ActualUser != null)
 				actualUserChanged(userService.ActualUser);
+
+
 		}
 
 		private LinearLayout layout = null;
@@ -67,35 +70,35 @@ namespace iSeconds
 //				
 				layout.RemoveView (actualView);
 				actualView = new TimelineView (timeline, this.Activity, this);
+
 				layout.AddView (actualView);
 			}
 		}
 			
 
 		
-		public override void OnActivityResult(int requestCode, int resultCode, Intent data) 
+		public override void OnActivityResult (int requestCode, int resultCode, Intent data)
 		{
-			if (requestCode == ISecondsConstants.SELECT_PHOTO_RESULT && data != null && data.Data != null)
-			{
+			if (requestCode == ISecondsConstants.SELECT_PHOTO_RESULT && data != null && data.Data != null) {
 				Uri _uri = data.Data;
 				
-				if (_uri != null) 
-				{
+				if (_uri != null) {
 					
 					//User had pick an image.
-					var cursor = this.Activity.ContentResolver.Query(
+					var cursor = this.Activity.ContentResolver.Query (
 						_uri, new string[] { MediaStore.Images.ImageColumns.Data }, null, null, null
 					);
-					cursor.MoveToFirst();
+					cursor.MoveToFirst ();
 					
 					//Link to the image
-					string imageFilePath = cursor.GetString(0);
-					cursor.Close();
+					string imageFilePath = cursor.GetString (0);
+					cursor.Close ();
 
 					if (actualView != null)
-						actualView.HandleImageQueryResult(imageFilePath);
+						actualView.HandleImageQueryResult (imageFilePath);
 				}
-			}
+			} 
+
 			base.OnActivityResult(requestCode, resultCode, data);
 		}
 
@@ -108,10 +111,55 @@ namespace iSeconds
 			this.StartActivityForResult(photoPickerIntent, ISecondsConstants.SELECT_PHOTO_RESULT);
 		}
 
+		private string generateName(string prefix, System.DateTime dateTime)
+		{
+			string movieName = prefix + "_" + dateTime.ToString();
+			movieName = movieName.Replace("/", "_");
+			movieName = movieName.Replace(" ", "_");
+			movieName = movieName.Replace(":", "_");
+			return movieName;
+		}
+
+		private static readonly System.Object obj = new System.Object();
+
+		public void TakeVideo (System.DateTime date)
+		{
+			lock (obj) {
+
+				var picker = new MediaPicker (this.Activity);
+			
+				if (!picker.IsCameraAvailable || !picker.VideosSupported)
+					return;
+			
+				picker.TakeVideoAsync (new StoreVideoOptions
+			                      {
+				Name = this.generateName("movie", date),
+				DesiredLength = System.TimeSpan.FromSeconds(3)
+			})
+				.ContinueWith (t =>
+				{
+
+					if (t.IsCanceled)
+						return;
+
+					this.Activity.RunOnUiThread (() =>
+					{
+						if (actualView != null) 
+							actualView.HandleMovieMakerResult (t.Result.Path);
+					});
+
+//					t.Result.Dispose();
+//					t.Dispose();
+
+				});
+
+			}
+		}
+
 
 	};
 
-	class TimelineView : LinearLayout
+	class TimelineView : LinearLayout, View.IOnLongClickListener, View.IOnCreateContextMenuListener
 	{
 		private Timeline timeline = null;
 
@@ -144,7 +192,9 @@ namespace iSeconds
 			calendarView.OnDateSelect= (System.DateTime date) => {
 				// ...
 				currentDateClicked = date;
-				((TimelineFragment)this.parent).OpenGallery();
+
+				//((TimelineFragment)this.parent).OpenGallery();
+				((TimelineFragment)this.parent).TakeVideo(currentDateClicked);
 			};
 
 		}
@@ -153,6 +203,11 @@ namespace iSeconds
 		public void HandleImageQueryResult (string imagePath)
 		{
 			timeline.AddVideoAt(currentDateClicked, imagePath);	
+		}
+
+		public void HandleMovieMakerResult (string fileResult)
+		{
+			timeline.AddVideoAt(currentDateClicked, fileResult);
 		}
 		
 		private Bitmap resizeBitmap(Bitmap bm, int newHeight, int newWidth) 
@@ -173,26 +228,49 @@ namespace iSeconds
 			return Bitmap.CreateBitmap(bm, 0, 0, width, height, matrix, false);
 		}
 
-		private TextView configureItem(TextView view, System.DateTime date)
+		private Bitmap getVideoThumbnail (string filePath)
 		{
-			if (view.Width <= 0 || view.Height <= 0) 
+			return ThumbnailUtils.CreateVideoThumbnail(filePath, ThumbnailKind.MicroKind);
+		}
+
+		private TextView configureItem (TextView view, System.DateTime date)
+		{
+			view.LongClickable = true;
+			view.SetOnLongClickListener (this);
+			view.SetOnCreateContextMenuListener (this);
+
+			if (view.LayoutParameters.Width <= 0 || view.LayoutParameters.Height <= 0) 
 				return view;
 
-			string path = timeline.GetDayThumbnail(date);
-			if (path == "")
+			string path = timeline.GetDayThumbnail (date);
+			if (path == "") {
 				return view;
+			}
 
-			System.Console.WriteLine(date.ToString());
-			System.Console.WriteLine(path);
-
-			Bitmap bitmap = BitmapFactory.DecodeFile(path);
+			//Bitmap bitmap = BitmapFactory.DecodeFile(path);
+			Bitmap bitmap = getVideoThumbnail(path);
 			BitmapDrawable bgImage = new BitmapDrawable(
-				this.Context.Resources, resizeBitmap(bitmap, view.Width, view.Height));
+				this.Context.Resources, resizeBitmap(bitmap, view.LayoutParameters.Width, view.LayoutParameters.Height));
 
 			view.SetBackgroundDrawable(bgImage);
 
 			return view;
 		}
+
+		public bool OnLongClick (View v)
+		{
+			v.ShowContextMenu();
+			return true;
+		}
+		
+		public void OnCreateContextMenu (IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+		{
+			menu.Add(0, 0, 0, "Video");
+			menu.Add(0, 1, 0, "Photo");
+			menu.Add(0, 2, 0, "Options");
+			
+		}
 	}
+
 }
 

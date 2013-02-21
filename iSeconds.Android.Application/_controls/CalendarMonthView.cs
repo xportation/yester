@@ -280,9 +280,8 @@ namespace CalendarControl
 			TextView textViewCaption = FindViewById<TextView>(textViewCalendarCaptionId);
 	        textViewCaption.Text = date.ToString ("MMMM yyyy");
 			
-			calendarGridView.Adapter = adapter;
-			calendarGridView.InvalidateViews();
-		}		
+			InvalidateCalendar();
+		}
 
 		public void InvalidateCalendar ()
 		{
@@ -312,6 +311,7 @@ namespace CalendarControl
 		
 		public void OnLongPress (MotionEvent e)
 		{
+			Toast.MakeText(this.Context, "long press", ToastLength.Long).Show();
 		}
 		
 		public bool OnScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
