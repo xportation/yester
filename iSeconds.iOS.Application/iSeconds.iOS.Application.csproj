@@ -88,16 +88,21 @@
     <None Include="Info.plist" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="iSeconds_iOSViewController.cs" />
-    <Compile Include="iSeconds_iOSViewController.designer.cs">
-      <DependentUpon>iSeconds_iOSViewController.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="iSeconds_iOSViewController_iPhone.xib" />
-    <InterfaceDefinition Include="iSeconds_iOSViewController_iPad.xib" />
+    <Compile Include="Main.cs" />
+    <Compile Include="CalendarMonth.cs" />
+    <Compile Include="TimelineView.cs" />
+    <Compile Include="CalendarMonthView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\iSeconds.Domain\iSeconds.iOS.Domain.csproj">
+      <Project>{B616D406-C3C2-4EB2-9584-15151F85F598}</Project>
+      <Name>iSeconds.iOS.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\leftarrow.png" />
+    <Content Include="Images\rightarrow.png" />
+  </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@ using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
-namespace iSeconds.iOS
+namespace iSeconds
 {
    // The UIApplicationDelegate for the application. This class is responsible for launching the 
    // User Interface of the application, as well as listening (and optionally responding) to 
@@ -15,7 +15,7 @@ namespace iSeconds.iOS
    {
       // class-level declarations
       UIWindow window;
-      iSeconds_iOSViewController viewController;
+      TimelineView viewController;
 
       //
       // This method is invoked when the application has loaded and is ready to run. In this 
@@ -28,7 +28,7 @@ namespace iSeconds.iOS
       {
          window = new UIWindow(UIScreen.MainScreen.Bounds);
             
-         viewController = new iSeconds_iOSViewController();
+         viewController = new TimelineView();
          window.RootViewController = viewController;
          window.MakeKeyAndVisible();
             

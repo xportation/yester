@@ -1,0 +1,43 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="iSeconds.iOS.Application/CalendarMonthView.cs">
+    <Files>
+      <File FileName="iSeconds.iOS.Application/Main.cs" Line="12" Column="34" />
+      <File FileName="iSeconds.iOS.Application/CalendarMonthView.cs" Line="52" Column="47" />
+      <File FileName="iSeconds.iOS.Application/CalendarMonth.cs" Line="32" Column="8" />
+      <File FileName="iSeconds.iOS.Application/TimelineView.cs" Line="19" Column="41" />
+      <File FileName="iSeconds.iOS.Application/AppDelegate.cs" Line="8" Column="19" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="iSeconds.iOS.Application" expanded="True" selected="True">
+            <Node name="References" expanded="True" />
+          </Node>
+          <Node name="iSeconds.iOS.Domain" expanded="True" />
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>NSUserDefaults.StandardUserDefaults.StringForKey("URL")</Value>
+          <Value>NSUserDefaults.StandardUserDefaults["URL"]</Value>
+          <Value>NSUserDefaults.StandardUserDefaults.length</Value>
+          <Value>_customer.Guests[0]</Value>
+          <Value>this</Value>
+          <Value>TableView</Value>
+          <Value>NavigationController</Value>
+        </State>
+      </Pad>
+      <Pad Id="ConnectionManagerPad">
+        <State selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

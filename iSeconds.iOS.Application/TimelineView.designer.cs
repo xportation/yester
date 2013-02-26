@@ -5,10 +5,10 @@
 //
 using MonoTouch.Foundation;
 
-namespace iSeconds.iOS
+namespace iSeconds
 {
-   [Register ("iSeconds_iOSViewController")]
-   partial class iSeconds_iOSViewController
+   [Register ("TimelineView")]
+   partial class TimelineView
    {
       void ReleaseDesignerOutlets()
       {
