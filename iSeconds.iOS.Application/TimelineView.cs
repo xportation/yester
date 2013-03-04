@@ -20,7 +20,7 @@ namespace iSeconds
       {
          base.ViewDidLoad();
        
-         calendarView= new CalendarMonthView(getMonthViewSize());
+         calendarView= new CalendarMonthView(getMonthViewSize(), false);
          calendarView.AutoresizingMask= UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
 
          this.View.AddSubview(calendarView);

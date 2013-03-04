@@ -3,6 +3,7 @@ using MonoTouch.UIKit;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Globalization;
+using MonoTouch.Foundation;
 
 namespace iSeconds
 {
@@ -11,17 +12,22 @@ namespace iSeconds
       const float BorderX= 5;
       const float BorderY= 5;
       const float MonthTitleHeight= 40;
+      const float MonthHeaderHeight= 35;
       const float NavigationButtonsWidth= 134;
       const string DefaultFontName= "MarkerFelt-Thin";
 
       UILabel monthTitle;
-      GridView monthDaysView;
       CalendarMonth calendar;
+      GridView monthDaysView;
+      GridHeaderView monthHeaderView;
       UISegmentedControl navigationButtons;
 
-      public CalendarMonthView(RectangleF frame)
+      bool isDayNamesEmbeded;
+
+      public CalendarMonthView(RectangleF frame, bool isDayNamesEmbeded)
          :  base(frame)
       {
+         this.isDayNamesEmbeded= isDayNamesEmbeded;
          calendar= new CalendarMonth(true);
 
          BackgroundColor= UIColor.White;
@@ -70,8 +76,13 @@ namespace iSeconds
 
       void createMonthDaysView()
       {
-         monthDaysView= new GridView(calendar);
+         if (!isDayNamesEmbeded)
+         {
+            monthHeaderView= new GridHeaderView(calendar);
+            AddSubview(monthHeaderView);
+         }
 
+         monthDaysView= new GridView(calendar,isDayNamesEmbeded);
          AddSubview(monthDaysView);
       }
 
@@ -79,17 +90,25 @@ namespace iSeconds
       {
          base.LayoutSubviews();
 
+         float titleAndHeaderHeight= MonthTitleHeight + BorderY;
+         if (!isDayNamesEmbeded)
+            titleAndHeaderHeight+= MonthHeaderHeight;
+
          monthTitle.Frame= new RectangleF(BorderX,0,this.Bounds.Width - NavigationButtonsWidth - (2*BorderX), MonthTitleHeight);
          navigationButtons.Frame= new RectangleF(this.Bounds.Width - NavigationButtonsWidth - BorderX,(MonthTitleHeight - 22) / 2,NavigationButtonsWidth,22);
-         monthDaysView.SetFrame(new RectangleF(BorderX,MonthTitleHeight+BorderY,this.Bounds.Width - (2*BorderX), this.Bounds.Height - MonthTitleHeight - (2*BorderY)));
+
+         if (!isDayNamesEmbeded)
+            monthHeaderView.SetFrame(new RectangleF(BorderX, MonthTitleHeight + BorderY,this.Bounds.Width - (2*BorderX), MonthHeaderHeight));
+
+         monthDaysView.SetFrame(new RectangleF(BorderX, titleAndHeaderHeight,this.Bounds.Width - (2*BorderX), this.Bounds.Height - titleAndHeaderHeight - BorderY));
       }
    }
 
-   class GridView : UIControl
+   class GridHeaderView : UIControl
    {
       CalendarMonth calendar;
-
-      public GridView(CalendarMonth calendar)
+      
+      public GridHeaderView(CalendarMonth calendar)
       {
          this.calendar= calendar;
          BackgroundColor= UIColor.Clear;
@@ -100,16 +119,95 @@ namespace iSeconds
          this.Frame= rect;
          this.SetNeedsDisplay();
       }
+      
+      public override void Draw(RectangleF rect)
+      {
+         base.Draw(rect);
+         
+         float BaseWidth= this.Bounds.Width-2;
+         float BaseHeight= this.Bounds.Height;
+         
+         int cellWidth= (int)BaseWidth / 7;
+         int cellHeight= (int)BaseHeight;
+         
+         float TotalWidth= cellWidth * 7;
+         
+         var context = UIGraphics.GetCurrentContext ();         
+         context.SaveState();
+         context.SetLineWidth(1);
+
+         drawDaysText(context, cellWidth, cellHeight);
+         
+         UIColor.FromRGB(230,230,230).SetColor();
+         context.SetAllowsAntialiasing(false);
+         
+         for (int i= 0; i <= 7; i++) {
+            context.MoveTo(cellWidth*i+1,0);
+            context.AddLineToPoint(cellWidth*i+1,cellHeight);
+         }
+
+         context.MoveTo(0, 1);
+         context.AddLineToPoint(TotalWidth, 1);
+
+         context.DrawPath(MonoTouch.CoreGraphics.CGPathDrawingMode.Stroke);
+
+         context.RestoreState();
+      }
+      
+      void drawDaysText(MonoTouch.CoreGraphics.CGContext context, float cellWidth, float cellHeight)
+      {
+         UIColor.FromRGB(180,180,180).SetColor();
+         UIFont font= UIFont.FromName("MarkerFelt-Thin",20f);
+         context.SetShadowWithColor (new SizeF (0, -1), 0.5f, UIColor.White.CGColor);
+
+         List<Day> monthDays= calendar.GetViewedDays();
+         for (int index= 0; index < 7; index++) {                           
+            RectangleF fontRect= new RectangleF(cellWidth*index+1, 5, cellWidth-5, cellHeight);
+            DrawString (monthDays[index].shortestDayName, fontRect, font, UILineBreakMode.WordWrap, UITextAlignment.Center);
+         }
+      }
+   }
+
+   class GridView : UIControl
+   {
+      private int daySelectedIndex;
+      private CalendarMonth calendar;
+
+      private bool showDayNames;
+
+      public GridView(CalendarMonth calendar, bool showDayNames)
+      {
+         this.showDayNames= showDayNames;
+
+         daySelectedIndex= -1;
+         this.calendar= calendar;
+         BackgroundColor= UIColor.Clear;
+      }
+
+      public void SetFrame(RectangleF rect)
+      {
+         this.Frame= rect;
+         this.SetNeedsDisplay();
+      }
+
+      private int getCellWidth()
+      {
+         float BaseWidth= this.Bounds.Width-2;
+         return (int)BaseWidth / 7;
+      }
+
+      private int getCellHeight()
+      {
+         float BaseHeight= this.Bounds.Height-2;
+         return (int)BaseHeight / 6;
+      }
 
       public override void Draw(RectangleF rect)
       {
          base.Draw(rect);
 
-         float BaseWidth= this.Bounds.Width-2;
-         float BaseHeight= this.Bounds.Height-2;
-
-         int cellWidth= (int)BaseWidth / 7;
-         int cellHeight= (int)BaseHeight / 6;
+         int cellWidth= this.getCellWidth();
+         int cellHeight= this.getCellHeight();
 
          float TotalWidth= cellWidth * 7;
          float TotalHeight= cellHeight * 6;
@@ -120,7 +218,8 @@ namespace iSeconds
 
          //draw images
          //drawDaysThumbs(context);
-         drawDaysText(context, cellWidth, cellHeight);
+         drawSelectedDay(context);
+         drawDaysText(context);
 
          UIColor.FromRGB(230,230,230).SetColor();
          context.SetAllowsAntialiasing(false);
@@ -140,30 +239,77 @@ namespace iSeconds
          context.RestoreState();
       }
 
-      void drawDaysText(MonoTouch.CoreGraphics.CGContext context, float cellWidth, float cellHeight)
+      void drawSelectedDay(MonoTouch.CoreGraphics.CGContext context)
+      {
+         if (daySelectedIndex == -1)
+            return;
+
+         UIColor.FromRGBA(200,200,200,127).SetColor();
+         context.FillRect(this.getCellRectByIndex(daySelectedIndex,3,2));
+      }
+
+      void drawDaysText(MonoTouch.CoreGraphics.CGContext context)
       {
          UIColor.FromRGB(180,180,180).SetColor();
          UIFont font= UIFont.FromName("MarkerFelt-Thin",20f);
          context.SetShadowWithColor (new SizeF (0, -1), 0.5f, UIColor.White.CGColor);
 
-         int dayIndex= 0;
          List<Day> monthDays= calendar.GetViewedDays();
-         for (int row= 0; row < 6; row++) {
-            for (int col= 0; col < 7; col++) {
-               string text= string.Empty;
-               if (row == 0) {
-                  string name= DateTimeFormatInfo.CurrentInfo.AbbreviatedDayNames[col];
-                  text+= name.Substring (0, 3) + ", ";
-               }
+         for (int dayIndex= 0; dayIndex < monthDays.Count; dayIndex++) 
+         {
+            string text= string.Empty;
+            if (dayIndex < 7 && showDayNames)
+               text+= monthDays[dayIndex].shortestDayName + ", ";
 
-               text+= monthDays[dayIndex].number.ToString();
+            text+= monthDays[dayIndex].number.ToString();
 
-               RectangleF fontRect= new RectangleF(cellWidth*col+1,cellHeight*row+5,cellWidth-5,cellHeight);
-               DrawString (text, fontRect, font, UILineBreakMode.WordWrap, UITextAlignment.Right);
+            RectangleF fontRect= this.getCellRectByIndex(dayIndex,1,5);
+            DrawString (text, fontRect, font, UILineBreakMode.WordWrap, UITextAlignment.Right);
+         }
+      }
 
-               dayIndex++;
+      private RectangleF getCellRectByIndex(int index, float xPadding, float yPadding)
+      {         
+         int col= index % 7;
+         int row= index / 7;
+
+         return new RectangleF(this.getCellWidth()*col+xPadding,this.getCellHeight()*row+yPadding,this.getCellWidth()-xPadding,this.getCellHeight()-yPadding);
+      }
+
+      public override void TouchesBegan (NSSet touches, UIEvent evt)
+      {
+         base.TouchesBegan (touches, evt);
+         SelectDayView((UITouch)touches.AnyObject);
+      }
+      
+      public override void TouchesMoved (NSSet touches, UIEvent evt)
+      {
+         base.TouchesMoved (touches, evt);
+         SelectDayView((UITouch)touches.AnyObject);
+      }
+      
+      public override void TouchesEnded (NSSet touches, UIEvent evt)
+      {
+         base.TouchesEnded (touches, evt);
+      }
+      
+      private bool SelectDayView (UITouch touch)
+      {
+         daySelectedIndex= -1;
+         var p = touch.LocationInView (this);
+
+         List<Day> monthDays= calendar.GetViewedDays();
+         for (int dayIndex= 0; dayIndex < monthDays.Count; dayIndex++) 
+         {     
+            RectangleF rect= this.getCellRectByIndex(dayIndex,3,2);
+            if (rect.Contains(p.X,p.Y)) {
+               daySelectedIndex= dayIndex;
+               break;
             }
          }
+
+         SetNeedsDisplay();
+         return daySelectedIndex != -1;
       }
    }
 }
