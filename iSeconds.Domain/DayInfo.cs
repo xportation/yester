@@ -1,11 +1,22 @@
 
 using System;
 using System.Collections.Generic;
+using SQLite;
 
 namespace iSeconds.Domain
 {
-	public class DayInfo
+	public class DayInfo : IModel
 	{
+		public DayInfo (DateTime date, int timelineId)
+		{
+			this.Date = date;
+			this.TimelineId = timelineId;
+		}
+
+		public DayInfo()
+		{
+		}
+
 		public void AddVideo (string url)
 		{
 			videos.Add(url);
@@ -28,6 +39,13 @@ namespace iSeconds.Domain
 		}
 
 		private List<string> videos = new List<string>();
+
+		#region db
+		[PrimaryKey, AutoIncrement]
+		public int Id { get; set; }
+		public int TimelineId { get; set; }
+		public DateTime Date { get; set; }
+		#endregion
 	}
 
 }

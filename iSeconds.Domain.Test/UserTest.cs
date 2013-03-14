@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using iSeconds.Domain;
+using System.Reflection;
 
 namespace iSeconds.Domain.Test
 {
@@ -21,6 +22,7 @@ namespace iSeconds.Domain.Test
 		[Test()]
 		public void TestUserNotifiesOnNewTimelines()
 		{
+
 			bool wasCalled = false;
 			User user = new User();
 			user.OnNewTimeline += (object source, GenericEventArgs<Timeline> e) => {
@@ -32,6 +34,17 @@ namespace iSeconds.Domain.Test
 			Assert.IsTrue(wasCalled);
 		}
 
+		public static void Main()
+		{
+			NUnit.ConsoleRunner.Runner.Main(new string[]
+			{
+				Assembly.GetExecutingAssembly().Location, 
+			});
+		}
+
 	}
+
+
+
 }
 

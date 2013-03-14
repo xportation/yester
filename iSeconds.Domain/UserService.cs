@@ -9,18 +9,18 @@ namespace iSeconds.Domain
 	 */
 	public class UserService
 	{
-		public event EventHandler<GenericEventArgs<User>> OnActualUserChanged;
+		public event EventHandler<GenericEventArgs<User>> OnCurrentUserChanged;
 
 		// TODO: implementar logica de login (se for ter...)
-		private User actualUser = new User();
-		public User ActualUser {
+		private User currentUser = null;
+		public User CurrentUser {
 			get {
-				return actualUser;
+				return currentUser;
 			}
 			set {
-				actualUser = value;
-				if (OnActualUserChanged != null)
-					OnActualUserChanged(this, new GenericEventArgs<User>(actualUser));
+				currentUser = value;
+				if (OnCurrentUserChanged != null)
+					OnCurrentUserChanged(this, new GenericEventArgs<User>(currentUser));
 			}
 		}
 	}

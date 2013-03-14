@@ -114,6 +114,7 @@ namespace iSeconds
 		
       private void takePicture(string pictureName)
       {
+          
          var picker = new MediaPicker(this);
 
          if (!picker.IsCameraAvailable || !picker.PhotosSupported)

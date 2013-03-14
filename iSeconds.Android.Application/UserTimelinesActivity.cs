@@ -40,7 +40,7 @@ namespace iSeconds
 			};
 
 			UserService userService = ((ISecondsApplication)this.Application).GetUserService();
-			user = userService.ActualUser;
+			user = userService.CurrentUser;
 
 			foreach (Timeline timeline in user.GetTimelines()) 
 			{
@@ -60,8 +60,6 @@ namespace iSeconds
 				if (resultCode == Result.Ok) 
 				{
 					string timelineName = data.GetStringExtra(ISecondsConstants.TIMELINE_NAME_EXTRA);
-					Toast toast = Toast.MakeText(this, timelineName, ToastLength.Short);
-					toast.Show();				
 					user.CreateTimeline(timelineName);
 				}
 			}

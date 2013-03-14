@@ -4,4 +4,6 @@
         android:title="Media Sandbox"/>
   <item android:id="@+id/menu_timelines" 
         android:title="Timelines"/>
+  <item android:id="@+id/menu_inspect_db" 
+        android:title="Inspect DB"/>
 </menu>

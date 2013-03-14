@@ -6,9 +6,11 @@
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1971851B-A591-4E36-8705-90C074C86FDC}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>iSeconds.Domain.Test</RootNamespace>
     <AssemblyName>iSeconds.Domain.Test</AssemblyName>
+    <StartupObject>iSeconds.Domain.Test.UserTest</StartupObject>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -18,7 +20,8 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
+    <Externalconsole>True</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -29,24 +32,69 @@
     <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\Third_Party\NUnit\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="..\iSeconds.Domain\CalendarMonth.cs">
+      <Link>CalendarMonth.cs</Link>
+    </Compile>
     <Compile Include="..\iSeconds.Domain\Timeline.cs">
       <Link>Timeline.cs</Link>
     </Compile>
     <Compile Include="..\iSeconds.Domain\User.cs">
       <Link>User.cs</Link>
     </Compile>
+    <Compile Include="TimelineViewModelTest.cs" />
     <Compile Include="UserTest.cs" />
-    <Compile Include="TimelineTest.cs" />
     <Compile Include="..\iSeconds.Domain\DayInfo.cs" />
     <Compile Include="..\iSeconds.Domain\GenericEventArgs.cs">
       <Link>GenericEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\iSeconds.Domain\SQLite.cs">
+      <Link>SQLite.cs</Link>
+    </Compile>
+    <Compile Include="..\iSeconds.Domain\IModel.cs">
+      <Link>IModel.cs</Link>
+    </Compile>
+    <Compile Include="TimelineTest.cs" />
+    <Compile Include="RepositoryServiceTest.cs" />
+    <Compile Include="..\iSeconds.Domain\RepositoryService.cs">
+      <Link>RepositoryService.cs</Link>
+    </Compile>
+    <Compile Include="..\iSeconds.Domain\ISecondsDB.cs">
+      <Link>ISecondsDB.cs</Link>
+    </Compile>
+    <Compile Include="..\iSeconds.Domain\UserService.cs">
+      <Link>UserService.cs</Link>
+    </Compile>
+    <Compile Include="..\iSeconds.Domain\MediaInfo.cs">
+      <Link>MediaInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\iSeconds.Domain\IRepository.cs">
+      <Link>IRepositoryService.cs</Link>
+    </Compile>
+    <Compile Include="HomeViewModelTest.cs" />
+    <Compile Include="..\iSeconds.Domain\ViewModel\Command.cs">
+      <Link>Command.cs</Link>
+    </Compile>
+    <Compile Include="..\iSeconds.Domain\ViewModel\HomeViewModel.cs">
+      <Link>HomeViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\iSeconds.Domain\ViewModel\TimelineViewModel.cs">
+      <Link>TimelineViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\iSeconds.Domain\ViewModel\ViewModel.cs">
+      <Link>ViewModel.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit-console-runner">
+      <HintPath>..\..\..\..\..\Program Files %28x86%29\NUnit 2.6.2\bin\lib\nunit-console-runner.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core">
+      <HintPath>..\..\..\..\..\Program Files %28x86%29\NUnit 2.6.2\bin\lib\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\..\..\Program Files %28x86%29\NUnit 2.6.2\bin\framework\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

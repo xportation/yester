@@ -1,23 +1,28 @@
 
 using System;
 using System.Collections.Generic;
-
+using SQLite;
 
 namespace iSeconds.Domain
 {
-	public class Timeline
+	public class Timeline : iSeconds.Domain.IModel
 	{
 		public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
 
-		public Timeline (string name)
+		public Timeline (string name, int userId)
 		{
 			this.Name = name;
+			this.UserId = userId;
+		}
+
+		public Timeline ()
+		{
 		}
 
 		public void AddVideoAt (DateTime date, string url)
 		{
 			if (!days.ContainsKey(date))
-				days.Add(date, new DayInfo());
+				days.Add(date, new DayInfo(date, this.Id));
 
 			days[date].AddVideo(url);
 
@@ -46,6 +51,11 @@ namespace iSeconds.Domain
 			return days[date].GetThumbnail();
 		}
 
+		#region db
+		[PrimaryKey, AutoIncrement]
+		public int Id { get; set; }
+		public int UserId { get; set; }
+
 		private string name;
 		public string Name 
 		{
@@ -56,7 +66,10 @@ namespace iSeconds.Domain
 				name = value;
 			}
 		}
+		#endregion
 
+
+		// only client side...
 		private Dictionary<DateTime, DayInfo> days = new Dictionary<DateTime, DayInfo>();
 	}
 }

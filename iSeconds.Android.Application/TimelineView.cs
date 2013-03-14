@@ -33,12 +33,12 @@ namespace iSeconds
 			base.OnCreate(bundle);
 
 			this.userService = ((ISecondsApplication)this.Activity.Application).GetUserService();
-			this.userService.OnActualUserChanged+= (object sender, GenericEventArgs<User> args) => {
+			this.userService.OnCurrentUserChanged+= (object sender, GenericEventArgs<User> args) => {
 				actualUserChanged(args.Value);
 			};
 			
-			if (userService.ActualUser != null)
-				actualUserChanged(userService.ActualUser);
+			if (userService.CurrentUser != null)
+				actualUserChanged(userService.CurrentUser);
 
 
 		}
@@ -157,6 +157,12 @@ namespace iSeconds
 		}
 
 
+		public void ShowVideo (string videoPath)
+		{
+			Intent intent = new Intent(Intent.ActionView, Uri.Parse(videoPath));
+			intent.SetDataAndType(Uri.Parse(videoPath), "video/mp4");
+			StartActivity(intent);
+		}
 	};
 
 	class TimelineView : LinearLayout, View.IOnLongClickListener, View.IOnCreateContextMenuListener
@@ -194,7 +200,10 @@ namespace iSeconds
 				currentDateClicked = date;
 
 				//((TimelineFragment)this.parent).OpenGallery();
-				((TimelineFragment)this.parent).TakeVideo(currentDateClicked);
+				if (model.HasVideoAt(date))
+					((TimelineFragment)this.parent).ShowVideo(model.GetDayThumbnail(currentDateClicked));
+				else 
+					((TimelineFragment)this.parent).TakeVideo(date);
 			};
 
 		}
