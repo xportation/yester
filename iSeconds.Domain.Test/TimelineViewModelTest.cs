@@ -8,7 +8,8 @@ namespace iSeconds.Domain.Test
     {
         User user = null;
         Timeline timeline = null;
-        ISecondsDB repository = null;        
+        ISecondsDB repository = null;
+        TimelineViewModel viewModel = null; 
 
         [SetUp()]
         public void Init()
@@ -19,26 +20,57 @@ namespace iSeconds.Domain.Test
             repository.SaveItem(user);
             timeline = new Timeline("xou da xuxa", user.Id);
             repository.SaveTimeline(timeline);
+
+            viewModel = new TimelineViewModel(timeline, repository);
         }
 
         [Test()]
         public void TestEmptyTimelineShouldHaveNoDays()
         {
-            TimelineViewModel viewModel = new TimelineViewModel(timeline, repository);
             Assert.IsEmpty(viewModel.Days);
         }
 
         [Test()]
         public void TestOnCurrentDateChangedVisibleDaysChangesToo()
         {
-            TimelineViewModel viewModel = new TimelineViewModel(timeline, repository);
-
-            viewModel.CalendarMode = TimelineViewModel.VisualizationMode.MONTH;            
             viewModel.CurrentDate = new DateTime(2013, 3, 12);
 
             Assert.That(viewModel.VisibleDays.Count, Is.EqualTo(42)); // fixed...
             Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 2, 24)));
             Assert.That(viewModel.VisibleDays[viewModel.VisibleDays.Count-1].date, Is.EqualTo(new DateTime(2013, 4, 6)));
+        }
+
+        [Test()]
+        public void TestJumpToNextMonthShouldChangeVisibleDays()
+        {
+            viewModel.CurrentDate = new DateTime(2013, 3, 12);
+            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 2, 24)));
+
+            viewModel.NextMonthCommand.Execute(null);
+            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 3, 31)));
+        }
+
+        [Test()]
+        public void TestJumpToPreviousMonthShouldChangeVisibleDays()
+        {
+            viewModel.CurrentDate = new DateTime(2013, 3, 12);
+            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 2, 24)));
+
+            viewModel.PreviousMonthCommand.Execute(null);
+            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 1, 27)));
+        }
+
+        [Test()]
+        public void TestGoToTodayShouldChangeVisibleDays()
+        {
+            viewModel.CurrentDate = DateTime.Today;
+            DateTime firstDayOfThisMonth = viewModel.VisibleDays[0].date;
+
+            viewModel.PreviousMonthCommand.Execute(null);
+            viewModel.PreviousMonthCommand.Execute(null);
+            viewModel.GoToTodayCommand.Execute(null);
+
+            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(firstDayOfThisMonth));
         }
 
         [Test()]
