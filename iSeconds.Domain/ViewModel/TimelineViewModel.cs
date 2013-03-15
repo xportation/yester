@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows.Input;
 
 namespace iSeconds.Domain
@@ -21,29 +22,32 @@ namespace iSeconds.Domain
 			
 			Days = this.repository.GetDaysInMonth (this.timeline.Id, DateTime.Today.Month, DateTime.Today.Year);
 
-            PropertyChanged += this.CurrentDateChanged;
-
             this.CurrentDate = DateTime.Today;
 		}
-
-        private void CurrentDateChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "CurrentDate")
-            {
-                CalendarMonth calendarMonth = new CalendarMonth(true, (DateTime)this.GetType().GetProperty(e.PropertyName).GetValue(this, null));
-                VisibleDays = calendarMonth.GetViewedDays();
-            }
-        }
-
-        
 
         private DateTime currentDate;
         public DateTime CurrentDate
         {
             get { return currentDate; }
             set {
+
+                // se mudou o mes ou o ano devemos o title do mes
+                if (currentDate.Month != value.Month || currentDate.Year != value.Year)
+                {
+                    CurrentMonthTitle = this.prepareCurrentMonthTitle(value.Month, value.Year);
+                }
+
+                CalendarMonth calendarMonth = new CalendarMonth(true, value);
+                VisibleDays = calendarMonth.GetViewedDays();
+
                 this.SetField(ref currentDate, value, "CurrentDate"); 
             }
+        }
+
+        private string prepareCurrentMonthTitle(int month, int year)
+        {
+            string strMonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month);
+            return strMonthName + ", " + year.ToString();
         }
 
         public enum VisualizationMode { MONTH, WEEK }
@@ -115,7 +119,20 @@ namespace iSeconds.Domain
         }
 		
 		public IList<DayInfo> Days { get; set; }
-		
-	}
+
+
+        private string currentMonthTitle;
+        public string CurrentMonthTitle 
+        { 
+            get 
+            {
+                return currentMonthTitle;
+            }
+            set 
+            {
+                this.SetField(ref currentMonthTitle, value, "CurrentMonthTitle");
+            }
+        }
+    }
 }
 

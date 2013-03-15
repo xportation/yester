@@ -48,6 +48,19 @@ namespace iSeconds.Droid
                 this.viewModel.GoToTodayCommand.Execute(null);
             };
 
+            TextView monthLabel = this.FindViewById<TextView>(Resource.Id.monthLabel);
+            monthLabel.Text = this.viewModel.CurrentMonthTitle;
+
+            this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
+            {
+                if (e.PropertyName == "CurrentMonthTitle")
+                {
+                    monthLabel.Text = this.viewModel.CurrentMonthTitle;
+                }
+            };
+
+
+
 //            calendar = new CalendarMonth(true);
 
             GridView monthView = FindViewById<GridView>(Resource.Id.monthGridView);

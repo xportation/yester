@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Globalization;
 
 namespace iSeconds.Domain.Test
 {
@@ -71,6 +72,21 @@ namespace iSeconds.Domain.Test
             viewModel.GoToTodayCommand.Execute(null);
 
             Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(firstDayOfThisMonth));
+        }
+
+        [Test()]
+        public void TestOnMonthChangedShouldChangeMonthTitle()
+        {
+            viewModel.CurrentDate = new DateTime(2013, 3, 12);
+            Assert.That(viewModel.CurrentMonthTitle, Is.EqualTo(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(3) + ", 2013"));
+            
+            viewModel.PreviousMonthCommand.Execute(null);
+            // ok, month changed should change title
+            Assert.That(viewModel.CurrentMonthTitle, Is.EqualTo(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(2) + ", 2013"));
+
+            // but if we change only the day, without change month, should not change title
+            viewModel.CurrentDate.AddDays(1);
+            Assert.That(viewModel.CurrentMonthTitle, Is.EqualTo(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(2) + ", 2013"));
         }
 
         [Test()]
