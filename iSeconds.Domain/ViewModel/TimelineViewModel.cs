@@ -41,7 +41,7 @@ namespace iSeconds.Domain
         public DateTime CurrentDate
         {
             get { return currentDate; }
-            set  { 
+            set {
                 this.SetField(ref currentDate, value, "CurrentDate"); 
             }
         }
@@ -88,6 +88,28 @@ namespace iSeconds.Domain
                 return new Command(delegate
                 {
                     this.CurrentDate = this.CurrentDate.AddMonths(1);
+                });
+            }
+        }
+
+        public ICommand PreviousMonthCommand
+        {
+            get
+            {
+                return new Command(delegate
+                {
+                    this.CurrentDate = this.CurrentDate.AddMonths(-1);
+                });
+            }
+        }
+
+        public ICommand GoToTodayCommand
+        {
+            get
+            {
+                return new Command(delegate
+                {
+                    this.CurrentDate = DateTime.Today;
                 });
             }
         }

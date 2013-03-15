@@ -30,10 +30,22 @@ namespace iSeconds.Droid
 
             View.Inflate(context, Resource.Layout.CalendarMonthView, this);
 
-            ImageButton button = this.FindViewById<ImageButton>(Resource.Id.nextMonthButton);
-            button.Click += delegate
+            ImageButton nextMonthButton = this.FindViewById<ImageButton>(Resource.Id.nextMonthButton);
+            nextMonthButton.Click += delegate
             {
                 this.viewModel.NextMonthCommand.Execute(null);
+            };
+
+            ImageButton previousMonthButton = this.FindViewById<ImageButton>(Resource.Id.previousMonthButton);
+            previousMonthButton.Click += delegate
+            {
+                this.viewModel.PreviousMonthCommand.Execute(null);
+            };
+
+            Button todayButton = this.FindViewById<Button>(Resource.Id.todayButton);
+            todayButton.Click += delegate
+            {
+                this.viewModel.GoToTodayCommand.Execute(null);
             };
 
 //            calendar = new CalendarMonth(true);
