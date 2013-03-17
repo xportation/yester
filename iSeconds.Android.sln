@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroidUnitTesting", "MonoDroidUnitTesting\MonoDroidUnitTesting.csproj", "{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSeconds.Android.Application", "iSeconds.Android.Application\iSeconds.Android.Application.csproj", "{35CF5239-F77C-40B0-B3A7-14AF989A19C8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSeconds.Domain", "iSeconds.Domain\iSeconds.Domain.csproj", "{50EE0B1B-58F6-4CF8-BF44-4196D017744C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSeconds.Domain.Test", "iSeconds.Domain.Test\iSeconds.Domain.Test.csproj", "{1971851B-A591-4E36-8705-90C074C86FDC}"
@@ -18,42 +16,35 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Default|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5F8FB02-00E0-4335-91EF-AEAA2C2F3C48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50EE0B1B-58F6-4CF8-BF44-4196D017744C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B5AB26F4-94D4-4FA3-BE1D-0517F54B560D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B5AB26F4-94D4-4FA3-BE1D-0517F54B560D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5AB26F4-94D4-4FA3-BE1D-0517F54B560D}.Default|Any CPU.ActiveCfg = Debug|Any CPU
 		{B5AB26F4-94D4-4FA3-BE1D-0517F54B560D}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{B5AB26F4-94D4-4FA3-BE1D-0517F54B560D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5AB26F4-94D4-4FA3-BE1D-0517F54B560D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35CF5239-F77C-40B0-B3A7-14AF989A19C8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = iSeconds.Domain.Test\iSeconds.Domain.Test.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = iSeconds.Domain.Test\iSeconds.Domain.Test.csproj
 	EndGlobalSection
 EndGlobal
