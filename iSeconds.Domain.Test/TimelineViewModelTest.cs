@@ -37,41 +37,50 @@ namespace iSeconds.Domain.Test
             viewModel.CurrentDate = new DateTime(2013, 3, 12);
 
             Assert.That(viewModel.VisibleDays.Count, Is.EqualTo(42)); // fixed...
-            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 2, 24)));
-            Assert.That(viewModel.VisibleDays[viewModel.VisibleDays.Count-1].date, Is.EqualTo(new DateTime(2013, 4, 6)));
+            assertDay(viewModel.VisibleDays[0], 24, false, false, true);
+            assertDay(viewModel.VisibleDays[viewModel.VisibleDays.Count - 1], 6, false, false, true);
+            assertDay(viewModel.VisibleDays[viewModel.VisibleDays.Count - 2], 5, false, false, false);
         }
 
         [Test()]
         public void TestJumpToNextMonthShouldChangeVisibleDays()
         {
             viewModel.CurrentDate = new DateTime(2013, 3, 12);
-            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 2, 24)));
+            assertDay(viewModel.VisibleDays[0], 24, false, false, true);
 
             viewModel.NextMonthCommand.Execute(null);
-            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 3, 31)));
+            assertDay(viewModel.VisibleDays[1], 1, true, false, false);
         }
 
         [Test()]
         public void TestJumpToPreviousMonthShouldChangeVisibleDays()
         {
             viewModel.CurrentDate = new DateTime(2013, 3, 12);
-            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 2, 24)));
+            assertDay(viewModel.VisibleDays[0], 24, false, false, true);
 
-            viewModel.PreviousMonthCommand.Execute(null);
-            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(new DateTime(2013, 1, 27)));
+           viewModel.PreviousMonthCommand.Execute(null);
+           assertDay(viewModel.VisibleDays[0], 27, false, false, true);
         }
 
-        [Test()]
+       private void assertDay(Day day, int number, bool inCurrentMonth, bool isToday, bool isWeekend)
+        {
+           Assert.That(day.number, Is.EqualTo(number));
+           Assert.That(day.inCurrentMonth, Is.EqualTo(inCurrentMonth));
+           Assert.That(day.isToday, Is.EqualTo(isToday));
+           Assert.That(day.isWeekend, Is.EqualTo(isWeekend));  
+       }
+
+       [Test()]
         public void TestGoToTodayShouldChangeVisibleDays()
         {
             viewModel.CurrentDate = DateTime.Today;
-            DateTime firstDayOfThisMonth = viewModel.VisibleDays[0].date;
+            int firstDayVisible = viewModel.VisibleDays[0].number;
 
             viewModel.PreviousMonthCommand.Execute(null);
             viewModel.PreviousMonthCommand.Execute(null);
             viewModel.GoToTodayCommand.Execute(null);
 
-            Assert.That(viewModel.VisibleDays[0].date, Is.EqualTo(firstDayOfThisMonth));
+            Assert.That(viewModel.VisibleDays[0].number, Is.EqualTo(firstDayVisible));
         }
 
         [Test()]
