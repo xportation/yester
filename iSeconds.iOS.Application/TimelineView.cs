@@ -5,10 +5,24 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.Collections.Generic;
 using System.Globalization;
+using MonoTouch.Dialog;
 
 namespace iSeconds
 {
-   public partial class TimelineView : UIViewController
+   public class TimelineLegalView : UINavigationController {
+      
+      public TimelineLegalView()
+      {
+         TabBarItem = new UITabBarItem ("Timeline", null, 1);
+         var root = new RootElement ("Timeline", (RootElement e) => {
+            return new TimelineView();
+         });
+
+         PushViewController (new DialogViewController (root), false);
+      }
+   }
+
+   public class TimelineView : UIViewController
    {
       private CalendarMonthView calendarView;
 

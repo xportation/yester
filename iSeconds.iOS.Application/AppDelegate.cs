@@ -4,6 +4,7 @@ using System.Linq;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using MonoTouch.Dialog;
 
 namespace iSeconds
 {
@@ -15,7 +16,7 @@ namespace iSeconds
    {
       // class-level declarations
       UIWindow window;
-      TimelineView viewController;
+      /*TimelineView viewController;
 
       //
       // This method is invoked when the application has loaded and is ready to run. In this 
@@ -32,6 +33,22 @@ namespace iSeconds
          window.RootViewController = viewController;
          window.MakeKeyAndVisible();
             
+         return true;
+      }*/
+
+      public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+      {
+         window = new UIWindow (UIScreen.MainScreen.Bounds);
+         
+         var nav = new UITabBarController ();
+         nav.ViewControllers = new UIViewController [] {
+            new UserTimelinesView(),
+            new TimelineLegalView()
+         };
+         nav.CustomizableViewControllers = new UIViewController [0];
+         
+         window.RootViewController = nav;
+         window.MakeKeyAndVisible ();
          return true;
       }
    }

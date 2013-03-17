@@ -93,12 +93,17 @@
     <Compile Include="CalendarMonth.cs" />
     <Compile Include="TimelineView.cs" />
     <Compile Include="CalendarMonthView.cs" />
+    <Compile Include="UserTimelinesView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\iSeconds.Domain\iSeconds.iOS.Domain.csproj">
       <Project>{B616D406-C3C2-4EB2-9584-15151F85F598}</Project>
       <Name>iSeconds.iOS.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Third_Party\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
+      <Name>MonoTouch.Dialog</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
