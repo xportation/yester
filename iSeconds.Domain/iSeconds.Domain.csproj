@@ -37,14 +37,14 @@
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarMonth.cs" />
-    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="CalendarMonth.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Timeline.cs" />
     <Compile Include="DayInfo.cs" />
@@ -61,12 +61,5 @@
     <Compile Include="ViewModel\Command.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AboutResources.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\values\Strings.xml" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <ItemGroup />
 </Project>

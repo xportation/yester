@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 
-namespace CalendarMonthViewAndroid
+namespace iSeconds.Domain
 {
    public struct Day 
    {
@@ -11,7 +10,8 @@ namespace CalendarMonthViewAndroid
       public string dayName;
       public string shortestDayName;
       public bool inCurrentMonth;
-      public DateTime date;
+      public bool isWeekend;
+      public bool isToday;
    }
 
    public class CalendarMonth
@@ -22,8 +22,7 @@ namespace CalendarMonthViewAndroid
       private bool usingFixedRows;
       private DateTime currentDate;
 
-      //private List<Day> currentDays= new List<Day>();
-      private List<Day> currentDays = new List<Day>();
+      private List<Day> currentDays= new List<Day>();
 
       public CalendarMonth(bool usingFixedRows, DateTime currentDate)
       {
@@ -65,14 +64,15 @@ namespace CalendarMonthViewAndroid
 
 	      for (int i = 0; i < totalDays; i++)
 	      {
-              currentDays.Add(new Day
-                 {
-                     number = startDate.Day,
-                     inCurrentMonth = startDate.Month == currentDate.Month,
-                     dayName = DateTimeFormatInfo.CurrentInfo.GetDayName(startDate.DayOfWeek),
-                     shortestDayName = DateTimeFormatInfo.CurrentInfo.GetShortestDayName(startDate.DayOfWeek),
-                     date = startDate
-                 });
+            currentDays.Add(new Day
+               {
+                  number = startDate.Day, 
+                  inCurrentMonth= startDate.Month == currentDate.Month,
+                  dayName = DateTimeFormatInfo.CurrentInfo.GetDayName(startDate.DayOfWeek),
+                  shortestDayName = DateTimeFormatInfo.CurrentInfo.GetShortestDayName(startDate.DayOfWeek),
+                  isWeekend = startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday,
+                  isToday = startDate.Date == DateTime.Now.Date
+               } );
 	         startDate = startDate.AddDays(1);
 	      }
 
