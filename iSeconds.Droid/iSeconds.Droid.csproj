@@ -45,7 +45,8 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity1.cs" />
+    <Compile Include="CalendarMonthView\CalendarMonthView.cs" />
+    <Compile Include="CalendarMonthView\CalendarMonthViewWeekNames.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,7 +60,9 @@
     <AndroidResource Include="Resources\layout\HomeView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\CalendarMonthView.axml" />
+    <AndroidResource Include="Resources\layout\CalendarMonthViewLayout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -74,5 +77,8 @@
       <Project>{50EE0B1B-58F6-4CF8-BF44-4196D017744C}</Project>
       <Name>iSeconds.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\monthNameBackground.png" />
   </ItemGroup>
 </Project>
