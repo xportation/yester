@@ -17,8 +17,6 @@ namespace iSeconds.Domain
 
             CalendarMode = VisualizationMode.MONTH;
 			
-			Days = this.repository.GetDaysInMonth (this.timeline.Id, DateTime.Today.Month, DateTime.Today.Year);
-
             this.CurrentDate = DateTime.Today;
 		}
 
@@ -35,7 +33,19 @@ namespace iSeconds.Domain
                 }
 
                 CalendarMonth calendarMonth = new CalendarMonth(true, value);
-                VisibleDays = calendarMonth.GetViewedDays();
+
+                List<DayViewModel> viewModels = new List<DayViewModel>();
+
+                List<Day> viewedDays = calendarMonth.GetViewedDays();
+                foreach (Day date in viewedDays)
+                {
+                    DayViewModel viewModel = new DayViewModel(this.repository.GetDayInfoAt(date.day, this.timeline.Id), repository);
+
+                    viewModel.PresentationInfo = date;
+                    viewModels.Add(viewModel);
+                }
+
+                VisibleDays = viewModels;
 
                 this.SetField(ref currentDate, value, "CurrentDate"); 
             }
@@ -60,26 +70,14 @@ namespace iSeconds.Domain
         }
 
 
-        List<Day> visibleDays = new List<Day>();
-        public List<Day> VisibleDays
+        List<DayViewModel> visibleDays = new List<DayViewModel>();
+        public List<DayViewModel> VisibleDays
         {
             get { return visibleDays; }
             set {
                 this.SetField(ref visibleDays, value, "VisibleDays");
             }
 
-        }
-
-        public ICommand AddVideoAt
-        {
-            get {
-                return new Command(null);
-                //return new Command((DateTime date, string videoPath) => {
-
-                //    //this.repository.SaveDayInfo(new DayInfo(date, this.timeline.Id));
-					
-                //});
-            }
         }
 
         public ICommand NextMonthCommand
@@ -114,9 +112,6 @@ namespace iSeconds.Domain
                 });
             }
         }
-		
-		public IList<DayInfo> Days { get; set; }
-
 
         private string currentMonthTitle;
         public string CurrentMonthTitle 

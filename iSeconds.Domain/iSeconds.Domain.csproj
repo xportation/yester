@@ -42,6 +42,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMediaService.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="CalendarMonth.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -56,6 +58,7 @@
     <Compile Include="IModel.cs" />
     <Compile Include="RepositoryService.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="ViewModel\DayViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\TimelineViewModel.cs" />
     <Compile Include="ViewModel\Command.cs" />

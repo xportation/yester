@@ -64,7 +64,7 @@ namespace iSeconds.Droid
    public class CalendarMonthViewWeekNames : View
    {
       private Paint textPaint= null;
-      private List<Day> weekDays= null;
+      private List<DayViewModel> weekDays= null;
       private CalendarMonthViewWeekNamesTheme theme = null;
 
       public CalendarMonthViewWeekNames(Context context) 
@@ -99,7 +99,7 @@ namespace iSeconds.Droid
          this.SetBackgroundColor(theme.BackgroundColor);
       }
 
-      public List<Day> WeekDays
+      public List<DayViewModel> WeekDays
       {
          get { return weekDays; }
          set { weekDays = value; }
@@ -119,9 +119,9 @@ namespace iSeconds.Droid
 
          for (int i = 0; i < weekDays.Count; i++)
          {
-            string text = weekDays[i].dayName.Substring(0,3);
+             string text = weekDays[i].PresentationInfo.dayName.Substring(0, 3);
 
-            textPaint.Color = weekDays[i].isWeekend ? theme.WeekendTextColor : theme.WeekTextColor;
+            textPaint.Color = weekDays[i].PresentationInfo.isWeekend ? theme.WeekendTextColor : theme.WeekTextColor;
             float xPos = (cellWidth * i) + cellWidth / 2f;
             float yPos = (cellHeight / 2f) - ((textPaint.Descent() + textPaint.Ascent()) / 2f);
 

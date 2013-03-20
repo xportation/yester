@@ -55,6 +55,18 @@ namespace iSeconds.Domain
 			}
 		}
 
+        public ICommand LoadTimelineCommand
+        {
+            get
+            {
+                return new Command(delegate(object arg)
+                {
+                    int timelineId = (int)arg;
+                    CurrentTimeline = new TimelineViewModel(repository.GetUserTimeline(this.user.Id, timelineId), repository);
+                });
+            }
+        }
+
     }
 
 }

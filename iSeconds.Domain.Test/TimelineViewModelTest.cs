@@ -26,12 +26,6 @@ namespace iSeconds.Domain.Test
         }
 
         [Test()]
-        public void TestEmptyTimelineShouldHaveNoDays()
-        {
-            Assert.IsEmpty(viewModel.Days);
-        }
-
-        [Test()]
         public void TestOnCurrentDateChangedVisibleDaysChangesToo()
         {
             viewModel.CurrentDate = new DateTime(2013, 3, 12);
@@ -62,25 +56,25 @@ namespace iSeconds.Domain.Test
            assertDay(viewModel.VisibleDays[0], 27, false, false, true);
         }
 
-       private void assertDay(Day day, int number, bool inCurrentMonth, bool isToday, bool isWeekend)
+       private void assertDay(DayViewModel day, int number, bool inCurrentMonth, bool isToday, bool isWeekend)
         {
-           Assert.That(day.number, Is.EqualTo(number));
-           Assert.That(day.inCurrentMonth, Is.EqualTo(inCurrentMonth));
-           Assert.That(day.isToday, Is.EqualTo(isToday));
-           Assert.That(day.isWeekend, Is.EqualTo(isWeekend));  
+           Assert.That(day.PresentationInfo.number, Is.EqualTo(number));
+           Assert.That(day.PresentationInfo.inCurrentMonth, Is.EqualTo(inCurrentMonth));
+           Assert.That(day.PresentationInfo.isToday, Is.EqualTo(isToday));
+           Assert.That(day.PresentationInfo.isWeekend, Is.EqualTo(isWeekend));  
        }
 
        [Test()]
         public void TestGoToTodayShouldChangeVisibleDays()
         {
             viewModel.CurrentDate = DateTime.Today;
-            int firstDayVisible = viewModel.VisibleDays[0].number;
+            int firstDayVisible = viewModel.VisibleDays[0].PresentationInfo.number;
 
             viewModel.PreviousMonthCommand.Execute(null);
             viewModel.PreviousMonthCommand.Execute(null);
             viewModel.GoToTodayCommand.Execute(null);
 
-            Assert.That(viewModel.VisibleDays[0].number, Is.EqualTo(firstDayVisible));
+            Assert.That(viewModel.VisibleDays[0].PresentationInfo.number, Is.EqualTo(firstDayVisible));
         }
 
         [Test()]
@@ -99,11 +93,16 @@ namespace iSeconds.Domain.Test
         }
 
         [Test()]
-        public void TestOnNewDay()
+        public void TestTakeVideo()
         {
-            //TimelineViewModel viewModel = new TimelineViewModel(timeline, repository);
+            // se ficar nesse design extrair esse teste para DayViewModelTest
+            DayViewModel dayViewModel = viewModel.VisibleDays[0];
+            dayViewModel.AddVideoCommand.Execute("video/path");
 
-            //viewModel.AddVideoAt.Execute(DateTime.Today, "video.path");
+            Assert.That(dayViewModel.VideoPath, Is.EqualTo("video/path"));
+
+            DayInfo dayInfo = repository.GetDayInfoAt(dayViewModel.PresentationInfo.day, dayViewModel.Model.TimelineId);
+            Assert.That(dayInfo.GetThumbnail(), Is.EqualTo("video/path"));
         }
     }
 }

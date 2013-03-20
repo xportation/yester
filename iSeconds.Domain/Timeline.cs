@@ -19,16 +19,17 @@ namespace iSeconds.Domain
 		{
 		}
 
-		public void AddVideoAt (DateTime date, string url)
-		{
-			if (!days.ContainsKey(date))
-				days.Add(date, new DayInfo(date, this.Id));
+        // temporariamente comentado.. gostaria que essa api fosse assim e nao orientada a banco de dados
+        //public void AddVideoAt(DateTime date, string url)
+        //{
+        //    if (!days.ContainsKey(date))
+        //        days.Add(date, new DayInfo(date, this.Id));
 
-			days[date].AddVideo(url);
+        //    days[date].AddVideo(url);
 
-			if (OnDayChanged != null)
-				OnDayChanged(this, new GenericEventArgs<DayInfo>(days[date]));
-		}
+        //    if (OnDayChanged != null)
+        //        OnDayChanged(this, new GenericEventArgs<DayInfo>(days[date]));
+        //}
 
 		public bool HasVideoAt (DateTime date)
 		{

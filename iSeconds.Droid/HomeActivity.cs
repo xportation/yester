@@ -10,49 +10,7 @@ using System.ComponentModel;
 
 namespace iSeconds.Droid
 {
-   class CalendarGestureListener : GestureDetector.SimpleOnGestureListener
-   {
-      private HomeViewModel viewModel;
-
-      public CalendarGestureListener(HomeViewModel viewModel)
-      {
-         this.viewModel = viewModel;
-      }
-
-      public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
-      {
-         const float tolerance = 15;
-         float angle = getAngleInDegrees(e1.GetX(), e1.GetY(), e2.GetX(), e2.GetY());
-
-         if ((angle < 90 + tolerance && angle > 90 - tolerance) || (angle < 270 + tolerance && angle > 270 - tolerance))
-         {
-            if(e1.GetY() > e2.GetY())
-               viewModel.CurrentTimeline.NextMonthCommand.Execute(null);
-            else
-               viewModel.CurrentTimeline.PreviousMonthCommand.Execute(null);
-            
-            return true;
-         }
-
-         return false;
-      }
-
-      private float getAngleInDegrees(float x1, float y1, float x2, float y2)
-      {
-         float dx, dy, angle;
-         dx = x2 - x1;
-         dy = y2 - y1;
-         if ((Math.Abs(dx) + Math.Abs(dy)) < 0.00000001)
-            return 0;
-
-         angle = (float)Math.Atan2(dy, dx);
-         if (angle < 0)
-            angle = (float)(2 * Math.PI + angle);
-
-         return (float)(angle * 180 / Math.PI);
-      }
-   }
-
+   
    public class TimelineView : LinearLayout
    {
       private TimelineViewModel viewModel = null;
@@ -69,11 +27,12 @@ namespace iSeconds.Droid
 
          CalendarMonthViewWeekNames monthWeekNames =
             FindViewById<CalendarMonthViewWeekNames>(Resource.Id.calendarWeekDays);
-         List<Day> weekDays = new List<Day>(viewModel.VisibleDays.GetRange(0, 7));
+         List<DayViewModel> weekDays = new List<DayViewModel>(viewModel.VisibleDays.GetRange(0, 7));
          monthWeekNames.WeekDays = weekDays;
 
          CalendarMonthView monthView = FindViewById<CalendarMonthView>(Resource.Id.calendarView);
          monthView.ViewedDays = viewModel.VisibleDays;
+         monthView.ViewModel = viewModel;
 
          this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
             {
@@ -147,20 +106,14 @@ namespace iSeconds.Droid
          layout.AddView(new HomeView(viewModel, this),
                         new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent));
 
-         //TimelineViewModel timelineViewModel = new TimelineViewModel(application.GetUserService().CurrentUser, application.GetRepository());
-         //layout.AddView(new TimelineView(timelineViewModel, this));
+          // temporariamente para teste.. se nao existir nenhum timeline irá criar, se já existir irá sempre pegar a primeira
+         IList<Timeline> timelines = application.GetRepository().GetUserTimelines(application.GetUserService().CurrentUser.Id);
+         if (timelines.Count == 0)
+             viewModel.NewTimelineCommand.Execute(null);
+         else 
+             viewModel.LoadTimelineCommand.Execute(timelines[0].Id);
 
-         viewModel.NewTimelineCommand.Execute(0);
-
-         gestureDetector= new GestureDetector(new CalendarGestureListener(viewModel));
-         //this.StartActivity(typeof(Activity1));
-         // Create your application here
       }
 
-      public override bool OnTouchEvent(MotionEvent e)
-      {
-         gestureDetector.OnTouchEvent(e);
-         return base.OnTouchEvent(e);
-      }
    }
 }

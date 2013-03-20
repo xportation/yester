@@ -41,6 +41,9 @@
     <Compile Include="..\iSeconds.Domain\User.cs">
       <Link>User.cs</Link>
     </Compile>
+    <Compile Include="..\iSeconds.Domain\ViewModel\DayViewModel.cs">
+      <Link>DayViewModel.cs</Link>
+    </Compile>
     <Compile Include="TimelineViewModelTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="..\iSeconds.Domain\DayInfo.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using iSeconds.Domain;
 
 namespace iSeconds.Domain
 {
@@ -12,6 +13,7 @@ namespace iSeconds.Domain
       public bool inCurrentMonth;
       public bool isWeekend;
       public bool isToday;
+      public DateTime day;
    }
 
    public class CalendarMonth
@@ -71,7 +73,8 @@ namespace iSeconds.Domain
                   dayName = DateTimeFormatInfo.CurrentInfo.GetDayName(startDate.DayOfWeek),
                   shortestDayName = DateTimeFormatInfo.CurrentInfo.GetShortestDayName(startDate.DayOfWeek),
                   isWeekend = startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday,
-                  isToday = startDate.Date == DateTime.Now.Date
+                  isToday = startDate.Date == DateTime.Now.Date,
+                  day = startDate
                } );
 	         startDate = startDate.AddDays(1);
 	      }

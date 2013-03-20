@@ -11,6 +11,10 @@ namespace iSeconds.Domain
 			this.Path = path;
 		}
 
+        public MediaInfo()
+        {
+        }
+
 		#region db
 		[PrimaryKey, AutoIncrement]
 		public int Id { get; set; }

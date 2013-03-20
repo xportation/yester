@@ -21,7 +21,14 @@ namespace iSeconds.Domain
 		IList<DayInfo> GetDaysInMonth (int timelineId, int month, int year);
 
         event EventHandler<GenericEventArgs<Timeline>> OnNewTimeline;
-	}
+        event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
+
+        void SaveDay(int timelineId, DateTime day, string videoPath);
+
+        DayInfo GetDayInfoAt(DateTime dateTime, int timelineId);
+
+        Timeline GetUserTimeline(int userId, int timelineId);
+    }
 
 }
 

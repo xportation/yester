@@ -58,6 +58,7 @@ namespace iSeconds.Domain
 		}
 
         public event EventHandler<GenericEventArgs<Timeline>> OnNewTimeline;
+        public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
 
         public void SaveTimeline(Timeline timeline)
         {
@@ -65,6 +66,25 @@ namespace iSeconds.Domain
 
             if (OnNewTimeline != null)
                 OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
+        }
+
+        public void SaveDay(int timelineId, DateTime day, string videoPath)
+        {
+            DayInfo dayInfo = new DayInfo(day, timelineId);
+            this.SaveItem(dayInfo);
+            this.SaveItem(new MediaInfo(dayInfo.Id, videoPath));
+
+            IList<MediaInfo> videos = this.GetMediasForDay(dayInfo);
+            dayInfo.LoadMedia(videos);
+
+            if (OnDayChanged != null)
+                OnDayChanged(this, new GenericEventArgs<DayInfo>(dayInfo));
+
+        }
+
+        public IList<MediaInfo> GetMediasForDay(DayInfo day)
+        {
+            return (from i in Table<MediaInfo>() where i.DayId == day.Id select i).ToList();
         }
 
 		public IList<User> GetUsers ()
@@ -81,6 +101,22 @@ namespace iSeconds.Domain
 		{
 			return this.GetItems<DayInfo>();
 		}
+
+        public DayInfo GetDayInfoAt(DateTime dateTime, int timelineId)
+        {
+            DayInfo dayInfo = (from i in Table<DayInfo>() where i.TimelineId == timelineId && i.Date == dateTime select i).FirstOrDefault();
+            if (dayInfo == null)
+            {
+                dayInfo = new DayInfo(dateTime, timelineId);
+            }
+            else
+            {
+                IList<MediaInfo> videos = this.GetMediasForDay(dayInfo);
+                dayInfo.LoadMedia(videos);
+            }
+
+            return dayInfo;
+        }
 
 		public IList<DayInfo> GetDaysInMonth (int timelineId, int month, int year)
 		{
@@ -100,6 +136,14 @@ namespace iSeconds.Domain
 				return (from i in Table<Timeline>() where i.UserId == userId select i).ToList();
 			}
 		}
+
+        public Timeline GetUserTimeline(int userId, int timelineId)
+        {
+            lock (locker)
+            {
+                return (from i in Table<Timeline>() where i.UserId == userId && i.Id == timelineId select i).FirstOrDefault();
+            }
+        }
 
 		public IList<T> GetItems<T> () where T : IModel, new ()
 		{

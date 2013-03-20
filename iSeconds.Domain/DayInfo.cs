@@ -17,28 +17,29 @@ namespace iSeconds.Domain
 		{
 		}
 
-		public void AddVideo (string url)
-		{
-			videos.Add(url);
-		}
-
 		public bool HasVideo ()
 		{
-			return videos.Count > 0;
+			return medias.Count > 0;
 		}
 
 		public int GetVideoCount ()
 		{
-			return videos.Count;
+			return medias.Count;
 		}
 
 		public string GetThumbnail ()
 		{
 			// TODO: temporariamente assim.. teriamos que ver o que vamos retornar
-			return !HasVideo() ? "" : videos[0];
+            return !HasVideo() ? "" : medias[0].Path;
 		}
 
-		private List<string> videos = new List<string>();
+        public void LoadMedia(IList<MediaInfo> media)
+        {
+            this.medias.AddRange(media);
+        }
+
+
+        private List<MediaInfo> medias = new List<MediaInfo>();
 
 		#region db
 		[PrimaryKey, AutoIncrement]
