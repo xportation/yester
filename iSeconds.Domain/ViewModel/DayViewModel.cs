@@ -11,12 +11,16 @@ namespace iSeconds.Domain
     {
         private DayInfo model = null;
 
-        public IRepository repository = null;
+        private IRepository repository = null;
 
-        public DayViewModel(DayInfo model, IRepository repository)
+        private IMediaService mediaService = null;
+        
+
+        public DayViewModel(DayInfo model, IRepository repository, IMediaService mediaService)
         {
             this.model = model;
             this.repository = repository;
+            this.mediaService = mediaService;
 
             this.videoPath = model != null ? model.GetThumbnail() : "";
         }
@@ -40,6 +44,29 @@ namespace iSeconds.Domain
             set
             {
                 this.SetField(ref videoPath, value, "VideoPath");
+            }
+        }
+
+        public ICommand DayClickedCommand
+        {
+            get
+            {
+                return new Command((object arg) => {
+
+                    if (this.VideoPath == "")
+                    {
+                        mediaService.TakeVideo(this.model.Date, (string videoPath) =>
+                        {
+                            this.AddVideoCommand.Execute(videoPath);
+                        });
+
+                    }
+                    else
+                    {
+                        mediaService.PlayVideo(this.videoPath);
+                    }
+
+                });
             }
         }
 

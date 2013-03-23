@@ -22,13 +22,13 @@ namespace iSeconds.Domain
 
 		public void CreateTimeline (string timelineName)
 		{
-			Timeline timeline = new Timeline(timelineName, this.Id);
-			timelines.Add(timeline);
+            Timeline timeline = new Timeline(timelineName, this.Id);
+            timelines.Add(timeline);
 
-			if (OnNewTimeline != null)
-				OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
+            if (OnNewTimeline != null)
+                OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
 
-			this.ActualTimeline = timeline;
+            this.ActualTimeline = timeline;
 		}
 
 		public List<Timeline> GetTimelines ()

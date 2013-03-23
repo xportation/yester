@@ -3,6 +3,10 @@ using Android.App;
 using System;
 using iSeconds.Domain;
 using Xamarin.Media;
+using Android.Media;
+using Android.Provider;
+
+
 
 
 namespace iSeconds.Droid
@@ -11,18 +15,19 @@ namespace iSeconds.Droid
     {
         private static readonly System.Object obj = new System.Object();
 
-        private Activity context = null;
+        private ActivityTracker activityTracker = null;
 
-        public MediaServiceAndroid(Activity context)
+        public MediaServiceAndroid(ActivityTracker activityTracker)
         {
-            this.context = context;
+            this.activityTracker = activityTracker;         
         }
 
         public void TakeVideo(DateTime date, Action<string> resultAction)
         {
             lock (obj)
             {
-                var picker = new MediaPicker(this.context);
+                Activity currentActivity = this.activityTracker.GetCurrentActivity();
+                var picker = new MediaPicker(currentActivity);
 
                 if (!picker.IsCameraAvailable || !picker.VideosSupported)
                     return;
@@ -38,7 +43,7 @@ namespace iSeconds.Droid
                     if (t.IsCanceled)
                         return;
 
-                    this.context.RunOnUiThread(() =>
+                    currentActivity.RunOnUiThread(() =>
                     {
                         resultAction.Invoke(t.Result.Path);
                     });
@@ -49,6 +54,14 @@ namespace iSeconds.Droid
                 });
 
             }
+        }
+
+        public void PlayVideo(string videoPath)
+        {
+            Activity currentActivity = this.activityTracker.GetCurrentActivity();
+			Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(videoPath));
+			intent.SetDataAndType(Android.Net.Uri.Parse(videoPath), "video/mp4");
+			currentActivity.StartActivity(intent);
         }
 
         private string generateName(string prefix, System.DateTime dateTime)

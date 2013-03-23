@@ -9,11 +9,13 @@ namespace iSeconds.Domain
 	{
 		private Timeline timeline = null;
 		private IRepository repository = null;
+        private IMediaService mediaService = null;
 		
-		public TimelineViewModel(Timeline timeline, IRepository repository)
+		public TimelineViewModel(Timeline timeline, IRepository repository, IMediaService mediaService)
 		{
 			this.timeline = timeline;
 			this.repository = repository;
+            this.mediaService = mediaService;
 
             CalendarMode = VisualizationMode.MONTH;
 			
@@ -39,7 +41,7 @@ namespace iSeconds.Domain
                 List<Day> viewedDays = calendarMonth.GetViewedDays();
                 foreach (Day date in viewedDays)
                 {
-                    DayViewModel viewModel = new DayViewModel(this.repository.GetDayInfoAt(date.day, this.timeline.Id), repository);
+                    DayViewModel viewModel = new DayViewModel(this.repository.GetDayInfoAt(date.day, this.timeline.Id), repository, this.mediaService);
 
                     viewModel.PresentationInfo = date;
                     viewModels.Add(viewModel);

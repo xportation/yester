@@ -10,6 +10,7 @@ namespace iSeconds.Domain.Test
 	{
 		ISecondsDB repository = null; 
 		User user = null;
+        IMediaService mockMediaService = new MockMediaService();
 
 		[SetUp()]
 		public void Init()
@@ -27,7 +28,7 @@ namespace iSeconds.Domain.Test
 		[Test()]
 		public void TestUserWithoutTimelineHasNoCurrentTimeline ()
 		{
-			HomeViewModel viewModel = new HomeViewModel (user, repository);
+			HomeViewModel viewModel = new HomeViewModel (user, repository, mockMediaService);
             Assert.Null(viewModel.CurrentTimeline);
             Assert.IsEmpty(viewModel.Timelines);
 		}
@@ -35,7 +36,7 @@ namespace iSeconds.Domain.Test
         [Test()]
         public void TestModelViewNotifiesOnNewTimeline()
         {
-            HomeViewModel viewModel = new HomeViewModel(user, repository);
+            HomeViewModel viewModel = new HomeViewModel(user, repository, mockMediaService);
             MockHomeView view = new MockHomeView();
 
             bool wasCalled = false;

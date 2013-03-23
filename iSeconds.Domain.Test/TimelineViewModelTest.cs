@@ -10,7 +10,9 @@ namespace iSeconds.Domain.Test
         User user = null;
         Timeline timeline = null;
         ISecondsDB repository = null;
-        TimelineViewModel viewModel = null; 
+        TimelineViewModel viewModel = null;
+
+        IMediaService mockMediaService = new MockMediaService(); 
 
         [SetUp()]
         public void Init()
@@ -22,7 +24,7 @@ namespace iSeconds.Domain.Test
             timeline = new Timeline("xou da xuxa", user.Id);
             repository.SaveTimeline(timeline);
 
-            viewModel = new TimelineViewModel(timeline, repository);
+            viewModel = new TimelineViewModel(timeline, repository, mockMediaService);
         }
 
         [Test()]
@@ -104,5 +106,16 @@ namespace iSeconds.Domain.Test
             DayInfo dayInfo = repository.GetDayInfoAt(dayViewModel.PresentationInfo.day, dayViewModel.Model.TimelineId);
             Assert.That(dayInfo.GetThumbnail(), Is.EqualTo("video/path"));
         }
+
+        //[Test()]
+        //public void TestTakeAVideoOnADayWithVideoShouldPlay()
+        //{
+        //    DayViewModel dayViewModel = viewModel.VisibleDays[0];
+        //    dayViewModel.AddVideoCommand.Execute("video/path");
+
+        //    dayViewModel.AddVideoCommand.Execute("other.video");
+
+
+        //}
     }
 }

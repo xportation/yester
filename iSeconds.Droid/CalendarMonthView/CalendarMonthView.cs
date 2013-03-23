@@ -387,11 +387,8 @@ namespace iSeconds.Droid
             {
                 if (dayRegion.Item1.Contains(x, y))
                 {
-                    MediaServiceAndroid mediaService = new MediaServiceAndroid((Activity)this.Context);
 
-                    mediaService.TakeVideo(dayRegion.Item2.PresentationInfo.day, (string videoPath) => {
-                        dayRegion.Item2.AddVideoCommand.Execute(videoPath);
-                    });
+                    dayRegion.Item2.DayClickedCommand.Execute(null);
 
                     return true;
                 }

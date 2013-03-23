@@ -35,6 +35,9 @@
     <Compile Include="..\iSeconds.Domain\CalendarMonth.cs">
       <Link>CalendarMonth.cs</Link>
     </Compile>
+    <Compile Include="..\iSeconds.Domain\IMediaService.cs">
+      <Link>IMediaService.cs</Link>
+    </Compile>
     <Compile Include="..\iSeconds.Domain\Timeline.cs">
       <Link>Timeline.cs</Link>
     </Compile>
@@ -44,6 +47,7 @@
     <Compile Include="..\iSeconds.Domain\ViewModel\DayViewModel.cs">
       <Link>DayViewModel.cs</Link>
     </Compile>
+    <Compile Include="MockMediaService.cs" />
     <Compile Include="TimelineViewModelTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="..\iSeconds.Domain\DayInfo.cs" />

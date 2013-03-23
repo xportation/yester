@@ -87,7 +87,7 @@ namespace iSeconds.Droid
 
 
    [Activity(Label = "HomeActivity")]
-   public class HomeActivity : Activity
+   public class HomeActivity : ISecondsActivity
    {
       private HomeViewModel viewModel = null;
       private GestureDetector gestureDetector;
@@ -97,7 +97,7 @@ namespace iSeconds.Droid
          base.OnCreate(bundle);
 
          ISecondsApplication application = (ISecondsApplication) this.Application;
-         viewModel = new HomeViewModel(application.GetUserService().CurrentUser, application.GetRepository());
+         viewModel = new HomeViewModel(application.GetUserService().CurrentUser, application.GetRepository(), application.GetMediaService());
 
          this.RequestWindowFeature(WindowFeatures.NoTitle);
          this.SetContentView(Resource.Layout.HomeView);

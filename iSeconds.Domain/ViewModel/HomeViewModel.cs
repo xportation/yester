@@ -8,15 +8,17 @@ namespace iSeconds.Domain
 	{
 		private User user = null;
 		private IRepository repository = null;
-		
-		public HomeViewModel(User user, IRepository repository)
+        private IMediaService mediaService = null;
+
+        public HomeViewModel(User user, IRepository repository, IMediaService mediaService)
 		{
 			this.user = user;
 			this.repository = repository;
+            this.mediaService = mediaService;
 
             this.repository.OnNewTimeline += (object sender, GenericEventArgs<Timeline> arg) =>
             {
-                this.CurrentTimeline = new TimelineViewModel(arg.Value, repository);
+                this.CurrentTimeline = new TimelineViewModel(arg.Value, repository, mediaService);
                 Timelines = this.repository.GetUserTimelines(this.user.Id);
             };
 
@@ -62,7 +64,7 @@ namespace iSeconds.Domain
                 return new Command(delegate(object arg)
                 {
                     int timelineId = (int)arg;
-                    CurrentTimeline = new TimelineViewModel(repository.GetUserTimeline(this.user.Id, timelineId), repository);
+                    CurrentTimeline = new TimelineViewModel(repository.GetUserTimeline(this.user.Id, timelineId), repository, this.mediaService);
                 });
             }
         }
