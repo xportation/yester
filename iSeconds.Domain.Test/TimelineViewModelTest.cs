@@ -12,7 +12,7 @@ namespace iSeconds.Domain.Test
         ISecondsDB repository = null;
         TimelineViewModel viewModel = null;
 
-        IMediaService mockMediaService = new MockMediaService(); 
+        MockMediaService mockMediaService = new MockMediaService(); 
 
         [SetUp()]
         public void Init()
@@ -107,15 +107,26 @@ namespace iSeconds.Domain.Test
             Assert.That(dayInfo.GetThumbnail(), Is.EqualTo("video/path"));
         }
 
-        //[Test()]
-        //public void TestTakeAVideoOnADayWithVideoShouldPlay()
-        //{
-        //    DayViewModel dayViewModel = viewModel.VisibleDays[0];
-        //    dayViewModel.AddVideoCommand.Execute("video/path");
+        [Test()]
+        public void TestTakeAVideoOnADayWithVideoShouldPlay()
+        {
+            DayViewModel dayViewModel = viewModel.VisibleDays[0];
+            
+            mockMediaService.Reset();
 
-        //    dayViewModel.AddVideoCommand.Execute("other.video");
+            dayViewModel.DayClickedCommand.Execute(null);            
+
+            Assert.That(mockMediaService.playVideoWasCalled, Is.Not.True);
+            Assert.That(mockMediaService.takeVideoWasCalled, Is.True);
+
+            mockMediaService.Reset();
+
+            dayViewModel.DayClickedCommand.Execute(null);
+
+            Assert.That(mockMediaService.playVideoWasCalled, Is.True);
+            Assert.That(mockMediaService.takeVideoWasCalled, Is.Not.True);
 
 
-        //}
+        }
     }
 }
