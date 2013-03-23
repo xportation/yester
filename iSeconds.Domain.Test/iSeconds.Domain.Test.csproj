@@ -35,6 +35,9 @@
     <Compile Include="..\iSeconds.Domain\CalendarMonth.cs">
       <Link>CalendarMonth.cs</Link>
     </Compile>
+    <Compile Include="..\iSeconds.Domain\Framework\InteractionRequest.cs">
+      <Link>InteractionRequest.cs</Link>
+    </Compile>
     <Compile Include="..\iSeconds.Domain\IMediaService.cs">
       <Link>IMediaService.cs</Link>
     </Compile>

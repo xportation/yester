@@ -41,9 +41,9 @@ namespace iSeconds.Droid
                   monthLabel.Text = this.viewModel.CurrentMonthTitle;
                }
 
-               if (e.PropertyName == "CurrentDate")
+               if (e.PropertyName == "VisibleDays")
                {
-                  monthView.ViewedDays = viewModel.VisibleDays;         
+                  monthView.ViewedDays = viewModel.VisibleDays;
                }
             };
       }

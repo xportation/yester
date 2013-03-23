@@ -1,3 +1,4 @@
+using iSeconds.Domain.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,30 @@ namespace iSeconds.Domain
             }
         }
 
+        public ICommand PlayVideoCommand
+        {
+            get
+            {
+                return new Command((object arg) => {
+                    mediaService.PlayVideo(this.videoPath);
+                });                
+            }
+        }
+
+        public ICommand RecordVideoCommand
+        {
+            get
+            {
+                return new Command((object arg) =>
+                {
+                    mediaService.TakeVideo(this.model.Date, (string videoPath) =>
+                    {
+                        this.AddVideoCommand.Execute(videoPath);
+                    });
+                });
+            }
+        }
+
         public ICommand DayClickedCommand
         {
             get
@@ -55,17 +80,81 @@ namespace iSeconds.Domain
 
                     if (this.VideoPath == "")
                     {
-                        mediaService.TakeVideo(this.model.Date, (string videoPath) =>
-                        {
-                            this.AddVideoCommand.Execute(videoPath);
-                        });
-
+                        RecordVideoCommand.Execute(null);
                     }
                     else
                     {
-                        mediaService.PlayVideo(this.videoPath);
+                        PlayVideoCommand.Execute(null);
                     }
+                });
+            }
+        }
 
+        public class DayOptionsList
+        {
+            public class DayOptionsEntry
+            {
+                public DayOptionsEntry(string name, Action callback)
+                {
+                    this.Name = name;
+                    this.Callback = callback;
+                }
+
+                public string Name { get; set; }
+                public Action Callback { get; set; }
+            }
+
+            List<DayOptionsEntry> entries = new List<DayOptionsEntry>();
+            public List<DayOptionsEntry> OptionsEntries
+            {
+                get
+                {
+                    return entries;
+                }
+            }
+
+            public ICommand DayEntryClicked
+            {
+                get
+                {
+                    return new Command((object arg) => {
+                        int index = (int)arg;
+                        entries[index].Callback.Invoke();
+                    });
+                }
+            }
+
+
+            public DayOptionsList(DayViewModel viewModel)
+            {
+                entries.Add(new DayOptionsEntry("Record video", () => 
+                {
+                    viewModel.RecordVideoCommand.Execute(null);
+                }));
+
+                entries.Add(new DayOptionsEntry("Options", () =>
+                {
+                    
+                }));
+            }
+        }
+
+        private InteractionRequest<DayOptionsList> dayOptionsRequest = new InteractionRequest<DayOptionsList>();
+        public InteractionRequest<DayOptionsList> DayOptionsRequest
+        {
+            get
+            {
+                return dayOptionsRequest;
+            }
+        }
+
+        public ICommand DayOptionsCommand
+        {
+            get
+            {
+                return new Command((object arg) => {
+
+                    DayOptionsRequest.Raise(new DayOptionsList(this));
                 });
             }
         }

@@ -107,7 +107,7 @@ namespace iSeconds.Droid
         }
     }
 
-    public class CalendarMonthView : View, GestureDetector.IOnGestureListener
+    public class CalendarMonthView : View, GestureDetector.IOnGestureListener, View.IOnCreateContextMenuListener, IMenuItemOnMenuItemClickListener
     {
         private int todayIndex = -1;
         private List<DayViewModel> viewedDays = null;
@@ -165,6 +165,7 @@ namespace iSeconds.Droid
 
             gestureDetector = new GestureDetector(this);
 
+            this.SetOnCreateContextMenuListener(this);
         }
 
         public List<DayViewModel> ViewedDays
@@ -173,7 +174,7 @@ namespace iSeconds.Droid
             set
             {
                 viewedDays = value;
-                findTodayInViewedDays();
+                configureViewedDays();
                 this.Invalidate();
             }
         }
@@ -190,16 +191,29 @@ namespace iSeconds.Droid
             return true;
         }
 
-        private void findTodayInViewedDays()
+        private DayViewModel.DayOptionsList optionsList = null;
+
+        private void configureViewedDays()
         {
             todayIndex = -1;
             for (int dayIndex = 0; dayIndex < viewedDays.Count; dayIndex++)
             {
-                if (viewedDays[dayIndex].PresentationInfo.isToday)
+                DayViewModel dayViewModel = viewedDays[dayIndex];
+                if (dayViewModel.PresentationInfo.isToday)
                 {
                     todayIndex = dayIndex;
-                    break;
                 }
+
+                dayViewModel.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
+                {
+                    this.Invalidate();
+                };
+
+                dayViewModel.DayOptionsRequest.Raised += (object sender, GenericEventArgs<DayViewModel.DayOptionsList> e) =>
+                {
+                    optionsList = e.Value;
+                    this.ShowContextMenu();
+                };
             }
         }
 
@@ -290,22 +304,29 @@ namespace iSeconds.Droid
 
                 daysRegions.Add(Tuple.Create(fontRect, dayViewModel));
 
-                dayViewModel.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
-                {
-                    this.Invalidate();
-                };
-
-                canvas.DrawText(text, xPos, yPos, textPaint);
-
                 if (dayViewModel.VideoPath != "")
                 {
                     Bitmap thumbnail = resizeBitmap(getVideoThumbnail(dayViewModel.VideoPath), fontRect.Height, fontRect.Width);
                     canvas.DrawBitmap(thumbnail, fontRect.Left, fontRect.Top, backgroundPaint);
-
                 }
+
+                canvas.DrawText(text, xPos, yPos, textPaint);
+
+                
 
             }
         }
+
+        public void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+        {
+            for (int i = 0; i < optionsList.OptionsEntries.Count; i++)
+            {
+                DayViewModel.DayOptionsList.DayOptionsEntry entry = optionsList.OptionsEntries[i];
+                IMenuItem menuItem = menu.Add(0, i, i, entry.Name);
+                menuItem.SetOnMenuItemClickListener(this);
+            }
+        }
+
 
         private RectangleF getCellRectByIndex(int index, float xPadding, float yPadding)
         {
@@ -367,6 +388,17 @@ namespace iSeconds.Droid
 
         public void OnLongPress(MotionEvent e)
         {
+            float x = e.GetX();
+            float y = e.GetY();
+
+            foreach (Tuple<RectangleF, DayViewModel> dayRegion in daysRegions)
+            {
+                if (dayRegion.Item1.Contains(x, y))
+                {
+                    dayRegion.Item2.DayOptionsCommand.Execute(null);
+                }
+            }
+
         }
 
         public bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
@@ -387,9 +419,7 @@ namespace iSeconds.Droid
             {
                 if (dayRegion.Item1.Contains(x, y))
                 {
-
                     dayRegion.Item2.DayClickedCommand.Execute(null);
-
                     return true;
                 }
             }
@@ -397,6 +427,12 @@ namespace iSeconds.Droid
 
 
             return false;
+        }
+
+        public bool OnMenuItemClick(IMenuItem item)
+        {
+            optionsList.DayEntryClicked.Execute(item.ItemId);
+            return true;
         }
     }
 }

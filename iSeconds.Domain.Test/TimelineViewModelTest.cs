@@ -125,8 +125,8 @@ namespace iSeconds.Domain.Test
 
             Assert.That(mockMediaService.playVideoWasCalled, Is.True);
             Assert.That(mockMediaService.takeVideoWasCalled, Is.Not.True);
-
-
         }
+
+
     }
 }

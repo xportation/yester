@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\InteractionRequest.cs" />
     <Compile Include="IMediaService.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="CalendarMonth.cs">
