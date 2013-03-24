@@ -31,7 +31,7 @@ namespace iSeconds.Droid
          monthWeekNames.WeekDays = weekDays;
 
          CalendarMonthView monthView = FindViewById<CalendarMonthView>(Resource.Id.calendarView);
-         monthView.ViewedDays = viewModel.VisibleDays;
+         monthView.ViewedDays= viewModel.VisibleDays;
          monthView.ViewModel = viewModel;
 
          this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
@@ -43,7 +43,7 @@ namespace iSeconds.Droid
 
                if (e.PropertyName == "VisibleDays")
                {
-                  monthView.ViewedDays = viewModel.VisibleDays;
+                  monthView.SetViewedDaysAnimated(viewModel.VisibleDays);
                }
             };
       }

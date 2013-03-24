@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">MediaPickerSample</string>
-	<string name="create_timeline">Create Timeline</string>
-	<string name="timeline_name">Name</string>
-	<string name="create_timeline_button">Create</string>
-	<string name="library_name">iseconds</string>
-</resources>

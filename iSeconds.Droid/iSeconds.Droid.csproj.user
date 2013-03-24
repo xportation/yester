@@ -4,4 +4,8 @@
     <AndroidDesignerPreferredDevice>3.7in WVGA %28Nexus One%29</AndroidDesignerPreferredDevice>
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>
+    </ReferencePath>
+  </PropertyGroup>
 </Project>
