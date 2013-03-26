@@ -47,6 +47,22 @@ namespace iSeconds.Domain
                 this.SetField(ref videoPath, value, "VideoPath");
             }
         }
+        
+        public string VideoThumbnailPath
+        {
+            get
+            {
+                return getThumbnailPath(videoPath);
+            }
+        }
+
+        private string getThumbnailPath(string videoPath)
+        {
+            if (videoPath.Length == 0)
+                return "";
+
+            return System.IO.Path.GetDirectoryName(videoPath) + "/" + System.IO.Path.GetFileNameWithoutExtension(videoPath) + ".png";
+        }
 
         public ICommand PlayVideoCommand
         {
@@ -66,6 +82,7 @@ namespace iSeconds.Domain
                 {
                     mediaService.TakeVideo(this.model.Date, (string videoPath) =>
                     {
+                        mediaService.SaveVideoThumbnail(this.getThumbnailPath(videoPath), videoPath);
                         this.AddVideoCommand.Execute(videoPath);
                     });
                 });
@@ -139,8 +156,9 @@ namespace iSeconds.Domain
             }
         }
 
-        private InteractionRequest<DayOptionsList> dayOptionsRequest = new InteractionRequest<DayOptionsList>();
-        public InteractionRequest<DayOptionsList> DayOptionsRequest
+       private InteractionRequest<DayOptionsList> dayOptionsRequest = new InteractionRequest<DayOptionsList>();
+	    
+	    public InteractionRequest<DayOptionsList> DayOptionsRequest
         {
             get
             {

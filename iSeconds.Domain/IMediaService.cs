@@ -10,5 +10,7 @@ namespace iSeconds.Domain
         void TakeVideo(DateTime date, Action<string> resultAction);
 
         void PlayVideo(string videoPath);
+
+        void SaveVideoThumbnail(string thumbnailPath, string videoPath);
     }
 }
