@@ -102,6 +102,7 @@ namespace iSeconds.Domain.Test
             dayViewModel.AddVideoCommand.Execute("video/path");
 
             Assert.That(dayViewModel.VideoPath, Is.EqualTo("video/path"));
+            Assert.That(dayViewModel.VideoThumbnailPath, Is.EqualTo("video/path.png"));
 
             DayInfo dayInfo = repository.GetDayInfoAt(dayViewModel.PresentationInfo.day, dayViewModel.Model.TimelineId);
             Assert.That(dayInfo.GetThumbnail(), Is.EqualTo("video/path"));
@@ -118,13 +119,15 @@ namespace iSeconds.Domain.Test
 
             Assert.That(mockMediaService.playVideoWasCalled, Is.Not.True);
             Assert.That(mockMediaService.takeVideoWasCalled, Is.True);
+            Assert.That(mockMediaService.saveVideoThumbnailWasCalled, Is.True);
 
-            mockMediaService.Reset();
+           mockMediaService.Reset();
 
-            dayViewModel.DayClickedCommand.Execute(null);
+           dayViewModel.DayClickedCommand.Execute(null);
 
-            Assert.That(mockMediaService.playVideoWasCalled, Is.True);
-            Assert.That(mockMediaService.takeVideoWasCalled, Is.Not.True);
+           Assert.That(mockMediaService.playVideoWasCalled, Is.True);
+           Assert.That(mockMediaService.takeVideoWasCalled, Is.Not.True);
+           Assert.That(mockMediaService.saveVideoThumbnailWasCalled, Is.Not.True);
         }
 
 
