@@ -1,12 +1,15 @@
-﻿using Android.Content;
+﻿using System.IO;
+using Android.Content;
 using Android.App;
 using System;
+using Android.Graphics;
+using Java.IO;
 using iSeconds.Domain;
 using Xamarin.Media;
 using Android.Media;
 using Android.Provider;
-
-
+using File = System.IO.File;
+using Stream = System.IO.Stream;
 
 
 namespace iSeconds.Droid
@@ -62,6 +65,21 @@ namespace iSeconds.Droid
 			Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(videoPath));
 			intent.SetDataAndType(Android.Net.Uri.Parse(videoPath), "video/mp4");
 			currentActivity.StartActivity(intent);
+        }
+
+        public void SaveVideoThumbnail(string thumbnailPath, string videoPath)
+        {
+            try
+            {
+                Stream fileOutput = File.Create(thumbnailPath);
+                Bitmap bitmap= ThumbnailUtils.CreateVideoThumbnail(videoPath, ThumbnailKind.MicroKind);
+                bitmap.Compress(Bitmap.CompressFormat.Png, 100, fileOutput);
+                fileOutput.Flush();
+                fileOutput.Close();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private string generateName(string prefix, System.DateTime dateTime)
