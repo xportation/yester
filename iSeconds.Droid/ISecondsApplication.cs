@@ -6,6 +6,7 @@ using Android.Runtime;
 using iSeconds.Droid;
 using System.Collections.Generic;
 using Android.Content;
+using iSeconds.Domain.Framework;
 
 namespace iSeconds
 {
@@ -17,6 +18,8 @@ namespace iSeconds
         private IMediaService mediaService = null;
 
         private ActivityTracker activityTracker = null;
+
+        private INavigator navigator = null;
 
 
 		public ISecondsApplication (IntPtr javaReference, JniHandleOwnership transfer)
@@ -30,7 +33,12 @@ namespace iSeconds
 
             mediaService = new MediaServiceAndroid(this.activityTracker);
 
-			userService.CurrentUser = new User ("test");
+            navigator = new INavigator();
+
+            navigator.RegisterNavigation("day_options", new AndroidPresenter(this.activityTracker, typeof(DayOptionsActivity)));
+
+            // ---
+			userService.CurrentUser = new User ("test", repository);
 		}
 
 		public override void OnCreate()
@@ -58,6 +66,11 @@ namespace iSeconds
         public ActivityTracker GetActivityTracker()
         {
             return this.activityTracker;
+        }
+
+        public INavigator GetNavigator()
+        {
+            return navigator;
         }
     }
 

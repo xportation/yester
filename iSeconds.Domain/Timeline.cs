@@ -9,48 +9,35 @@ namespace iSeconds.Domain
 	{
 		public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
 
-		public Timeline (string name, int userId)
+        private IRepository repository = null;
+
+		public Timeline (string name, int userId, IRepository repository)
 		{
 			this.Name = name;
 			this.UserId = userId;
+            this.repository = repository;
 		}
 
 		public Timeline ()
 		{
 		}
 
-        // temporariamente comentado.. gostaria que essa api fosse assim e nao orientada a banco de dados
-        //public void AddVideoAt(DateTime date, string url)
-        //{
-        //    if (!days.ContainsKey(date))
-        //        days.Add(date, new DayInfo(date, this.Id));
+        public void AddVideoAt(DateTime date, string url)
+        {
+            DayInfo day = this.repository.GetDayInfoAt(date, this.Id);
+            day.AddVideo(url);
+        }
 
-        //    days[date].AddVideo(url);
+        public IList<MediaInfo> GetVideosAt(DateTime date)
+        {
+            DayInfo day = this.repository.GetDayInfoAt(date, this.Id);
+            return day.GetVideos();
+        }
 
-        //    if (OnDayChanged != null)
-        //        OnDayChanged(this, new GenericEventArgs<DayInfo>(days[date]));
-        //}
-
-		public bool HasVideoAt (DateTime date)
-		{
-			return days.ContainsKey(date) && days[date].HasVideo();
-		}
-
-		public int GetVideoCountAt (DateTime date)
-		{
-			if (!days.ContainsKey(date))
-				return 0;
-
-			return days[date].GetVideoCount();
-		}
-
-		public string GetDayThumbnail (DateTime date)
-		{
-			if (!days.ContainsKey(date))
-				return "";
-
-			return days[date].GetThumbnail();
-		}
+        public DayInfo GetDayAt(DateTime date)
+        {
+            return this.repository.GetDayInfoAt(date, this.Id);
+        }
 
 		#region db
 		[PrimaryKey, AutoIncrement]
@@ -68,10 +55,6 @@ namespace iSeconds.Domain
 			}
 		}
 		#endregion
-
-
-		// only client side...
-		private Dictionary<DateTime, DayInfo> days = new Dictionary<DateTime, DayInfo>();
 	}
 }
 

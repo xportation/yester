@@ -8,12 +8,12 @@ namespace iSeconds.Domain
 {
 	public class User : IModel
 	{
-		public event EventHandler<GenericEventArgs<Timeline>> OnNewTimeline;
-		public event EventHandler<GenericEventArgs<Timeline>> OnActualTimelineChanged;
+        private IRepository repository = null;
 
-		public User (string name)
+		public User (string name, IRepository repository)
 		{
 			this.Name = name;
+            this.repository = repository;
 		}
 
 		public User ()
@@ -22,56 +22,40 @@ namespace iSeconds.Domain
 
 		public void CreateTimeline (string timelineName)
 		{
-            Timeline timeline = new Timeline(timelineName, this.Id);
-            timelines.Add(timeline);
+            Timeline timeline = new Timeline(timelineName, this.Id, this.repository);
 
-            if (OnNewTimeline != null)
-                OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
+            repository.SaveTimeline(timeline);
 
-            this.ActualTimeline = timeline;
+            // TODO: implement user preferences
+            //this.ActualTimeline = timeline;
 		}
 
-		public List<Timeline> GetTimelines ()
-		{
-			return timelines;
-		}
+        public int GetTimelineCount()
+        {
+            return this.GetTimelines().Count;
+        }
 
-		public int GetTimelineCount ()
-		{
-			return timelines.Count;
-		}
+        public IList<Timeline> GetTimelines()
+        {
+            return repository.GetUserTimelines(this.Id);
+        }
 
-		public int TimelineCount {
-			get {
-				return timelines.Count;
-			}
-		}
-
-		public void LoadTimelines (IEnumerable<Timeline> timelines)
-		{
-			this.timelines.Clear ();
-			this.timelines.AddRange (timelines);
-		}
-
-
-		private Timeline _ActualTimeline = null;
-		[Ignore]
-		public Timeline ActualTimeline {
-			get {
-//				if (_ActualTimeline == null)
-//					throw new Exception("Has no actual timeline");
-//
-				return _ActualTimeline;
-			}
-			set {
-				_ActualTimeline = value;
-				if (OnActualTimelineChanged != null)
-					OnActualTimelineChanged(this, new GenericEventArgs<Timeline>(_ActualTimeline));
-			}
-		}
-
-		private List<Timeline> timelines = new List<Timeline>();
-
+        // TODO: implementar nas user preferences...		
+//        private Timeline _ActualTimeline = null;
+//        [Ignore]
+//        public Timeline ActualTimeline {
+//            get {
+////				if (_ActualTimeline == null)
+////					throw new Exception("Has no actual timeline");
+////
+//                return _ActualTimeline;
+//            }
+//            set {
+//                _ActualTimeline = value;
+//                if (OnActualTimelineChanged != null)
+//                    OnActualTimelineChanged(this, new GenericEventArgs<Timeline>(_ActualTimeline));
+//            }
+//        }
 
 		#region db
 		[PrimaryKey, AutoIncrement]

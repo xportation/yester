@@ -2,11 +2,14 @@
 using System;
 using System.Collections.Generic;
 using SQLite;
+using System.Diagnostics;
 
 namespace iSeconds.Domain
 {
 	public class DayInfo : IModel
 	{
+        private IRepository repository = null;
+
 		public DayInfo (DateTime date, int timelineId)
 		{
 			this.Date = date;
@@ -17,29 +20,39 @@ namespace iSeconds.Domain
 		{
 		}
 
-		public bool HasVideo ()
-		{
-			return medias.Count > 0;
-		}
+        public void AddVideo(string url)
+        {
+            Debug.Assert(repository != null); // you should bind a repository with SetRepository() method
+
+            // TODO: ver se isso basta.. salvamos o dia apenas se ele tiver video
+            this.repository.SaveItem(this);
+
+            MediaInfo media = new MediaInfo(this.Id, url);
+            this.repository.SaveItem(media);
+        }
+
+        public IList<MediaInfo> GetVideos()
+        {
+            return this.repository.GetMediasForDay(this);
+        }
 
 		public int GetVideoCount ()
 		{
-			return medias.Count;
+			return GetVideos().Count;
 		}
 
 		public string GetThumbnail ()
 		{
 			// TODO: temporariamente assim.. teriamos que ver o que vamos retornar
-            return !HasVideo() ? "" : medias[0].Path;
+            IList<MediaInfo> videos = GetVideos();
+
+            return videos.Count == 0 ? "" : videos[0].Path;
 		}
 
-        public void LoadMedia(IList<MediaInfo> media)
+        public void SetRepository(IRepository repository)
         {
-            this.medias.AddRange(media);
+            this.repository = repository;
         }
-
-
-        private List<MediaInfo> medias = new List<MediaInfo>();
 
 		#region db
 		[PrimaryKey, AutoIncrement]
@@ -47,7 +60,9 @@ namespace iSeconds.Domain
 		public int TimelineId { get; set; }
 		public DateTime Date { get; set; }
 		#endregion
-	}
+
+        
+    }
 
 }
 

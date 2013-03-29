@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using iSeconds.Domain.Framework;
 
 
 namespace iSeconds.Domain
@@ -15,13 +16,15 @@ namespace iSeconds.Domain
         private IRepository repository = null;
 
         private IMediaService mediaService = null;
-        
 
-        public DayViewModel(DayInfo model, IRepository repository, IMediaService mediaService)
+        private INavigator navigator = null;
+
+        public DayViewModel(DayInfo model, IRepository repository, IMediaService mediaService, INavigator navigator)
         {
             this.model = model;
             this.repository = repository;
             this.mediaService = mediaService;
+            this.navigator = navigator;
 
             this.videoPath = model != null ? model.GetThumbnail() : "";
         }
@@ -151,7 +154,9 @@ namespace iSeconds.Domain
 
                 entries.Add(new DayOptionsEntry("Options", () =>
                 {
-                    
+                    Args args = new Args();
+                    args.Put("DayId", viewModel.Model.Id.ToString());
+                    viewModel.navigator.NavigateTo("day_options", args);
                 }));
             }
         }
@@ -183,7 +188,7 @@ namespace iSeconds.Domain
             {
                 return new Command((object arg) => {
                     string videoPath = (string) arg;
-                    repository.SaveDay(this.model.TimelineId, this.model.Date, videoPath);
+                    this.model.AddVideo(videoPath);
                     VideoPath = videoPath;
                 });
             }

@@ -50,8 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityTracker.cs" />
+    <Compile Include="AndroidPresenter.cs" />
     <Compile Include="CalendarMonthView\CalendarMonthView.cs" />
     <Compile Include="CalendarMonthView\CalendarMonthViewWeekNames.cs" />
+    <Compile Include="DayOptionsActivity.cs" />
     <Compile Include="ISecondsActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MediaServiceAndroid.cs" />

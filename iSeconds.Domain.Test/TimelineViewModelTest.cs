@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using iSeconds.Domain.Framework;
+using NUnit.Framework;
 using System;
 using System.Globalization;
 
@@ -12,19 +13,25 @@ namespace iSeconds.Domain.Test
         ISecondsDB repository = null;
         TimelineViewModel viewModel = null;
 
-        MockMediaService mockMediaService = new MockMediaService(); 
+        MockMediaService mockMediaService = new MockMediaService();
+        INavigator navigator = new INavigator();
+
 
         [SetUp()]
         public void Init()
         {
             repository = new ISecondsDB("testbase.db3");
             repository.DeleteAll<User>();
-            user = new User("xuxa");
+            repository.DeleteAll<Timeline>();
+            repository.DeleteAll<DayInfo>();
+            repository.DeleteAll<MediaInfo>();
+
+            user = new User("xuxa", repository);
             repository.SaveItem(user);
-            timeline = new Timeline("xou da xuxa", user.Id);
+            timeline = new Timeline("xou da xuxa", user.Id, this.repository);
             repository.SaveTimeline(timeline);
 
-            viewModel = new TimelineViewModel(timeline, repository, mockMediaService);
+            viewModel = new TimelineViewModel(timeline, repository, mockMediaService, navigator);
         }
 
         [Test()]

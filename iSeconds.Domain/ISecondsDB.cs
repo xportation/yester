@@ -52,7 +52,6 @@ namespace iSeconds.Domain
             lock (locker)
             {
                 User user = (from i in Table<User>() where i.Id == id select i).First();
-                user.LoadTimelines(this.GetUserTimelines(id));
                 return user;
             }
 		}
@@ -68,39 +67,10 @@ namespace iSeconds.Domain
                 OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
         }
 
-        public void SaveDay(int timelineId, DateTime day, string videoPath)
-        {
-            DayInfo dayInfo = new DayInfo(day, timelineId);
-            this.SaveItem(dayInfo);
-            this.SaveItem(new MediaInfo(dayInfo.Id, videoPath));
-
-            IList<MediaInfo> videos = this.GetMediasForDay(dayInfo);
-            dayInfo.LoadMedia(videos);
-
-            if (OnDayChanged != null)
-                OnDayChanged(this, new GenericEventArgs<DayInfo>(dayInfo));
-
-        }
-
         public IList<MediaInfo> GetMediasForDay(DayInfo day)
         {
             return (from i in Table<MediaInfo>() where i.DayId == day.Id select i).ToList();
         }
-
-		public IList<User> GetUsers ()
-		{
-			return this.GetItems<User> ();
-		}
-
-		public IList<Timeline> GetTimelines ()
-		{
-			return this.GetItems<Timeline> ();
-		}
-
-		public IList<DayInfo> GetDays ()
-		{
-			return this.GetItems<DayInfo>();
-		}
 
         public DayInfo GetDayInfoAt(DateTime dateTime, int timelineId)
         {
@@ -109,26 +79,12 @@ namespace iSeconds.Domain
             {
                 dayInfo = new DayInfo(dateTime, timelineId);
             }
-            else
-            {
-                IList<MediaInfo> videos = this.GetMediasForDay(dayInfo);
-                dayInfo.LoadMedia(videos);
-            }
+            dayInfo.SetRepository(this);
 
             return dayInfo;
         }
 
-		public IList<DayInfo> GetDaysInMonth (int timelineId, int month, int year)
-		{
-			lock (locker) {
-                DateTime begin = new DateTime(year, month, 1);
-                DateTime end = new DateTime(year, month, DateTime.DaysInMonth(year, month));
 
-				return (from i in Table<DayInfo>() 
-				        	where i.TimelineId == timelineId && i.Date >= begin && i.Date <= end select i
-				       ).ToList();
-			}
-		}
 
 		public IList<Timeline> GetUserTimelines (int userId)
 		{

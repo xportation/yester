@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using iSeconds.Domain;
 using System.ComponentModel;
+using iSeconds.Domain.Framework;
 
 namespace iSeconds.Domain.Test
 {
@@ -11,13 +12,14 @@ namespace iSeconds.Domain.Test
 		ISecondsDB repository = null; 
 		User user = null;
         IMediaService mockMediaService = new MockMediaService();
+        INavigator navigator = new INavigator();
 
 		[SetUp()]
 		public void Init()
 		{
 			repository = new ISecondsDB("testbase.db3");
 			repository.DeleteAll<User> ();
-			user = new User ("xuxa");
+			user = new User ("xuxa", repository);
 			repository.SaveItem (user);
 		}
 
@@ -28,7 +30,7 @@ namespace iSeconds.Domain.Test
 		[Test()]
 		public void TestUserWithoutTimelineHasNoCurrentTimeline ()
 		{
-			HomeViewModel viewModel = new HomeViewModel (user, repository, mockMediaService);
+			HomeViewModel viewModel = new HomeViewModel (user, repository, mockMediaService, navigator);
             Assert.Null(viewModel.CurrentTimeline);
             Assert.IsEmpty(viewModel.Timelines);
 		}
@@ -36,7 +38,7 @@ namespace iSeconds.Domain.Test
         [Test()]
         public void TestModelViewNotifiesOnNewTimeline()
         {
-            HomeViewModel viewModel = new HomeViewModel(user, repository, mockMediaService);
+            HomeViewModel viewModel = new HomeViewModel(user, repository, mockMediaService, navigator);
             MockHomeView view = new MockHomeView();
 
             bool wasCalled = false;
@@ -47,7 +49,7 @@ namespace iSeconds.Domain.Test
 
             };
 
-            repository.SaveTimeline(new Timeline("xou da xuxa", user.Id));
+            repository.SaveTimeline(new Timeline("xou da xuxa", user.Id, repository));
 
             Assert.IsTrue(wasCalled);
         }

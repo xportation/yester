@@ -21,16 +21,19 @@ namespace iSeconds.Droid
             base.OnCreate(savedInstanceState);
             activityTracker = ((ISecondsApplication)this.Application).GetActivityTracker();
         }
+
         protected override void OnResume()
         {
             base.OnResume();
             activityTracker.SetCurrentActivity(this);
         }
+
         protected override void OnPause()
         {
             clearReferences();
             base.OnPause();
         }
+
         protected override void OnDestroy()
         {
             clearReferences();

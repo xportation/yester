@@ -1,3 +1,4 @@
+using iSeconds.Domain.Framework;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,12 +11,14 @@ namespace iSeconds.Domain
 		private Timeline timeline = null;
 		private IRepository repository = null;
         private IMediaService mediaService = null;
+        private INavigator navigator = null;
 		
-		public TimelineViewModel(Timeline timeline, IRepository repository, IMediaService mediaService)
+		public TimelineViewModel(Timeline timeline, IRepository repository, IMediaService mediaService, INavigator navigator)
 		{
 			this.timeline = timeline;
 			this.repository = repository;
             this.mediaService = mediaService;
+            this.navigator = navigator;
 
             CalendarMode = VisualizationMode.MONTH;
 			
@@ -41,7 +44,9 @@ namespace iSeconds.Domain
                 List<Day> viewedDays = calendarMonth.GetViewedDays();
                 foreach (Day date in viewedDays)
                 {
-                    DayViewModel viewModel = new DayViewModel(this.repository.GetDayInfoAt(date.day, this.timeline.Id), repository, this.mediaService);
+                    DayViewModel viewModel = new DayViewModel(
+                        this.timeline.GetDayAt(date.day), repository, this.mediaService, this.navigator
+                    );
 
                     viewModel.PresentationInfo = date;
                     viewModels.Add(viewModel);

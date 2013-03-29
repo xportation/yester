@@ -97,7 +97,7 @@ namespace iSeconds.Droid
          base.OnCreate(bundle);
 
          ISecondsApplication application = (ISecondsApplication) this.Application;
-         viewModel = new HomeViewModel(application.GetUserService().CurrentUser, application.GetRepository(), application.GetMediaService());
+         viewModel = new HomeViewModel(application.GetUserService().CurrentUser, application.GetRepository(), application.GetMediaService(), application.GetNavigator());
 
          this.RequestWindowFeature(WindowFeatures.NoTitle);
          this.SetContentView(Resource.Layout.HomeView);

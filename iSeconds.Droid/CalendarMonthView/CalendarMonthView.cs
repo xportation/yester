@@ -427,7 +427,10 @@ namespace iSeconds.Droid
 				DayViewModel dayViewModel = viewedDays[dayIndex];
 				
 				dayViewModel.PropertyChanged +=
-					(object sender, PropertyChangedEventArgs e) => { Invalidate(); };
+					(object sender, PropertyChangedEventArgs e) => 
+                        {
+                            createCacheDisplay(ref calendarMonthCache, viewedDays);
+                        };
 
 				dayViewModel.DayOptionsRequest.Raised +=
 					(object sender, GenericEventArgs<DayViewModel.DayOptionsList> e) =>

@@ -1,3 +1,4 @@
+using iSeconds.Domain.Framework;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -9,16 +10,18 @@ namespace iSeconds.Domain
 		private User user = null;
 		private IRepository repository = null;
         private IMediaService mediaService = null;
+        private INavigator navigator = null;
 
-        public HomeViewModel(User user, IRepository repository, IMediaService mediaService)
+        public HomeViewModel(User user, IRepository repository, IMediaService mediaService, INavigator navigator)
 		{
 			this.user = user;
 			this.repository = repository;
             this.mediaService = mediaService;
+            this.navigator = navigator;
 
             this.repository.OnNewTimeline += (object sender, GenericEventArgs<Timeline> arg) =>
             {
-                this.CurrentTimeline = new TimelineViewModel(arg.Value, repository, mediaService);
+                this.CurrentTimeline = new TimelineViewModel(arg.Value, repository, mediaService, this.navigator);
                 Timelines = this.repository.GetUserTimelines(this.user.Id);
             };
 
@@ -48,7 +51,7 @@ namespace iSeconds.Domain
 			{
 				return new Command(delegate(object arg)
 				{
-                    repository.SaveTimeline(new Timeline("xou da xuxa", user.Id));
+                    repository.SaveTimeline(new Timeline("xou da xuxa", user.Id, repository));
 
                     //Timeline timeline = new Timeline("my timeline", this.user.Id);
                     //this.repository.SaveItem(timeline);
@@ -64,7 +67,7 @@ namespace iSeconds.Domain
                 return new Command(delegate(object arg)
                 {
                     int timelineId = (int)arg;
-                    CurrentTimeline = new TimelineViewModel(repository.GetUserTimeline(this.user.Id, timelineId), repository, this.mediaService);
+                    CurrentTimeline = new TimelineViewModel(repository.GetUserTimeline(this.user.Id, timelineId), repository, this.mediaService, this.navigator);
                 });
             }
         }
