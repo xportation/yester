@@ -49,7 +49,7 @@ namespace iSeconds.Domain.Test
 
             };
 
-            repository.SaveTimeline(new Timeline("xou da xuxa", user.Id, repository));
+            user.CreateTimeline("xou da xuxa");
 
             Assert.IsTrue(wasCalled);
         }

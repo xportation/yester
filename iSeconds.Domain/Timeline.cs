@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using SQLite;
+using System.Diagnostics;
 
 namespace iSeconds.Domain
 {
@@ -11,31 +12,41 @@ namespace iSeconds.Domain
 
         private IRepository repository = null;
 
-		public Timeline (string name, int userId, IRepository repository)
+		public Timeline (string name, int userId)
 		{
 			this.Name = name;
 			this.UserId = userId;
-            this.repository = repository;
 		}
 
 		public Timeline ()
 		{
 		}
 
+        public void SetRepository(IRepository repository)
+        {
+            this.repository = repository;
+        }
+
         public void AddVideoAt(DateTime date, string url)
         {
+            Debug.Assert(repository != null); 
+
             DayInfo day = this.repository.GetDayInfoAt(date, this.Id);
             day.AddVideo(url);
         }
 
         public IList<MediaInfo> GetVideosAt(DateTime date)
         {
+            Debug.Assert(repository != null); 
+
             DayInfo day = this.repository.GetDayInfoAt(date, this.Id);
             return day.GetVideos();
         }
 
         public DayInfo GetDayAt(DateTime date)
         {
+            Debug.Assert(repository != null); 
+
             return this.repository.GetDayInfoAt(date, this.Id);
         }
 

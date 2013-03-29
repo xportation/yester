@@ -155,7 +155,11 @@ namespace iSeconds.Domain
                 entries.Add(new DayOptionsEntry("Options", () =>
                 {
                     Args args = new Args();
-                    args.Put("DayId", viewModel.Model.Id.ToString());
+                    args.Put("Day", viewModel.Model.Date.Day.ToString());
+                    args.Put("Month", viewModel.Model.Date.Month.ToString());
+                    args.Put("Year", viewModel.Model.Date.Year.ToString());
+                    args.Put("Timeline", viewModel.Model.Date.Year.ToString());
+
                     viewModel.navigator.NavigateTo("day_options", args);
                 }));
             }

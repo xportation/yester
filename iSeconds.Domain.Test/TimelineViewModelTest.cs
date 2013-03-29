@@ -28,7 +28,8 @@ namespace iSeconds.Domain.Test
 
             user = new User("xuxa", repository);
             repository.SaveItem(user);
-            timeline = new Timeline("xou da xuxa", user.Id, this.repository);
+            timeline = new Timeline("xou da xuxa", user.Id);
+            timeline.SetRepository(repository);
             repository.SaveTimeline(timeline);
 
             viewModel = new TimelineViewModel(timeline, repository, mockMediaService, navigator);

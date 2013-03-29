@@ -22,7 +22,8 @@ namespace iSeconds.Domain
 
 		public void CreateTimeline (string timelineName)
 		{
-            Timeline timeline = new Timeline(timelineName, this.Id, this.repository);
+            Timeline timeline = new Timeline(timelineName, this.Id);
+            timeline.SetRepository(this.repository);
 
             repository.SaveTimeline(timeline);
 
@@ -38,6 +39,11 @@ namespace iSeconds.Domain
         public IList<Timeline> GetTimelines()
         {
             return repository.GetUserTimelines(this.Id);
+        }
+
+        public Timeline GetTimelineById(int timelineId)
+        {
+            return repository.GetUserTimeline(this.Id, timelineId);
         }
 
         // TODO: implementar nas user preferences...		

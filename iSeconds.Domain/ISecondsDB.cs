@@ -89,7 +89,13 @@ namespace iSeconds.Domain
 		public IList<Timeline> GetUserTimelines (int userId)
 		{
 			lock (locker) {
-				return (from i in Table<Timeline>() where i.UserId == userId select i).ToList();
+                IList<Timeline> timelines = (from i in Table<Timeline>() where i.UserId == userId select i).ToList();
+                foreach (Timeline timeline in timelines)
+                {
+                    timeline.SetRepository(this);
+                }
+				//return (from i in Table<Timeline>() where i.UserId == userId select i).ToList();
+                return timelines;
 			}
 		}
 
@@ -97,7 +103,9 @@ namespace iSeconds.Domain
         {
             lock (locker)
             {
-                return (from i in Table<Timeline>() where i.UserId == userId && i.Id == timelineId select i).FirstOrDefault();
+                Timeline timeline = (from i in Table<Timeline>() where i.UserId == userId && i.Id == timelineId select i).FirstOrDefault();
+                timeline.SetRepository(this);
+                return timeline;
             }
         }
 

@@ -51,7 +51,11 @@ namespace iSeconds.Domain
 			{
 				return new Command(delegate(object arg)
 				{
-                    repository.SaveTimeline(new Timeline("xou da xuxa", user.Id, repository));
+                    //Timeline timeline = new Timeline("xou da xuxa", user.Id);
+                    //timeline.SetRepository(this.repository);
+
+                    user.CreateTimeline("xou da xuxa");
+                    
 
                     //Timeline timeline = new Timeline("my timeline", this.user.Id);
                     //this.repository.SaveItem(timeline);

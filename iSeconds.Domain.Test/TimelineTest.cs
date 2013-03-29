@@ -7,6 +7,7 @@ namespace iSeconds.Domain.Test
     public class TimelineTest
     {
         ISecondsDB repository = null;
+        Timeline timeline = null;
 
         [SetUp()]
         public void Init()
@@ -17,6 +18,9 @@ namespace iSeconds.Domain.Test
             repository.DeleteAll<DayInfo>();
             repository.DeleteAll<MediaInfo>();
 
+            timeline = new Timeline("my life", 1);
+            timeline.SetRepository(repository);
+
             //user = new User("test", repository);
             //repository.SaveItem(user);
         }
@@ -24,7 +28,6 @@ namespace iSeconds.Domain.Test
         [Test()]
         public void TestShouldBeAbleToAddAVideoInADate()
         {
-            Timeline timeline = new Timeline("my life", 1, repository);
             timeline.AddVideoAt(new DateTime(2012, 1, 1), "sdcard/iseconds/video.mpeg");
 
             Assert.That(timeline.GetVideosAt(new DateTime(2012, 1, 1)).Count, Is.EqualTo(1));
@@ -35,7 +38,6 @@ namespace iSeconds.Domain.Test
         {
             // o usuario a principio pode adicionar mais de um video no dia.
             // na hora de "commitar" para o "trunk" do timeline ele deve escolher apenas um.
-            Timeline timeline = new Timeline("my life", 1, repository);
             timeline.AddVideoAt(new DateTime(2012, 1, 1), "sdcard/iseconds/video.mpeg");
             timeline.AddVideoAt(new DateTime(2012, 1, 1), "sdcard/iseconds/video2.mpeg");
 
