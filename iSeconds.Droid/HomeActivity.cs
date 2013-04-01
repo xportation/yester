@@ -90,7 +90,6 @@ namespace iSeconds.Droid
    public class HomeActivity : ISecondsActivity
    {
       private HomeViewModel viewModel = null;
-      private GestureDetector gestureDetector;
 
       protected override void OnCreate(Bundle bundle)
       {

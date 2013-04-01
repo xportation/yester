@@ -9,8 +9,8 @@
         android:layout_height="22dp"
         android:id="@+id/calendarMonthName"
         android:gravity="center"
-        android:background="@drawable/monthNameBackground"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:background="@drawable/monthNameBackground" />
     <iSeconds.Droid.CalendarMonthViewWeekNames
         android:layout_width="fill_parent"
         android:layout_height="22dp"

@@ -10,7 +10,7 @@ using iSeconds.Domain;
 
 namespace iSeconds.Droid
 {
-	[Activity (Label = "iSeconds.Droid", MainLauncher = true)]
+	[Activity (Label = "My life in seconds", MainLauncher = true)]
 	public class MainActivity : Activity
 	{
 		protected override void OnCreate (Bundle bundle)

@@ -483,18 +483,27 @@ namespace iSeconds.Droid
 
 		private void drawBackgroundImage(Canvas canvas, List<DayViewModel> days)
 		{
-			for (int dayIndex = 0; dayIndex < days.Count; dayIndex++)
+         Matrix matrix = new Matrix();
+		   for (int dayIndex = 0; dayIndex < days.Count; dayIndex++)
 			{
-				DayViewModel dayViewModel = days[dayIndex];
-
-				RectangleF rect = getCellRectByIndex(dayIndex, 0, 0);
-				if (dayViewModel.VideoThumbnailPath.Length > 0)
+			   DayViewModel dayViewModel = days[dayIndex];
+			   if (dayViewModel.VideoThumbnailPath.Length > 0)
 				{
-					Bitmap thumbnail = BitmapFactory.DecodeFile(dayViewModel.VideoThumbnailPath);
-					Rect thumbnailSrc = new Rect((int) (thumbnail.Width / 2 - rect.Width / 2), (int) (thumbnail.Height / 2 - rect.Height / 2),
-						 (int) (thumbnail.Width / 2 + rect.Width / 2), (int) (thumbnail.Height / 2 + rect.Height / 2));
-					RectF thumbnailDst = new RectF(rect.Left, rect.Top, rect.Right, rect.Bottom);
-					canvas.DrawBitmap(thumbnail, thumbnailSrc, thumbnailDst, backgroundPaint);
+				   canvas.Save();
+
+				   Bitmap thumbnail = BitmapFactory.DecodeFile(dayViewModel.VideoThumbnailPath);
+				   RectangleF rect = getCellRectByIndex(dayIndex, 0, 0);
+				   RectF thumbnailDst = new RectF(rect.Left, rect.Top, rect.Right, rect.Bottom);
+
+				   canvas.ClipRect(thumbnailDst);
+               float scale = Math.Max(thumbnailDst.Width(), thumbnailDst.Height()) / Math.Min(rect.Width, rect.Height);
+               
+               matrix.Reset();
+               matrix.PostScale(scale, scale);
+				   matrix.PostTranslate(rect.X,rect.Y);
+				   canvas.DrawBitmap(thumbnail, matrix, backgroundPaint);
+               
+               canvas.Restore();
 				}
 			}
 		}
