@@ -26,6 +26,7 @@ namespace iSeconds.Droid
 		private Color textShadowColor;
 		private float textSize;
 		private Color textStrokeColor;
+		private Color selectionShadowColor;
 
 		public CalendarMonthViewTheme()
 		{
@@ -104,14 +105,21 @@ namespace iSeconds.Droid
 			set { strokeWidth = value; }
 		}
 
+		public Color SelectionShadowColor
+		{
+			get { return selectionShadowColor; }
+			set { selectionShadowColor = value; }
+		}
+
 		public void SetDefault()
 		{
 			gridLineColor = Color.Rgb(220, 220, 220);
-			isTextShadow = true;
+			isTextShadow = false;
 			textShadowColor = Color.Rgb(240, 240, 240);
 			textAlign = Paint.Align.Center;
 			textSize = 19f;
-			selectionColor = Color.Argb(127, 200, 200, 200);
+			selectionColor = Color.Argb(255, 0, 180, 255);
+			selectionShadowColor = Color.Rgb(200, 220, 255);
 			textColor = Color.Rgb(50, 50, 50);
 			inactiveTextColor = gridLineColor;
 			cellForegroundColor = Color.Transparent;
@@ -227,7 +235,10 @@ namespace iSeconds.Droid
 
 	      todayPaint = new Paint();
 	      todayPaint.Color = theme.SelectionColor;
-	      todayPaint.SetStyle(Paint.Style.Fill);
+	      todayPaint.StrokeWidth = 5;
+			todayPaint.SetShadowLayer(1.5f, 1.0f, 1.0f, theme.SelectionShadowColor);
+	      
+	      todayPaint.SetStyle(Paint.Style.Stroke);
 
 	      cellForegroundPaint = new Paint();
 	      cellForegroundPaint.SetStyle(Paint.Style.Fill);
@@ -477,8 +488,8 @@ namespace iSeconds.Droid
 			drawBackgroundImage(canvas, days);
 			drawCellsForeground(canvas, days);
 			drawDaysText(canvas, days);
-		   drawToday(canvas, days);
-		   drawGridLines(canvas);
+			drawGridLines(canvas);
+			drawToday(canvas, days);
 		}
 
 		private void drawBackgroundImage(Canvas canvas, List<DayViewModel> days)
@@ -492,16 +503,14 @@ namespace iSeconds.Droid
 				   canvas.Save();
 
 				   Bitmap thumbnail = BitmapFactory.DecodeFile(dayViewModel.VideoThumbnailPath);
-				   RectangleF rect = getCellRectByIndex(dayIndex, 0, 0);
-				   RectF thumbnailDst = new RectF(rect.Left, rect.Top, rect.Right, rect.Bottom);
-
-				   canvas.ClipRect(thumbnailDst);
-               float scale = Math.Max(thumbnailDst.Width(), thumbnailDst.Height()) / Math.Min(rect.Width, rect.Height);
-               
+					RectangleF rect = getCellRectByIndex(dayIndex, 0, 0);
+					canvas.ClipRect(rect.Left, rect.Top, rect.Right, rect.Bottom);
+					float scale = Math.Max(rect.Width / thumbnail.Width, rect.Height / thumbnail.Height);
+					
                matrix.Reset();
-               matrix.PostScale(scale, scale);
-				   matrix.PostTranslate(rect.X,rect.Y);
-				   canvas.DrawBitmap(thumbnail, matrix, backgroundPaint);
+					matrix.PostScale(scale, scale);
+					matrix.PostTranslate(rect.X - ((thumbnail.Width * scale - rect.Width) / 2), rect.Y - ((thumbnail.Height * scale - rect.Height) / 2));
+					canvas.DrawBitmap(thumbnail, matrix, backgroundPaint);
                
                canvas.Restore();
 				}
@@ -539,11 +548,16 @@ namespace iSeconds.Droid
          for (int dayIndex = 0; dayIndex < days.Count; dayIndex++)
          {
             DayViewModel dayViewModel = days[dayIndex];
-            if (dayViewModel.PresentationInfo.isToday)
+            if (dayViewModel.PresentationInfo.isToday && dayViewModel.PresentationInfo.inCurrentMonth)
             {
+               canvas.Save();
                RectangleF rect = getCellRectByIndex(dayIndex, 0, 0);
+               RectF todayRectClip = new RectF(rect.Left, rect.Top, rect.Right, rect.Bottom);
+               canvas.ClipRect(todayRectClip);
+               
                canvas.DrawRect(rect.Left, rect.Top, rect.Right, rect.Bottom, todayPaint);
-               return;
+               canvas.Restore();
+               break;
             }
          }
 		}
