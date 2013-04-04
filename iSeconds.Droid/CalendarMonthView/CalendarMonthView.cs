@@ -197,7 +197,7 @@ namespace iSeconds.Droid
 		private CalendarMonthViewTheme theme;
 		private Paint todayPaint;
 		private Timer transitionTimer;
-		private List<DayViewModel> viewedDays;
+
 
 		private bool shouldAnimate = false;
 
@@ -269,12 +269,13 @@ namespace iSeconds.Droid
 	   }
       #endregion
 
+		private List<DayViewModel> viewedDays;
       public List<DayViewModel> ViewedDays
 		{
 			get { return viewedDays; }
 			set
 			{
-				if (!shouldAnimate)
+				if (!shouldAnimate || viewedDays == null)
 				{
 					viewedDays = value;
 					heightMoviment = 0;
@@ -286,8 +287,8 @@ namespace iSeconds.Droid
 				{
 					// a atualização está vindo devido ao gesto de mudar de mês, então aninamos...
 					this.shouldAnimate = false;
-					createCacheDisplay(ref calendarNextMonthCache, viewedDays);
-					this.viewedDays = viewedDays;
+					createCacheDisplay(ref calendarNextMonthCache, value);
+					viewedDays = value;
 					
 					configureViewedDays();
 					animation.StartTransition(Height, isNextMonthByGesture, transitionTimer);
