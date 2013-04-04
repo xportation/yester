@@ -14,6 +14,7 @@ namespace iSeconds.Domain
 		{
 			this.Date = date;
 			this.TimelineId = timelineId;
+			this.DefaultVideoId = -1;
 		}
 
 		public DayInfo()
@@ -29,7 +30,19 @@ namespace iSeconds.Domain
 
             MediaInfo media = new MediaInfo(this.Id, url);
             this.repository.SaveItem(media);
+
+			this.DefaultVideoId = media.Id;
+
+			// TODO: ugly, salvando duas vezes. na primeira vez temos que salvar para associar um Id a esse dia (usado no MediaInfo depois)
+			// na segunda vez temos que persistir o ChoosedMediaId que sera o id associado ao MediaInfo quando salvo no banco (dependencia ciclica..)
+			this.repository.SaveItem(this); 
         }
+
+		public void SetDefaultVideo (int mediaId)
+		{
+			this.DefaultVideoId = mediaId;
+			this.repository.SaveItem(this);
+		}
 
         public IList<MediaInfo> GetVideos()
         {
@@ -41,12 +54,14 @@ namespace iSeconds.Domain
 			return GetVideos().Count;
 		}
 
+		public MediaInfo GetMediaByPath (string videopath)
+		{
+			return this.repository.GetMediaByPath(videopath);
+		}
+
 		public string GetThumbnail ()
 		{
-			// TODO: temporariamente assim.. teriamos que ver o que vamos retornar
-            IList<MediaInfo> videos = GetVideos();
-
-            return videos.Count == 0 ? "" : videos[0].Path;
+			return DefaultVideoId == -1 ? "" : this.repository.GetMediaById(this.DefaultVideoId).Path;
 		}
 
         public void SetRepository(IRepository repository)
@@ -59,6 +74,7 @@ namespace iSeconds.Domain
 		public int Id { get; set; }
 		public int TimelineId { get; set; }
 		public DateTime Date { get; set; }
+		public int DefaultVideoId { get; set; }
 		#endregion
 
         

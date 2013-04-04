@@ -96,6 +96,11 @@
     <Compile Include="..\iSeconds.Domain\ViewModel\ViewModel.cs">
       <Link>ViewModel.cs</Link>
     </Compile>
+    <Compile Include="DayOptionsViewModelTest.cs" />
+    <Compile Include="..\iSeconds.Domain\ViewModel\DayOptionsViewModel.cs">
+      <Link>DayOptionsViewModel.cs</Link>
+    </Compile>
+    <Compile Include="DayInfoTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -158,7 +158,7 @@ namespace iSeconds.Domain
                     args.Put("Day", viewModel.Model.Date.Day.ToString());
                     args.Put("Month", viewModel.Model.Date.Month.ToString());
                     args.Put("Year", viewModel.Model.Date.Year.ToString());
-                    args.Put("Timeline", viewModel.Model.Date.Year.ToString());
+                    args.Put("TimelineId", viewModel.Model.TimelineId.ToString());
 
                     viewModel.navigator.NavigateTo("day_options", args);
                 }));

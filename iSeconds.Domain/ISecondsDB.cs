@@ -84,7 +84,21 @@ namespace iSeconds.Domain
             return dayInfo;
         }
 
+		public MediaInfo GetMediaById(int id)
+		{
+            lock (locker)
+            {
+                return (from i in Table<MediaInfo>() where i.Id == id select i).FirstOrDefault();
+            }
+		}
 
+		public MediaInfo GetMediaByPath (string videopath)
+		{
+			lock (locker)
+			{
+				return (from i in Table<MediaInfo>() where i.Path == videopath select i).FirstOrDefault();
+			}
+		}
 
 		public IList<Timeline> GetUserTimelines (int userId)
 		{
@@ -116,14 +130,15 @@ namespace iSeconds.Domain
 			}
 		}
 		
-		public T GetItem<T> (int id) where T : IModel, new ()
-		{
-			lock (locker) {
-				return (from i in Table<T> ()
-				        where i.Id == id
-				        select i).FirstOrDefault ();
-			}
-		}
+        // nao sei pq esse metodo nao funciona...
+        //public T GetItem<T> (int id) where T : IModel, new ()
+        //{
+        //    lock (locker) {
+        //        return (from i in Table<T> ()
+        //                where i.Id == id
+        //                select i).FirstOrDefault ();
+        //    }
+        //}
 		
 		public int SaveItem<T> (T item) where T : IModel
 		{
@@ -143,6 +158,19 @@ namespace iSeconds.Domain
 				return Delete<T> (new T () { Id = id });
 			}
 		}
+
+		public void Reset()
+		{
+			// soh permite deletar em debug.. para testes..
+#if DEBUG
+			this.DeleteAll<User>();
+			this.DeleteAll<Timeline>();
+			this.DeleteAll<DayInfo>();
+			this.DeleteAll<MediaInfo>();
+
+#endif
+		}
+
 
 
     }

@@ -19,11 +19,11 @@ namespace iSeconds.Domain
 
         DayInfo GetDayInfoAt(DateTime dateTime, int timelineId);
 
-        IList<MediaInfo> GetMediasForDay(DayInfo day);
-
         Timeline GetUserTimeline(int userId, int timelineId);
 
-
+		MediaInfo GetMediaById(int id);
+		MediaInfo GetMediaByPath (string videopath);
+		IList<MediaInfo> GetMediasForDay(DayInfo day);
     }
 
 }

@@ -31,7 +31,7 @@ namespace iSeconds.Domain
             get { return currentDate; }
             set {
 
-                // se mudou o mes ou o ano devemos o title do mes
+                // se mudou o mes ou o ano devemos mudar o title do mes
                 if (currentDate.Month != value.Month || currentDate.Year != value.Year)
                 {
                     CurrentMonthTitle = this.prepareCurrentMonthTitle(value.Month, value.Year);
@@ -76,6 +76,11 @@ namespace iSeconds.Domain
             }
         }
 
+		public void Invalidate ()
+		{
+			// forçamos recalcular o viewmodels dos dias visíveis
+			this.CurrentDate = this.currentDate;
+		}
 
         List<DayViewModel> visibleDays = new List<DayViewModel>();
         public List<DayViewModel> VisibleDays

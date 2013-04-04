@@ -43,7 +43,7 @@ namespace iSeconds.Droid
 
                if (e.PropertyName == "VisibleDays")
                {
-                  monthView.SetViewedDaysAnimated(viewModel.VisibleDays);
+					monthView.ViewedDays = viewModel.VisibleDays;
                }
             };
       }
@@ -111,8 +111,16 @@ namespace iSeconds.Droid
              viewModel.NewTimelineCommand.Execute(null);
          else 
              viewModel.LoadTimelineCommand.Execute(timelines[0].Id);
-
       }
+
+		protected override void OnStart()
+		{
+			base.OnStart();
+			// por enquanto estou fazendo isso, pois ao voltar do DayOptionsActivity 
+			// o modelo pode ter mudado. Talvez tenha um jeito melhor de fazer isso
+			viewModel.CurrentTimeline.Invalidate();
+		}
+	  
 
    }
 }

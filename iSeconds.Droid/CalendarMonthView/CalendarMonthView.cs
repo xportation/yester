@@ -199,6 +199,8 @@ namespace iSeconds.Droid
 		private Timer transitionTimer;
 		private List<DayViewModel> viewedDays;
 
+		private bool shouldAnimate = false;
+
       #region Constructors
       public CalendarMonthView(Context context)
 			: base(context)
@@ -272,11 +274,25 @@ namespace iSeconds.Droid
 			get { return viewedDays; }
 			set
 			{
-				viewedDays = value;
-				heightMoviment = 0;
-				configureViewedDays();
-				createCacheDisplay(ref calendarMonthCache, viewedDays);
-				Invalidate();
+				if (!shouldAnimate)
+				{
+					viewedDays = value;
+					heightMoviment = 0;
+					configureViewedDays();
+					createCacheDisplay(ref calendarMonthCache, viewedDays);
+					Invalidate();
+				}
+				else 
+				{
+					// a atualização está vindo devido ao gesto de mudar de mês, então aninamos...
+					this.shouldAnimate = false;
+					createCacheDisplay(ref calendarNextMonthCache, viewedDays);
+					this.viewedDays = viewedDays;
+					
+					configureViewedDays();
+					animation.StartTransition(Height, isNextMonthByGesture, transitionTimer);
+					PostInvalidate();
+				}
 			}
 		}
 
@@ -310,6 +326,7 @@ namespace iSeconds.Droid
 			if ((angle < 90 + tolerance && angle > 90 - tolerance) ||
 			    (angle < 270 + tolerance && angle > 270 - tolerance))
 			{
+				this.shouldAnimate = true;
 				if (e1.GetY() > e2.GetY())
 				{
 					isNextMonthByGesture = true;
@@ -404,26 +421,6 @@ namespace iSeconds.Droid
 			PostInvalidate();
 		}
 
-		/// <summary>
-		///    Set new viewedDays with animation. Uses the gesture to identify the direction
-		/// </summary>
-		/// <param name="viewedDays"></param>
-		public void SetViewedDaysAnimated(List<DayViewModel> viewedDays)
-		{
-			if (viewedDays == null)
-			{
-				ViewedDays = viewedDays;
-			}
-			else
-			{
-				createCacheDisplay(ref calendarNextMonthCache, viewedDays);
-				this.viewedDays = viewedDays;
-
-				configureViewedDays();
-				animation.StartTransition(Height, isNextMonthByGesture, transitionTimer);
-				PostInvalidate();
-			}
-		}
 
 		public override bool OnTouchEvent(MotionEvent e)
 		{
@@ -543,7 +540,7 @@ namespace iSeconds.Droid
 			}
 		}
 
-		private void drawToday(Canvas canvas, List<DayViewModel> days )
+		private void drawToday(Canvas canvas, List<DayViewModel> days)
 		{
          for (int dayIndex = 0; dayIndex < days.Count; dayIndex++)
          {

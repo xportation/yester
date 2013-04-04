@@ -20,7 +20,7 @@ namespace iSeconds.Domain
 		{
 		}
 
-		public void CreateTimeline (string timelineName)
+		public Timeline CreateTimeline (string timelineName)
 		{
             Timeline timeline = new Timeline(timelineName, this.Id);
             timeline.SetRepository(this.repository);
@@ -29,6 +29,8 @@ namespace iSeconds.Domain
 
             // TODO: implement user preferences
             //this.ActualTimeline = timeline;
+
+			return timeline;
 		}
 
         public int GetTimelineCount()

@@ -21,10 +21,7 @@ namespace iSeconds.Domain.Test
         public void Init()
         {
             repository = new ISecondsDB("testbase.db3");
-            repository.DeleteAll<User>();
-            repository.DeleteAll<Timeline>();
-            repository.DeleteAll<DayInfo>();
-            repository.DeleteAll<MediaInfo>();
+			repository.Reset();
 
             user = new User("xuxa", repository);
             repository.SaveItem(user);

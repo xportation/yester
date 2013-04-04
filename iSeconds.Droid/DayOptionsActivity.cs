@@ -13,34 +13,78 @@ using iSeconds.Domain;
 
 namespace iSeconds.Droid
 {
-    public class DayOptionsViewModel : ViewModel
-    {
-        private DayInfo model = null;
+    class VideoListAdapter : BaseAdapter
+	{
+		private DayOptionsViewModel viewModel = null;
+		private Context context = null;
 
-        private IList<MediaInfo> videos = null;
-        public IList<MediaInfo> Videos
-        {
-            get
-            {
-                return videos;
-            }
-            set
-            {
-                this.SetField(ref videos, value, "Videos");
-            }
-        }
+		public VideoListAdapter(Context context, DayOptionsViewModel viewModel)
+		{
+			this.viewModel = viewModel;
+			this.context = context;
+		}
 
-        public DayOptionsViewModel(DayInfo model)
-        {
-            this.model = model;
+		public override Java.Lang.Object GetItem (int position)
+		{
+			return 0;
+		}
+		public override long GetItemId (int position)
+		{
+			return 0;
+		}
 
-            this.Videos = this.model.GetVideos();
-        }
-    }
+
+		private bool blocking = false;
+
+		public override View GetView (int position, View convertView, ViewGroup parent)
+		{
+			CheckBox checkBox = new CheckBox(this.context);
+
+			DayOptionsViewModel.VideoItem model = viewModel.Videos[position];
+			checkBox.Text = model.Label;
+			checkBox.Checked = model.Checked;
+			checkBox.CheckedChange += (object sender, CompoundButton.CheckedChangeEventArgs e) => 
+			{
+				if (this.blocking) 
+					return;
+
+				// se o cara esta checado nao tem como tirar o check..
+				if (model.Checked && !e.IsChecked)
+				{
+					checkBox.Checked = true;
+					return;
+				}
+
+				if (e.IsChecked)
+					this.viewModel.CheckVideoCommand.Execute(position);
+			};
+
+			model.OnCheckedChanged += (object sender, GenericEventArgs<bool /*isChecked*/> args) =>
+			{
+				blocking = true;
+				checkBox.Checked = args.Value;
+				blocking = false;
+			};
+
+
+
+			//checkBox.SetOnCheckedChangeListener(new CheckListener(this.viewModel, position));
+
+			return checkBox;
+		}
+
+		public override int Count {
+			get {
+				return viewModel.Videos.Count;
+			}
+		}
+	}
 
     [Activity(Label = "Day options")]
     public class DayOptionsActivity : Activity
     {
+		private ListView listView = null;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -57,12 +101,11 @@ namespace iSeconds.Droid
             this.SetContentView(Resource.Layout.DayOptions);
 
             DayOptionsViewModel viewModel = new DayOptionsViewModel(dayInfo);
-            
 
-            ListView listView = this.FindViewById<ListView>(Resource.Id.videosList);
-            ArrayAdapter<MediaInfo> adapter = new ArrayAdapter<MediaInfo>(
-                this, Resource.Layout.VideoItem, Resource.Id.calendarMonthName, viewModel.Videos);
+            listView = this.FindViewById<ListView>(Resource.Id.videosList);
+
+			VideoListAdapter adapter = new VideoListAdapter(this, viewModel);
             listView.Adapter = adapter;
         }
-    }
+	}
 }
