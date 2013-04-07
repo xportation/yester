@@ -20,6 +20,7 @@ namespace iSeconds.Droid
 		private Color inactiveTextColor;
 		private bool isTextShadow;
 		private Color selectionColor;
+		private Color todayColor;
 		private float strokeWidth;
 		private Paint.Align textAlign;
 		private Color textColor;
@@ -61,6 +62,12 @@ namespace iSeconds.Droid
 		{
 			get { return textSize; }
 			set { textSize = value; }
+		}
+
+		public Color TodayColor
+		{
+			get { return todayColor; }
+			set { todayColor = value; }
 		}
 
 		public Color SelectionColor
@@ -118,7 +125,8 @@ namespace iSeconds.Droid
 			textShadowColor = Color.Rgb(240, 240, 240);
 			textAlign = Paint.Align.Center;
 			textSize = 19f;
-			selectionColor = Color.Argb(255, 0, 180, 255);
+			todayColor = Color.Argb(255, 0, 180, 255);
+			selectionColor = Color.Gray;
 			selectionShadowColor = Color.Rgb(200, 220, 255);
 			textColor = Color.Rgb(50, 50, 50);
 			inactiveTextColor = gridLineColor;
@@ -176,8 +184,7 @@ namespace iSeconds.Droid
 		}
 	}
 
-	public class CalendarMonthView : View, GestureDetector.IOnGestureListener, View.IOnCreateContextMenuListener,
-	                                 IMenuItemOnMenuItemClickListener
+	public class CalendarMonthView : View, GestureDetector.IOnGestureListener
 	{
 		private readonly List<Tuple<RectangleF, DayViewModel>> daysRegions = new List<Tuple<RectangleF, DayViewModel>>();
 		private TransitionAnimation animation;
@@ -192,12 +199,14 @@ namespace iSeconds.Droid
 
 		private bool isNextMonthByGesture;
 		private Paint linePaint;
-		private DayViewModel.DayOptionsList optionsList;
 		private Paint textPaint;
 		private CalendarMonthViewTheme theme;
 		private Paint todayPaint;
 		private Timer transitionTimer;
 
+		private bool isPressed = false;
+		private RectangleF pressedRect;
+		private Paint pressedPaint;
 
 		private bool shouldAnimate = false;
 
@@ -236,7 +245,7 @@ namespace iSeconds.Droid
 	      textPaint.TextSize = theme.TextSize*Resources.DisplayMetrics.Density;
 
 	      todayPaint = new Paint();
-	      todayPaint.Color = theme.SelectionColor;
+	      todayPaint.Color = theme.TodayColor;
 	      todayPaint.StrokeWidth = 5;
 			todayPaint.SetShadowLayer(1.5f, 1.0f, 1.0f, theme.SelectionShadowColor);
 	      
@@ -248,9 +257,12 @@ namespace iSeconds.Droid
 	      backgroundPaint = new Paint();
 	      cellForegroundPaint.SetStyle(Paint.Style.Fill);
 
-	      gestureDetector = new GestureDetector(this);
+			pressedPaint = new Paint();
+			pressedPaint.Color = theme.SelectionColor;
+			pressedPaint.SetStyle(Paint.Style.Stroke);
+			pressedPaint.StrokeWidth = 3;
 
-	      SetOnCreateContextMenuListener(this);
+	      gestureDetector = new GestureDetector(this);
 
 	      cacheDisplayPaint = new Paint();
 	      initBitmapCache();
@@ -297,23 +309,7 @@ namespace iSeconds.Droid
 			}
 		}
 
-	   public TimelineViewModel ViewModel { get; set; }
-
-	   public bool OnMenuItemClick(IMenuItem item)
-		{
-			optionsList.DayEntryClicked.Execute(item.ItemId);
-			return true;
-		}
-
-	   public void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
-		{
-			for (int i = 0; i < optionsList.OptionsEntries.Count; i++)
-			{
-				DayViewModel.DayOptionsList.DayOptionsEntry entry = optionsList.OptionsEntries[i];
-				IMenuItem menuItem = menu.Add(0, i, i, entry.Name);
-				menuItem.SetOnMenuItemClickListener(this);
-			}
-		}
+		public TimelineViewModel ViewModel { get; set; }
 
 	   #region Gestures
 	   public bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
@@ -358,12 +354,10 @@ namespace iSeconds.Droid
 			float x = e.GetX();
 			float y = e.GetY();
 
-			foreach (var dayRegion in daysRegions)
+			var dayRegion = this.findDayOnXY(x, y);
+			if (dayRegion != null)
 			{
-				if (dayRegion.Item1.Contains(x, y))
-				{
-					dayRegion.Item2.DayOptionsCommand.Execute(null);
-				}
+				dayRegion.Item2.DayOptionsCommand.Execute(null);
 			}
 		}
 
@@ -374,6 +368,37 @@ namespace iSeconds.Droid
 
 	   public void OnShowPress(MotionEvent e)
 		{
+			if (animation.IsAnimating())
+				return; 
+
+			float x = e.GetX();
+			float y = e.GetY();
+			
+			findAndSelectDay (x, y);
+		}
+
+		private Tuple<RectangleF, DayViewModel> findAndSelectDay (float x, float y)
+		{
+			var dayRegion = this.findDayOnXY (x, y);
+			if (dayRegion != null) 
+			{
+				isPressed = true;
+				pressedRect = dayRegion.Item1;
+				this.Invalidate ();
+			}
+			return dayRegion;
+		}
+
+		private Tuple<RectangleF, DayViewModel> findDayOnXY(float x, float y)
+		{
+			foreach (var dayRegion in daysRegions)
+			{
+				if (dayRegion.Item1.Contains(x, y))
+				{
+					return dayRegion;
+				}
+			}
+			return null;
 		}
 
 	   public bool OnSingleTapUp(MotionEvent e)
@@ -384,13 +409,11 @@ namespace iSeconds.Droid
 			float x = e.GetX();
 			float y = e.GetY();
 
-			foreach (var dayRegion in daysRegions)
+			var dayRegion = findAndSelectDay(x, y);
+			if (dayRegion != null)
 			{
-				if (dayRegion.Item1.Contains(x, y))
-				{
-					dayRegion.Item2.DayClickedCommand.Execute(null);
-					return true;
-				}
+				dayRegion.Item2.DayClickedCommand.Execute(null);
+				return true;
 			}
 
 
@@ -439,14 +462,7 @@ namespace iSeconds.Droid
 					(object sender, PropertyChangedEventArgs e) => 
                         {
                             createCacheDisplay(ref calendarMonthCache, viewedDays);
-                        };
-
-				dayViewModel.DayOptionsRequest.Raised +=
-					(object sender, GenericEventArgs<DayViewModel.DayOptionsList> e) =>
-						{
-							optionsList = e.Value;
-							ShowContextMenu();
-						};
+                        };		
 			}
 		}
 
@@ -466,6 +482,17 @@ namespace iSeconds.Droid
 
 			if (calendarNextMonthCache != null && animation.IsAnimating())
 				canvas.DrawBitmap(calendarNextMonthCache, 0, heightMoviment + heightIncrement, cacheDisplayPaint);
+
+			drawSelection (canvas);
+		}
+
+		void drawSelection (Canvas canvas)
+		{
+			if (isPressed) 
+			{
+				isPressed = false;
+				canvas.DrawRect (pressedRect.Left, pressedRect.Top, pressedRect.Right, pressedRect.Bottom, pressedPaint);
+			}
 		}
 
 		private void createCacheDisplay(ref Bitmap bitmap, List<DayViewModel> days)

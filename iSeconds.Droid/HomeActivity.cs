@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace iSeconds.Droid
 {
    
-   public class TimelineView : LinearLayout
+   public class TimelineView : LinearLayout, View.IOnCreateContextMenuListener, IMenuItemOnMenuItemClickListener
    {
       private TimelineViewModel viewModel = null;
 
@@ -43,10 +43,47 @@ namespace iSeconds.Droid
 
                if (e.PropertyName == "VisibleDays")
                {
-					monthView.ViewedDays = viewModel.VisibleDays;
+                  monthView.ViewedDays = viewModel.VisibleDays;
+
+						foreach (DayViewModel day in viewModel.VisibleDays)
+						{
+							day.DayOptionsRequest.Raised += (object s, GenericEventArgs<DayViewModel.DayOptionsList> args) => 
+							{
+								optionsList = args.Value;
+								ShowContextMenu();
+							};
+						}					
                }
             };
-      }
+
+			SetOnCreateContextMenuListener(this);
+		}
+
+		public override void OnWindowFocusChanged(bool hasFocus)
+		{
+			base.OnWindowFocusChanged(hasFocus);
+			// precisei fazer pois depois do menu de contexto aberto, se apertarmos o back button a seleção não é removida
+			if (hasFocus)
+				this.Invalidate();
+		}
+
+		private DayViewModel.DayOptionsList optionsList;
+
+		public bool OnMenuItemClick(IMenuItem item)
+		{
+			optionsList.DayEntryClicked.Execute(item.ItemId);
+			return true;
+		}
+		
+		public void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+		{
+			for (int i = 0; i < optionsList.OptionsEntries.Count; i++)
+			{
+				DayViewModel.DayOptionsList.DayOptionsEntry entry = optionsList.OptionsEntries[i];
+				IMenuItem menuItem = menu.Add(0, i, i, entry.Name);
+				menuItem.SetOnMenuItemClickListener(this);
+			}
+		}
 
    }
 
@@ -90,6 +127,7 @@ namespace iSeconds.Droid
    public class HomeActivity : ISecondsActivity
    {
       private HomeViewModel viewModel = null;
+      private LinearLayout layout = null;
 
       protected override void OnCreate(Bundle bundle)
       {
@@ -101,7 +139,7 @@ namespace iSeconds.Droid
          this.RequestWindowFeature(WindowFeatures.NoTitle);
          this.SetContentView(Resource.Layout.HomeView);
 
-         LinearLayout layout = this.FindViewById<LinearLayout>(Resource.Id.homeViewLayout);
+         layout = this.FindViewById<LinearLayout>(Resource.Id.homeViewLayout);
          layout.AddView(new HomeView(viewModel, this),
                         new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent));
 
