@@ -1,71 +1,65 @@
-
 using System;
 using System.Collections.Generic;
-using SQLite;
 using System.Diagnostics;
+using SQLite;
 
 namespace iSeconds.Domain
 {
-	public class Timeline : iSeconds.Domain.IModel
+	public class Timeline : IModel
 	{
+		private IRepository repository;
+
+	   public Timeline(string name, int userId)
+		{
+			Name = name;
+			UserId = userId;
+		}
+
+		public Timeline()
+		{
+		}
+
 		public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
 
-        private IRepository repository = null;
-
-		public Timeline (string name, int userId)
+		public void SetRepository(IRepository repository)
 		{
-			this.Name = name;
-			this.UserId = userId;
+			this.repository = repository;
 		}
 
-		public Timeline ()
+		public void AddVideoAt(DateTime date, string url)
 		{
+			Debug.Assert(repository != null);
+
+			DayInfo day = repository.GetDayInfoAt(date, Id);
+			day.AddVideo(url);
 		}
 
-        public void SetRepository(IRepository repository)
-        {
-            this.repository = repository;
-        }
+		public IList<MediaInfo> GetVideosAt(DateTime date)
+		{
+			Debug.Assert(repository != null);
 
-        public void AddVideoAt(DateTime date, string url)
-        {
-            Debug.Assert(repository != null); 
+			DayInfo day = repository.GetDayInfoAt(date, Id);
+			return day.GetVideos();
+		}
 
-            DayInfo day = this.repository.GetDayInfoAt(date, this.Id);
-            day.AddVideo(url);
-        }
+		public DayInfo GetDayAt(DateTime date)
+		{
+			Debug.Assert(repository != null);
 
-        public IList<MediaInfo> GetVideosAt(DateTime date)
-        {
-            Debug.Assert(repository != null); 
-
-            DayInfo day = this.repository.GetDayInfoAt(date, this.Id);
-            return day.GetVideos();
-        }
-
-        public DayInfo GetDayAt(DateTime date)
-        {
-            Debug.Assert(repository != null); 
-
-            return this.repository.GetDayInfoAt(date, this.Id);
-        }
+			return repository.GetDayInfoAt(date, Id);
+		}
 
 		#region db
-		[PrimaryKey, AutoIncrement]
-		public int Id { get; set; }
+
 		public int UserId { get; set; }
 
-		private string name;
-		public string Name 
-		{
-			get {
-				return name;
-			}
-			set {
-				name = value;
-			}
-		}
-		#endregion
+		public string Name { get; set; }
+
+	   public string Description { get; set; }
+
+	   [PrimaryKey, AutoIncrement]
+		public int Id { get; set; }
+
+	   #endregion
 	}
 }
-

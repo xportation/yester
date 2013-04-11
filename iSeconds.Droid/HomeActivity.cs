@@ -5,6 +5,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using LegacyBar.Library.Bar;
 using iSeconds.Domain;
 using System.ComponentModel;
 
@@ -138,8 +139,10 @@ namespace iSeconds.Droid
 
          this.RequestWindowFeature(WindowFeatures.NoTitle);
          this.SetContentView(Resource.Layout.HomeView);
-
-         layout = this.FindViewById<LinearLayout>(Resource.Id.homeViewLayout);
+			
+			addActionBarItems();
+         
+			LinearLayout layout = this.FindViewById<LinearLayout>(Resource.Id.homeViewLayout);
          layout.AddView(new HomeView(viewModel, this),
                         new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent));
 
@@ -151,6 +154,20 @@ namespace iSeconds.Droid
              viewModel.LoadTimelineCommand.Execute(timelines[0].Id);
       }
 
+		private void addActionBarItems()
+		{
+			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+			actionBar.SetHomeLogo(Resource.Drawable.actionbar_logo);
+
+			var timelineOptionsMenuItemAction = new MenuItemLegacyBarAction(
+					 this, this, Resource.Id.actionbar_timeline_menu_options, Resource.Drawable.actionbar_settings,
+					 Resource.String.timeline_menu_options)
+			{
+				ActionType = ActionType.IfRoom
+			};
+			actionBar.AddAction(timelineOptionsMenuItemAction);
+		}
+
 		protected override void OnStart()
 		{
 			base.OnStart();
@@ -158,7 +175,19 @@ namespace iSeconds.Droid
 			// o modelo pode ter mudado. Talvez tenha um jeito melhor de fazer isso
 			viewModel.CurrentTimeline.Invalidate();
 		}
-	  
 
+
+		public override bool OnOptionsItemSelected(IMenuItem item)
+		{
+			switch (item.ItemId)
+			{
+				case Resource.Id.actionbar_timeline_menu_options:
+					OnSearchRequested();
+					viewModel.TimelineOptionsCommand.Execute(null);
+					return true;
+			}
+
+			return base.OnOptionsItemSelected(item);
+		}
    }
 }

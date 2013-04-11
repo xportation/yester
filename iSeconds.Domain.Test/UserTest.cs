@@ -23,10 +23,10 @@ namespace iSeconds.Domain.Test
 		[Test()]
 		public void TestUserShouldHaveTimelines()
 		{
-			user.CreateTimeline("my life");
+         user.CreateTimeline("my life", "timeline_description");
 			Assert.AreEqual(1, user.GetTimelineCount());
 
-			user.CreateTimeline("my daughter's life");
+         user.CreateTimeline("my daughter's life", "timeline_description");
 			Assert.AreEqual(2, user.GetTimelineCount());
 		}
 

@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">iSeconds.Droid</string>
 	<string name="library_name">iSeconds.Droid</string>
+	<string name="add_timeline">Add</string>
+	<string name="actionbar_timelines_text">Timelines</string>
+	<string name="timeline_default">Default Timeline</string>
+	<string name="timeline_options_title">Timelines</string>
+	<string name="timeline_menu_options">Timeline Settings</string>
+	<string name="timeline_options_message">*Hold on a timeline for options menu</string>
+	<string name="timeline_options_dialog_textName">Name</string>
+	<string name="timeline_options_dialog_textDescription">Description</string>
+	<string name="timeline_options_dialog_new_timeline">New Timeline</string>
+	<string name="timeline_options_dialog_edit_timeline">Edit Timeline</string>
+	<string name="ok">Ok</string>
+	<string name="cancel">Cancel</string>
 	
 </resources>

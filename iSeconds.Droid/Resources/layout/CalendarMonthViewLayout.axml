@@ -10,7 +10,7 @@
         android:id="@+id/calendarMonthName"
         android:gravity="center"
         android:textColor="#ffffff"
-        android:background="@drawable/monthNameBackground" />
+        android:background="@color/calendar_title_color" />
     <iSeconds.Droid.CalendarMonthViewWeekNames
         android:layout_width="fill_parent"
         android:layout_height="22dp"

@@ -187,6 +187,12 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f040008
 			public const int actionbar_background_start_alt = 2130968584;
 			
+			// aapt resource value: 0x7f04001a
+			public const int actionbar_maincolor = 2130968602;
+			
+			// aapt resource value: 0x7f04001b
+			public const int actionbar_pressedcolor = 2130968603;
+			
 			// aapt resource value: 0x7f040000
 			public const int actionbar_separator = 2130968576;
 			
@@ -222,6 +228,9 @@ namespace iSeconds.Droid
 			
 			// aapt resource value: 0x7f04000d
 			public const int bottomactionbar_title = 2130968589;
+			
+			// aapt resource value: 0x7f04001c
+			public const int calendar_title_color = 2130968604;
 			
 			// aapt resource value: 0x7f040014
 			public const int green = 2130968596;
@@ -300,73 +309,91 @@ namespace iSeconds.Droid
 			public const int actionbar_btn_pressed_alt = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int actionbar_grayscale_background = 2130837513;
+			public const int actionbar_button = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int bottomactionbar_background = 2130837514;
+			public const int actionbar_home = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int bottomactionbar_btn = 2130837515;
+			public const int actionbar_logo = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int bottomactionbar_btn_normal = 2130837516;
+			public const int actionbar_settings = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int bottomactionbar_btn_pressed = 2130837517;
+			public const int actionbarMenuDown = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int ic_action_down = 2130837518;
+			public const int add = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int ic_action_left = 2130837519;
+			public const int bottomactionbar_background = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int ic_action_overflow_dark = 2130837520;
+			public const int bottomactionbar_btn = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int ic_action_refresh_dark = 2130837521;
+			public const int bottomactionbar_btn_normal = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int ic_action_right = 2130837522;
+			public const int bottomactionbar_btn_pressed = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int ic_action_search_dark = 2130837523;
+			public const int ic_action_down = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int ic_action_up = 2130837524;
+			public const int ic_action_left = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int ic_launcher = 2130837525;
+			public const int ic_action_overflow_dark = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int ic_menu_down = 2130837526;
+			public const int ic_action_refresh_dark = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int ic_menu_left = 2130837527;
+			public const int ic_action_right = 2130837527;
 			
 			// aapt resource value: 0x7f020018
-			public const int ic_menu_refresh = 2130837528;
+			public const int ic_action_search_dark = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int ic_menu_right = 2130837529;
+			public const int ic_action_up = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int ic_menu_search = 2130837530;
+			public const int ic_launcher = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int ic_menu_up = 2130837531;
+			public const int ic_menu_down = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int ic_title_export_default = 2130837532;
+			public const int ic_menu_left = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int ic_title_share_default = 2130837533;
+			public const int ic_menu_refresh = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int Icon = 2130837534;
+			public const int ic_menu_right = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int monthNameBackground = 2130837535;
+			public const int ic_menu_search = 2130837535;
+			
+			// aapt resource value: 0x7f020020
+			public const int ic_menu_up = 2130837536;
+			
+			// aapt resource value: 0x7f020021
+			public const int ic_title_export_default = 2130837537;
+			
+			// aapt resource value: 0x7f020022
+			public const int ic_title_share_default = 2130837538;
+			
+			// aapt resource value: 0x7f020023
+			public const int Icon = 2130837539;
+			
+			// aapt resource value: 0x7f020024
+			public const int monthNameBackground = 2130837540;
+			
+			// aapt resource value: 0x7f020025
+			public const int trash = 2130837541;
 			
 			private Drawable()
 			{
@@ -376,65 +403,89 @@ namespace iSeconds.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080010
-			public const int actionbar = 2131230736;
+			// aapt resource value: 0x7f090010
+			public const int actionbar = 2131296272;
 			
-			// aapt resource value: 0x7f080006
-			public const int actionbar_actions = 2131230726;
+			// aapt resource value: 0x7f090006
+			public const int actionbar_actions = 2131296262;
 			
-			// aapt resource value: 0x7f080001
-			public const int actionbar_home = 2131230721;
+			// aapt resource value: 0x7f090001
+			public const int actionbar_home = 2131296257;
 			
-			// aapt resource value: 0x7f080003
-			public const int actionbar_home_bg = 2131230723;
+			// aapt resource value: 0x7f090003
+			public const int actionbar_home_bg = 2131296259;
 			
-			// aapt resource value: 0x7f080004
-			public const int actionbar_home_btn = 2131230724;
+			// aapt resource value: 0x7f090004
+			public const int actionbar_home_btn = 2131296260;
 			
-			// aapt resource value: 0x7f080005
-			public const int actionbar_home_is_back = 2131230725;
+			// aapt resource value: 0x7f090005
+			public const int actionbar_home_is_back = 2131296261;
 			
-			// aapt resource value: 0x7f080002
-			public const int actionbar_home_logo = 2131230722;
+			// aapt resource value: 0x7f090002
+			public const int actionbar_home_logo = 2131296258;
 			
-			// aapt resource value: 0x7f08000a
-			public const int actionbar_item = 2131230730;
+			// aapt resource value: 0x7f09000a
+			public const int actionbar_item = 2131296266;
 			
-			// aapt resource value: 0x7f080008
-			public const int actionbar_progress = 2131230728;
+			// aapt resource value: 0x7f090008
+			public const int actionbar_progress = 2131296264;
 			
-			// aapt resource value: 0x7f080009
-			public const int actionbar_title = 2131230729;
+			// aapt resource value: 0x7f09001b
+			public const int actionbar_timeline_back_to_home = 2131296283;
 			
-			// aapt resource value: 0x7f080007
-			public const int actionbar_title_layout = 2131230727;
+			// aapt resource value: 0x7f09001a
+			public const int actionbar_timeline_menu_options = 2131296282;
 			
-			// aapt resource value: 0x7f08000b
-			public const int calendarMonthName = 2131230731;
+			// aapt resource value: 0x7f090009
+			public const int actionbar_title = 2131296265;
 			
-			// aapt resource value: 0x7f08000d
-			public const int calendarView = 2131230733;
+			// aapt resource value: 0x7f090007
+			public const int actionbar_title_layout = 2131296263;
 			
-			// aapt resource value: 0x7f08000c
-			public const int calendarWeekDays = 2131230732;
+			// aapt resource value: 0x7f090014
+			public const int addTimeline = 2131296276;
 			
-			// aapt resource value: 0x7f08000f
-			public const int homeViewLayout = 2131230735;
+			// aapt resource value: 0x7f09000b
+			public const int calendarMonthName = 2131296267;
 			
-			// aapt resource value: 0x7f080011
-			public const int myButton = 2131230737;
+			// aapt resource value: 0x7f09000d
+			public const int calendarView = 2131296269;
 			
-			// aapt resource value: 0x7f080012
-			public const int overflow_spinner = 2131230738;
+			// aapt resource value: 0x7f09000c
+			public const int calendarWeekDays = 2131296268;
 			
-			// aapt resource value: 0x7f080000
-			public const int screen = 2131230720;
+			// aapt resource value: 0x7f09000f
+			public const int homeViewLayout = 2131296271;
 			
-			// aapt resource value: 0x7f080013
-			public const int videoItemRadio = 2131230739;
+			// aapt resource value: 0x7f090011
+			public const int overflow_spinner = 2131296273;
 			
-			// aapt resource value: 0x7f08000e
-			public const int videosList = 2131230734;
+			// aapt resource value: 0x7f090000
+			public const int screen = 2131296256;
+			
+			// aapt resource value: 0x7f090017
+			public const int textDescription = 2131296279;
+			
+			// aapt resource value: 0x7f090015
+			public const int textName = 2131296277;
+			
+			// aapt resource value: 0x7f090018
+			public const int timelineDescription = 2131296280;
+			
+			// aapt resource value: 0x7f090016
+			public const int timelineName = 2131296278;
+			
+			// aapt resource value: 0x7f090013
+			public const int timelineOptionsMessage = 2131296275;
+			
+			// aapt resource value: 0x7f090012
+			public const int timelines = 2131296274;
+			
+			// aapt resource value: 0x7f090019
+			public const int videoItemRadio = 2131296281;
+			
+			// aapt resource value: 0x7f09000e
+			public const int videosList = 2131296270;
 			
 			private Id()
 			{
@@ -472,9 +523,32 @@ namespace iSeconds.Droid
 			public const int spinneritem = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int VideoItem = 2130903049;
+			public const int TimelineOptions = 2130903049;
+			
+			// aapt resource value: 0x7f03000a
+			public const int TimelineOptionsDialogModal = 2130903050;
+			
+			// aapt resource value: 0x7f03000b
+			public const int TimelineOptionsItem = 2130903051;
+			
+			// aapt resource value: 0x7f03000c
+			public const int VideoItem = 2130903052;
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f080000
+			public const int HomeViewMenu = 2131230720;
+			
+			// aapt resource value: 0x7f080001
+			public const int TimelineOptionsMenu = 2131230721;
+			
+			private Menu()
 			{
 			}
 		}
@@ -488,14 +562,20 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f060002
 			public const int actionbar_activity_not_found = 2131099650;
 			
+			// aapt resource value: 0x7f06000c
+			public const int actionbar_timelines_text = 2131099660;
+			
+			// aapt resource value: 0x7f06000b
+			public const int add_timeline = 2131099659;
+			
 			// aapt resource value: 0x7f060001
 			public const int app_name = 2131099649;
 			
-			// aapt resource value: 0x7f06000a
-			public const int hello = 2131099658;
+			// aapt resource value: 0x7f060016
+			public const int cancel = 2131099670;
 			
-			// aapt resource value: 0x7f06000b
-			public const int library_name = 2131099659;
+			// aapt resource value: 0x7f06000a
+			public const int library_name = 2131099658;
 			
 			// aapt resource value: 0x7f060006
 			public const int menu_string_down = 2131099654;
@@ -515,8 +595,35 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f060005
 			public const int menu_string_up = 2131099653;
 			
+			// aapt resource value: 0x7f060015
+			public const int ok = 2131099669;
+			
 			// aapt resource value: 0x7f060003
 			public const int some_title = 2131099651;
+			
+			// aapt resource value: 0x7f06000d
+			public const int timeline_default = 2131099661;
+			
+			// aapt resource value: 0x7f06000f
+			public const int timeline_menu_options = 2131099663;
+			
+			// aapt resource value: 0x7f060014
+			public const int timeline_options_dialog_edit_timeline = 2131099668;
+			
+			// aapt resource value: 0x7f060013
+			public const int timeline_options_dialog_new_timeline = 2131099667;
+			
+			// aapt resource value: 0x7f060012
+			public const int timeline_options_dialog_textDescription = 2131099666;
+			
+			// aapt resource value: 0x7f060011
+			public const int timeline_options_dialog_textName = 2131099665;
+			
+			// aapt resource value: 0x7f060010
+			public const int timeline_options_message = 2131099664;
+			
+			// aapt resource value: 0x7f06000e
+			public const int timeline_options_title = 2131099662;
 			
 			private String()
 			{

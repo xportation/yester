@@ -104,7 +104,7 @@ namespace iSeconds.Droid
 
             listView = this.FindViewById<ListView>(Resource.Id.videosList);
 
-			VideoListAdapter adapter = new VideoListAdapter(this, viewModel);
+			   VideoListAdapter adapter = new VideoListAdapter(this, viewModel);
             listView.Adapter = adapter;
         }
 	}

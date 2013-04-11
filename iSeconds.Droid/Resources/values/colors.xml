@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<color name="actionbar_separator">#FF888888</color>
+	<color name="actionbar_maincolor">#FF000000</color>
+	<color name="actionbar_pressedcolor">#FF206e8a</color>
+	<color name="calendar_title_color">#FF4D717F</color>
+</resources>

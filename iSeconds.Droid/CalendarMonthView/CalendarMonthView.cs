@@ -126,7 +126,7 @@ namespace iSeconds.Droid
 			textAlign = Paint.Align.Center;
 			textSize = 19f;
 			todayColor = Color.Argb(255, 0, 180, 255);
-			selectionColor = Color.Gray;
+			selectionColor = Color.Argb(100, 0, 180, 255);
 			selectionShadowColor = Color.Rgb(200, 220, 255);
 			textColor = Color.Rgb(50, 50, 50);
 			inactiveTextColor = gridLineColor;
@@ -259,8 +259,7 @@ namespace iSeconds.Droid
 
 			pressedPaint = new Paint();
 			pressedPaint.Color = theme.SelectionColor;
-			pressedPaint.SetStyle(Paint.Style.Stroke);
-			pressedPaint.StrokeWidth = 3;
+			pressedPaint.SetStyle(Paint.Style.Fill);
 
 	      gestureDetector = new GestureDetector(this);
 

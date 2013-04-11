@@ -49,7 +49,7 @@ namespace iSeconds.Domain.Test
 
             };
 
-            user.CreateTimeline("xou da xuxa");
+            user.CreateTimeline("xou da xuxa", "timeline_description");
 
             Assert.IsTrue(wasCalled);
         }

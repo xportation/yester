@@ -10,133 +10,110 @@ namespace iSeconds.Domain
 	{
 		private Timeline timeline = null;
 		private IRepository repository = null;
-        private IMediaService mediaService = null;
-        private INavigator navigator = null;
-		
+		private IMediaService mediaService = null;
+		private INavigator navigator = null;
+
 		public TimelineViewModel(Timeline timeline, IRepository repository, IMediaService mediaService, INavigator navigator)
 		{
 			this.timeline = timeline;
 			this.repository = repository;
-            this.mediaService = mediaService;
-            this.navigator = navigator;
+			this.mediaService = mediaService;
+			this.navigator = navigator;
 
-            CalendarMode = VisualizationMode.MONTH;
-			
-            this.CurrentDate = DateTime.Today;
+			CalendarMode = VisualizationMode.MONTH;
+
+			this.CurrentDate = DateTime.Today;
 		}
 
-        private DateTime currentDate;
-        public DateTime CurrentDate
-        {
-            get { return currentDate; }
-            set {
+		private DateTime currentDate;
 
-                // se mudou o mes ou o ano devemos mudar o title do mes
-                if (currentDate.Month != value.Month || currentDate.Year != value.Year)
-                {
-                    CurrentMonthTitle = this.prepareCurrentMonthTitle(value.Month, value.Year);
-                }
+		public DateTime CurrentDate
+		{
+			get { return currentDate; }
+			set
+			{
+				// se mudou o mes ou o ano devemos mudar o title do mes
+				if (currentDate.Month != value.Month || currentDate.Year != value.Year)
+				{
+					CurrentMonthTitle = this.prepareCurrentMonthTitle(value.Month, value.Year);
+				}
 
-                CalendarMonth calendarMonth = new CalendarMonth(true, value);
+				CalendarMonth calendarMonth = new CalendarMonth(true, value);
 
-                List<DayViewModel> viewModels = new List<DayViewModel>();
+				List<DayViewModel> viewModels = new List<DayViewModel>();
 
-                List<Day> viewedDays = calendarMonth.GetViewedDays();
-                foreach (Day date in viewedDays)
-                {
-                    DayViewModel viewModel = new DayViewModel(
-                        this.timeline.GetDayAt(date.day), repository, this.mediaService, this.navigator
-                    );
+				List<Day> viewedDays = calendarMonth.GetViewedDays();
+				foreach (Day date in viewedDays)
+				{
+					DayViewModel viewModel = new DayViewModel(
+						this.timeline.GetDayAt(date.day), repository, this.mediaService, this.navigator
+						);
 
-                    viewModel.PresentationInfo = date;
-                    viewModels.Add(viewModel);
-                }
+					viewModel.PresentationInfo = date;
+					viewModels.Add(viewModel);
+				}
 
-                VisibleDays = viewModels;
+				VisibleDays = viewModels;
 
-                this.SetField(ref currentDate, value, "CurrentDate"); 
-            }
-        }
+				this.SetField(ref currentDate, value, "CurrentDate");
+			}
+		}
 
-        private string prepareCurrentMonthTitle(int month, int year)
-        {
-            string strMonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month);
-            return strMonthName + ", " + year.ToString();
-        }
+		private string prepareCurrentMonthTitle(int month, int year)
+		{
+			string strMonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month);
+			return strMonthName + ", " + year.ToString();
+		}
 
-        public enum VisualizationMode { MONTH, WEEK }
+		public enum VisualizationMode
+		{
+			MONTH,
+			WEEK
+		}
 
-        private VisualizationMode calendarMode;
-        public VisualizationMode CalendarMode
-        {
-            get { return calendarMode; }
-            set
-            {
-                this.SetField(ref calendarMode, value, "CalendarMode");
-            }
-        }
+		private VisualizationMode calendarMode;
 
-		public void Invalidate ()
+		public VisualizationMode CalendarMode
+		{
+			get { return calendarMode; }
+			set { this.SetField(ref calendarMode, value, "CalendarMode"); }
+		}
+
+		public void Invalidate()
 		{
 			// forçamos recalcular o viewmodels dos dias visíveis
 			this.CurrentDate = this.currentDate;
 		}
 
-        List<DayViewModel> visibleDays = new List<DayViewModel>();
-        public List<DayViewModel> VisibleDays
-        {
-            get { return visibleDays; }
-            set {
-                this.SetField(ref visibleDays, value, "VisibleDays");
-            }
+		private List<DayViewModel> visibleDays = new List<DayViewModel>();
 
-        }
+		public List<DayViewModel> VisibleDays
+		{
+			get { return visibleDays; }
+			set { this.SetField(ref visibleDays, value, "VisibleDays"); }
+		}
 
-        public ICommand NextMonthCommand
-        {
-            get
-            {
-                return new Command(delegate
-                {
-                    this.CurrentDate = this.CurrentDate.AddMonths(1);
-                });
-            }
-        }
+		public ICommand NextMonthCommand
+		{
+			get { return new Command(delegate { this.CurrentDate = this.CurrentDate.AddMonths(1); }); }
+		}
 
-        public ICommand PreviousMonthCommand
-        {
-            get
-            {
-                return new Command(delegate
-                {
-                    this.CurrentDate = this.CurrentDate.AddMonths(-1);
-                });
-            }
-        }
+		public ICommand PreviousMonthCommand
+		{
+			get { return new Command(delegate { this.CurrentDate = this.CurrentDate.AddMonths(-1); }); }
+		}
 
-        public ICommand GoToTodayCommand
-        {
-            get
-            {
-                return new Command(delegate
-                {
-                    this.CurrentDate = DateTime.Today;
-                });
-            }
-        }
+		public ICommand GoToTodayCommand
+		{
+			get { return new Command(delegate { this.CurrentDate = DateTime.Today; }); }
+		}
 
-        private string currentMonthTitle;
-        public string CurrentMonthTitle 
-        { 
-            get 
-            {
-                return currentMonthTitle;
-            }
-            set 
-            {
-                this.SetField(ref currentMonthTitle, value, "CurrentMonthTitle");
-            }
-        }
-    }
+		private string currentMonthTitle;
+
+		public string CurrentMonthTitle
+		{
+			get { return currentMonthTitle; }
+			set { this.SetField(ref currentMonthTitle, value, "CurrentMonthTitle"); }
+		}
+	}
 }
-

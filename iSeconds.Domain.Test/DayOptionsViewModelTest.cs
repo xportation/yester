@@ -21,7 +21,7 @@ namespace iSeconds.Domain.Test
 			User user = new User("teste", repository);
 			repository.SaveItem(user);
 
-			timeline = user.CreateTimeline("timeline");
+			timeline = user.CreateTimeline("timeline","timeline_description");
 
 			DateTime date = new DateTime(1979, 1, 1);
 			timeline.AddVideoAt(date, "videopath1");

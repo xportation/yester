@@ -8,9 +8,9 @@
   <legacybar.library.bar.LegacyBar
       android:id="@+id/actionbar"
       style="@style/actionbar"
-      ab:title="My life in seconds"
-      ab:separator="@color/actionbar_separator_alt"
-      ab:background="@drawable/actionbar_grayscale_background"
-      ab:background_item="@drawable/actionbar_btn_alt"
+      ab:title="@string/timeline_default"
+		ab:separator="@color/actionbar_separator"
+      ab:background="@drawable/actionbar_background"
+      ab:background_item="@drawable/actionbar_button"
         />
 </LinearLayout>

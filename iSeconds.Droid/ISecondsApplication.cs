@@ -10,7 +10,7 @@ using iSeconds.Domain.Framework;
 
 namespace iSeconds
 {
-	[Application(Debuggable=true, Label="insert label here")]
+	[Application(Debuggable=true, Label="")]
 	public class ISecondsApplication : Application
 	{
 		private UserService userService = null;
@@ -36,6 +36,10 @@ namespace iSeconds
             navigator = new INavigator();
 
             navigator.RegisterNavigation("day_options", new AndroidPresenter(this.activityTracker, typeof(DayOptionsActivity)));
+            
+            navigator.RegisterNavigation("timeline_options", new AndroidPresenter(this.activityTracker, typeof(TimelineOptionsActivity)));
+
+            navigator.RegisterNavigation("homeview", new AndroidPresenter(this.activityTracker, typeof(HomeActivity)));
 
             // ---
 			userService.CurrentUser = new User ("test", repository);
