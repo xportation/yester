@@ -23,30 +23,6 @@ namespace iSeconds.Domain
          CreateTable<MediaInfo>();
       }
 
-      public static string DatabaseFilePath
-      {
-         get
-         {
-            // codigo copiado dos samples do xamarin.. serve para guardar o db no lugar correto de acordo com o SO
-            //				#if SILVERLIGHT
-            //				var path = "MwcDB.db3";
-            //				#else
-
-            //				#if __ANDROID__
-            string libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            ;
-            //				#else
-            //				// we need to put in /Library/ on iOS5.1 to meet Apple's iCloud terms
-            //				// (they don't want non-user-generated data in Documents)
-            //				string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); // Documents folder
-            //				string libraryPath = Path.Combine (documentsPath, "../Library/");
-            //				#endif
-            var path = Path.Combine(libraryPath, "ISeconds.db3");
-            //				#endif		
-            return path;
-         }
-      }
-
       public User GetUser(int id)
       {
          //return GetItem<User> (id);
