@@ -53,7 +53,14 @@
     <Compile Include="..\iSeconds.Domain\ViewModel\DayViewModel.cs">
       <Link>DayViewModel.cs</Link>
     </Compile>
+    <Compile Include="..\iSeconds.Domain\ViewModel\OptionsList.cs">
+      <Link>OptionsList.cs</Link>
+    </Compile>
+    <Compile Include="..\iSeconds.Domain\ViewModel\TimelineOptionsViewModel.cs">
+      <Link>TimelineOptionsViewModel.cs</Link>
+    </Compile>
     <Compile Include="MockMediaService.cs" />
+    <Compile Include="TimelineOptionsViewModelTest.cs" />
     <Compile Include="TimelineViewModelTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="..\iSeconds.Domain\DayInfo.cs" />
@@ -67,10 +74,6 @@
       <Link>IModel.cs</Link>
     </Compile>
     <Compile Include="TimelineTest.cs" />
-    <Compile Include="RepositoryServiceTest.cs" />
-    <Compile Include="..\iSeconds.Domain\RepositoryService.cs">
-      <Link>RepositoryService.cs</Link>
-    </Compile>
     <Compile Include="..\iSeconds.Domain\ISecondsDB.cs">
       <Link>ISecondsDB.cs</Link>
     </Compile>

@@ -1,10 +1,5 @@
 using iSeconds.Domain.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
-using iSeconds.Domain.Framework;
 
 
 namespace iSeconds.Domain
@@ -99,45 +94,13 @@ namespace iSeconds.Domain
 
       #region Day Options
 
-      public class DayOptionsList
+		public class DayOptionsList : OptionsList
       {
-         public class DayOptionsEntry
-         {
-            public DayOptionsEntry(string name, Action callback)
-            {
-               this.Name = name;
-               this.Callback = callback;
-            }
-
-            public string Name { get; set; }
-            public Action Callback { get; set; }
-         }
-
-         private List<DayOptionsEntry> entries = new List<DayOptionsEntry>();
-
-         public List<DayOptionsEntry> OptionsEntries
-         {
-            get { return entries; }
-         }
-
-         public ICommand DayEntryClicked
-         {
-            get
-            {
-               return new Command((object arg) =>
-                  {
-                     int index = (int) arg;
-                     entries[index].Callback.Invoke();
-                  });
-            }
-         }
-
-
          public DayOptionsList(DayViewModel viewModel)
          {
-            entries.Add(new DayOptionsEntry("Record video", () => { viewModel.RecordVideoCommand.Execute(null); }));
+            AddEntry(new OptionsEntry("Record video", () => { viewModel.RecordVideoCommand.Execute(null); }));
 
-            entries.Add(new DayOptionsEntry("Options", () =>
+            AddEntry(new OptionsEntry("Options", () =>
                {
                   Args args = new Args();
                   args.Put("Day", viewModel.Model.Date.Day.ToString());

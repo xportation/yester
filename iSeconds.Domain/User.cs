@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SQLite;
 
@@ -6,17 +7,18 @@ namespace iSeconds.Domain
 	public class User : IModel
 	{
 		private readonly IRepository repository;
-
+		
 		public User(string name, IRepository repository)
 		{
 			Name = name;
+			CurrentTimelineId = -1;
 			this.repository = repository;
 		}
 
 		public User()
 		{
 		}
-
+		
 	   public Timeline CreateTimeline(string timelineName, string timelineDescription)
 		{
 			var timeline = new Timeline(timelineName, Id);
@@ -25,8 +27,8 @@ namespace iSeconds.Domain
 
 			repository.SaveTimeline(timeline);
 
-			// TODO: implement user preferences
-			//this.ActualTimeline = timeline;
+		   if (CurrentTimelineId == -1)
+			   CurrentTimeline = timeline;
 
 			return timeline;
 		}
@@ -55,6 +57,47 @@ namespace iSeconds.Domain
 			return repository.GetUserTimeline(Id, timelineId);
 		}
 
+		public event EventHandler<GenericEventArgs<Timeline>> OnCurrentTimelineChanged;
+
+		[IgnoreAttribute]
+	   public Timeline CurrentTimeline
+	   {
+	      get
+	      {
+		      IList<Timeline> timelines = GetTimelines();
+	         foreach (Timeline timeline in timelines)
+	         {
+		         if (timeline.Id == CurrentTimelineId)
+			         return timeline;
+	         }
+
+				if (timelines.Count > 0)
+				{
+					CurrentTimelineId = timelines[0].Id;
+					return timelines[0];
+				}
+					
+
+	         return null;
+	      }
+			set
+			{
+				if (value.Id != CurrentTimelineId && value.UserId == this.Id)
+				{
+					CurrentTimelineId = value.Id;
+
+					if (OnCurrentTimelineChanged != null)
+						OnCurrentTimelineChanged(this, new GenericEventArgs<Timeline>(value));
+				} 
+			}
+	   }
+      
+      public void DeleteTimeline(Timeline timeline)
+      {
+         if (this.Id == timeline.UserId)
+            repository.DeleteTimeline(timeline);
+      }
+
 	   #region db
 
 	   public string Name { get; set; }
@@ -62,38 +105,8 @@ namespace iSeconds.Domain
 	   [PrimaryKey, AutoIncrement]
 		public int Id { get; set; }
 
+		public int CurrentTimelineId { get; set; }
+
 	   #endregion
-
-	   // TODO: implementar nas user preferences...		
-
-//        private Timeline _ActualTimeline = null;
-
-//        [Ignore]
-
-//        public Timeline ActualTimeline {
-
-//            get {
-
-////				if (_ActualTimeline == null)
-
-////					throw new Exception("Has no actual timeline");
-
-////
-
-//                return _ActualTimeline;
-
-//            }
-
-//            set {
-
-//                _ActualTimeline = value;
-
-//                if (OnActualTimelineChanged != null)
-
-//                    OnActualTimelineChanged(this, new GenericEventArgs<Timeline>(_ActualTimeline));
-
-//            }
-
-//        }
 	}
 }

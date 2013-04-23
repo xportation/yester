@@ -19,7 +19,7 @@ namespace iSeconds.Domain
          this.mediaService = mediaService;
          this.navigator = navigator;
 
-         this.repository.OnNewTimeline += (object sender, GenericEventArgs<Timeline> arg) =>
+         this.repository.OnSaveTimeline += (object sender, GenericEventArgs<Timeline> arg) =>
             {
                this.CurrentTimeline = new TimelineViewModel(arg.Value, repository, mediaService, this.navigator);
                Timelines = this.repository.GetUserTimelines(this.user.Id);

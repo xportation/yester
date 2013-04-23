@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: Android.Runtime.ResourceDesignerAttribute("LegacyBar.Library.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("LegacyBar.Library.Resource", IsApplication=false)]
 
 namespace LegacyBar.Library
 {
@@ -19,9 +19,9 @@ namespace LegacyBar.Library
 	public partial class Resource
 	{
 		
-		Resource()
+		static Resource()
 		{
-			global::Android.Runtime.ResourceIdManager.UpdateIdValues ();
+			global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 		}
 		
 		public partial class Attribute
@@ -41,6 +41,11 @@ namespace LegacyBar.Library
 			
 			// aapt resource value: 0x7f010001
 			public static int title_color = 2130771969;
+			
+			static Attribute()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Attribute()
 			{
@@ -128,6 +133,11 @@ namespace LegacyBar.Library
 			// aapt resource value: 0x7f040018
 			public static int yellow = 2130968600;
 			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Color()
 			{
 			}
@@ -153,6 +163,11 @@ namespace LegacyBar.Library
 			
 			// aapt resource value: 0x7f050003
 			public static int actionbar_item_width = 2131034115;
+			
+			static Dimension()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Dimension()
 			{
@@ -249,6 +264,11 @@ namespace LegacyBar.Library
 			// aapt resource value: 0x7f02001c
 			public static int ic_title_share_default = 2130837532;
 			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Drawable()
 			{
 			}
@@ -293,6 +313,11 @@ namespace LegacyBar.Library
 			// aapt resource value: 0x7f080000
 			public static int screen = 2131230720;
 			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Id()
 			{
 			}
@@ -315,6 +340,11 @@ namespace LegacyBar.Library
 			
 			// aapt resource value: 0x7f030004
 			public static int spinneritem = 2130903044;
+			
+			static Layout()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Layout()
 			{
@@ -354,6 +384,11 @@ namespace LegacyBar.Library
 			// aapt resource value: 0x7f060003
 			public static int some_title = 2131099651;
 			
+			static String()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private String()
 			{
 			}
@@ -382,6 +417,11 @@ namespace LegacyBar.Library
 			
 			// aapt resource value: 0x7f070002
 			public static int clearbutton = 2131165186;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Style()
 			{
@@ -412,6 +452,11 @@ namespace LegacyBar.Library
 			
 			// aapt resource value: 1
 			public static int actionbar_title_color = 1;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Styleable()
 			{

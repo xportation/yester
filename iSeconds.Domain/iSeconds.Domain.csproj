@@ -58,11 +58,11 @@
     <Compile Include="ISecondsDB.cs" />
     <Compile Include="MediaInfo.cs" />
     <Compile Include="IModel.cs" />
-    <Compile Include="RepositoryService.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ViewModel\DayViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="Framework\INavigator.cs" />
+    <Compile Include="ViewModel\OptionsList.cs" />
     <Compile Include="ViewModel\TimelineOptionsViewModel.cs" />
     <Compile Include="ViewModel\TimelineViewModel.cs" />
     <Compile Include="ViewModel\Command.cs" />

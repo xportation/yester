@@ -91,7 +91,7 @@
     <AndroidResource Include="Resources\layout\TimelineOptionsItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\TimelineOptionsDialogModal.axml">
+    <AndroidResource Include="Resources\layout\TimelineOptionsEditTimeline.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -14,5 +14,8 @@
 	<string name="timeline_options_dialog_edit_timeline">Edit Timeline</string>
 	<string name="ok">Ok</string>
 	<string name="cancel">Cancel</string>
-	
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	<string name="timeline_options_dialog_delete_ask">Delete timeline?</string>
+	<string name="timeline_options_dialog_delete_alert">Are you sure to delete this timeline? \nThis operation can not be undone.</string>
 </resources>

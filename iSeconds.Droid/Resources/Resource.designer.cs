@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: Android.Runtime.ResourceDesignerAttribute("iSeconds.Droid.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("iSeconds.Droid.Resource", IsApplication=true)]
 
 namespace iSeconds.Droid
 {
@@ -19,9 +19,9 @@ namespace iSeconds.Droid
 	public partial class Resource
 	{
 		
-		Resource()
+		static Resource()
 		{
-			global::Android.Runtime.ResourceIdManager.UpdateIdValues ();
+			global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 		}
 		
 		public static void UpdateIdValues()
@@ -152,6 +152,11 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f010001
 			public const int title_color = 2130771969;
 			
+			static Attribute()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Attribute()
 			{
 			}
@@ -247,6 +252,11 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f040018
 			public const int yellow = 2130968600;
 			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Color()
 			{
 			}
@@ -272,6 +282,11 @@ namespace iSeconds.Droid
 			
 			// aapt resource value: 0x7f050003
 			public const int actionbar_item_width = 2131034115;
+			
+			static Dimension()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Dimension()
 			{
@@ -395,6 +410,11 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f020025
 			public const int trash = 2130837541;
 			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Drawable()
 			{
 			}
@@ -487,6 +507,11 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f09000e
 			public const int videosList = 2131296270;
 			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Id()
 			{
 			}
@@ -526,13 +551,18 @@ namespace iSeconds.Droid
 			public const int TimelineOptions = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int TimelineOptionsDialogModal = 2130903050;
+			public const int TimelineOptionsEditTimeline = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
 			public const int TimelineOptionsItem = 2130903051;
 			
 			// aapt resource value: 0x7f03000c
 			public const int VideoItem = 2130903052;
+			
+			static Layout()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Layout()
 			{
@@ -547,6 +577,11 @@ namespace iSeconds.Droid
 			
 			// aapt resource value: 0x7f080001
 			public const int TimelineOptionsMenu = 2131230721;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Menu()
 			{
@@ -595,6 +630,9 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f060005
 			public const int menu_string_up = 2131099653;
 			
+			// aapt resource value: 0x7f060018
+			public const int no = 2131099672;
+			
 			// aapt resource value: 0x7f060015
 			public const int ok = 2131099669;
 			
@@ -606,6 +644,12 @@ namespace iSeconds.Droid
 			
 			// aapt resource value: 0x7f06000f
 			public const int timeline_menu_options = 2131099663;
+			
+			// aapt resource value: 0x7f06001a
+			public const int timeline_options_dialog_delete_alert = 2131099674;
+			
+			// aapt resource value: 0x7f060019
+			public const int timeline_options_dialog_delete_ask = 2131099673;
 			
 			// aapt resource value: 0x7f060014
 			public const int timeline_options_dialog_edit_timeline = 2131099668;
@@ -624,6 +668,14 @@ namespace iSeconds.Droid
 			
 			// aapt resource value: 0x7f06000e
 			public const int timeline_options_title = 2131099662;
+			
+			// aapt resource value: 0x7f060017
+			public const int yes = 2131099671;
+			
+			static String()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private String()
 			{
@@ -654,6 +706,11 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f070002
 			public const int clearbutton = 2131165186;
 			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Style()
 			{
 			}
@@ -683,6 +740,11 @@ namespace iSeconds.Droid
 			
 			// aapt resource value: 1
 			public const int actionbar_title_color = 1;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Styleable()
 			{

@@ -23,7 +23,7 @@ namespace iSeconds.Domain
          CreateTable<MediaInfo>();
       }
 
-      public User GetUser(int id)
+      /*public User GetUser(int id)
       {
          //return GetItem<User> (id);
          lock (locker)
@@ -31,17 +31,26 @@ namespace iSeconds.Domain
             User user = (from i in Table<User>() where i.Id == id select i).First();
             return user;
          }
-      }
+      }*/
 
-      public event EventHandler<GenericEventArgs<Timeline>> OnNewTimeline;
-      public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
+      public event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
+	   public event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
+	   public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
 
       public void SaveTimeline(Timeline timeline)
       {
          this.SaveItem(timeline);
 
-         if (OnNewTimeline != null)
-            OnNewTimeline(this, new GenericEventArgs<Timeline>(timeline));
+         if (OnSaveTimeline != null)
+            OnSaveTimeline(this, new GenericEventArgs<Timeline>(timeline));
+      }
+      
+      public void DeleteTimeline(Timeline timeline)
+      {
+         this.DeleteItem(timeline);
+
+	      if (OnDeleteTimeline != null)
+		      OnDeleteTimeline(this, new GenericEventArgs<Timeline>(timeline));
       }
 
       public IList<MediaInfo> GetMediasForDay(DayInfo day)
@@ -137,11 +146,11 @@ namespace iSeconds.Domain
          }
       }
 
-      public int DeleteItem<T>(int id) where T : IModel, new()
+      public int DeleteItem<T>(T item) where T : IModel
       {
          lock (locker)
          {
-            return Delete<T>(new T() {Id = id});
+            return Delete(item);
          }
       }
 

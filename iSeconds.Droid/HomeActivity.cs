@@ -80,7 +80,7 @@ namespace iSeconds.Droid
 		{
 			for (int i = 0; i < optionsList.OptionsEntries.Count; i++)
 			{
-				DayViewModel.DayOptionsList.DayOptionsEntry entry = optionsList.OptionsEntries[i];
+				OptionsList.OptionsEntry entry = optionsList.OptionsEntries[i];
 				IMenuItem menuItem = menu.Add(0, i, i, entry.Name);
 				menuItem.SetOnMenuItemClickListener(this);
 			}
