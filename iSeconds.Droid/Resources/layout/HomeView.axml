@@ -5,12 +5,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/homeViewLayout">
-  <legacybar.library.bar.LegacyBar
-      android:id="@+id/actionbar"
-      style="@style/actionbar"
-      ab:title="@string/timeline_default"
-		ab:separator="@color/actionbar_separator"
-      ab:background="@drawable/actionbar_background"
-      ab:background_item="@drawable/actionbar_button"
-        />
+    <legacybar.library.bar.LegacyBar
+        android:id="@+id/actionbar"
+        style="@style/actionbar"
+        ab:title="@string/timeline_default"
+        ab:separator="@color/actionbar_background"
+        ab:background="@color/actionbar_background"
+        ab:background_item="@drawable/actionbar_button" />
 </LinearLayout>

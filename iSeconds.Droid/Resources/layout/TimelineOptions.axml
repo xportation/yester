@@ -3,13 +3,14 @@
     xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/timelines_list_background">
     <legacybar.library.bar.LegacyBar
         android:id="@+id/actionbar"
         style="@style/actionbar"
         ab:title="@string/timeline_options_title"
-        ab:separator="@color/actionbar_separator"
-        ab:background="@drawable/actionbar_background"
+        ab:separator="@color/actionbar_background"
+        ab:background="@color/actionbar_background"
         ab:background_item="@drawable/actionbar_button" />
     <ListView
         android:minWidth="25px"
@@ -17,7 +18,12 @@
         android:layout_width="fill_parent"
         android:id="@+id/timelines"
         android:layout_height="fill_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:background="@color/timelines_list_background"
+        android:divider="@color/timelines_list_divider_color"
+        android:dividerHeight="1sp"
+        android:choiceMode="none"
+        android:cacheColorHint="@android:color/transparent" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="fill_parent"
@@ -26,11 +32,7 @@
         android:textStyle="italic"
         android:paddingLeft="2dip"
         android:text="@string/timeline_options_message"
-        android:background="#555555"
-        android:layout_margin="2dip" />
-    <ImageButton
-        android:src="@drawable/add"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/addTimeline" />
+        android:background="@color/actionbar_background"
+        android:layout_margin="2dip"
+        android:textColor="#FFFFFFFF" />
 </LinearLayout>

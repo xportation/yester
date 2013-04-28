@@ -12,6 +12,7 @@
 	<string name="timeline_options_dialog_textDescription">Description</string>
 	<string name="timeline_options_dialog_new_timeline">New Timeline</string>
 	<string name="timeline_options_dialog_edit_timeline">Edit Timeline</string>
+	<string name="timeline_options_dialog_add_timeline">Creat a new Timeline</string>
 	<string name="ok">Ok</string>
 	<string name="cancel">Cancel</string>
 	<string name="yes">Yes</string>

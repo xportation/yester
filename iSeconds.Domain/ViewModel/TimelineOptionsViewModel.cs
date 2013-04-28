@@ -90,7 +90,7 @@ namespace iSeconds.Domain
 
 				AddEntry(new OptionsEntry("Set as current", () => viewModel.SetCurrentTimeline(this.currentTimeline)));
 				AddEntry(new OptionsEntry("Delete", () => viewModel.TimelineDeleteRequest.Raise(new TimelineDeleteModel(viewModel, this.currentTimeline))));
-				AddEntry(new OptionsEntry("Back", () => { /*nothing to do*/ }));
+				AddEntry(new OptionsEntry("Cancel", () => { /*nothing to do*/ }));
 			}
 
 			public string[] ListNames()

@@ -5,7 +5,7 @@
 		 android:state_focused="false"
 		 android:state_selected="false"
 		 android:state_pressed="false"
-		 android:drawable="@drawable/actionbar_background"
+		 android:drawable="@color/actionbar_background"
         />
 	<item
 		 android:state_focused="false"

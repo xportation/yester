@@ -32,8 +32,15 @@ namespace iSeconds.Droid
       public override View GetView(int position, View convertView, ViewGroup parent)
       {
          View view = convertView;
-         if (view == null)
-            view = context.LayoutInflater.Inflate(Resource.Layout.TimelineOptionsItem, null);
+         if (view == null) 
+			{
+				view = context.LayoutInflater.Inflate(Resource.Layout.TimelineOptionsItem, null);
+				TextView textView = view.FindViewById<CheckedTextView>(Resource.Id.timelineName);
+				TextViewUtil.ChangeFontForTimelinesList(textView, context, 26f);
+
+				textView = view.FindViewById<TextView>(Resource.Id.timelineDescription);
+				TextViewUtil.ChangeFontForTimelinesList(textView, context, 20f);
+			}
 
          Timeline timeline = viewModel.TimelineAt(position);
          CheckedTextView checkedText = view.FindViewById<CheckedTextView>(Resource.Id.timelineName);
@@ -86,13 +93,10 @@ namespace iSeconds.Droid
 			listView.ItemLongClick += (sender, e) => viewModel.TimelineOptionsCommand.Execute(e.Position);
 
 			viewModel.OnTimelineOptionsViewModelChanged += (sender, args) => listViewAdapter.Invalidate();
-
-         var addButton = FindViewById<ImageButton>(Resource.Id.addTimeline);
-			addButton.Click += (sender, args) => viewModel.AddTimelineCommand.Execute(null);
 			
 			viewModelRequests();
 
-         addTimelineBackToHome();
+         configureActionBar();
       }
 
 	   private void viewModelRequests()
@@ -123,17 +127,30 @@ namespace iSeconds.Droid
 	   }
 
 
-	   private void addTimelineBackToHome()
+	   private void configureActionBar()
       {
          var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
          var itemActionBarAction = new MenuItemLegacyBarAction(
-            this, this, Resource.Id.actionbar_timeline_back_to_home, Resource.Drawable.actionbar_home,
+            this, this, Resource.Id.actionbar_timeline_back_to_home, Resource.Drawable.ic_home,
             Resource.String.actionbar_timelines_text)
             {
                ActionType = ActionType.Always
             };
 
          actionBar.SetHomeAction(itemActionBarAction);
+
+			var addTimelineItemAction = new MenuItemLegacyBarAction(
+				this, this, Resource.Id.actionbar_timeline_add, Resource.Drawable.ic_add,
+				Resource.String.timeline_options_dialog_add_timeline)
+			{
+				ActionType = ActionType.IfRoom
+			};
+			actionBar.AddAction(addTimelineItemAction);
+
+			actionBar.SeparatorColorRaw= Resource.Color.actionbar_background;
+
+			TextView titleView= actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
+			TextViewUtil.ChangeFontForActionBarTitle(titleView,this,26f);
       }
 
       public override bool OnOptionsItemSelected(IMenuItem item)
@@ -144,6 +161,10 @@ namespace iSeconds.Droid
                OnSearchRequested();
                viewModel.BackToHomeCommand.Execute(null);
                return true;
+				case Resource.Id.actionbar_timeline_add:
+					OnSearchRequested();
+					viewModel.AddTimelineCommand.Execute(null);
+					return true;
          }
 
          return base.OnOptionsItemSelected(item);
@@ -221,6 +242,7 @@ namespace iSeconds.Droid
 		      return null;
 			
          var builder = new AlertDialog.Builder(this);
+			builder.SetTitle(string.Empty);
          builder.SetItems(optionsList.ListNames(), (sender, eventArgs) => optionsList.DayEntryClicked.Execute(eventArgs.Which));
 
          return builder.Create();

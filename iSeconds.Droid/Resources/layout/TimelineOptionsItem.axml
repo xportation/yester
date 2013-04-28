@@ -8,11 +8,12 @@
         android:id="@+id/timelineName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:checkMark="?android:attr/textCheckMark"
+        android:checkMark="@drawable/indicator_check_mark"
         android:paddingLeft="6dip"
         android:paddingRight="6dip"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:textColor="@color/timelines_list_first_item_color" />
     <TextView
         android:text="My pretty timeline"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -20,5 +21,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/timelineDescription"
         android:paddingLeft="6dip"
-        android:paddingRight="6dip" />
+        android:paddingRight="6dip"
+        android:textColor="@color/timelines_list_second_item_color" />
 </LinearLayout>

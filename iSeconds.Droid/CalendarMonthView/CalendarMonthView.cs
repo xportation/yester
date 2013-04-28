@@ -28,110 +28,110 @@ namespace iSeconds.Droid
 		private float textSize;
 		private Color textStrokeColor;
 		private Color selectionShadowColor;
-
+		
 		public CalendarMonthViewTheme()
 		{
 			SetDefault();
 		}
-
+		
 		public Color GridLineColor
 		{
 			get { return gridLineColor; }
 			set { gridLineColor = value; }
 		}
-
+		
 		public bool IsTextShadow
 		{
 			get { return isTextShadow; }
 			set { isTextShadow = value; }
 		}
-
+		
 		public Color TextShadowColor
 		{
 			get { return textShadowColor; }
 			set { textShadowColor = value; }
 		}
-
+		
 		public Paint.Align TextAlign
 		{
 			get { return textAlign; }
 			set { textAlign = value; }
 		}
-
+		
 		public float TextSize
 		{
 			get { return textSize; }
 			set { textSize = value; }
 		}
-
+		
 		public Color TodayColor
 		{
 			get { return todayColor; }
 			set { todayColor = value; }
 		}
-
+		
 		public Color SelectionColor
 		{
 			get { return selectionColor; }
 			set { selectionColor = value; }
 		}
-
+		
 		public Color TextColor
 		{
 			get { return textColor; }
 			set { textColor = value; }
 		}
-
+		
 		public Color InactiveTextColor
 		{
 			get { return inactiveTextColor; }
 			set { inactiveTextColor = value; }
 		}
-
+		
 		public Color CellForegroundColor
 		{
 			get { return cellForegroundColor; }
 			set { cellForegroundColor = value; }
 		}
-
+		
 		public Color InactiveCellForegroundColor
 		{
 			get { return inactiveCellForegroundColor; }
 			set { inactiveCellForegroundColor = value; }
 		}
-
+		
 		public Color TextStrokeColor
 		{
 			get { return textStrokeColor; }
 			set { textStrokeColor = value; }
 		}
-
+		
 		public float StrokeWidth
 		{
 			get { return strokeWidth; }
 			set { strokeWidth = value; }
 		}
-
+		
 		public Color SelectionShadowColor
 		{
 			get { return selectionShadowColor; }
 			set { selectionShadowColor = value; }
 		}
-
+		
 		public void SetDefault()
 		{
-			gridLineColor = Color.Rgb(220, 220, 220);
+			gridLineColor = Color.Rgb(216,223,234);
 			isTextShadow = false;
 			textShadowColor = Color.Rgb(240, 240, 240);
 			textAlign = Paint.Align.Center;
-			textSize = 19f;
+			textSize = 22f;
 			todayColor = Color.Argb(255, 0, 180, 255);
 			selectionColor = Color.Argb(100, 0, 180, 255);
 			selectionShadowColor = Color.Rgb(200, 220, 255);
-			textColor = Color.Rgb(50, 50, 50);
-			inactiveTextColor = gridLineColor;
+			textColor = Color.Rgb(51,65,90);
+			inactiveTextColor = Color.Rgb(127,147,182);
 			cellForegroundColor = Color.Transparent;
-			inactiveCellForegroundColor = Color.Argb(127, 245, 245, 245);
+			inactiveCellForegroundColor = Color.Argb(127,237,239,244);
 			textStrokeColor = Color.DarkGray;
 			strokeWidth = 1.2f;
 		}
@@ -242,7 +242,8 @@ namespace iSeconds.Droid
 	      textPaint.TextAlign = theme.TextAlign;
 	      textPaint.AntiAlias = true;
 	      textPaint.StrokeWidth = theme.StrokeWidth;
-	      textPaint.TextSize = theme.TextSize*Resources.DisplayMetrics.Density;
+	      textPaint.TextSize = theme.TextSize * Resources.DisplayMetrics.Density;
+			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/Swagger.ttf"));
 
 	      todayPaint = new Paint();
 	      todayPaint.Color = theme.TodayColor;

@@ -8,10 +8,11 @@ using Android.Widget;
 using LegacyBar.Library.Bar;
 using iSeconds.Domain;
 using System.ComponentModel;
+using Android.Graphics;
 
 namespace iSeconds.Droid
 {
-   
+
    public class TimelineView : LinearLayout, View.IOnCreateContextMenuListener, IMenuItemOnMenuItemClickListener
    {
       private TimelineViewModel viewModel = null;
@@ -24,6 +25,7 @@ namespace iSeconds.Droid
          Inflate(context, Resource.Layout.CalendarMonthViewLayout, this);
 
          TextView monthLabel = this.FindViewById<TextView>(Resource.Id.calendarMonthName);
+			TextViewUtil.ChangeFontForMonthTitle(monthLabel, context, 20f);
          monthLabel.Text = this.viewModel.CurrentMonthTitle;
 
          CalendarMonthViewWeekNames monthWeekNames =
@@ -140,6 +142,7 @@ namespace iSeconds.Droid
          this.RequestWindowFeature(WindowFeatures.NoTitle);
          this.SetContentView(Resource.Layout.HomeView);
 			
+			adjustActionBarTitle();
 			addActionBarItems();
          
 			LinearLayout layout = this.FindViewById<LinearLayout>(Resource.Id.homeViewLayout);
@@ -157,10 +160,10 @@ namespace iSeconds.Droid
 		private void addActionBarItems()
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			actionBar.SetHomeLogo(Resource.Drawable.actionbar_logo);
+			actionBar.SetHomeLogo(Resource.Drawable.ic_logo);
 
 			var timelineOptionsMenuItemAction = new MenuItemLegacyBarAction(
-					 this, this, Resource.Id.actionbar_timeline_menu_options, Resource.Drawable.actionbar_settings,
+					 this, this, Resource.Id.actionbar_timeline_menu_options, Resource.Drawable.ic_settings,
 					 Resource.String.timeline_menu_options)
 			{
 				ActionType = ActionType.IfRoom
@@ -168,14 +171,22 @@ namespace iSeconds.Droid
 			actionBar.AddAction(timelineOptionsMenuItemAction);
 		}
 
+		void adjustActionBarTitle ()
+		{
+			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+
+			TextView titleView= actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
+			TextViewUtil.ChangeFontForActionBarTitle(titleView,this,26f);
+		}
+
 		protected override void OnStart()
 		{
 			base.OnStart();
+
 			// por enquanto estou fazendo isso, pois ao voltar do DayOptionsActivity 
 			// o modelo pode ter mudado. Talvez tenha um jeito melhor de fazer isso
 			viewModel.CurrentTimeline.Invalidate();
 		}
-
 
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
