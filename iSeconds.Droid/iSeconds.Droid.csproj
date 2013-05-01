@@ -67,6 +67,8 @@
     <Compile Include="TimelineOptionsActivity.cs" />
     <Compile Include="PathServiceAndroid.cs" />
     <Compile Include="TextViewUtil.cs" />
+    <Compile Include="HomeView.cs" />
+    <Compile Include="TimelineView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
