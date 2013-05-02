@@ -54,7 +54,7 @@ namespace iSeconds.Droid
       public void SetDefault()
       {
          textAlign = Paint.Align.Center;
-         textSize = 16f;
+         textSize = 15f;
          weekTextColor = Color.Rgb(55,69,93);
 		 	weekendTextColor = Color.Rgb(59,79,152);
          backgroundColor = Color.Rgb(237,239,244);
@@ -94,7 +94,7 @@ namespace iSeconds.Droid
          textPaint.AntiAlias = true;
          textPaint.TextSize = theme.TextSize * Resources.DisplayMetrics.Density;
          textPaint.TextAlign = theme.TextAlign;
-			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/Andy Bold.ttf"));
+			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/123Marker.ttf"));
 
          this.SetBackgroundColor(theme.BackgroundColor);
       }

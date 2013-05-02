@@ -20,7 +20,7 @@ namespace iSeconds.Droid
          Inflate (context, Resource.Layout.CalendarMonthViewLayout, this);
       
          TextView monthLabel = this.FindViewById<TextView> (Resource.Id.calendarMonthName);
-         TextViewUtil.ChangeFontForMonthTitle(monthLabel, context, 20f);
+         TextViewUtil.ChangeFontForMonthTitle(monthLabel, context, 18f);
          monthLabel.Text = this.viewModel.CurrentMonthTitle;
       
          CalendarMonthViewWeekNames monthWeekNames =

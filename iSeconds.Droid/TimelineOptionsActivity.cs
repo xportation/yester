@@ -36,10 +36,10 @@ namespace iSeconds.Droid
 			{
 				view = context.LayoutInflater.Inflate(Resource.Layout.TimelineOptionsItem, null);
 				TextView textView = view.FindViewById<CheckedTextView>(Resource.Id.timelineName);
-				TextViewUtil.ChangeFontForTimelinesList(textView, context, 26f);
+				TextViewUtil.ChangeFontForTimelinesList(textView, context, 24f);
 
 				textView = view.FindViewById<TextView>(Resource.Id.timelineDescription);
-				TextViewUtil.ChangeFontForTimelinesList(textView, context, 20f);
+				TextViewUtil.ChangeFontForTimelinesList(textView, context, 18f);
 			}
 
          Timeline timeline = viewModel.TimelineAt(position);

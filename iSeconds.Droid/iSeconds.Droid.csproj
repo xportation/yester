@@ -208,8 +208,7 @@
     <AndroidResource Include="Resources\drawable\ic_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\fonts\Andy Bold.ttf" />
-    <AndroidAsset Include="Assets\fonts\Swagger.ttf" />
     <AndroidAsset Include="Assets\fonts\augie.ttf" />
+    <AndroidAsset Include="Assets\fonts\123Marker.ttf" />
   </ItemGroup>
 </Project>

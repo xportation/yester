@@ -124,7 +124,7 @@ namespace iSeconds.Droid
 			isTextShadow = false;
 			textShadowColor = Color.Rgb(240, 240, 240);
 			textAlign = Paint.Align.Center;
-			textSize = 22f;
+			textSize = 21f;
 			todayColor = Color.Argb(255, 0, 180, 255);
 			selectionColor = Color.Argb(100, 0, 180, 255);
 			selectionShadowColor = Color.Rgb(200, 220, 255);
@@ -132,8 +132,8 @@ namespace iSeconds.Droid
 			inactiveTextColor = Color.Rgb(127,147,182);
 			cellForegroundColor = Color.Transparent;
 			inactiveCellForegroundColor = Color.Argb(127,237,239,244);
-			textStrokeColor = Color.DarkGray;
-			strokeWidth = 1.2f;
+			textStrokeColor = Color.Argb(170,255,255,255);
+			strokeWidth = 2.1f;
 		}
 	}
 
@@ -243,7 +243,7 @@ namespace iSeconds.Droid
 	      textPaint.AntiAlias = true;
 	      textPaint.StrokeWidth = theme.StrokeWidth;
 	      textPaint.TextSize = theme.TextSize * Resources.DisplayMetrics.Density;
-			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/Swagger.ttf"));
+			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/123Marker.ttf"));
 
 	      todayPaint = new Paint();
 	      todayPaint.Color = theme.TodayColor;

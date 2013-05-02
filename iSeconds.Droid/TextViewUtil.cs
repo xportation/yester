@@ -28,12 +28,12 @@ namespace iSeconds.Droid
 				
 		static public void ChangeFontForMonthTitle(TextView textView, Context context, float fontSize)
 		{
-			ChangeFont(textView,context,"fonts/Andy Bold.ttf",fontSize);
+			ChangeFont(textView,context,"fonts/123Marker.ttf",fontSize);
 		}
 
 		public static void ChangeFontForTimelinesList (TextView textView, Context context, float fontSize)
 		{
-			ChangeFont(textView,context,"fonts/Andy Bold.ttf",fontSize);
+			ChangeFont(textView,context,"fonts/123Marker.ttf",fontSize);
 		}
 	}
    
