@@ -2,11 +2,13 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Input;
+using iSeconds.Domain.Framework;
 
 namespace iSeconds.Domain
 {
 	public class DayOptionsViewModel : ViewModel
 	{
+
 		public class VideoItem
 		{
 			public VideoItem(MediaInfo model)
@@ -77,15 +79,22 @@ namespace iSeconds.Domain
 		}
 
 		private DayInfo model = null;
+      private INavigator navigator = null;
 		
 		public DayInfo Model 
 		{
 			get { return model; }
 		}
 
-		public DayOptionsViewModel(DayInfo model)
+      public ICommand BackToHomeCommand
+      {
+         get { return new Command((object arg) => { navigator.NavigateBack(); }); }
+      }
+
+      public DayOptionsViewModel(DayInfo model, INavigator navigator)
 		{
 			this.model = model;
+         this.navigator = navigator;
 			this.Init();
 		}
 

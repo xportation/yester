@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using iSeconds.Domain.Framework;
 
 namespace iSeconds.Domain.Test
 {
@@ -11,6 +12,8 @@ namespace iSeconds.Domain.Test
 
 		DayOptionsViewModel viewModel;
 		DayInfo dayInfo;
+
+      INavigator navigator = new INavigator();
 
 		[SetUp()]
 		public void Init()
@@ -29,7 +32,7 @@ namespace iSeconds.Domain.Test
 
 			dayInfo = timeline.GetDayAt(date);
 			
-			viewModel = new DayOptionsViewModel(dayInfo);
+			viewModel = new DayOptionsViewModel(dayInfo, navigator);
 		}
 
 		[Test()]

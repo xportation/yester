@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/timelines_list_background">
+    <legacybar.library.bar.LegacyBar
+        android:id="@+id/actionbar"
+        style="@style/actionbar"
+        ab:title="date"
+        ab:separator="@color/actionbar_background"
+        ab:background="@color/actionbar_background"
+        ab:background_item="@drawable/actionbar_button" />
     <ListView
-        android:id="@+id/videosList"
-        android:choiceMode="singleChoice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:minWidth="25px"
+        android:minHeight="100px"
+        android:layout_width="fill_parent"
+        android:id="@+id/videoList"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="@color/timelines_list_background"
+        android:divider="@color/timelines_list_divider_color"
+        android:dividerHeight="1sp"
+        android:choiceMode="none"
+        android:cacheColorHint="@android:color/transparent" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/timelineOptionsMessage"
+        android:textStyle="italic"
+        android:paddingLeft="2dip"
+        android:text="@string/timeline_options_message"
+        android:background="@color/actionbar_background"
+        android:layout_margin="2dip"
+        android:textColor="#FFFFFFFF" />
 </LinearLayout>

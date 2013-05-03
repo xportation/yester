@@ -19,4 +19,5 @@
 	<string name="no">No</string>
 	<string name="timeline_options_dialog_delete_ask">Delete timeline?</string>
 	<string name="timeline_options_dialog_delete_alert">Are you sure to delete this timeline? \nThis operation can not be undone.</string>
+   <string name="day_options_title">Day</string>
 </resources>

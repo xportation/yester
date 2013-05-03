@@ -10,102 +10,143 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using iSeconds.Domain;
+using LegacyBar.Library.Bar;
+using System.Globalization;
+using iSeconds.Domain.Framework;
 
 namespace iSeconds.Droid
 {
-    class VideoListAdapter : BaseAdapter
-	{
-		private DayOptionsViewModel viewModel = null;
-		private Context context = null;
+   class VideoListAdapter : BaseAdapter
+   {
+      private DayOptionsViewModel viewModel = null;
+      private Context context = null;
 
-		public VideoListAdapter(Context context, DayOptionsViewModel viewModel)
-		{
-			this.viewModel = viewModel;
-			this.context = context;
-		}
+      public VideoListAdapter (Context context, DayOptionsViewModel viewModel)
+      {
+         this.viewModel = viewModel;
+         this.context = context;
+      }
 
-		public override Java.Lang.Object GetItem (int position)
-		{
-			return 0;
-		}
-		public override long GetItemId (int position)
-		{
-			return 0;
-		}
+      public override Java.Lang.Object GetItem (int position)
+      {
+         return 0;
+      }
 
+      public override long GetItemId (int position)
+      {
+         return 0;
+      }
 
-		private bool blocking = false;
+      private bool blocking = false;
 
-		public override View GetView (int position, View convertView, ViewGroup parent)
-		{
-			CheckBox checkBox = new CheckBox(this.context);
+      public override View GetView (int position, View convertView, ViewGroup parent)
+      {
+         CheckBox checkBox = new CheckBox (this.context);
 
-			DayOptionsViewModel.VideoItem model = viewModel.Videos[position];
-			checkBox.Text = model.Label;
-			checkBox.Checked = model.Checked;
-			checkBox.CheckedChange += (object sender, CompoundButton.CheckedChangeEventArgs e) => 
-			{
-				if (this.blocking) 
-					return;
+         DayOptionsViewModel.VideoItem model = viewModel.Videos [position];
+         checkBox.Text = model.Label;
+         checkBox.Checked = model.Checked;
+         checkBox.CheckedChange += (object sender, CompoundButton.CheckedChangeEventArgs e) => 
+         {
+            if (this.blocking) 
+               return;
 
-				// se o cara esta checado nao tem como tirar o check..
-				if (model.Checked && !e.IsChecked)
-				{
-					checkBox.Checked = true;
-					return;
-				}
+            // se o cara esta checado nao tem como tirar o check..
+            if (model.Checked && !e.IsChecked) {
+               checkBox.Checked = true;
+               return;
+            }
 
-				if (e.IsChecked)
-					this.viewModel.CheckVideoCommand.Execute(position);
-			};
+            if (e.IsChecked)
+               this.viewModel.CheckVideoCommand.Execute (position);
+         };
 
-			model.OnCheckedChanged += (object sender, GenericEventArgs<bool /*isChecked*/> args) =>
-			{
-				blocking = true;
-				checkBox.Checked = args.Value;
-				blocking = false;
-			};
+         model.OnCheckedChanged += (object sender, GenericEventArgs<bool /*isChecked*/> args) =>
+         {
+            blocking = true;
+            checkBox.Checked = args.Value;
+            blocking = false;
+         };
 
+         //checkBox.SetOnCheckedChangeListener(new CheckListener(this.viewModel, position));
 
+         return checkBox;
+      }
 
-			//checkBox.SetOnCheckedChangeListener(new CheckListener(this.viewModel, position));
+      public override int Count {
+         get {
+            return viewModel.Videos.Count;
+         }
+      }
+   }
 
-			return checkBox;
-		}
+   [Activity(Label = "Day options")]
+   public class DayOptionsActivity : ISecondsActivity
+   {
+      private ListView listView = null;
 
-		public override int Count {
-			get {
-				return viewModel.Videos.Count;
-			}
-		}
-	}
+      private DayOptionsViewModel viewModel = null;
 
-    [Activity(Label = "Day options")]
-    public class DayOptionsActivity : Activity
-    {
-		private ListView listView = null;
+      protected override void OnCreate (Bundle bundle)
+      {
+         base.OnCreate (bundle);
 
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
+         int day = Convert.ToInt32 (this.Intent.Extras.GetString ("Day"));
+         int month = Convert.ToInt32 (this.Intent.Extras.GetString ("Month"));
+         int year = Convert.ToInt32 (this.Intent.Extras.GetString ("Year"));
+         int timelineId = Convert.ToInt32 (this.Intent.Extras.GetString ("TimelineId"));
 
-            int day = Convert.ToInt32(this.Intent.Extras.GetString("Day"));
-            int month = Convert.ToInt32(this.Intent.Extras.GetString("Month"));
-            int year = Convert.ToInt32(this.Intent.Extras.GetString("Year"));
-            int timelineId = Convert.ToInt32(this.Intent.Extras.GetString("TimelineId"));
+         User currentUser = ((ISecondsApplication)this.Application).GetUserService ().CurrentUser;
+         Timeline timeline = currentUser.GetTimelineById (timelineId);
+         DayInfo dayInfo = timeline.GetDayAt (new DateTime (year, month, day));
 
-            User currentUser = ((ISecondsApplication)this.Application).GetUserService().CurrentUser;
-            Timeline timeline = currentUser.GetTimelineById(timelineId);
-            DayInfo dayInfo = timeline.GetDayAt(new DateTime(year, month, day));
+         this.RequestWindowFeature(WindowFeatures.NoTitle);
+         this.SetContentView (Resource.Layout.DayOptions);
 
-            this.SetContentView(Resource.Layout.DayOptions);
+         INavigator navigator = ((ISecondsApplication)this.Application).GetNavigator();
 
-            DayOptionsViewModel viewModel = new DayOptionsViewModel(dayInfo);
+         viewModel = new DayOptionsViewModel (dayInfo, navigator);
 
-            listView = this.FindViewById<ListView>(Resource.Id.videosList);
+         listView = this.FindViewById<ListView> (Resource.Id.videoList);
 
-			   VideoListAdapter adapter = new VideoListAdapter(this, viewModel);
-            listView.Adapter = adapter;
-        }
-	}
+         VideoListAdapter adapter = new VideoListAdapter (this, viewModel);
+         listView.Adapter = adapter;
+
+         configureActionBar();
+      }
+
+      private void configureActionBar()
+      {
+         var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+         var itemActionBarAction = new MenuItemLegacyBarAction(this, this, Resource.Id.actionbar_timeline_back_to_home, Resource.Drawable.ic_home,
+            Resource.String.actionbar_timelines_text)
+         {
+            ActionType = ActionType.Always
+         };
+         
+         actionBar.SetHomeAction(itemActionBarAction);       
+
+         
+         actionBar.SeparatorColorRaw= Resource.Color.actionbar_background;
+         
+         TextView titleView= actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
+         DateTimeFormatInfo format = CultureInfo.CurrentCulture.DateTimeFormat;
+         titleView.Text = viewModel.Model.Date.ToString(format.ShortDatePattern);
+         TextViewUtil.ChangeFontForActionBarTitle(titleView,this,26f);
+      }
+
+      public override bool OnOptionsItemSelected(IMenuItem item)
+      {
+         switch (item.ItemId)
+         {
+         case Resource.Id.actionbar_timeline_back_to_home:
+            OnSearchRequested();
+            viewModel.BackToHomeCommand.Execute(null);
+            return true;         
+         }
+         
+         return base.OnOptionsItemSelected(item);
+      }
+
+   }
 }
