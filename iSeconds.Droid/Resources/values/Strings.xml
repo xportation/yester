@@ -20,5 +20,5 @@
 	<string name="timeline_options_dialog_delete_ask">Delete timeline?</string>
 	<string name="timeline_options_dialog_delete_alert">Are you sure to delete this timeline? \nThis operation can not be undone.</string>   
    <string name="day_options_title">Day</string>
-   <string name="item_options_message">*Hold on an item for options menu</string>   
+   <string name="item_options_message">*Hold on an item for options menu\n*Tap to select the main video</string>   
 </resources>
