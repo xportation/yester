@@ -37,40 +37,42 @@ namespace iSeconds.Droid
          return 0;
       }
 
-      private bool blocking = false;
 
       public override View GetView (int position, View convertView, ViewGroup parent)
       {
-         CheckBox checkBox = new CheckBox (this.context);
+         View view = convertView;
 
-         DayOptionsViewModel.VideoItem model = viewModel.Videos [position];
-         checkBox.Text = model.Label;
-         checkBox.Checked = model.Checked;
-         checkBox.CheckedChange += (object sender, CompoundButton.CheckedChangeEventArgs e) => 
+         if (view == null) 
          {
-            if (this.blocking) 
-               return;
+            view = View.Inflate(this.context, Resource.Layout.DayOptionsItem, null);
 
-            // se o cara esta checado nao tem como tirar o check..
-            if (model.Checked && !e.IsChecked) {
-               checkBox.Checked = true;
-               return;
-            }
+            DayOptionsViewModel.VideoItem model = viewModel.Videos [position];
+            
+            TextView videoDescription = view.FindViewById<TextView>(Resource.Id.videoDescription);
+            TextViewUtil.ChangeFontForTimelinesList(videoDescription, context, 18f);
 
-            if (e.IsChecked)
-               this.viewModel.CheckVideoCommand.Execute (position);
-         };
+            CheckedTextView checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
+            TextViewUtil.ChangeFontForTimelinesList(checkBox, context, 20f);
+            checkBox.Text = model.Label;
+            checkBox.Checked = model.Checked;
 
-         model.OnCheckedChanged += (object sender, GenericEventArgs<bool /*isChecked*/> args) =>
-         {
-            blocking = true;
-            checkBox.Checked = args.Value;
-            blocking = false;
-         };
+            checkBox.Click += (object sender, EventArgs e) => {
+               if (!model.Checked)
+                  this.viewModel.CheckVideoCommand.Execute (position);
 
-         //checkBox.SetOnCheckedChangeListener(new CheckListener(this.viewModel, position));
+            };
 
-         return checkBox;
+            checkBox.LongClick+= (object sender, View.LongClickEventArgs e) => {
+               Toast.MakeText(this.context, "ola", ToastLength.Short).Show ();
+            };
+            
+            model.OnCheckedChanged += (object sender, GenericEventArgs<bool /*isChecked*/> args) =>
+            {
+               checkBox.Checked = args.Value;
+            };
+         }
+
+         return view;
       }
 
       public override int Count {

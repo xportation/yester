@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <CheckedTextView
+        android:text="Video"
+        android:id="@+id/videoItem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:checkMark="@drawable/indicator_check_mark"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="center_vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="@color/timelines_list_first_item_color" />
+    <TextView
+        android:text="Video description"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/videoDescription"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:textColor="@color/timelines_list_second_item_color" />
+</LinearLayout>

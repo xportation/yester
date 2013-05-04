@@ -97,6 +97,7 @@
     <AndroidResource Include="Resources\layout\TimelineOptionsEditTimeline.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\DayOptionsItem.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
