@@ -1,33 +1,25 @@
 using System;
-
 using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using iSeconds.Domain;
+using Android.Views;
 
 namespace iSeconds.Droid
 {
-	[Activity (Label = "My life in seconds", MainLauncher = true)]
-	public class MainActivity : Activity
+	[Activity (Label= "Memories", MainLauncher = true, Theme = "@style/Theme.Splash", NoHistory = true)]
+	public class SplashActivity : Activity
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
 			UserService userService = ((ISecondsApplication)this.Application).GetUserService();
-
+			
 			if (userService.CurrentUser != null)
 				this.StartActivity(typeof(HomeActivity));
 			// else
 			// this.StartActivity<LoginActivity>();
-
-
-
 		}
 	}
 }
-
 

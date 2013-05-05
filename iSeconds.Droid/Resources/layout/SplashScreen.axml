@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/actionbar_background">
+    <ImageView
+        android:src="@drawable/splash_title"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageViewTitle"
+        android:layout_weight="1"
+        android:layout_gravity="center" />
+    <TextView
+        android:text="broditech"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewBroditech"
+        android:gravity="center"
+        android:textColor="#ffb7c7e8"
+        android:layout_marginBottom="10dip" />
+</LinearLayout>

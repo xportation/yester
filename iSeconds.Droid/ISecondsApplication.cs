@@ -25,8 +25,6 @@ namespace iSeconds
       {
          userService = new UserService ();
 
-
-
          activityTracker = new ActivityTracker ();
 
          pathService = new PathServiceAndroid();

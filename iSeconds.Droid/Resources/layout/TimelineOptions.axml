@@ -33,6 +33,5 @@
         android:paddingLeft="2dip"
         android:text="@string/timeline_options_message"
         android:background="@color/actionbar_background"
-        android:layout_margin="2dip"
         android:textColor="#FFFFFFFF" />
 </LinearLayout>

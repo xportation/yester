@@ -8,7 +8,7 @@ using Android.App;
 [assembly: AssemblyTitle("iSeconds.Droid")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Broditech")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("Aniceto")]
 [assembly: AssemblyTrademark("")]

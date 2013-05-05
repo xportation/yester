@@ -29,7 +29,7 @@ namespace iSeconds.Domain
 
 		public ICommand BackToHomeCommand
 		{
-			get { return new Command((object arg) => { navigator.NavigateTo("homeview", new Args()); }); }
+			get { return new Command((object arg) => { navigator.NavigateBack(); }); }
 		}
 
 		public int TimelinesCount()

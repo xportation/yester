@@ -525,9 +525,11 @@ namespace iSeconds.Droid
 			   DayViewModel dayViewModel = days[dayIndex];
 			   if (dayViewModel.VideoThumbnailPath.Length > 0)
 				{
-				   canvas.Save();
-
 				   Bitmap thumbnail = BitmapFactory.DecodeFile(dayViewModel.VideoThumbnailPath);
+					if (thumbnail == null || thumbnail.Height == 0 || thumbnail.Width == 0)
+						continue;
+
+					canvas.Save();
 					RectangleF rect = getCellRectByIndex(dayIndex, 0, 0);
 					canvas.ClipRect(rect.Left, rect.Top, rect.Right, rect.Bottom);
 					float scale = Math.Max(rect.Width / thumbnail.Width, rect.Height / thumbnail.Height);
