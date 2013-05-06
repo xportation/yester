@@ -408,25 +408,28 @@ namespace iSeconds.Droid
 			public const int ic_menu_up = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int ic_settings = 2130837536;
+			public const int ic_setting = 2130837536;
 			
 			// aapt resource value: 0x7f020021
-			public const int ic_title_export_default = 2130837537;
+			public const int ic_settings = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int ic_title_share_default = 2130837538;
+			public const int ic_title_export_default = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int ic_uncheck = 2130837539;
+			public const int ic_title_share_default = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int Icon = 2130837540;
+			public const int ic_uncheck = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int indicator_check_mark = 2130837541;
+			public const int Icon = 2130837541;
 			
 			// aapt resource value: 0x7f020026
-			public const int splash_title = 2130837542;
+			public const int indicator_check_mark = 2130837542;
+			
+			// aapt resource value: 0x7f020027
+			public const int splash_title = 2130837543;
 			
 			static Drawable()
 			{

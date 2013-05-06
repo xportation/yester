@@ -39,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <ConsolePause>False</ConsolePause>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -100,6 +101,29 @@
     <AndroidResource Include="Resources\drawable\splash_title.png" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
     <AndroidResource Include="Resources\values\Styles.xml" />
+    <AndroidResource Include="Resources\Drawable-hdpi\ic_add.png" />
+    <AndroidResource Include="Resources\Drawable-hdpi\ic_check.png" />
+    <AndroidResource Include="Resources\Drawable-hdpi\ic_home.png" />
+    <AndroidResource Include="Resources\Drawable-hdpi\ic_logo.png" />
+    <AndroidResource Include="Resources\Drawable-hdpi\ic_setting.png" />
+    <AndroidResource Include="Resources\Drawable-hdpi\ic_uncheck.png" />
+    <AndroidResource Include="Resources\Drawable-hdpi\splash_title.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_add.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_check.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_home.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_logo.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_settings.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_uncheck.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\splash_title.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_add.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_check.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_home.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_logo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_setting.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_uncheck.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\splash_title.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -119,13 +143,7 @@
     <AndroidResource Include="Resources\Drawable-hdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable-ldpi\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\Drawable-mdpi\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Drawable-xhdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Menu\HomeViewMenu.xml">
