@@ -127,7 +127,7 @@ namespace iSeconds.Droid
          };
          
          actionBar.SetHomeAction(itemActionBarAction);   
-			actionBar.SetDisplayHomeAsUpEnabled(true);
+			//actionBar.SetDisplayHomeAsUpEnabled(true);
          
          actionBar.SeparatorColorRaw= Resource.Color.actionbar_background;
          

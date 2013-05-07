@@ -6,7 +6,7 @@ using Android.Views;
 
 namespace iSeconds.Droid
 {
-	[Activity (Label= "Memories", MainLauncher = true, Theme = "@style/Theme.Splash", NoHistory = true)]
+	[Activity (Label= "@string/app_name", MainLauncher = true, Theme = "@style/Theme.Splash", NoHistory = true)]
 	public class SplashActivity : Activity
 	{
 		protected override void OnCreate (Bundle bundle)

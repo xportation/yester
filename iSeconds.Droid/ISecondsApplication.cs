@@ -10,7 +10,7 @@ using iSeconds.Domain.Framework;
 
 namespace iSeconds
 {
-   [Application(Debuggable=true, Label="")]
+   [Application(Debuggable=true)]
    public class ISecondsApplication : Application
    {
       private UserService userService = null;

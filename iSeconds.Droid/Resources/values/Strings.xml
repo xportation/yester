@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Memories</string>
-	<string name="app_description">Memorize your timelines</string>
+	<string name="app_name">Moments</string>
+	<string name="app_description">Register your moments creating amazing timelines.</string>
 	<string name="library_name">iSeconds.Droid</string>
 	<string name="add_timeline">Add</string>
 	<string name="actionbar_timelines_text">Timelines</string>

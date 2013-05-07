@@ -13,7 +13,7 @@ using Android.Graphics;
 namespace iSeconds.Droid
 {
 
-   [Activity(Label = "HomeActivity")]
+	[Activity(Label= "HomeActivity")]
    public class HomeActivity : ISecondsActivity
    {
       private HomeViewModel viewModel = null;

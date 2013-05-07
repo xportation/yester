@@ -138,7 +138,7 @@ namespace iSeconds.Droid
             };
 
          actionBar.SetHomeAction(itemActionBarAction);
-			actionBar.SetDisplayHomeAsUpEnabled(true);
+			//actionBar.SetDisplayHomeAsUpEnabled(true);
 
 			var addTimelineItemAction = new MenuItemLegacyBarAction(
 				this, this, Resource.Id.actionbar_timeline_add, Resource.Drawable.ic_add,
