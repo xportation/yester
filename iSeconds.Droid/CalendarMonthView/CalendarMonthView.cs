@@ -437,9 +437,9 @@ namespace iSeconds.Droid
 			heightMoviment = animation.Step();
 			if (Math.Abs(heightMoviment - 0) < 0.01)
 			{
-				//cache mano
+				//cache mano... pra nao precisar recalcular
 				heightMoviment = 0;
-				createCacheDisplay(ref calendarMonthCache, viewedDays);
+				calendarMonthCache = System.Threading.Interlocked.Exchange(ref calendarNextMonthCache, calendarMonthCache);
 			}
 
 			PostInvalidate();

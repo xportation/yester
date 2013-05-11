@@ -45,13 +45,6 @@ namespace iSeconds
          userService.CurrentUser = new User ("test", repository);
       }
 
-      public override void OnCreate ()
-      {
-         base.OnCreate ();
-            
-         //userService.ActualUser.CreateTimeline("test");
-      }
-
       public UserService GetUserService ()
       {
          return userService;
