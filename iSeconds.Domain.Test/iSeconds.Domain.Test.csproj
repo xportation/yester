@@ -86,12 +86,8 @@
     <Compile Include="..\iSeconds.Domain\IRepository.cs">
       <Link>IRepositoryService.cs</Link>
     </Compile>
-    <Compile Include="HomeViewModelTest.cs" />
     <Compile Include="..\iSeconds.Domain\ViewModel\Command.cs">
       <Link>Command.cs</Link>
-    </Compile>
-    <Compile Include="..\iSeconds.Domain\ViewModel\HomeViewModel.cs">
-      <Link>HomeViewModel.cs</Link>
     </Compile>
     <Compile Include="..\iSeconds.Domain\ViewModel\TimelineViewModel.cs">
       <Link>TimelineViewModel.cs</Link>

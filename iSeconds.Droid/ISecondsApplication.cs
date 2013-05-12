@@ -23,26 +23,19 @@ namespace iSeconds
       public ISecondsApplication (IntPtr javaReference, JniHandleOwnership transfer)
          : base(javaReference, transfer)
       {
-         userService = new UserService ();
-
          activityTracker = new ActivityTracker ();
-
          pathService = new PathServiceAndroid();
-
          repository = new ISecondsDB (pathService.GetDbPath());
-
          mediaService = new MediaServiceAndroid (this.activityTracker, pathService.GetMediaPath());
-
-         navigator = new INavigator ();
-
-         navigator.RegisterNavigation ("day_options", new AndroidPresenter (this.activityTracker, typeof(DayOptionsActivity)));
-            
+         
+			navigator = new INavigator ();
+         navigator.RegisterNavigation ("day_options", new AndroidPresenter (this.activityTracker, typeof(DayOptionsActivity)));            
          navigator.RegisterNavigation ("timeline_options", new AndroidPresenter (this.activityTracker, typeof(TimelineOptionsActivity)));
+         navigator.RegisterNavigation ("timeline_view", new AndroidPresenter (this.activityTracker, typeof(TimelineActivity)));
 
-         navigator.RegisterNavigation ("homeview", new AndroidPresenter (this.activityTracker, typeof(HomeActivity)));
-
-         // ---
-         userService.CurrentUser = new User ("test", repository);
+			userService = new UserService (repository);
+			if (!userService.Login ("user", "password"))
+				userService.CreateUser ("user");
       }
 
       public UserService GetUserService ()

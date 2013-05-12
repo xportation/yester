@@ -21,7 +21,7 @@ namespace iSeconds.Droid
 		private bool isTextShadow;
 		private Color selectionColor;
 		private Color todayColor;
-		private float strokeWidth;
+		private float textStrokeWidth;
 		private Paint.Align textAlign;
 		private Color textColor;
 		private Color textShadowColor;
@@ -106,10 +106,10 @@ namespace iSeconds.Droid
 			set { textStrokeColor = value; }
 		}
 		
-		public float StrokeWidth
+		public float TextStrokeWidth
 		{
-			get { return strokeWidth; }
-			set { strokeWidth = value; }
+			get { return textStrokeWidth; }
+			set { textStrokeWidth = value; }
 		}
 		
 		public Color SelectionShadowColor
@@ -133,7 +133,7 @@ namespace iSeconds.Droid
 			cellForegroundColor = Color.Transparent;
 			inactiveCellForegroundColor = Color.Argb(127,237,239,244);
 			textStrokeColor = Color.Argb(170,255,255,255);
-			strokeWidth = 2.1f;
+			textStrokeWidth = 2.5f;
 		}
 	}
 
@@ -241,7 +241,7 @@ namespace iSeconds.Droid
 	      textPaint = new Paint();
 	      textPaint.TextAlign = theme.TextAlign;
 	      textPaint.AntiAlias = true;
-	      textPaint.StrokeWidth = theme.StrokeWidth;
+	      textPaint.StrokeWidth = theme.TextStrokeWidth;
 	      textPaint.TextSize = theme.TextSize * Resources.DisplayMetrics.Density;
 			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/123Marker.ttf"));
 

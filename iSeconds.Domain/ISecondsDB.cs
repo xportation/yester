@@ -23,16 +23,6 @@ namespace iSeconds.Domain
          CreateTable<MediaInfo>();
       }
 
-      /*public User GetUser(int id)
-      {
-         //return GetItem<User> (id);
-         lock (locker)
-         {
-            User user = (from i in Table<User>() where i.Id == id select i).First();
-            return user;
-         }
-      }*/
-
       public event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
 	   public event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
 	   public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
@@ -86,6 +76,26 @@ namespace iSeconds.Domain
             return (from i in Table<MediaInfo>() where i.Path == videopath select i).FirstOrDefault();
          }
       }
+
+		public User GetUser (string userName)
+		{
+			lock (locker)
+			{
+				try {
+					User user = (from i in Table<User>() where i.Name == userName select i).First();
+					user.SetRepository(this);
+					return user;
+				} catch (Exception exception) {
+					Console.WriteLine (exception.Message);
+				}
+				return null;
+			}
+		}
+
+		public void SaveUser(User user)
+		{
+			this.SaveItem(user);
+		}
 
       public IList<Timeline> GetUserTimelines(int userId)
       {

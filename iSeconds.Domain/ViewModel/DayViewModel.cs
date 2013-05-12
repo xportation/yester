@@ -111,6 +111,15 @@ namespace iSeconds.Domain
                   viewModel.navigator.NavigateTo("day_options", args);
                }));
          }
+
+			public string[] ListNames()
+			{
+				string[] names= new string[OptionsEntries.Count];
+				for (int i = 0; i < OptionsEntries.Count; i++)
+					names[i] = OptionsEntries[i].Name;
+
+				return names;
+			}
       }
 
       private InteractionRequest<DayOptionsList> dayOptionsRequest = new InteractionRequest<DayOptionsList>();

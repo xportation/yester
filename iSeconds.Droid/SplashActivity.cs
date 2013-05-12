@@ -16,7 +16,7 @@ namespace iSeconds.Droid
 			UserService userService = ((ISecondsApplication)this.Application).GetUserService();
 			
 			if (userService.CurrentUser != null)
-				this.StartActivity(typeof(HomeActivity));
+				this.StartActivity(typeof(TimelineActivity));
 			// else
 			// this.StartActivity<LoginActivity>();
 		}

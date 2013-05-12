@@ -6,7 +6,7 @@ namespace iSeconds.Domain
 {
 	public class User : IModel
 	{
-		private readonly IRepository repository;
+		private IRepository repository;
 		
 		public User(string name, IRepository repository)
 		{
@@ -31,6 +31,11 @@ namespace iSeconds.Domain
 			   CurrentTimeline = timeline;
 
 			return timeline;
+		}
+
+		public void SetRepository (IRepository repository)
+		{
+			this.repository = repository;
 		}
 
 	   public bool UpdateTimeline(Timeline timeline)
@@ -75,8 +80,7 @@ namespace iSeconds.Domain
 				{
 					CurrentTimelineId = timelines[0].Id;
 					return timelines[0];
-				}
-					
+				}					
 
 	         return null;
 	      }
@@ -85,6 +89,7 @@ namespace iSeconds.Domain
 				if (value.Id != CurrentTimelineId && value.UserId == this.Id)
 				{
 					CurrentTimelineId = value.Id;
+					repository.SaveUser(this);
 
 					if (OnCurrentTimelineChanged != null)
 						OnCurrentTimelineChanged(this, new GenericEventArgs<Timeline>(value));

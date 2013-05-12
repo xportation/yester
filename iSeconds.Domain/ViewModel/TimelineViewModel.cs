@@ -8,21 +8,35 @@ namespace iSeconds.Domain
 {
 	public class TimelineViewModel : ViewModel
 	{
+		private User user = null;
 		private Timeline timeline = null;
 		private IRepository repository = null;
 		private IMediaService mediaService = null;
 		private INavigator navigator = null;
 
-		public TimelineViewModel(Timeline timeline, IRepository repository, IMediaService mediaService, INavigator navigator)
+		public TimelineViewModel(User user, IRepository repository, IMediaService mediaService, INavigator navigator)
 		{
-			this.timeline = timeline;
+			this.user = user;
 			this.repository = repository;
 			this.mediaService = mediaService;
 			this.navigator = navigator;
 
+			setTimeline(user.CurrentTimeline);
 			CalendarMode = VisualizationMode.MONTH;
 
 			this.CurrentDate = DateTime.Today;
+
+			this.user.OnCurrentTimelineChanged += (sender, e) => 
+				{
+					setTimeline(e.Value);
+					this.Invalidate();
+				};
+		}
+
+		private void setTimeline(Timeline timeline)
+		{
+			this.timeline = timeline;
+			this.TimelineName = this.timeline.Name;
 		}
 
 		private DateTime currentDate;
@@ -108,12 +122,25 @@ namespace iSeconds.Domain
 			get { return new Command(delegate { this.CurrentDate = DateTime.Today; }); }
 		}
 
+		public ICommand OptionsCommand
+		{
+			get { return new Command((object arg) => { navigator.NavigateTo("timeline_options", new Args()); }); }
+		}
+
 		private string currentMonthTitle;
 
 		public string CurrentMonthTitle
 		{
 			get { return currentMonthTitle; }
 			set { this.SetField(ref currentMonthTitle, value, "CurrentMonthTitle"); }
+		}
+
+		private string timelineName;
+
+		public string TimelineName
+		{
+			get { return timelineName; }
+			set { this.SetField(ref timelineName, value, "TimelineName"); }
 		}
 	}
 }

@@ -21,7 +21,7 @@ namespace iSeconds.Domain.Test
         public void Init()
         {
             repository = new ISecondsDB("testbase.db3");
-			repository.Reset();
+				repository.Reset();
 
             user = new User("xuxa", repository);
             repository.SaveItem(user);
@@ -29,7 +29,7 @@ namespace iSeconds.Domain.Test
             timeline.SetRepository(repository);
             repository.SaveTimeline(timeline);
 
-            viewModel = new TimelineViewModel(timeline, repository, mockMediaService, navigator);
+            viewModel = new TimelineViewModel(user, repository, mockMediaService, navigator);
         }
 
         [Test()]

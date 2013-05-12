@@ -471,14 +471,14 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f090008
 			public const int actionbar_progress = 2131296264;
 			
+			// aapt resource value: 0x7f090020
+			public const int actionbar_timeline_add = 2131296288;
+			
 			// aapt resource value: 0x7f09001f
-			public const int actionbar_timeline_add = 2131296287;
+			public const int actionbar_timeline_back_to_home = 2131296287;
 			
 			// aapt resource value: 0x7f09001e
-			public const int actionbar_timeline_back_to_home = 2131296286;
-			
-			// aapt resource value: 0x7f09001d
-			public const int actionbar_timeline_menu_options = 2131296285;
+			public const int actionbar_timeline_menu_options = 2131296286;
 			
 			// aapt resource value: 0x7f090009
 			public const int actionbar_title = 2131296265;
@@ -525,6 +525,9 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f090010
 			public const int timelineOptionsMessage = 2131296272;
 			
+			// aapt resource value: 0x7f09001c
+			public const int timelineViewLayout = 2131296284;
+			
 			// aapt resource value: 0x7f090017
 			public const int timelines = 2131296279;
 			
@@ -534,8 +537,8 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f090011
 			public const int videoItem = 2131296273;
 			
-			// aapt resource value: 0x7f09001c
-			public const int videoItemRadio = 2131296284;
+			// aapt resource value: 0x7f09001d
+			public const int videoItemRadio = 2131296285;
 			
 			// aapt resource value: 0x7f09000f
 			public const int videoList = 2131296271;
@@ -593,7 +596,10 @@ namespace iSeconds.Droid
 			public const int TimelineOptionsItem = 2130903052;
 			
 			// aapt resource value: 0x7f03000d
-			public const int VideoItem = 2130903053;
+			public const int TimelineView = 2130903053;
+			
+			// aapt resource value: 0x7f03000e
+			public const int VideoItem = 2130903054;
 			
 			static Layout()
 			{
