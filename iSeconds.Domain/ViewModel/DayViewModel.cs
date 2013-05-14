@@ -20,8 +20,6 @@ namespace iSeconds.Domain
          this.repository = repository;
          this.mediaService = mediaService;
          this.navigator = navigator;
-
-         this.videoPath = model != null ? model.GetThumbnail() : "";
       }
 
       public Day PresentationInfo { get; set; }
@@ -32,31 +30,14 @@ namespace iSeconds.Domain
          set { this.model = value; }
       }
 
-      private string videoPath = string.Empty;
-
-      public string VideoPath
-      {
-         get { return videoPath; }
-         set { this.SetField(ref videoPath, value, "VideoPath"); }
-      }
-
       public string VideoThumbnailPath
       {
-         get { return getThumbnailPath(videoPath); }
-      }
-
-      private string getThumbnailPath(string videoPath)
-      {
-         if (videoPath.Length == 0)
-            return "";
-
-         return System.IO.Path.GetDirectoryName(videoPath) + "/" + System.IO.Path.GetFileNameWithoutExtension(videoPath) +
-                ".png";
+			get { return model.GetDefaultThumbnail(); }
       }
 
       public ICommand PlayVideoCommand
       {
-         get { return new Command((object arg) => { mediaService.PlayVideo(this.videoPath); }); }
+         get { return new Command((object arg) => { mediaService.PlayVideo(model.GetDefaultVideoPath()); }); }
       }
 
       public ICommand RecordVideoCommand
@@ -67,8 +48,8 @@ namespace iSeconds.Domain
                {
                   mediaService.TakeVideo(this.model.Date, (string videoPath) =>
                      {
-                        mediaService.SaveVideoThumbnail(this.getThumbnailPath(videoPath), videoPath);
                         this.AddVideoCommand.Execute(videoPath);
+								mediaService.SaveVideoThumbnail(model.GetDefaultThumbnail(), model.GetDefaultVideoPath());
                      });
                });
          }
@@ -80,7 +61,7 @@ namespace iSeconds.Domain
          {
             return new Command((object arg) =>
                {
-                  if (this.VideoPath == "")
+                  if (model.GetVideoCount() == 0)
                   {
                      RecordVideoCommand.Execute(null);
                   }
@@ -144,7 +125,6 @@ namespace iSeconds.Domain
                {
                   string videoPath = (string) arg;
                   this.model.AddVideo(videoPath);
-                  VideoPath = videoPath;
                });
          }
       }

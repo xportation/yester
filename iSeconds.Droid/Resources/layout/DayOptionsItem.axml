@@ -16,13 +16,26 @@
         android:clickable="true"
         android:focusable="true"
         android:textColor="@color/timelines_list_first_item_color" />
-    <TextView
-        android:text="Video description"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/videoDescription"
-        android:paddingLeft="6dip"
-        android:paddingRight="6dip"
-        android:textColor="@color/timelines_list_second_item_color" />
+        android:id="@+id/linearLayout1"
+        android:padding="5px">
+        <ImageView
+            android:layout_width="96px"
+            android:layout_height="96px"
+            android:id="@+id/videoThumbnail" />
+        <TextView
+            android:text="Video description"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/videoDescription"
+            android:paddingLeft="6dip"
+            android:paddingRight="6dip"
+            android:textColor="@color/timelines_list_second_item_color"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
 </LinearLayout>

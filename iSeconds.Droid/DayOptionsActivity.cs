@@ -13,6 +13,7 @@ using iSeconds.Domain;
 using LegacyBar.Library.Bar;
 using System.Globalization;
 using iSeconds.Domain.Framework;
+using Android.Graphics;
 
 namespace iSeconds.Droid
 {
@@ -55,6 +56,11 @@ namespace iSeconds.Droid
             TextViewUtil.ChangeFontForTimelinesList(checkBox, context, 20f);
             checkBox.Text = model.Label;
             checkBox.Checked = model.Checked;
+
+				ImageView imageView = view.FindViewById<ImageView> (Resource.Id.videoThumbnail);
+				Bitmap thumbnail = BitmapFactory.DecodeFile(model.Model.GetThumbnailPath());
+				if (thumbnail != null)
+					imageView.SetImageBitmap(thumbnail);
 
             checkBox.Click += (object sender, EventArgs e) => {
                if (!model.Checked)

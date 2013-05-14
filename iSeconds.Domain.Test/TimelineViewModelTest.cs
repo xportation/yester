@@ -106,11 +106,10 @@ namespace iSeconds.Domain.Test
             DayViewModel dayViewModel = viewModel.VisibleDays[0];
             dayViewModel.AddVideoCommand.Execute("video/path");
 
-            Assert.That(dayViewModel.VideoPath, Is.EqualTo("video/path"));
             Assert.That(dayViewModel.VideoThumbnailPath, Is.EqualTo("video/path.png"));
 
             DayInfo dayInfo = repository.GetDayInfoAt(dayViewModel.PresentationInfo.day, dayViewModel.Model.TimelineId);
-            Assert.That(dayInfo.GetThumbnail(), Is.EqualTo("video/path"));
+            Assert.That(dayInfo.GetDefaultVideoPath(), Is.EqualTo("video/path"));
         }
 
         [Test()]

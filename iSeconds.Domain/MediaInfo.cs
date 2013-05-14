@@ -11,9 +11,17 @@ namespace iSeconds.Domain
 			this.Path = path;
 		}
 
-        public MediaInfo()
-        {
-        }
+     	public MediaInfo()
+     	{
+     	}
+
+		public string GetThumbnailPath()
+		{
+			if (Path.Length == 0)
+				return "";
+
+			return System.IO.Path.GetDirectoryName(Path) + "/" + System.IO.Path.GetFileNameWithoutExtension(Path) + ".png";
+		}
 
 		#region db
 		[PrimaryKey, AutoIncrement]

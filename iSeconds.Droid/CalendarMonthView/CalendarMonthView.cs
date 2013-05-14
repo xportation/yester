@@ -28,6 +28,7 @@ namespace iSeconds.Droid
 		private float textSize;
 		private Color textStrokeColor;
 		private Color selectionShadowColor;
+		private float todayStrokeWidth;
 		
 		public CalendarMonthViewTheme()
 		{
@@ -117,6 +118,12 @@ namespace iSeconds.Droid
 			get { return selectionShadowColor; }
 			set { selectionShadowColor = value; }
 		}
+
+		public float TodayStrokeWidth 
+		{
+			get { return todayStrokeWidth; }
+			set { todayStrokeWidth = value; }
+		}
 		
 		public void SetDefault()
 		{
@@ -126,6 +133,7 @@ namespace iSeconds.Droid
 			textAlign = Paint.Align.Center;
 			textSize = 21f;
 			todayColor = Color.Argb(255, 0, 180, 255);
+			todayStrokeWidth = 8f;
 			selectionColor = Color.Argb(100, 0, 180, 255);
 			selectionShadowColor = Color.Rgb(200, 220, 255);
 			textColor = Color.Rgb(51,65,90);
@@ -191,6 +199,7 @@ namespace iSeconds.Droid
 		private Paint backgroundPaint;
 		private Paint cacheDisplayPaint;
 
+		private Bitmap dayMoreMoviesIndicator;
 		private Bitmap calendarMonthCache;
 		private Bitmap calendarNextMonthCache;
 		private Paint cellForegroundPaint;
@@ -247,9 +256,7 @@ namespace iSeconds.Droid
 
 	      todayPaint = new Paint();
 	      todayPaint.Color = theme.TodayColor;
-	      todayPaint.StrokeWidth = 5;
-			todayPaint.SetShadowLayer(1.5f, 1.0f, 1.0f, theme.SelectionShadowColor);
-	      
+			todayPaint.StrokeWidth = theme.TodayStrokeWidth;	      
 	      todayPaint.SetStyle(Paint.Style.Stroke);
 
 	      cellForegroundPaint = new Paint();
@@ -264,6 +271,7 @@ namespace iSeconds.Droid
 
 	      gestureDetector = new GestureDetector(this);
 
+			dayMoreMoviesIndicator = BitmapFactory.DecodeResource (this.Context.Resources, Resource.Drawable.ic_day_videos);
 	      cacheDisplayPaint = new Paint();
 	      initBitmapCache();
 
@@ -513,8 +521,9 @@ namespace iSeconds.Droid
 			drawBackgroundImage(canvas, days);
 			drawCellsForeground(canvas, days);
 			drawDaysText(canvas, days);
-			drawGridLines(canvas);
+			drawMoreMoviesByIcon(canvas, days);
 			drawToday(canvas, days);
+			drawGridLines(canvas);
 		}
 
 		private void drawBackgroundImage(Canvas canvas, List<DayViewModel> days)
@@ -621,6 +630,20 @@ namespace iSeconds.Droid
 				canvas.DrawText(text, xPos, yPos, textPaint);
 			}
 		}
+
+		void drawMoreMoviesByIcon (Canvas canvas, List<DayViewModel> days)
+		{
+			for (int dayIndex = 0; dayIndex < days.Count; dayIndex++)
+			{
+				DayViewModel dayViewModel = days[dayIndex];
+				if (dayViewModel.Model.GetVideoCount() > 1) {
+					RectangleF rect = getCellRectByIndex(dayIndex, 0, 0);
+					canvas.DrawBitmap (dayMoreMoviesIndicator, rect.Right - dayMoreMoviesIndicator.Width - 1,
+					                   rect.Bottom - dayMoreMoviesIndicator.Height - 1, backgroundPaint);
+				}
+			}
+		}
+
 #endregion
 
 		private RectangleF getCellRectByIndex(int index, float xPadding, float yPadding)

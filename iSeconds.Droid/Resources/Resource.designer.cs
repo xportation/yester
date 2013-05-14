@@ -381,55 +381,58 @@ namespace iSeconds.Droid
 			public const int ic_check = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int ic_home = 2130837527;
+			public const int ic_day_videos = 2130837527;
 			
 			// aapt resource value: 0x7f020018
-			public const int ic_launcher = 2130837528;
+			public const int ic_home = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int ic_logo = 2130837529;
+			public const int ic_launcher = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int ic_menu_down = 2130837530;
+			public const int ic_logo = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int ic_menu_left = 2130837531;
+			public const int ic_menu_down = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int ic_menu_refresh = 2130837532;
+			public const int ic_menu_left = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int ic_menu_right = 2130837533;
+			public const int ic_menu_refresh = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int ic_menu_search = 2130837534;
+			public const int ic_menu_right = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int ic_menu_up = 2130837535;
+			public const int ic_menu_search = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int ic_setting = 2130837536;
+			public const int ic_menu_up = 2130837536;
 			
 			// aapt resource value: 0x7f020021
-			public const int ic_settings = 2130837537;
+			public const int ic_setting = 2130837537;
 			
 			// aapt resource value: 0x7f020022
-			public const int ic_title_export_default = 2130837538;
+			public const int ic_settings = 2130837538;
 			
 			// aapt resource value: 0x7f020023
-			public const int ic_title_share_default = 2130837539;
+			public const int ic_title_export_default = 2130837539;
 			
 			// aapt resource value: 0x7f020024
-			public const int ic_uncheck = 2130837540;
+			public const int ic_title_share_default = 2130837540;
 			
 			// aapt resource value: 0x7f020025
-			public const int Icon = 2130837541;
+			public const int ic_uncheck = 2130837541;
 			
 			// aapt resource value: 0x7f020026
-			public const int indicator_check_mark = 2130837542;
+			public const int Icon = 2130837542;
 			
 			// aapt resource value: 0x7f020027
-			public const int splash_title = 2130837543;
+			public const int indicator_check_mark = 2130837543;
+			
+			// aapt resource value: 0x7f020028
+			public const int splash_title = 2130837544;
 			
 			static Drawable()
 			{
@@ -471,14 +474,14 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f090008
 			public const int actionbar_progress = 2131296264;
 			
+			// aapt resource value: 0x7f090022
+			public const int actionbar_timeline_add = 2131296290;
+			
+			// aapt resource value: 0x7f090021
+			public const int actionbar_timeline_back_to_home = 2131296289;
+			
 			// aapt resource value: 0x7f090020
-			public const int actionbar_timeline_add = 2131296288;
-			
-			// aapt resource value: 0x7f09001f
-			public const int actionbar_timeline_back_to_home = 2131296287;
-			
-			// aapt resource value: 0x7f09001e
-			public const int actionbar_timeline_menu_options = 2131296286;
+			public const int actionbar_timeline_menu_options = 2131296288;
 			
 			// aapt resource value: 0x7f090009
 			public const int actionbar_title = 2131296265;
@@ -495,53 +498,59 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f09000c
 			public const int calendarWeekDays = 2131296268;
 			
-			// aapt resource value: 0x7f090013
-			public const int homeViewLayout = 2131296275;
-			
 			// aapt resource value: 0x7f090015
-			public const int imageViewTitle = 2131296277;
+			public const int homeViewLayout = 2131296277;
 			
-			// aapt resource value: 0x7f090014
-			public const int overflow_spinner = 2131296276;
+			// aapt resource value: 0x7f090017
+			public const int imageViewTitle = 2131296279;
+			
+			// aapt resource value: 0x7f090012
+			public const int linearLayout1 = 2131296274;
+			
+			// aapt resource value: 0x7f090016
+			public const int overflow_spinner = 2131296278;
 			
 			// aapt resource value: 0x7f090000
 			public const int screen = 2131296256;
 			
+			// aapt resource value: 0x7f09001c
+			public const int textDescription = 2131296284;
+			
 			// aapt resource value: 0x7f09001a
-			public const int textDescription = 2131296282;
+			public const int textName = 2131296282;
 			
 			// aapt resource value: 0x7f090018
-			public const int textName = 2131296280;
+			public const int textViewBroditech = 2131296280;
 			
-			// aapt resource value: 0x7f090016
-			public const int textViewBroditech = 2131296278;
+			// aapt resource value: 0x7f09001d
+			public const int timelineDescription = 2131296285;
 			
 			// aapt resource value: 0x7f09001b
-			public const int timelineDescription = 2131296283;
-			
-			// aapt resource value: 0x7f090019
-			public const int timelineName = 2131296281;
+			public const int timelineName = 2131296283;
 			
 			// aapt resource value: 0x7f090010
 			public const int timelineOptionsMessage = 2131296272;
 			
-			// aapt resource value: 0x7f09001c
-			public const int timelineViewLayout = 2131296284;
+			// aapt resource value: 0x7f09001e
+			public const int timelineViewLayout = 2131296286;
 			
-			// aapt resource value: 0x7f090017
-			public const int timelines = 2131296279;
+			// aapt resource value: 0x7f090019
+			public const int timelines = 2131296281;
 			
-			// aapt resource value: 0x7f090012
-			public const int videoDescription = 2131296274;
+			// aapt resource value: 0x7f090014
+			public const int videoDescription = 2131296276;
 			
 			// aapt resource value: 0x7f090011
 			public const int videoItem = 2131296273;
 			
-			// aapt resource value: 0x7f09001d
-			public const int videoItemRadio = 2131296285;
+			// aapt resource value: 0x7f09001f
+			public const int videoItemRadio = 2131296287;
 			
 			// aapt resource value: 0x7f09000f
 			public const int videoList = 2131296271;
+			
+			// aapt resource value: 0x7f090013
+			public const int videoThumbnail = 2131296275;
 			
 			static Id()
 			{

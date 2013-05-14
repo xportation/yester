@@ -64,6 +64,11 @@ namespace iSeconds.Domain
 						);
 
 					viewModel.PresentationInfo = date;
+					viewModel.PropertyChanged+= (sender, e) => {
+						if (e.PropertyName == "VideoPath")
+							this.Invalidate();
+					};
+
 					viewModels.Add(viewModel);
 				}
 

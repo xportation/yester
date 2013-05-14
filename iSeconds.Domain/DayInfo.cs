@@ -8,7 +8,7 @@ namespace iSeconds.Domain
 {
 	public class DayInfo : IModel
 	{
-        private IRepository repository = null;
+      private IRepository repository = null;
 
 		public DayInfo (DateTime date, int timelineId)
 		{
@@ -21,22 +21,22 @@ namespace iSeconds.Domain
 		{
 		}
 
-        public void AddVideo(string url)
-        {
-            Debug.Assert(repository != null); // you should bind a repository with SetRepository() method
+      public void AddVideo(string url)
+      {
+      	Debug.Assert(repository != null); // you should bind a repository with SetRepository() method
 
-            // TODO: ver se isso basta.. salvamos o dia apenas se ele tiver video
-            this.repository.SaveItem(this);
+         // TODO: ver se isso basta.. salvamos o dia apenas se ele tiver video
+         this.repository.SaveItem(this);
 
-            MediaInfo media = new MediaInfo(this.Id, url);
-            this.repository.SaveItem(media);
+         MediaInfo media = new MediaInfo(this.Id, url);
+         this.repository.SaveItem(media);
 
 			this.DefaultVideoId = media.Id;
 
 			// TODO: ugly, salvando duas vezes. na primeira vez temos que salvar para associar um Id a esse dia (usado no MediaInfo depois)
 			// na segunda vez temos que persistir o ChoosedMediaId que sera o id associado ao MediaInfo quando salvo no banco (dependencia ciclica..)
 			this.repository.SaveItem(this); 
-        }
+      }
 
 		public void SetDefaultVideo (int mediaId)
 		{
@@ -44,10 +44,10 @@ namespace iSeconds.Domain
 			this.repository.SaveItem(this);
 		}
 
-        public IList<MediaInfo> GetVideos()
-        {
-            return this.repository.GetMediasForDay(this);
-        }
+		public IList<MediaInfo> GetVideos()
+		{
+		   return this.repository.GetMediasForDay(this);
+		}
 
 		public int GetVideoCount ()
 		{
@@ -59,15 +59,20 @@ namespace iSeconds.Domain
 			return this.repository.GetMediaByPath(videopath);
 		}
 
-		public string GetThumbnail ()
+		public string GetDefaultThumbnail ()
+		{
+			return DefaultVideoId == -1 ? "" : this.repository.GetMediaById(this.DefaultVideoId).GetThumbnailPath();
+		}
+
+		public string GetDefaultVideoPath ()
 		{
 			return DefaultVideoId == -1 ? "" : this.repository.GetMediaById(this.DefaultVideoId).Path;
 		}
 
-        public void SetRepository(IRepository repository)
-        {
-            this.repository = repository;
-        }
+      public void SetRepository(IRepository repository)
+      {
+      	this.repository = repository;
+		}
 
 		#region db
 		[PrimaryKey, AutoIncrement]
