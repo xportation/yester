@@ -90,6 +90,7 @@ namespace iSeconds.Droid
          listViewAdapter = new TimelinesViewAdapter(this, viewModel);
          listView = FindViewById<ListView>(Resource.Id.timelines);
          listView.Adapter = listViewAdapter;
+			listView.ItemClick += (sender, e) => viewModel.SetDefaultCommand.Execute(e.Position);
 			listView.ItemLongClick += (sender, e) => viewModel.TimelineOptionsCommand.Execute(e.Position);
 
 			viewModel.OnTimelineOptionsViewModelChanged += (sender, args) => listViewAdapter.Invalidate();

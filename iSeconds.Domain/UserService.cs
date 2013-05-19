@@ -16,19 +16,11 @@ namespace iSeconds.Domain
 			this.repository= repository;
 		}
 
-//		public event EventHandler<GenericEventArgs<User>> OnCurrentUserChanged;
-
-		// TODO: implementar logica de login (se for ter...)
 		private User currentUser = null;
 		public User CurrentUser {
 			get {
 				return currentUser;
 			}
-//			set {
-//				currentUser = value;
-//				if (OnCurrentUserChanged != null)
-//					OnCurrentUserChanged (this, new GenericEventArgs<User> (currentUser));
-//			}
 		}
 
 		public bool Login(string userName, string password)

@@ -22,20 +22,32 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:padding="5px">
+        android:padding="5dp">
         <ImageView
             android:layout_width="96px"
             android:layout_height="96px"
             android:id="@+id/videoThumbnail" />
-        <TextView
-            android:text="Video description"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/videoDescription"
-            android:paddingLeft="6dip"
-            android:paddingRight="6dip"
-            android:textColor="@color/timelines_list_second_item_color"
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="fill_parent"
+            android:id="@+id/linearLayout2"
+            android:padding="5dp">
+            <TextView
+                android:text="@string/day_options_video_description"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/videoDescriptionInfo"
+                android:textColor="@color/timelines_list_first_item_color"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoDescription"
+                android:textColor="@color/timelines_list_second_item_color" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

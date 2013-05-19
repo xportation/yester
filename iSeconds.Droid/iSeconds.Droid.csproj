@@ -83,9 +83,6 @@
     <AndroidResource Include="Resources\layout\DayOptions.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\VideoItem.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\TimelineOptions.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
@@ -124,6 +121,19 @@
     <AndroidResource Include="Resources\drawable-xhdpi\splash_title.png" />
     <AndroidResource Include="Resources\layout\TimelineView.axml" />
     <AndroidResource Include="Resources\drawable\ic_day_videos.png" />
+    <AndroidResource Include="Resources\values-land\Styles.xml" />
+    <AndroidResource Include="Resources\drawable\splash_title_land.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\splash_title_land.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\splash_title_land.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\splash_title_land.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\splash_title_land.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_add.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_check.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_home.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_logo.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_settings.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_uncheck.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\splash_title.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -192,5 +202,8 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\fonts\augie.ttf" />
     <AndroidAsset Include="Assets\fonts\123Marker.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\values-land\" />
   </ItemGroup>
 </Project>

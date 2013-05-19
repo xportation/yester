@@ -434,6 +434,9 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f020028
 			public const int splash_title = 2130837544;
 			
+			// aapt resource value: 0x7f020029
+			public const int splash_title_land = 2130837545;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -498,59 +501,59 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f09000c
 			public const int calendarWeekDays = 2131296268;
 			
-			// aapt resource value: 0x7f090015
-			public const int homeViewLayout = 2131296277;
+			// aapt resource value: 0x7f090016
+			public const int homeViewLayout = 2131296278;
+			
+			// aapt resource value: 0x7f090018
+			public const int imageViewTitle = 2131296280;
+			
+			// aapt resource value: 0x7f090013
+			public const int linearLayout2 = 2131296275;
 			
 			// aapt resource value: 0x7f090017
-			public const int imageViewTitle = 2131296279;
-			
-			// aapt resource value: 0x7f090012
-			public const int linearLayout1 = 2131296274;
-			
-			// aapt resource value: 0x7f090016
-			public const int overflow_spinner = 2131296278;
+			public const int overflow_spinner = 2131296279;
 			
 			// aapt resource value: 0x7f090000
 			public const int screen = 2131296256;
 			
-			// aapt resource value: 0x7f09001c
-			public const int textDescription = 2131296284;
-			
-			// aapt resource value: 0x7f09001a
-			public const int textName = 2131296282;
-			
-			// aapt resource value: 0x7f090018
-			public const int textViewBroditech = 2131296280;
-			
 			// aapt resource value: 0x7f09001d
-			public const int timelineDescription = 2131296285;
+			public const int textDescription = 2131296285;
 			
 			// aapt resource value: 0x7f09001b
-			public const int timelineName = 2131296283;
+			public const int textName = 2131296283;
+			
+			// aapt resource value: 0x7f090019
+			public const int textViewBroditech = 2131296281;
+			
+			// aapt resource value: 0x7f09001e
+			public const int timelineDescription = 2131296286;
+			
+			// aapt resource value: 0x7f09001c
+			public const int timelineName = 2131296284;
 			
 			// aapt resource value: 0x7f090010
 			public const int timelineOptionsMessage = 2131296272;
 			
-			// aapt resource value: 0x7f09001e
-			public const int timelineViewLayout = 2131296286;
+			// aapt resource value: 0x7f09001f
+			public const int timelineViewLayout = 2131296287;
 			
-			// aapt resource value: 0x7f090019
-			public const int timelines = 2131296281;
+			// aapt resource value: 0x7f09001a
+			public const int timelines = 2131296282;
+			
+			// aapt resource value: 0x7f090015
+			public const int videoDescription = 2131296277;
 			
 			// aapt resource value: 0x7f090014
-			public const int videoDescription = 2131296276;
+			public const int videoDescriptionInfo = 2131296276;
 			
 			// aapt resource value: 0x7f090011
 			public const int videoItem = 2131296273;
 			
-			// aapt resource value: 0x7f09001f
-			public const int videoItemRadio = 2131296287;
-			
 			// aapt resource value: 0x7f09000f
 			public const int videoList = 2131296271;
 			
-			// aapt resource value: 0x7f090013
-			public const int videoThumbnail = 2131296275;
+			// aapt resource value: 0x7f090012
+			public const int videoThumbnail = 2131296274;
 			
 			static Id()
 			{
@@ -606,9 +609,6 @@ namespace iSeconds.Droid
 			
 			// aapt resource value: 0x7f03000d
 			public const int TimelineView = 2130903053;
-			
-			// aapt resource value: 0x7f03000e
-			public const int VideoItem = 2130903054;
 			
 			static Layout()
 			{
@@ -667,7 +667,10 @@ namespace iSeconds.Droid
 			public const int day_options_title = 2131099677;
 			
 			// aapt resource value: 0x7f06001e
-			public const int item_options_message = 2131099678;
+			public const int day_options_video_description = 2131099678;
+			
+			// aapt resource value: 0x7f06001f
+			public const int item_options_message = 2131099679;
 			
 			// aapt resource value: 0x7f06000b
 			public const int library_name = 2131099659;

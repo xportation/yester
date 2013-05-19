@@ -57,7 +57,7 @@ namespace iSeconds.Droid
          textSize = 15f;
          weekTextColor = Color.Rgb(55,69,93);
 		 	weekendTextColor = Color.Rgb(59,79,152);
-         backgroundColor = Color.Rgb(237,239,244);
+         backgroundColor = Color.Rgb(233,235,247);
       }
    }
 

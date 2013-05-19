@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-	<color name="actionbar_background">#FF3b5998</color>
-	<color name="actionbar_pressedcolor">#FF206e8a</color>
-	<color name="calendar_title_background">#FFd8dfea</color>
+	<color name="actionbar_background">#FF265cce</color>
+	<color name="actionbar_pressedcolor">#FF88a7e9</color>
+	<color name="calendar_title_background">#FFc3d4ef</color>
 	<color name="calendar_title_color">#FF33415a</color>
 	
-	<color name="timelines_list_background">#FFd8dfea</color>
+	<color name="timelines_list_background">#FFc3d4ef</color>
 	<color name="timelines_list_divider_color">#FF7f93b6</color>
 	<color name="timelines_list_first_item_color">#FF33415a</color>
 	<color name="timelines_list_second_item_color">#FF5a73a0</color>

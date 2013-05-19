@@ -121,7 +121,19 @@ namespace iSeconds.Domain
 					}); 
 			}
 		}
-		
+
+		public ICommand SetDefaultCommand
+		{
+			get 
+			{ 
+				return new Command((object arg) =>
+				                   {
+					var currentTimelineInEdition = this.TimelineAt((int) arg);
+					this.SetCurrentTimeline(currentTimelineInEdition);
+				}); 
+			}
+		}
+
 		#endregion
 
 		#region Timeline Edition

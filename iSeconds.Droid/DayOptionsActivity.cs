@@ -43,40 +43,42 @@ namespace iSeconds.Droid
       {
          View view = convertView;
 
+			CheckedTextView checkBox = null;
+			DayOptionsViewModel.VideoItem model = null;
+
          if (view == null) 
          {
             view = View.Inflate(this.context, Resource.Layout.DayOptionsItem, null);
 
-            DayOptionsViewModel.VideoItem model = viewModel.Videos [position];
+            model = viewModel.Videos [position];
             
-            TextView videoDescription = view.FindViewById<TextView>(Resource.Id.videoDescription);
-            TextViewUtil.ChangeFontForTimelinesList(videoDescription, context, 18f);
+            TextView videoDescriptionInfo = view.FindViewById<TextView>(Resource.Id.videoDescriptionInfo);
+            TextViewUtil.ChangeFontForTimelinesList(videoDescriptionInfo, context, 18f);
 
-            CheckedTextView checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
+				TextView videoDescription = view.FindViewById<TextView>(Resource.Id.videoDescription);
+				TextViewUtil.ChangeFontForTimelinesList(videoDescription, context, 18f);
+
+            checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
             TextViewUtil.ChangeFontForTimelinesList(checkBox, context, 20f);
-            checkBox.Text = model.Label;
-            checkBox.Checked = model.Checked;
 
 				ImageView imageView = view.FindViewById<ImageView> (Resource.Id.videoThumbnail);
 				Bitmap thumbnail = BitmapFactory.DecodeFile(model.Model.GetThumbnailPath());
 				if (thumbnail != null)
 					imageView.SetImageBitmap(thumbnail);
 
-            checkBox.Click += (object sender, EventArgs e) => {
-               if (!model.Checked)
-                  this.viewModel.CheckVideoCommand.Execute (position);
+				view.Click += (sender, e) => viewModel.CheckVideoCommand.Execute(position);
+				view.LongClick += (sender, e) => Toast.MakeText(context, "ola", ToastLength.Short).Show();
 
-            };
-
-            checkBox.LongClick+= (object sender, View.LongClickEventArgs e) => {
-               Toast.MakeText(this.context, "ola", ToastLength.Short).Show ();
-            };
-            
             model.OnCheckedChanged += (object sender, GenericEventArgs<bool /*isChecked*/> args) =>
             {
                checkBox.Checked = args.Value;
             };
          }
+
+			if (checkBox != null && model != null) {
+				checkBox.Text = model.Label;
+				checkBox.Checked = model.Checked;
+			}
 
          return view;
       }
@@ -91,8 +93,6 @@ namespace iSeconds.Droid
    [Activity(Label = "Day options")]
    public class DayOptionsActivity : ISecondsActivity
    {
-      private ListView listView = null;
-
       private DayOptionsViewModel viewModel = null;
 
       protected override void OnCreate (Bundle bundle)
@@ -115,9 +115,8 @@ namespace iSeconds.Droid
 
          viewModel = new DayOptionsViewModel (dayInfo, navigator);
 
-         listView = this.FindViewById<ListView> (Resource.Id.videoList);
-
-         VideoListAdapter adapter = new VideoListAdapter (this, viewModel);
+			VideoListAdapter adapter = new VideoListAdapter (this, viewModel);
+			ListView listView = this.FindViewById<ListView> (Resource.Id.videoList);
          listView.Adapter = adapter;
 
          configureActionBar();
