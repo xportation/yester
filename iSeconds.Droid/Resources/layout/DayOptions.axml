@@ -16,13 +16,13 @@
         android:minWidth="25px"
         android:minHeight="100px"
         android:layout_width="fill_parent"
-        android:id="@+id/videoList"
+        android:id="@+id/videosList"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:background="@color/timelines_list_background"
         android:divider="@color/timelines_list_divider_color"
         android:dividerHeight="1sp"
-        android:choiceMode="none"
+        android:choiceMode="singleChoice"
         android:cacheColorHint="@android:color/transparent" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceSmall"

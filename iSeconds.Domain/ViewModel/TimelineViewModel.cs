@@ -31,6 +31,8 @@ namespace iSeconds.Domain
 					setTimeline(e.Value);
 					this.Invalidate();
 				};
+
+			this.user.OnTimelineUpdated += (sender, e) => this.TimelineName= e.Value.Name;
 		}
 
 		private void setTimeline(Timeline timeline)
@@ -65,7 +67,7 @@ namespace iSeconds.Domain
 
 					viewModel.PresentationInfo = date;
 					viewModel.PropertyChanged+= (sender, e) => {
-						if (e.PropertyName == "VideoPath")
+						if (e.PropertyName == "VideoRecorded" || e.PropertyName == "VideoAdded") 
 							this.Invalidate();
 					};
 

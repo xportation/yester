@@ -134,6 +134,9 @@
     <AndroidResource Include="Resources\drawable-mdpi\ic_settings.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_uncheck.png" />
     <AndroidResource Include="Resources\drawable-mdpi\splash_title.png" />
+    <AndroidResource Include="Resources\Menu\DayOptionsMenu.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

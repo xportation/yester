@@ -44,6 +44,12 @@ namespace iSeconds.Droid
 			setupCalendar();
 		}
 
+		protected override void OnResume()
+		{
+			base.OnResume();
+			viewModel.Invalidate();
+		}
+
 		protected override void OnSaveInstanceState(Bundle outState)
 		{
 			base.OnSaveInstanceState(outState);

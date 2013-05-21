@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -14,110 +9,102 @@ using LegacyBar.Library.Bar;
 using System.Globalization;
 using iSeconds.Domain.Framework;
 using Android.Graphics;
+using System;
 
 namespace iSeconds.Droid
 {
    class VideoListAdapter : BaseAdapter
    {
+		private Activity context = null;
       private DayOptionsViewModel viewModel = null;
-      private Context context = null;
 
-      public VideoListAdapter (Context context, DayOptionsViewModel viewModel)
+      public VideoListAdapter (Activity context, DayOptionsViewModel viewModel)
       {
          this.viewModel = viewModel;
          this.context = context;
+
+			foreach(DayOptionsViewModel.VideoItem model in viewModel.Videos) 
+			{
+				model.OnCheckedChanged += (object sender, GenericEventArgs<bool> args) =>
+				{
+					this.NotifyDataSetChanged();
+				};
+			}
       }
 
       public override Java.Lang.Object GetItem (int position)
       {
-         return 0;
+         return null;
       }
 
       public override long GetItemId (int position)
       {
-         return 0;
+         return position;
       }
-
 
       public override View GetView (int position, View convertView, ViewGroup parent)
       {
          View view = convertView;
-
 			CheckedTextView checkBox = null;
-			DayOptionsViewModel.VideoItem model = null;
+			DayOptionsViewModel.VideoItem model = viewModel.Videos[position];
 
          if (view == null) 
          {
-            view = View.Inflate(this.context, Resource.Layout.DayOptionsItem, null);
+            view = context.LayoutInflater.Inflate(Resource.Layout.DayOptionsItem, null);
 
-            model = viewModel.Videos [position];
-            
-            TextView videoDescriptionInfo = view.FindViewById<TextView>(Resource.Id.videoDescriptionInfo);
-            TextViewUtil.ChangeFontForTimelinesList(videoDescriptionInfo, context, 18f);
-
-				TextView videoDescription = view.FindViewById<TextView>(Resource.Id.videoDescription);
-				TextViewUtil.ChangeFontForTimelinesList(videoDescription, context, 18f);
-
-            checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
+				checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
             TextViewUtil.ChangeFontForTimelinesList(checkBox, context, 20f);
-
-				ImageView imageView = view.FindViewById<ImageView> (Resource.Id.videoThumbnail);
-				Bitmap thumbnail = BitmapFactory.DecodeFile(model.Model.GetThumbnailPath());
-				if (thumbnail != null)
-					imageView.SetImageBitmap(thumbnail);
-
-				view.Click += (sender, e) => viewModel.CheckVideoCommand.Execute(position);
-				view.LongClick += (sender, e) => Toast.MakeText(context, "ola", ToastLength.Short).Show();
-
-            model.OnCheckedChanged += (object sender, GenericEventArgs<bool /*isChecked*/> args) =>
-            {
-               checkBox.Checked = args.Value;
-            };
          }
 
-			if (checkBox != null && model != null) {
-				checkBox.Text = model.Label;
-				checkBox.Checked = model.Checked;
-			}
+			checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
+
+			checkBox.Text = model.Label;
+			checkBox.Checked = model.Checked;
+			
+			ImageView imageView = view.FindViewById<ImageView> (Resource.Id.videoThumbnail);
+			Bitmap thumbnail = BitmapFactory.DecodeFile(model.Model.GetThumbnailPath());
+			imageView.SetImageBitmap(thumbnail);
 
          return view;
       }
 
       public override int Count {
-         get {
-            return viewModel.Videos.Count;
-         }
+         get { return viewModel.Videos.Count; }
       }
    }
 
    [Activity(Label = "Day options")]
    public class DayOptionsActivity : ISecondsActivity
    {
+		private ListView listView = null;
+		private VideoListAdapter adapter = null;
       private DayOptionsViewModel viewModel = null;
 
       protected override void OnCreate (Bundle bundle)
       {
          base.OnCreate (bundle);
+			
+			this.RequestWindowFeature(WindowFeatures.NoTitle);
+			this.SetContentView (Resource.Layout.DayOptions);
 
          int day = Convert.ToInt32 (this.Intent.Extras.GetString ("Day"));
          int month = Convert.ToInt32 (this.Intent.Extras.GetString ("Month"));
          int year = Convert.ToInt32 (this.Intent.Extras.GetString ("Year"));
          int timelineId = Convert.ToInt32 (this.Intent.Extras.GetString ("TimelineId"));
 
-         User currentUser = ((ISecondsApplication)this.Application).GetUserService ().CurrentUser;
+			User currentUser = ((ISecondsApplication)this.Application).GetUserService ().CurrentUser;
          Timeline timeline = currentUser.GetTimelineById (timelineId);
          DayInfo dayInfo = timeline.GetDayAt (new DateTime (year, month, day));
-
-         this.RequestWindowFeature(WindowFeatures.NoTitle);
-         this.SetContentView (Resource.Layout.DayOptions);
 
          INavigator navigator = ((ISecondsApplication)this.Application).GetNavigator();
 
          viewModel = new DayOptionsViewModel (dayInfo, navigator);
 
-			VideoListAdapter adapter = new VideoListAdapter (this, viewModel);
-			ListView listView = this.FindViewById<ListView> (Resource.Id.videoList);
+			adapter = new VideoListAdapter (this, viewModel);
+			listView = this.FindViewById<ListView> (Resource.Id.videosList);
          listView.Adapter = adapter;
+			listView.ItemClick += (sender, e) => viewModel.CheckVideoCommand.Execute(e.Position);
+			listView.ItemLongClick += (sender, e) => Toast.MakeText(this, "ola", ToastLength.Short).Show();
 
          configureActionBar();
       }
@@ -125,8 +112,8 @@ namespace iSeconds.Droid
       private void configureActionBar()
       {
          var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-         var itemActionBarAction = new MenuItemLegacyBarAction(this, this, Resource.Id.actionbar_timeline_back_to_home, Resource.Drawable.ic_home,
-            Resource.String.actionbar_timelines_text)
+			var itemActionBarAction = new MenuItemLegacyBarAction(this, this, Resource.Id.actionbar_dayoptions_back_to_home, 
+					Resource.Drawable.ic_home, Resource.String.actionbar_dayoptions_text)
          {
             ActionType = ActionType.Always
          };
@@ -146,7 +133,7 @@ namespace iSeconds.Droid
       {
          switch (item.ItemId)
          {
-         case Resource.Id.actionbar_timeline_back_to_home:
+			case Resource.Id.actionbar_dayoptions_back_to_home :
             OnSearchRequested();
             viewModel.BackToHomeCommand.Execute(null);
             return true;         

@@ -50,6 +50,7 @@ namespace iSeconds.Domain
                      {
                         this.AddVideoCommand.Execute(videoPath);
 								mediaService.SaveVideoThumbnail(model.GetDefaultThumbnail(), model.GetDefaultVideoPath());
+								OnPropertyChanged("VideoRecorded");
                      });
                });
          }
@@ -125,6 +126,7 @@ namespace iSeconds.Domain
                {
                   string videoPath = (string) arg;
                   this.model.AddVideo(videoPath);
+						OnPropertyChanged("VideoAdded");
                });
          }
       }

@@ -38,12 +38,18 @@ namespace iSeconds.Domain
 			this.repository = repository;
 		}
 
+		public event EventHandler<GenericEventArgs<Timeline>> OnTimelineUpdated;
+
 	   public bool UpdateTimeline(Timeline timeline)
 	   {
 	      if (timeline.UserId != this.Id)
 	         return false;
    
          repository.SaveTimeline(timeline);
+
+			if (OnTimelineUpdated != null)
+				OnTimelineUpdated(this, new GenericEventArgs<Timeline>(timeline));
+
 	      return true;
 	   }
 

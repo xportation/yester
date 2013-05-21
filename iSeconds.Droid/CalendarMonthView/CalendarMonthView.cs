@@ -133,7 +133,7 @@ namespace iSeconds.Droid
 			textAlign = Paint.Align.Center;
 			textSize = 21f;
 			todayColor = Color.Argb(255, 0, 180, 255);
-			todayStrokeWidth = 8f;
+			todayStrokeWidth = 6f;
 			selectionColor = Color.Argb(100, 0, 180, 255);
 			selectionShadowColor = Color.Rgb(200, 220, 255);
 			textColor = Color.Rgb(51,65,90);
@@ -256,7 +256,7 @@ namespace iSeconds.Droid
 
 	      todayPaint = new Paint();
 	      todayPaint.Color = theme.TodayColor;
-			todayPaint.StrokeWidth = theme.TodayStrokeWidth;	      
+			todayPaint.StrokeWidth = theme.TodayStrokeWidth * Resources.DisplayMetrics.Density;	      
 	      todayPaint.SetStyle(Paint.Style.Stroke);
 
 	      cellForegroundPaint = new Paint();
@@ -299,7 +299,6 @@ namespace iSeconds.Droid
 				{
 					viewedDays = value;
 					heightMoviment = 0;
-					configureViewedDays();
 					createCacheDisplay(ref calendarMonthCache, viewedDays);
 					Invalidate();
 				}
@@ -309,8 +308,7 @@ namespace iSeconds.Droid
 					this.shouldAnimate = false;
 					createCacheDisplay(ref calendarNextMonthCache, value);
 					viewedDays = value;
-					
-					configureViewedDays();
+
 					animation.StartTransition(Height, isNextMonthByGesture, transitionTimer);
 					PostInvalidate();
 				}
@@ -458,20 +456,6 @@ namespace iSeconds.Droid
 		{
 			gestureDetector.OnTouchEvent(e);
 			return true;
-		}
-
-		private void configureViewedDays()
-		{
-			for (int dayIndex = 0; dayIndex < viewedDays.Count; dayIndex++)
-			{
-				DayViewModel dayViewModel = viewedDays[dayIndex];
-				
-				dayViewModel.PropertyChanged +=
-					(object sender, PropertyChangedEventArgs e) => 
-                        {
-                            createCacheDisplay(ref calendarMonthCache, viewedDays);
-                        };		
-			}
 		}
 
       #region Draw

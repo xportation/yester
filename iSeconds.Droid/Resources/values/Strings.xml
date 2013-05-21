@@ -5,6 +5,7 @@
 	<string name="library_name">iSeconds.Droid</string>
 	<string name="add_timeline">Add</string>
 	<string name="actionbar_timelines_text">Timelines</string>
+	<string name="actionbar_dayoptions_text">Date</string>
 	<string name="timeline_default">Default Timeline</string>
 	<string name="timeline_options_title">Timelines</string>
 	<string name="timeline_menu_options">Timeline Settings</string>

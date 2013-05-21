@@ -105,6 +105,20 @@ namespace iSeconds.Domain.Test
 			Assert.AreEqual(false, notified);
 		}
 
+		[Test]
+		public void TestNotifyWhenTimelineWasUpdated()
+		{
+			bool notified = false;
+			user.OnTimelineUpdated += (sender, args) => notified = true; 
+
+			Timeline timelineToUpdate = user.CreateTimeline("my life", "timeline_description");
+			Assert.AreEqual(false, notified);
+
+			timelineToUpdate.Name = "Nome lindo";
+			user.UpdateTimeline(timelineToUpdate);
+			Assert.AreEqual(true, notified);
+		}
+
 		public static void Main()
 		{
 			NUnit.ConsoleRunner.Runner.Main(new string[]
