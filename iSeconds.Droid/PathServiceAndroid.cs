@@ -1,16 +1,49 @@
 using System;
 using iSeconds.Domain;
+using Java.IO;
+using Android.OS;
 
 namespace iSeconds.Droid
 {
+	internal class MemoryUtils
+	{
+		private static bool externalMemoryAvailable() 
+		{
+			string state = Android.OS.Environment.ExternalStorageState;
+			return Android.OS.Environment.MediaMounted == state;
+		}
+
+		private static long availableMemorySize(File path) {
+			StatFs stat = new StatFs(path.Path);
+			long blockSize = stat.BlockSize;
+			long availableBlocks = stat.AvailableBlocks;
+			return availableBlocks * blockSize;
+		}
+
+		public static bool IsExternalMemoryBestChoice() {
+			if (MemoryUtils.externalMemoryAvailable())
+				return availableMemorySize (Android.OS.Environment.ExternalStorageDirectory) > 
+					availableMemorySize (Android.OS.Environment.DataDirectory);
+
+			return false;
+		}
+	}
+
    public class PathServiceAndroid : IPathService
    {
-      private string appPath = Android.OS.Environment.ExternalStorageDirectory + "/iSeconds";
-      private string mediaPath = Android.OS.Environment.ExternalStorageDirectory + "/iSeconds/Videos";
-      private string dbPath = Android.OS.Environment.ExternalStorageDirectory + "/iSeconds/Db"; 
+      private string appPath;
+      private string mediaPath;
+      private string dbPath; 
 
       public PathServiceAndroid()
       {
+			appPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/iSeconds";
+			if (MemoryUtils.IsExternalMemoryBestChoice())
+				appPath = Android.OS.Environment.ExternalStorageDirectory + "/iSeconds";
+
+			mediaPath = appPath + "/Videos";
+			dbPath = appPath + "/Db"; 
+
          createPaths();
       }
 
@@ -36,17 +69,8 @@ namespace iSeconds.Droid
          }
       }
 
-      bool sdCardMounted()
-      {
-         string state = Android.OS.Environment.ExternalStorageState;
-         return Android.OS.Environment.MediaMounted == state;
-      }
-
       void createPaths ()
       {
-         if (!sdCardMounted())
-            throw new Exception("you need a mounted sdcard"); // TODO: mostrar isso pro usuario...
-
          createPath(appPath);
          createPath(mediaPath);
          createPath(dbPath);

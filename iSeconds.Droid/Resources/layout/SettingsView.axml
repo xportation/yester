@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/secondary_activities_background">
+    <legacybar.library.bar.LegacyBar
+        android:id="@+id/actionbar"
+        style="@style/actionbar"
+        ab:title="@string/settings"
+        ab:separator="@color/actionbar_background"
+        ab:background="@color/actionbar_background"
+        ab:background_item="@drawable/actionbar_button" />
+    <TextView
+        android:text="@string/settings_movies_size_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settingsTitle"
+        android:textColor="@color/first_item_color"
+        android:padding="5px" />
+    <TextView
+        android:text="@string/settings_movies_size_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settingsDescription"
+        android:textColor="@color/second_item_color"
+        android:layout_marginBottom="10px"
+        android:padding="5px" />
+    <RadioGroup
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settingsVideoSizeGroup"
+        android:padding="5px"
+        android:layout_weight="1">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/settings_movies_size_small"
+            android:id="@+id/settingsVideoSizeSmall"
+            android:textColor="@color/first_item_color" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_movies_size_medium"
+            android:id="@+id/settingsVideoSizeMedium"
+            android:textColor="@color/first_item_color"
+            android:checked="true" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_movies_size_large"
+            android:id="@+id/settingsVideoSizeLarge"
+            android:textColor="@color/first_item_color" />
+    </RadioGroup>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settingWarning"
+        android:textColor="@color/second_item_color"
+        android:text="@string/settings_movies_size_warning"
+        android:layout_marginTop="10px"
+        android:textStyle="italic"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+</LinearLayout>

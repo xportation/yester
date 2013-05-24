@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/timelines_list_background">
+    android:background="@color/secondary_activities_background">
     <legacybar.library.bar.LegacyBar
         android:id="@+id/actionbar"
         style="@style/actionbar"
@@ -19,8 +19,8 @@
         android:id="@+id/timelines"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:background="@color/timelines_list_background"
-        android:divider="@color/timelines_list_divider_color"
+        android:background="@color/activity_background"
+        android:divider="@color/list_divider_color"
         android:dividerHeight="1sp"
         android:choiceMode="none"
         android:cacheColorHint="@android:color/transparent" />

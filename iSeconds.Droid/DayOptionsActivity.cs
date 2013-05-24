@@ -112,7 +112,7 @@ namespace iSeconds.Droid
       private void configureActionBar()
       {
          var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			var itemActionBarAction = new MenuItemLegacyBarAction(this, this, Resource.Id.actionbar_dayoptions_back_to_home, 
+			var itemActionBarAction = new MenuItemLegacyBarAction(this, this, Resource.Id.actionbar_back_to_home, 
 					Resource.Drawable.ic_home, Resource.String.actionbar_dayoptions_text)
          {
             ActionType = ActionType.Always
@@ -133,7 +133,7 @@ namespace iSeconds.Droid
       {
          switch (item.ItemId)
          {
-			case Resource.Id.actionbar_dayoptions_back_to_home :
+			case Resource.Id.actionbar_back_to_home :
             OnSearchRequested();
             viewModel.BackToHomeCommand.Execute(null);
             return true;         

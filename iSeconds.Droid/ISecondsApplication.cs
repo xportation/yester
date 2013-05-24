@@ -23,19 +23,21 @@ namespace iSeconds
       public ISecondsApplication (IntPtr javaReference, JniHandleOwnership transfer)
          : base(javaReference, transfer)
       {
-         activityTracker = new ActivityTracker ();
-         pathService = new PathServiceAndroid();
-         repository = new ISecondsDB (pathService.GetDbPath());
-         mediaService = new MediaServiceAndroid (this.activityTracker, pathService.GetMediaPath());
-         
-			navigator = new INavigator ();
-         navigator.RegisterNavigation ("day_options", new AndroidPresenter (this.activityTracker, typeof(DayOptionsActivity)));            
-         navigator.RegisterNavigation ("timeline_options", new AndroidPresenter (this.activityTracker, typeof(TimelineOptionsActivity)));
-         navigator.RegisterNavigation ("timeline_view", new AndroidPresenter (this.activityTracker, typeof(TimelineActivity)));
+			pathService = new PathServiceAndroid();
+			repository = new ISecondsDB (pathService.GetDbPath());
 
 			userService = new UserService (repository);
 			if (!userService.Login ("user", "password"))
 				userService.CreateUser ("user");
+         
+			activityTracker = new ActivityTracker ();
+         mediaService = new MediaServiceAndroid (this.activityTracker, pathService.GetMediaPath(), userService.CurrentUser);         
+
+			navigator = new INavigator ();
+         navigator.RegisterNavigation ("day_options", new AndroidPresenter (this.activityTracker, typeof(DayOptionsActivity)));            
+         navigator.RegisterNavigation ("timeline_options", new AndroidPresenter (this.activityTracker, typeof(TimelineOptionsActivity)));
+         navigator.RegisterNavigation ("timeline_view", new AndroidPresenter (this.activityTracker, typeof(TimelineActivity)));
+			navigator.RegisterNavigation ("settings_view", new AndroidPresenter (this.activityTracker, typeof(SettingsActivity)));
       }
 
       public UserService GetUserService ()

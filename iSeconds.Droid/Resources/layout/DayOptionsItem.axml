@@ -24,6 +24,6 @@
             android:paddingRight="6dip"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center_vertical"
-            android:textColor="@color/timelines_list_first_item_color" />
+            android:textColor="@color/first_item_color" />
     </LinearLayout>
 </LinearLayout>

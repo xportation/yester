@@ -68,16 +68,25 @@ namespace iSeconds.Droid
 		private void addActionBarItems()
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			actionBar.SetHomeLogo(Resource.Drawable.ic_logo);
+			//actionBar.SetHomeLogo(Resource.Drawable.ic_logo);
 
 			var timelineOptionsMenuItemAction = new MenuItemLegacyBarAction(
-				this, this, Resource.Id.actionbar_timeline_menu_options, Resource.Drawable.ic_settings,
+				this, this, Resource.Id.actionbar_timeline_menu_options, Resource.Drawable.ic_menu,
 				Resource.String.timeline_menu_options)
 			{
 				ActionType = ActionType.IfRoom
 			};
 
 			actionBar.AddAction(timelineOptionsMenuItemAction);
+			
+			var settingsItemAction = new MenuItemLegacyBarAction(
+				this, this, Resource.Id.actionbar_settings, Resource.Drawable.ic_settings,
+				Resource.String.settings)
+			{
+				ActionType = ActionType.IfRoom
+			};
+
+			actionBar.AddAction(settingsItemAction);
 		}
 
 		private void setupCalendar()
@@ -136,9 +145,13 @@ namespace iSeconds.Droid
 		{
 			switch (item.ItemId)
 			{
-				case Resource.Id.actionbar_timeline_menu_options:
+			case Resource.Id.actionbar_timeline_menu_options:
 				OnSearchRequested();
 				viewModel.OptionsCommand.Execute(null);
+				return true;
+			case Resource.Id.actionbar_settings:
+				OnSearchRequested();
+				viewModel.SettingsCommand.Execute(null);
 				return true;
 			}
 

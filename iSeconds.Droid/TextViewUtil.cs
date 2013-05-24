@@ -35,6 +35,11 @@ namespace iSeconds.Droid
 		{
 			ChangeFont(textView,context,"fonts/123Marker.ttf",fontSize);
 		}
+
+		public static void ChangeFontForSettingView(TextView textView, Context context, float fontSize)
+		{
+			ChangeFont(textView,context,"fonts/123Marker.ttf",fontSize);
+		}
 	}
    
 }

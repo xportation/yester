@@ -67,6 +67,7 @@
     <Compile Include="TextViewUtil.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="TimelineActivity.cs" />
+    <Compile Include="SettingsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -76,9 +77,6 @@
     </None>
     <AndroidResource Include="Resources\layout\CalendarMonthViewLayout.axml">
       <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\HomeView.axml">
-      <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DayOptions.axml">
       <SubType>AndroidResource</SubType>
@@ -134,9 +132,13 @@
     <AndroidResource Include="Resources\drawable-mdpi\ic_settings.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_uncheck.png" />
     <AndroidResource Include="Resources\drawable-mdpi\splash_title.png" />
-    <AndroidResource Include="Resources\Menu\DayOptionsMenu.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SettingsView.axml" />
+    <AndroidResource Include="Resources\drawable\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\Menu\menu.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -159,11 +161,6 @@
     <AndroidResource Include="Resources\Drawable-mdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Menu\HomeViewMenu.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -175,11 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Menu\TimelineOptionsMenu.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_settings.png" />
