@@ -12,6 +12,7 @@ namespace iSeconds.Domain
 		{
 			Name = name;
 			CurrentTimelineId = -1;
+			RecordDuration = 3;
 			this.repository = repository;
 		}
 
@@ -109,6 +110,16 @@ namespace iSeconds.Domain
             repository.DeleteTimeline(timeline);
       }
 
+		/// <summary>
+		/// Sets the record duration and save in database.
+		/// </summary>
+		/// <param name="duration">Duration.</param>
+		public void SetRecordDuration(int duration)
+		{
+			this.RecordDuration = duration;
+			repository.SaveUser(this);
+		}
+
 	   #region db
 
 	   public string Name { get; set; }
@@ -117,6 +128,8 @@ namespace iSeconds.Domain
 		public int Id { get; set; }
 
 		public int CurrentTimelineId { get; set; }
+
+		public int RecordDuration { get; set; }
 
 	   #endregion
 	}
