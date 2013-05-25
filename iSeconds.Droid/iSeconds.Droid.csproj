@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.Mobile">
-      <HintPath>..\Third_Party\XamarinMobileApi\Android\Xamarin.Mobile.dll</HintPath>
+      <HintPath>..\Third_Party\XamarinMobileApi_Android\Xamarin.Mobile.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
