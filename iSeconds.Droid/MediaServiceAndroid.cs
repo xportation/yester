@@ -19,12 +19,29 @@ namespace iSeconds.Droid
 		private ActivityTracker activityTracker = null;
 		private string mediaPath;
 		private User user;
+		private int cameraFPS;
 
 		public MediaServiceAndroid(ActivityTracker activityTracker, string mediaPath, User user)
 		{
 			this.activityTracker = activityTracker;
 			this.mediaPath = mediaPath;
 			this.user = user;
+
+			defineFPS();
+		}
+
+		public void defineFPS()
+		{
+			try
+			{
+				Android.Hardware.Camera camera = Android.Hardware.Camera.Open();
+				var parameters = camera.GetParameters();
+				cameraFPS = parameters.PreviewFrameRate;
+			}
+			catch (Exception)
+			{
+				cameraFPS = 15;
+			}
 		}
 
 		public void TakeVideo(DateTime date, Action<string> resultAction)
@@ -39,9 +56,7 @@ namespace iSeconds.Droid
 				picker.TakeVideoAsync(new StoreVideoOptions
                     {
                         Name = this.generateName("movie", date),
-								//TODO [leonardo] soma 1 frame, aqui considerando 20 FPS. Mas tentar pegar a quantidade minima de FPS para somar. 
-								//						Isso para que o tempo seja igual ao desejado e nao menor. Ainda preciso confirmar essa teoria :p
-                        DesiredLength = System.TimeSpan.FromMilliseconds(user.RecordDuration*1050),
+                        DesiredLength = System.TimeSpan.FromMilliseconds(user.RecordDuration*1000 + 1000/cameraFPS),
                         //Directory = this.getMediaDirectory()
                     })
                     .ContinueWith(t =>

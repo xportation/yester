@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using LegacyBar.Library.Bar;
 using iSeconds.Domain;
 
 namespace iSeconds.Droid
@@ -31,27 +24,11 @@ namespace iSeconds.Droid
 			ISecondsApplication application = (ISecondsApplication) this.Application;
 			viewModel = new SettingsViewModel(application.GetUserService().CurrentUser);
 
-			configureActionBar();
+			configureActionBar(true);
 			configureFonts();
 			configureRadioButton();
 		}
-
-		private void configureActionBar()
-		{
-			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			var itemActionBarAction = new MenuItemLegacyBarAction(this, this, Resource.Id.actionbar_back_to_home, 
-			                                                      Resource.Drawable.ic_home, Resource.String.settings)
-			{
-				ActionType = ActionType.Always
-			};
-
-			actionBar.SetHomeAction(itemActionBarAction);
-			actionBar.SeparatorColorRaw= Resource.Color.actionbar_background;
-
-			TextView titleView= actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
-			TextViewUtil.ChangeFontForActionBarTitle(titleView,this,26f);
-		}
-
+		
 		void configureFonts()
 		{
 			TextView titleView= FindViewById<TextView>(Resource.Id.settingsTitle);
@@ -60,11 +37,11 @@ namespace iSeconds.Droid
 			RadioButton mediumView= FindViewById<RadioButton>(Resource.Id.settingsVideoSizeMedium);
 			RadioButton largeView= FindViewById<RadioButton>(Resource.Id.settingsVideoSizeLarge);
 
-			TextViewUtil.ChangeFontForSettingView(titleView,this,22f);
-			TextViewUtil.ChangeFontForSettingView(descriptionView,this,18f);
-			TextViewUtil.ChangeFontForSettingView(smallView,this,18f);
-			TextViewUtil.ChangeFontForSettingView(mediumView,this,18f);
-			TextViewUtil.ChangeFontForSettingView(largeView,this,18f);
+			TextViewUtil.ChangeForDefaultFont(titleView,this,22f);
+			TextViewUtil.ChangeForDefaultFont(descriptionView,this,18f);
+			TextViewUtil.ChangeForDefaultFont(smallView,this,18f);
+			TextViewUtil.ChangeForDefaultFont(mediumView,this,18f);
+			TextViewUtil.ChangeForDefaultFont(largeView,this,18f);
 		}
 
 		void configureRadioButton()

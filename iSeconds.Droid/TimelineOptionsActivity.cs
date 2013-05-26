@@ -36,10 +36,10 @@ namespace iSeconds.Droid
 			{
 				view = context.LayoutInflater.Inflate(Resource.Layout.TimelineOptionsItem, null);
 				TextView textView = view.FindViewById<CheckedTextView>(Resource.Id.timelineName);
-				TextViewUtil.ChangeFontForTimelinesList(textView, context, 24f);
+				TextViewUtil.ChangeForDefaultFont(textView, context, 24f);
 
 				textView = view.FindViewById<TextView>(Resource.Id.timelineDescription);
-				TextViewUtil.ChangeFontForTimelinesList(textView, context, 18f);
+				TextViewUtil.ChangeForDefaultFont(textView, context, 18f);
 			}
 
          Timeline timeline = viewModel.TimelineAt(position);
@@ -97,7 +97,8 @@ namespace iSeconds.Droid
 			
 			viewModelRequests();
 
-         configureActionBar();
+			configureActionBar(true);
+			configureActionBarActions();
       }
 
 	   private void viewModelRequests()
@@ -128,19 +129,10 @@ namespace iSeconds.Droid
 	   }
 
 
-	   private void configureActionBar()
+	   private void configureActionBarActions()
       {
          var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-         var itemActionBarAction = new MenuItemLegacyBarAction(
-            this, this, Resource.Id.actionbar_back_to_home, Resource.Drawable.ic_home,
-            Resource.String.actionbar_timelines_text)
-            {
-               ActionType = ActionType.Always
-            };
-
-         actionBar.SetHomeAction(itemActionBarAction);
-			//actionBar.SetDisplayHomeAsUpEnabled(true);
-
+         
 			var addTimelineItemAction = new MenuItemLegacyBarAction(
 				this, this, Resource.Id.actionbar_timeline_add, Resource.Drawable.ic_add,
 				Resource.String.timeline_options_dialog_add_timeline)
@@ -148,11 +140,6 @@ namespace iSeconds.Droid
 				ActionType = ActionType.IfRoom
 			};
 			actionBar.AddAction(addTimelineItemAction);
-
-			actionBar.SeparatorColorRaw= Resource.Color.actionbar_background;
-
-			TextView titleView= actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
-			TextViewUtil.ChangeFontForActionBarTitle(titleView,this,26f);
       }
 
       public override bool OnOptionsItemSelected(IMenuItem item)

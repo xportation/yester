@@ -139,6 +139,11 @@ namespace iSeconds.Domain
 			get { return new Command((object arg) => { navigator.NavigateTo("settings_view", new Args()); }); }
 		}
 
+		public ICommand ShareCommand
+		{
+			get { return new Command((object arg) => { navigator.NavigateTo("share_view", new Args()); }); }
+		}
+
 		private string currentMonthTitle;
 
 		public string CurrentMonthTitle

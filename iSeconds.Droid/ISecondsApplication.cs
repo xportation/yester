@@ -37,7 +37,8 @@ namespace iSeconds
          navigator.RegisterNavigation ("day_options", new AndroidPresenter (this.activityTracker, typeof(DayOptionsActivity)));            
          navigator.RegisterNavigation ("timeline_options", new AndroidPresenter (this.activityTracker, typeof(TimelineOptionsActivity)));
          navigator.RegisterNavigation ("timeline_view", new AndroidPresenter (this.activityTracker, typeof(TimelineActivity)));
-			navigator.RegisterNavigation ("settings_view", new AndroidPresenter (this.activityTracker, typeof(SettingsActivity)));
+			navigator.RegisterNavigation("settings_view", new AndroidPresenter(this.activityTracker, typeof(SettingsActivity)));
+			navigator.RegisterNavigation("share_view", new AndroidPresenter(this.activityTracker, typeof(ShareActivity)));
       }
 
       public UserService GetUserService ()

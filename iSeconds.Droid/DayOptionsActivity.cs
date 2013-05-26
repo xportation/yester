@@ -53,7 +53,7 @@ namespace iSeconds.Droid
             view = context.LayoutInflater.Inflate(Resource.Layout.DayOptionsItem, null);
 
 				checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
-            TextViewUtil.ChangeFontForTimelinesList(checkBox, context, 20f);
+            TextViewUtil.ChangeForDefaultFont(checkBox, context, 20f);
          }
 
 			checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
@@ -106,27 +106,16 @@ namespace iSeconds.Droid
 			listView.ItemClick += (sender, e) => viewModel.CheckVideoCommand.Execute(e.Position);
 			listView.ItemLongClick += (sender, e) => Toast.MakeText(this, "ola", ToastLength.Short).Show();
 
-         configureActionBar();
+			configureActionBar(true);
+			configureActionBarTitle();
       }
 
-      private void configureActionBar()
+      private void configureActionBarTitle()
       {
          var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			var itemActionBarAction = new MenuItemLegacyBarAction(this, this, Resource.Id.actionbar_back_to_home, 
-					Resource.Drawable.ic_home, Resource.String.actionbar_dayoptions_text)
-         {
-            ActionType = ActionType.Always
-         };
-         
-         actionBar.SetHomeAction(itemActionBarAction);   
-			//actionBar.SetDisplayHomeAsUpEnabled(true);
-         
-         actionBar.SeparatorColorRaw= Resource.Color.actionbar_background;
-         
-         TextView titleView= actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
+			TextView titleView= actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
          DateTimeFormatInfo format = CultureInfo.CurrentCulture.DateTimeFormat;
          titleView.Text = viewModel.Model.Date.ToString(format.ShortDatePattern);
-         TextViewUtil.ChangeFontForActionBarTitle(titleView,this,26f);
       }
 
       public override bool OnOptionsItemSelected(IMenuItem item)

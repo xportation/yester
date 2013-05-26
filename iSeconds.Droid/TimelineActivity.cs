@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using LegacyBar.Library.Bar;
@@ -39,7 +35,7 @@ namespace iSeconds.Droid
 				viewModel.CurrentDate= DateTime.FromBinary(bundle.GetLong(CurrentDateState));
 			}
 
-			adjustActionBarTitle();
+			configureActionBar(false);
 			addActionBarItems();
 			setupCalendar();
 		}
@@ -57,19 +53,10 @@ namespace iSeconds.Droid
 			outState.PutLong(CurrentDateState, viewModel.CurrentDate.ToBinary());
 		}
 
-		void adjustActionBarTitle ()
-		{
-			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-
-			TextView titleView= actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
-			TextViewUtil.ChangeFontForActionBarTitle(titleView,this,26f);
-		}
-
 		private void addActionBarItems()
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			//actionBar.SetHomeLogo(Resource.Drawable.ic_logo);
-
+			
 			var timelineOptionsMenuItemAction = new MenuItemLegacyBarAction(
 				this, this, Resource.Id.actionbar_timeline_menu_options, Resource.Drawable.ic_menu,
 				Resource.String.timeline_menu_options)
@@ -77,8 +64,6 @@ namespace iSeconds.Droid
 				ActionType = ActionType.IfRoom
 			};
 
-			actionBar.AddAction(timelineOptionsMenuItemAction);
-			
 			var settingsItemAction = new MenuItemLegacyBarAction(
 				this, this, Resource.Id.actionbar_settings, Resource.Drawable.ic_settings,
 				Resource.String.settings)
@@ -86,6 +71,15 @@ namespace iSeconds.Droid
 				ActionType = ActionType.IfRoom
 			};
 
+			var shareItemAction = new MenuItemLegacyBarAction(
+				this, this, Resource.Id.actionbar_share, Resource.Drawable.ic_share,
+				Resource.String.share)
+			{
+				ActionType = ActionType.IfRoom
+			};
+
+			actionBar.AddAction(shareItemAction);
+			actionBar.AddAction(timelineOptionsMenuItemAction);
 			actionBar.AddAction(settingsItemAction);
 		}
 
@@ -94,7 +88,7 @@ namespace iSeconds.Droid
 			setActionBarTitle();
 
 			TextView monthLabel = this.FindViewById<TextView> (Resource.Id.calendarMonthName);
-			TextViewUtil.ChangeFontForMonthTitle(monthLabel, this, 18f);
+			TextViewUtil.ChangeForDefaultFont(monthLabel, this, 18f);
 			monthLabel.Text = this.viewModel.CurrentMonthTitle;
 
 			CalendarMonthViewWeekNames monthWeekNames =
@@ -152,6 +146,10 @@ namespace iSeconds.Droid
 			case Resource.Id.actionbar_settings:
 				OnSearchRequested();
 				viewModel.SettingsCommand.Execute(null);
+				return true;
+			case Resource.Id.actionbar_share:
+				OnSearchRequested();
+				viewModel.ShareCommand.Execute(null);
 				return true;
 			}
 

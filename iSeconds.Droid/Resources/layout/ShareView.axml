@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/secondary_activities_background">
+    <legacybar.library.bar.LegacyBar
+        android:id="@+id/actionbar"
+        style="@style/actionbar"
+        ab:title="@string/share"
+        ab:separator="@color/actionbar_background"
+        ab:background="@color/actionbar_background"
+        ab:background_item="@drawable/actionbar_button" />
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/linearLayout1">
+            <TextView
+                android:text="@string/share_start_period"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textStartPeriod"
+                android:padding="5px"
+                android:textColor="@color/first_item_color"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <DatePicker
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateStartPeriod"
+                android:padding="5px"
+                android:layout_marginBottom="0.0dp" />
+            <TextView
+                android:text="@string/share_end_period"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textEndPeriod"
+                android:padding="5px"
+                android:textColor="@color/first_item_color" />
+            <DatePicker
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateEndPeriod"
+                android:padding="5px" />
+            <Button
+                android:text="@string/share_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/shareButton"
+                android:layout_marginRight="30.0dp"
+                android:layout_marginLeft="30.0dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
