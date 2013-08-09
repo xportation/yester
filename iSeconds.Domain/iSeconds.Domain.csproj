@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Framework\InteractionRequest.cs" />
     <Compile Include="IMediaService.cs" />
-    <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="CalendarMonth.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -71,4 +70,7 @@
     <Compile Include="ViewModel\SettingsViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
 </Project>
