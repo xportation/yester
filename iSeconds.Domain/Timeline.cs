@@ -49,6 +49,11 @@ namespace iSeconds.Domain
 			return repository.GetDayInfoAt(date, Id);
 		}
 
+	public IList<string> GetVideosFromRange(DateTime start, DateTime end)
+	{
+		return repository.GetVideosFromRange(start, end, Id);
+	}
+
 		#region db
 
 		public int UserId { get; set; }

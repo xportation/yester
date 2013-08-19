@@ -6,84 +6,80 @@ using System.Linq;
 
 namespace iSeconds.Domain
 {
-   public class ISecondsDB : SQLiteConnection, IRepository
-   {
-      private static object locker = new object();
+	public class ISecondsDB : SQLiteConnection, IRepository
+	{
+		private static object locker = new object ();
 
-      public ISecondsDB(string path)
-         : base(path)
-      {
-         Console.WriteLine("------------------------");
-         Console.WriteLine(path);
-         Console.WriteLine("------------------------");
+		public ISecondsDB (string path)
+			: base(path)
+		{
+			Console.WriteLine ("------------------------");
+			Console.WriteLine (path);
+			Console.WriteLine ("------------------------");
 
-         CreateTable<Timeline>();
-         CreateTable<User>();
-         CreateTable<DayInfo>();
-         CreateTable<MediaInfo>();
-      }
+			CreateTable<Timeline> ();
+			CreateTable<User> ();
+			CreateTable<DayInfo> ();
+			CreateTable<MediaInfo> ();
+		}
 
-      public event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
-	   public event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
-	   public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
+		public event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
+		public event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
+		public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
 
-      public void SaveTimeline(Timeline timeline)
-      {
-         this.SaveItem(timeline);
+		public void SaveTimeline (Timeline timeline)
+		{
+			this.SaveItem (timeline);
 
-         if (OnSaveTimeline != null)
-            OnSaveTimeline(this, new GenericEventArgs<Timeline>(timeline));
-      }
-      
-      public void DeleteTimeline(Timeline timeline)
-      {
-         this.DeleteItem(timeline);
+			if (OnSaveTimeline != null)
+				OnSaveTimeline (this, new GenericEventArgs<Timeline> (timeline));
+		}
 
-	      if (OnDeleteTimeline != null)
-		      OnDeleteTimeline(this, new GenericEventArgs<Timeline>(timeline));
-      }
+		public void DeleteTimeline (Timeline timeline)
+		{
+			this.DeleteItem (timeline);
 
-      public IList<MediaInfo> GetMediasForDay(DayInfo day)
-      {
-         return (from i in Table<MediaInfo>() where i.DayId == day.Id select i).ToList();
-      }
+			if (OnDeleteTimeline != null)
+				OnDeleteTimeline (this, new GenericEventArgs<Timeline> (timeline));
+		}
 
-      public DayInfo GetDayInfoAt(DateTime dateTime, int timelineId)
-      {
-         DayInfo dayInfo =
-            (from i in Table<DayInfo>() where i.TimelineId == timelineId && i.Date == dateTime select i).FirstOrDefault();
-         if (dayInfo == null)
-         {
-            dayInfo = new DayInfo(dateTime, timelineId);
-         }
-         dayInfo.SetRepository(this);
+		public IList<MediaInfo> GetMediasForDay (DayInfo day)
+		{
+			return (from i in Table<MediaInfo> () where i.DayId == day.Id select i).ToList ();
+		}
 
-         return dayInfo;
-      }
+		public DayInfo GetDayInfoAt (DateTime dateTime, int timelineId)
+		{
+			DayInfo dayInfo =
+            (from i in Table<DayInfo> () where i.TimelineId == timelineId && i.Date == dateTime select i).FirstOrDefault ();
+			if (dayInfo == null) {
+				dayInfo = new DayInfo (dateTime, timelineId);
+			}
+			dayInfo.SetRepository (this);
 
-      public MediaInfo GetMediaById(int id)
-      {
-         lock (locker)
-         {
-            return (from i in Table<MediaInfo>() where i.Id == id select i).FirstOrDefault();
-         }
-      }
+			return dayInfo;
+		}
 
-      public MediaInfo GetMediaByPath(string videopath)
-      {
-         lock (locker)
-         {
-            return (from i in Table<MediaInfo>() where i.Path == videopath select i).FirstOrDefault();
-         }
-      }
+		public MediaInfo GetMediaById (int id)
+		{
+			lock (locker) {
+				return (from i in Table<MediaInfo> () where i.Id == id select i).FirstOrDefault ();
+			}
+		}
+
+		public MediaInfo GetMediaByPath (string videopath)
+		{
+			lock (locker) {
+				return (from i in Table<MediaInfo> () where i.Path == videopath select i).FirstOrDefault ();
+			}
+		}
 
 		public User GetUser (string userName)
 		{
-			lock (locker)
-			{
+			lock (locker) {
 				try {
-					User user = (from i in Table<User>() where i.Name == userName select i).First();
-					user.SetRepository(this);
+					User user = (from i in Table<User> () where i.Name == userName select i).First ();
+					user.SetRepository (this);
 					return user;
 				} catch (Exception exception) {
 					Console.WriteLine (exception.Message);
@@ -92,88 +88,130 @@ namespace iSeconds.Domain
 			}
 		}
 
-		public void SaveUser(User user)
+		public void SaveUser (User user)
 		{
-			this.SaveItem(user);
+			this.SaveItem (user);
 		}
 
-      public IList<Timeline> GetUserTimelines(int userId)
-      {
-         lock (locker)
-         {
-            IList<Timeline> timelines = (from i in Table<Timeline>() where i.UserId == userId select i).ToList();
-            foreach (Timeline timeline in timelines)
-            {
-               timeline.SetRepository(this);
-            }
-            //return (from i in Table<Timeline>() where i.UserId == userId select i).ToList();
-            return timelines;
-         }
-      }
+		public IList<Timeline> GetUserTimelines (int userId)
+		{
+			lock (locker) {
+				IList<Timeline> timelines = (from i in Table<Timeline> () where i.UserId == userId select i).ToList ();
+				foreach (Timeline timeline in timelines) {
+					timeline.SetRepository (this);
+				}
+				//return (from i in Table<Timeline>() where i.UserId == userId select i).ToList();
+				return timelines;
+			}
+		}
 
-      public Timeline GetUserTimeline(int userId, int timelineId)
-      {
-         lock (locker)
-         {
-            Timeline timeline =
-               (from i in Table<Timeline>() where i.UserId == userId && i.Id == timelineId select i).FirstOrDefault();
-            timeline.SetRepository(this);
-            return timeline;
-         }
-      }
+		public Timeline GetUserTimeline (int userId, int timelineId)
+		{
+			lock (locker) {
+				Timeline timeline =
+               (from i in Table<Timeline> () where i.UserId == userId && i.Id == timelineId select i).FirstOrDefault ();
+				timeline.SetRepository (this);
+				return timeline;
+			}
+		}
 
-      public IList<T> GetItems<T>() where T : IModel, new()
-      {
-         lock (locker)
-         {
-            return (from i in Table<T>() select i).ToList();
-         }
-      }
+		public Timeline GetTimeline (int id)
+		{
+			lock (locker) {
+				Timeline timeline =
+               (from i in Table<Timeline> () where i.Id == id select i).FirstOrDefault ();
+				timeline.SetRepository (this);
+				return timeline;
+			}
+		}
+		// temos que colocar 0 na frente quando o mes ou o dia sao menores que 10
+		// ex: 2013-1-1 tem que virar 2013-01-01
+		string prependZero (int value)
+		{
+			string valueAsString = "" + value;
+			if (valueAsString.Length == 1)
+				valueAsString = "0" + valueAsString;
 
-      // nao sei pq esse metodo nao funciona...
-      //public T GetItem<T> (int id) where T : IModel, new ()
-      //{
-      //    lock (locker) {
-      //        return (from i in Table<T> ()
-      //                where i.Id == id
-      //                select i).FirstOrDefault ();
-      //    }
-      //}
+			return valueAsString;
+		}
+		// convert o DateTime para o formato do sqlite
+		string formatToSqliteDate (DateTime date)
+		{
+			string w = "" + date.Year + "-" + prependZero (date.Month) + "-" + prependZero (date.Day);
+			return w;
+		}
 
-      public int SaveItem<T>(T item) where T : IModel
-      {
-         lock (locker)
-         {
-            if (item.Id != 0)
-            {
-               Update(item);
-               return item.Id;
-            }
-            else
-            {
-               return Insert(item);
-            }
-         }
-      }
+		public IList<string> GetVideosFromRange (DateTime start, DateTime end, int timelineId)
+		{
+			lock (locker) {
 
-      public int DeleteItem<T>(T item) where T : IModel
-      {
-         lock (locker)
-         {
-            return Delete(item);
-         }
-      }
+				string sttm = "select M.* from MediaInfo M inner join DayInfo D on M.DayId = D.Id " +
+				//		'2013-08-14'
+					"where D.Date between '" + formatToSqliteDate (start) + "' and '" + formatToSqliteDate (end.AddDays (1)) + "'";
 
-      public void Reset()
-      {
-         // soh permite deletar em debug.. para testes..
+				//Console.WriteLine (sttm);
+
+				var q = this.Query<MediaInfo> (sttm).ToList ();
+//				
+				// tive que fazer isso pois o Query retorna uma lista de MediaInfo.. Nao consegui
+				// fazer retornar uma lista de strings
+				List<string> result = new List<string> ();
+				foreach (MediaInfo m in q) {
+					result.Add (m.Path);
+				}
+
+				return result;
+
+			}
+
+
+
+		}
+
+		public IList<T> GetItems<T> () where T : IModel, new()
+		{
+			lock (locker) {
+				return (from i in Table<T> () select i).ToList ();
+			}
+		}
+		// nao sei pq esse metodo nao funciona...
+		//public T GetItem<T> (int id) where T : IModel, new ()
+		//{
+		//    lock (locker) {
+		//        return (from i in Table<T> ()
+		//                where i.Id == id
+		//                select i).FirstOrDefault ();
+		//    }
+		//}
+		public int SaveItem<T> (T item) where T : IModel
+		{
+			lock (locker) {
+				if (item.Id != 0) {
+					Update (item);
+					return item.Id;
+				} else {
+					return Insert (item);
+				}
+			}
+		}
+
+		public int DeleteItem<T> (T item) where T : IModel
+		{
+			lock (locker) {
+				return Delete (item);
+			}
+		}
+
+		public void Reset ()
+		{
+			// soh permite deletar em debug.. para testes..
 #if DEBUG
-         this.DeleteAll<User>();
-         this.DeleteAll<Timeline>();
-         this.DeleteAll<DayInfo>();
-         this.DeleteAll<MediaInfo>();
+			this.DeleteAll<User> ();
+			this.DeleteAll<Timeline> ();
+			this.DeleteAll<DayInfo> ();
+			this.DeleteAll<MediaInfo> ();
 
 #endif
-      }
-   }
+		}
+	}
 }

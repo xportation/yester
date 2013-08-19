@@ -49,6 +49,11 @@ namespace iSeconds.Droid
 			TextView titleView = actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
 			TextViewUtil.ChangeFontForActionBarTitle(titleView, this, 26f);
 
+			ScrollingTextView sTextView = (ScrollingTextView)titleView;
+
+			// removendo esse efeito horroroso...
+			sTextView.SetHorizontallyScrolling (false);
+
 			if (addHomeAction)
 			{
 				var itemActionBarAction = new MenuItemLegacyBarAction(this, this, Resource.Id.actionbar_back_to_home,

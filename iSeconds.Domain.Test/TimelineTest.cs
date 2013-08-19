@@ -43,6 +43,36 @@ namespace iSeconds.Domain.Test
 
             Assert.That(timeline.GetVideosAt(new DateTime(2012, 1, 1)).Count, Is.EqualTo(2));
         }
+
+		[Test()]
+		public void TestRetrieveVideosInARange()
+		{
+			DateTime date1 = new DateTime (2012, 1, 1);
+			DateTime date2 = new DateTime (2012, 1, 2);
+
+			timeline.AddVideoAt(date1, "sdcard/iseconds/video.mpeg");
+			timeline.AddVideoAt(date2, "sdcard/iseconds/video2.mpeg");
+
+			//Assert.That(timeline.GetVideosFromRange (date1, date2).Count, Is.EqualTo(2));
+			Assert.That(timeline.GetVideosFromRange (new DateTime(2011,1,1), new DateTime(2013,1,1)).Count, Is.EqualTo(2));
+		}
+
+		[Test()]
+		public void TestRetrieveVideosInARangeShouldIncludeDaysSearched()
+		{
+			DateTime date1 = new DateTime (2012, 1, 1);
+			DateTime date2 = new DateTime (2012, 1, 2);
+
+			timeline.AddVideoAt(date1, "sdcard/iseconds/video.mpeg");
+			timeline.AddVideoAt(date2, "sdcard/iseconds/video2.mpeg");
+
+			Assert.That(timeline.GetVideosFromRange (date1, date2).Count, Is.EqualTo(2));
+			//Assert.That(timeline.GetVideosFromRange (new DateTime(2011,1,1), new DateTime(2013,1,1)).Count, Is.EqualTo(2));
+		}
+
+
+
+
     }
 }
 

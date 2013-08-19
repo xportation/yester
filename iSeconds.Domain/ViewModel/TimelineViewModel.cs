@@ -141,7 +141,12 @@ namespace iSeconds.Domain
 
 		public ICommand ShareCommand
 		{
-			get { return new Command((object arg) => { navigator.NavigateTo("share_view", new Args()); }); }
+			get { return new Command((object arg) => {
+					Args args = new Args();
+					args.Put("TimelineId", this.timeline.Id.ToString());
+					navigator.NavigateTo("share_view", args); 
+				}); 
+			}
 		}
 
 		private string currentMonthTitle;
