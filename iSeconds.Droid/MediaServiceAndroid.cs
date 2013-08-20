@@ -19,7 +19,7 @@ namespace iSeconds.Droid
 		private ActivityTracker activityTracker = null;
 		private string mediaPath;
 		private User user;
-		private int cameraFPS;
+		private int cameraFPS= 15;
 
 		public MediaServiceAndroid(ActivityTracker activityTracker, string mediaPath, User user)
 		{
@@ -27,7 +27,7 @@ namespace iSeconds.Droid
 			this.mediaPath = mediaPath;
 			this.user = user;
 
-			defineFPS();
+			//defineFPS();
 		}
 
 		public void defineFPS()
@@ -37,6 +37,7 @@ namespace iSeconds.Droid
 				Android.Hardware.Camera camera = Android.Hardware.Camera.Open();
 				var parameters = camera.GetParameters();
 				cameraFPS = parameters.PreviewFrameRate;
+				camera.Release();
 			}
 			catch (Exception)
 			{
