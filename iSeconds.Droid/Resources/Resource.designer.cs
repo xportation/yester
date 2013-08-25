@@ -495,6 +495,9 @@ namespace iSeconds.Droid
 			// aapt resource value: 0x7f09002d
 			public const int actionbar_share = 2131296301;
 			
+			// aapt resource value: 0x7f09002e
+			public const int actionbar_takeVideo = 2131296302;
+			
 			// aapt resource value: 0x7f09002b
 			public const int actionbar_timeline_add = 2131296299;
 			
@@ -779,6 +782,9 @@ namespace iSeconds.Droid
 			
 			// aapt resource value: 0x7f060003
 			public const int some_title = 2131099651;
+			
+			// aapt resource value: 0x7f06002c
+			public const int takeVideo = 2131099692;
 			
 			// aapt resource value: 0x7f06000f
 			public const int timeline_default = 2131099663;

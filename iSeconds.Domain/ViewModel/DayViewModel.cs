@@ -60,17 +60,16 @@ namespace iSeconds.Domain
       {
          get
          {
-            return new Command((object arg) =>
-               {
-                  if (model.GetVideoCount() == 0)
-                  {
-                     RecordVideoCommand.Execute(null);
-                  }
-                  else
-                  {
-                     PlayVideoCommand.Execute(null);
-                  }
-               });
+				return new Command ((object arg) => {
+
+					Args args = new Args ();
+					args.Put ("Day", Model.Date.Day.ToString ());
+					args.Put ("Month", Model.Date.Month.ToString ());
+					args.Put ("Year", Model.Date.Year.ToString ());
+					args.Put ("TimelineId", Model.TimelineId.ToString ());
+
+					navigator.NavigateTo ("day_options", args);
+				});
          }
       }
 

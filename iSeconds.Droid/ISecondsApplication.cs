@@ -19,6 +19,7 @@ namespace iSeconds
       private ActivityTracker activityTracker = null;
       private INavigator navigator = null;
       private IPathService pathService = null;
+		private IOptionsDialogService optionsDialogService = null;
 
       public ISecondsApplication (IntPtr javaReference, JniHandleOwnership transfer)
          : base(javaReference, transfer)
@@ -39,6 +40,8 @@ namespace iSeconds
          navigator.RegisterNavigation ("timeline_view", new AndroidPresenter (this.activityTracker, typeof(TimelineActivity)));
 			navigator.RegisterNavigation("settings_view", new AndroidPresenter(this.activityTracker, typeof(SettingsActivity)));
 			navigator.RegisterNavigation("share_view", new AndroidPresenter(this.activityTracker, typeof(ShareActivity)));
+
+			optionsDialogService = new OptionDialogServiceAndroid (activityTracker);
       }
 
       public UserService GetUserService ()
@@ -70,6 +73,11 @@ namespace iSeconds
       {
          return pathService;
       }
+
+		public IOptionsDialogService GetOptionsDialogService ()
+		{
+			return optionsDialogService;
+		}
    }
 
 }

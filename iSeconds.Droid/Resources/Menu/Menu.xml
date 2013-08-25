@@ -14,4 +14,7 @@
 
 	<item	android:id="@+id/actionbar_share"
 		 android:icon="@drawable/ic_share"/>
+		 
+	<item	android:id="@+id/actionbar_takeVideo"
+		 android:icon="@drawable/ic_share"/>
 </menu>

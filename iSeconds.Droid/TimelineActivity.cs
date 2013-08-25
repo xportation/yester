@@ -56,6 +56,13 @@ namespace iSeconds.Droid
 		private void addActionBarItems()
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+
+			var takeVideoAction = new MenuItemLegacyBarAction(
+				this, this, Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_share,
+				Resource.String.takeVideo)
+			{
+				ActionType = ActionType.IfRoom
+			};
 			
 			var timelineOptionsMenuItemAction = new MenuItemLegacyBarAction(
 				this, this, Resource.Id.actionbar_timeline_menu_options, Resource.Drawable.ic_menu,
@@ -81,6 +88,8 @@ namespace iSeconds.Droid
 			actionBar.AddAction(shareItemAction);
 			actionBar.AddAction(timelineOptionsMenuItemAction);
 			actionBar.AddAction(settingsItemAction);
+			actionBar.AddAction(takeVideoAction);
+
 		}
 
 		private void setupCalendar()
@@ -150,6 +159,10 @@ namespace iSeconds.Droid
 			case Resource.Id.actionbar_share:
 				OnSearchRequested();
 				viewModel.ShareCommand.Execute(null);
+				return true;
+			case Resource.Id.actionbar_takeVideo:
+				OnSearchRequested();
+				viewModel.TakeVideoCommand.Execute(null);
 				return true;
 			}
 

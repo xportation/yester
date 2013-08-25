@@ -15,6 +15,9 @@ namespace iSeconds.Domain.Test
 
       INavigator navigator = new INavigator();
 
+		MockOptionsDialogService mockOptionsDialog = new MockOptionsDialogService();
+		MockMediaService mockMediaService = new MockMediaService();
+
 		[SetUp()]
 		public void Init()
 		{
@@ -32,7 +35,7 @@ namespace iSeconds.Domain.Test
 
 			dayInfo = timeline.GetDayAt(date);
 			
-			viewModel = new DayOptionsViewModel(dayInfo, navigator);
+			viewModel = new DayOptionsViewModel(dayInfo, navigator, mockMediaService, mockOptionsDialog);
 		}
 
 		[Test()]

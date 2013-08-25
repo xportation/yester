@@ -23,7 +23,7 @@
 	<string name="timeline_options_dialog_delete_alert">Are you sure to delete this timeline? \nThis operation can not be undone.</string>   
    <string name="day_options_title">Day</string>
    <string name="day_options_video_description">Video description:</string>
-   <string name="item_options_message">*Long press on an item for options menu\n*Tap to select the main video</string>
+   <string name="item_options_message">*Long press on an item for options menu\n*Tap to play the video</string>
 	<string name="settings">Settings</string>
 	<string name="settings_movies_size_title">Movie size:</string>
 	<string name="settings_movies_size_description">It\'s the default size of the movies when you\'ll record. You can change it any time.</string>
@@ -35,4 +35,5 @@
 	<string name="share_start_period">Choose the begin:</string>
 	<string name="share_end_period">Choose the end:</string>
 	<string name="share_button">Share legal</string>
+	<string name="takeVideo">Take video on actual day</string>
 </resources>

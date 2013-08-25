@@ -30,6 +30,11 @@ namespace iSeconds.Droid
 					this.NotifyDataSetChanged();
 				};
 			}
+
+			this.viewModel.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) => {
+				if (e.PropertyName == "Videos")
+					this.NotifyDataSetChanged();
+			};
       }
 
       public override Java.Lang.Object GetItem (int position)
@@ -97,18 +102,35 @@ namespace iSeconds.Droid
          DayInfo dayInfo = timeline.GetDayAt (new DateTime (year, month, day));
 
          INavigator navigator = ((ISecondsApplication)this.Application).GetNavigator();
+			IMediaService mediaService = ((ISecondsApplication)this.Application).GetMediaService();
+			IOptionsDialogService optionsDialogService = ((ISecondsApplication)this.Application).GetOptionsDialogService();
 
-         viewModel = new DayOptionsViewModel (dayInfo, navigator);
+         viewModel = new DayOptionsViewModel (dayInfo, navigator, mediaService, optionsDialogService);
 
 			adapter = new VideoListAdapter (this, viewModel);
 			listView = this.FindViewById<ListView> (Resource.Id.videosList);
          listView.Adapter = adapter;
-			listView.ItemClick += (sender, e) => viewModel.CheckVideoCommand.Execute(e.Position);
-			listView.ItemLongClick += (sender, e) => Toast.MakeText(this, "ola", ToastLength.Short).Show();
+			listView.ItemClick += (sender, e) => viewModel.PlayVideoCommand.Execute(e.Position);
+			listView.ItemLongClick += (sender, e) => viewModel.ShowVideoOptionsCommand.Execute (e.Position);
 
 			configureActionBar(true);
 			configureActionBarTitle();
+			addActionBarItems ();
       }
+
+		private void addActionBarItems ()
+		{
+			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+
+			var takeVideoAction = new MenuItemLegacyBarAction(
+				this, this, Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_share,
+				Resource.String.takeVideo)
+			{
+				ActionType = ActionType.IfRoom
+			};
+
+			actionBar.AddAction (takeVideoAction);
+		}
 
       private void configureActionBarTitle()
       {
@@ -126,7 +148,12 @@ namespace iSeconds.Droid
             OnSearchRequested();
             viewModel.BackToHomeCommand.Execute(null);
             return true;         
+			case Resource.Id.actionbar_takeVideo:
+				OnSearchRequested();
+				viewModel.TakeVideoCommand.Execute(null);
+				return true;
          }
+
          
          return base.OnOptionsItemSelected(item);
       }

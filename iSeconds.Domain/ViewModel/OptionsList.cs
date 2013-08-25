@@ -41,5 +41,14 @@ namespace iSeconds.Domain
 		{
 			entries.Add(entry);
 		}
+
+		public string[] ListNames()
+		{
+			string[] names= new string[OptionsEntries.Count];
+			for (int i = 0; i < OptionsEntries.Count; i++)
+				names[i] = OptionsEntries[i].Name;
+
+			return names;
+		}
 	}
 }

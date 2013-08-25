@@ -100,6 +100,11 @@
       <Link>DayOptionsViewModel.cs</Link>
     </Compile>
     <Compile Include="DayInfoTest.cs" />
+    <Compile Include="..\iSeconds.Domain\IOptionsDialogService.cs">
+      <Link>IOptionsDialogService.cs</Link>
+    </Compile>
+    <Compile Include="MockDialogOptionsService.cs" />
+    <Compile Include="MockPresenter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

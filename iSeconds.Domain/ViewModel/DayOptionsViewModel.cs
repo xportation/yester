@@ -8,6 +8,44 @@ namespace iSeconds.Domain
 {
 	public class DayOptionsViewModel : ViewModel
 	{
+		private IMediaService mediaService = null;
+		private DayInfo model = null;
+		private INavigator navigator = null;
+		private IOptionsDialogService optionsDialogService = null;
+
+		public DayInfo Model 
+		{
+			get { return model; }
+		}
+
+		public DayOptionsViewModel(DayInfo model, INavigator navigator, IMediaService mediaService
+		                           , IOptionsDialogService optionsDialogService)
+		{
+			this.model = model;
+			this.navigator = navigator;
+			this.mediaService = mediaService;
+			this.optionsDialogService = optionsDialogService;
+			this.Init();
+		}
+
+		public void Init ()
+		{
+			this.videos.Clear ();
+
+			IList<MediaInfo> videos = this.model.GetVideos();
+
+			for (int i = 0; i < videos.Count; ++i )
+			{
+				MediaInfo media = videos[i];
+
+				this.videos.Add(new VideoItem(media));				
+
+				if (this.model.DefaultVideoId == media.Id)
+					this.CheckedVideo = i;
+			}
+
+			Videos = this.videos; // fazemos isso para notificar mudança e view se atualizar
+		}
 
 		public class VideoItem
 		{
@@ -78,40 +116,77 @@ namespace iSeconds.Domain
 			}
 		}
 
-		private DayInfo model = null;
-      private INavigator navigator = null;
-		
-		public DayInfo Model 
-		{
-			get { return model; }
-		}
 
       public ICommand BackToHomeCommand
       {
          get { return new Command((object arg) => { navigator.NavigateBack(); }); }
       }
 
-      public DayOptionsViewModel(DayInfo model, INavigator navigator)
+		public ICommand TakeVideoCommand
 		{
-			this.model = model;
-         this.navigator = navigator;
-			this.Init();
-		}
+			get { 
+				return new Command ((object arg) => { 
+					mediaService.TakeVideo(this.model.Date, (string videoPath) =>
+					{
+						this.model.AddVideo(videoPath);
+						mediaService.SaveVideoThumbnail(model.GetDefaultThumbnail(), model.GetDefaultVideoPath());
+						Init();
+						//OnPropertyChanged("VideoListChanged");
+					});
 
-		public void Init ()
-		{
-			IList<MediaInfo> videos = this.model.GetVideos();
-
-			for (int i = 0; i < videos.Count; ++i )
-			{
-				MediaInfo media = videos[i];
-
-				this.videos.Add(new VideoItem(media));				
-
-				if (this.model.DefaultVideoId == media.Id)
-					this.CheckedVideo = i;
+				});
 			}
 		}
+
+		public ICommand PlayVideoCommand 
+		{
+			get {
+				return new Command ((object arg) => {
+					int selectedVideo = (int)arg;
+					mediaService.PlayVideo(this.videos[selectedVideo].Model.Path);
+				});
+			}
+		}
+
+		public class VideoOptionsList : OptionsList
+		{
+			public VideoOptionsList(DayOptionsViewModel viewModel, int selectedVideo)
+			{
+				AddEntry(new OptionsEntry("Set as default", () => { viewModel.CheckVideoCommand.Execute(selectedVideo); }));
+
+				AddEntry(new OptionsEntry("Rename file", () => {
+					// TODO:
+				}));
+			}
+
+			public string[] ListNames()
+			{
+				string[] names= new string[OptionsEntries.Count];
+				for (int i = 0; i < OptionsEntries.Count; i++)
+					names[i] = OptionsEntries[i].Name;
+
+				return names;
+			}
+		}
+
+		private InteractionRequest<VideoOptionsList> videoOptionsRequest = new InteractionRequest<VideoOptionsList>();
+
+		public InteractionRequest<VideoOptionsList> VideoOptionsRequest
+		{
+			get { return videoOptionsRequest; }
+		}
+
+		public ICommand ShowVideoOptionsCommand
+		{
+			get {
+				return new Command ((object arg) => {
+					int selectedVideo = (int)arg;
+					//VideoOptionsRequest.Raise(new VideoOptionsList(this, selectedVideo));
+					optionsDialogService.ShowModal(new VideoOptionsList(this, selectedVideo));
+				});
+			}
+		}
+
 	}
 
 }

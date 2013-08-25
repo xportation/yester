@@ -71,6 +71,7 @@
     <Compile Include="SplashActivity.cs" />
     <Compile Include="TimelineActivity.cs" />
     <Compile Include="SettingsActivity.cs" />
+    <Compile Include="OptionDialogServiceAndroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

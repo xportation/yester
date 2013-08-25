@@ -112,28 +112,19 @@ namespace iSeconds.Domain.Test
             Assert.That(dayInfo.GetDefaultVideoPath(), Is.EqualTo("video/path"));
         }
 
-        [Test()]
-        public void TestTakeAVideoOnADayWithVideoShouldPlay()
-        {
-            DayViewModel dayViewModel = viewModel.VisibleDays[0];
+
+		[Test()]
+      public void TestClickOnADayShouldOpenTheDayOptions()
+		{
+			MockPresenter mockPresenter = new MockPresenter ();
+			navigator.RegisterNavigation ("day_options", mockPresenter);
+
+			DayViewModel dayViewModel = viewModel.VisibleDays [0];
             
-            mockMediaService.Reset();
+			dayViewModel.DayClickedCommand.Execute (null);
 
-            dayViewModel.DayClickedCommand.Execute(null);            
-
-            Assert.That(mockMediaService.playVideoWasCalled, Is.Not.True);
-            Assert.That(mockMediaService.takeVideoWasCalled, Is.True);
-            Assert.That(mockMediaService.saveVideoThumbnailWasCalled, Is.True);
-
-           mockMediaService.Reset();
-
-           dayViewModel.DayClickedCommand.Execute(null);
-
-           Assert.That(mockMediaService.playVideoWasCalled, Is.True);
-           Assert.That(mockMediaService.takeVideoWasCalled, Is.Not.True);
-           Assert.That(mockMediaService.saveVideoThumbnailWasCalled, Is.Not.True);
-        }
-
+			Assert.That (mockPresenter.wasShow);
+		}
 
     }
 }
