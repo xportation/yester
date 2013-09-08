@@ -323,7 +323,7 @@ namespace iSeconds.Droid
 	      if (animation.IsAnimating())
 	         return false;
 
-			const float tolerance = 15;
+			const float tolerance = 45;
 			float angle = getAngleInDegrees(e1.GetX(), e1.GetY(), e2.GetX(), e2.GetY());
 
 			if ((angle < 90 + tolerance && angle > 90 - tolerance) ||
