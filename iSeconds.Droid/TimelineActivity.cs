@@ -7,6 +7,7 @@ using Android.Widget;
 using LegacyBar.Library.Bar;
 using iSeconds.Domain;
 using System.ComponentModel;
+using Android.Graphics.Drawables;
 
 namespace iSeconds.Droid
 {
@@ -61,34 +62,18 @@ namespace iSeconds.Droid
 				this, this, Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_camera,
 				Resource.String.takeVideo)
 			{
-				ActionType = ActionType.IfRoom
-			};
-			
-			var timelineOptionsMenuItemAction = new MenuItemLegacyBarAction(
-				this, this, Resource.Id.actionbar_timeline_menu_options, Resource.Drawable.ic_menu,
-				Resource.String.timeline_menu_options)
+				ActionType = ActionType.Always
+			};			
+
+			var moreAction = new MenuItemLegacyBarAction(
+				this, this, Resource.Id.actionbar_more, Resource.Drawable.ic_action_overflow_dark,
+				Resource.String.more)
 			{
-				ActionType = ActionType.IfRoom
+				ActionType = ActionType.Always
 			};
 
-			var settingsItemAction = new MenuItemLegacyBarAction(
-				this, this, Resource.Id.actionbar_settings, Resource.Drawable.ic_settings,
-				Resource.String.settings)
-			{
-				ActionType = ActionType.IfRoom
-			};
-
-			var shareItemAction = new MenuItemLegacyBarAction(
-				this, this, Resource.Id.actionbar_share, Resource.Drawable.ic_share,
-				Resource.String.share)
-			{
-				ActionType = ActionType.IfRoom
-			};
-
-			actionBar.AddAction(shareItemAction);
-			actionBar.AddAction(timelineOptionsMenuItemAction);
-			actionBar.AddAction(settingsItemAction);
 			actionBar.AddAction(takeVideoAction);
+			actionBar.AddAction(moreAction);
 
 		}
 
@@ -147,26 +132,73 @@ namespace iSeconds.Droid
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
 			switch (item.ItemId)
-			{
-			case Resource.Id.actionbar_timeline_menu_options:
-				OnSearchRequested();
-				viewModel.OptionsCommand.Execute(null);
-				return true;
-			case Resource.Id.actionbar_settings:
-				OnSearchRequested();
-				viewModel.SettingsCommand.Execute(null);
-				return true;
-			case Resource.Id.actionbar_share:
-				OnSearchRequested();
-				viewModel.ShareCommand.Execute(null);
-				return true;
+			{			
 			case Resource.Id.actionbar_takeVideo:
-				OnSearchRequested();
-				viewModel.TakeVideoCommand.Execute(null);
+				OnSearchRequested ();
+				viewModel.TakeVideoCommand.Execute(null);				
+				return true;
+			case Resource.Id.actionbar_more:
+				OnSearchRequested ();
+				showPopup ();
 				return true;
 			}
 
 			return base.OnOptionsItemSelected(item);
+		}
+
+		private void showPopup()
+		{
+			LinearLayout moreContentView = (LinearLayout) this.LayoutInflater.Inflate(Resource.Layout.OverflowMenu, null);
+
+			moreContentView.Measure(Android.Views.View.MeasureSpec.MakeMeasureSpec (0, MeasureSpecMode.Unspecified)
+			                        , Android.Views.View.MeasureSpec.MakeMeasureSpec (0, MeasureSpecMode.Unspecified));
+			PopupWindow popupWindow = new PopupWindow(this);
+			popupWindow.SetBackgroundDrawable(new ColorDrawable(this.Resources.GetColor(Resource.Color.white))); // acaba sendo a cor que da a impressao de bordas
+			popupWindow.ContentView = moreContentView;
+			// xunxo para pegar o ImageView do overflow adicionado como action pelo LegacyBar
+			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+			TextView titleView = actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
+			var layout = actionBar.FindViewById<LinearLayout>(Resource.Id.actionbar_actions);
+			View view = layout.GetChildAt (layout.ChildCount - 1); // pegamos o ultimo... nao consegui fazer de outro jeito..
+			ImageView imageView = (ImageView)view;
+			imageView.Selected = true;
+			popupWindow.ShowAsDropDown (view);
+
+
+			popupWindow.Touchable = true;
+			popupWindow.Focusable = true;
+			popupWindow.OutsideTouchable = true;
+			popupWindow.DismissEvent += (object sender, EventArgs e) => {
+				imageView.Selected = false;
+			};
+
+			Button settingsButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_settings);
+			settingsButton.Click += (object sender, EventArgs e) =>  {
+
+				viewModel.SettingsCommand.Execute(null);
+				popupWindow.Dismiss();
+
+			};
+
+			Button timelineOptionsButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_timeline_options);
+			timelineOptionsButton.Click += (object sender, EventArgs e) => {
+				viewModel.OptionsCommand.Execute(null);
+				popupWindow.Dismiss();
+			};
+
+			Button shareButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_share);
+			shareButton.Click += (object sender, EventArgs e) => {
+				viewModel.ShareCommand.Execute(null);
+				popupWindow.Dismiss();
+			};
+
+			Button aboutButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_about);
+			aboutButton.Click += (object sender, EventArgs e) => {
+				// TODO:
+				popupWindow.Dismiss();
+			};
+
+			popupWindow.Update(moreContentView.MeasuredWidth, moreContentView.MeasuredHeight);
 		}
 
 		public override void OnWindowFocusChanged (bool hasFocus)

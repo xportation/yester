@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/main_more_content_timeline_options"
+        style="@style/ActionBarDropdownItem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:text="Timelines" />
+    <Button
+        android:id="@+id/main_more_content_share"
+        style="@style/ActionBarDropdownItem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:text="Share" />
+    <Button
+        android:id="@+id/main_more_content_settings"
+        style="@style/ActionBarDropdownItem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:text="Settings" />
+    <Button
+        android:id="@+id/main_more_content_about"
+        style="@style/ActionBarDropdownItem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="About" />
+</LinearLayout>

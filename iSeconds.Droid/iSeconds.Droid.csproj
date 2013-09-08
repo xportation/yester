@@ -71,10 +71,7 @@
     <Compile Include="SplashActivity.cs" />
     <Compile Include="TimelineActivity.cs" />
     <Compile Include="SettingsActivity.cs" />
-    <Compile Include="VideoUploadService.cs" />
     <Compile Include="OptionDialogServiceAndroid.cs" />
-    <Compile Include="VideoUploadNotificationReceiver.cs" />
-    <Compile Include="VideoUploadActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -149,12 +146,12 @@
     <AndroidResource Include="Resources\layout\ShareView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\VideoUpload.axml" />
     <AndroidResource Include="Resources\drawable\ic_camera.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_camera.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_camera.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_camera.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_camera.png" />
+    <AndroidResource Include="Resources\layout\OverflowMenu.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
