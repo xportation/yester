@@ -357,14 +357,8 @@ namespace iSeconds.Droid
 	      if (animation.IsAnimating())
 	         return;
 
-			float x = e.GetX();
-			float y = e.GetY();
+			// deixei para caso precisarmos adicionar algo no long press..
 
-			var dayRegion = this.findDayOnXY(x, y);
-			if (dayRegion != null)
-			{
-				dayRegion.Item2.DayOptionsCommand.Execute(null);
-			}
 		}
 
 	   public bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)

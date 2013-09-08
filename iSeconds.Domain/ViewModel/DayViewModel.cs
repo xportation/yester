@@ -73,50 +73,6 @@ namespace iSeconds.Domain
          }
       }
 
-      #region Day Options
-
-		public class DayOptionsList : OptionsList
-      {
-         public DayOptionsList(DayViewModel viewModel)
-         {
-            AddEntry(new OptionsEntry("Record video", () => { viewModel.RecordVideoCommand.Execute(null); }));
-
-            AddEntry(new OptionsEntry("Options", () =>
-               {
-                  Args args = new Args();
-                  args.Put("Day", viewModel.Model.Date.Day.ToString());
-                  args.Put("Month", viewModel.Model.Date.Month.ToString());
-                  args.Put("Year", viewModel.Model.Date.Year.ToString());
-                  args.Put("TimelineId", viewModel.Model.TimelineId.ToString());
-
-                  viewModel.navigator.NavigateTo("day_options", args);
-               }));
-         }
-
-			public string[] ListNames()
-			{
-				string[] names= new string[OptionsEntries.Count];
-				for (int i = 0; i < OptionsEntries.Count; i++)
-					names[i] = OptionsEntries[i].Name;
-
-				return names;
-			}
-      }
-
-      private InteractionRequest<DayOptionsList> dayOptionsRequest = new InteractionRequest<DayOptionsList>();
-
-      public InteractionRequest<DayOptionsList> DayOptionsRequest
-      {
-         get { return dayOptionsRequest; }
-      }
-
-      public ICommand DayOptionsCommand
-      {
-         get { return new Command((object arg) => { DayOptionsRequest.Raise(new DayOptionsList(this)); }); }
-      }
-
-      #endregion 
-
       public ICommand AddVideoCommand
       {
          get

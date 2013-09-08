@@ -93,7 +93,6 @@ namespace iSeconds.Droid
 			monthView = FindViewById<CalendarMonthView> (Resource.Id.calendarView);
 			monthView.ViewedDays = viewModel.VisibleDays;
 			monthView.ViewModel = viewModel;
-			configureVisibleDaysListener();
 
 			this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
 				{
@@ -103,7 +102,6 @@ namespace iSeconds.Droid
 
 					if (e.PropertyName == "VisibleDays") {
 						monthView.ViewedDays = viewModel.VisibleDays;
-						configureVisibleDaysListener();
 					}
 
 					if (e.PropertyName == "TimelineName") {
@@ -119,15 +117,6 @@ namespace iSeconds.Droid
 			actionBar.Title = this.viewModel.TimelineName;
 		}
 
-		private void configureVisibleDaysListener()
-		{
-			foreach (DayViewModel day in viewModel.VisibleDays) {
-				day.DayOptionsRequest.Raised += (object s, GenericEventArgs<DayViewModel.DayOptionsList> args) =>  {
-					optionsList = args.Value;
-					ShowDialog (ShowOptionsMenu);
-				};
-			}
-		}
 
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
@@ -209,27 +198,7 @@ namespace iSeconds.Droid
 				monthView.Invalidate();
 		}
 
-		#region Dialog Modal
 
-		private DayViewModel.DayOptionsList optionsList;
-
-		protected override Dialog OnCreateDialog(int dialogType)
-		{
-			if (dialogType == ShowOptionsMenu) {
-				if (optionsList == null)
-					return null;
-
-				var builder = new AlertDialog.Builder(this);
-				builder.SetTitle(string.Empty);
-				builder.SetItems(optionsList.ListNames(), (sender, eventArgs) => optionsList.DayEntryClicked.Execute(eventArgs.Which));
-
-				return builder.Create();
-			}
-
-			return null;
-		}
-
-		#endregion
 	}
 }
 
