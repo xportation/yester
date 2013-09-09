@@ -161,11 +161,20 @@ namespace iSeconds.Domain
 				}
 
 				return result;
+			}
+		}
 
+		public IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId)
+		{
+			IList<DayInfo> days= (from i in Table<DayInfo>() where i.Date >= first && i.Date <= last && i.TimelineId == timelineId select i).ToList();
+
+			List<MediaInfo> medias = new List<MediaInfo>();
+			foreach (DayInfo day in days) {
+				day.SetRepository(this);
+				medias.AddRange(day.GetVideos());
 			}
 
-
-
+			return medias;
 		}
 
 		public IList<T> GetItems<T> () where T : IModel, new()

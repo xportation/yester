@@ -157,11 +157,13 @@ namespace iSeconds.Domain
 		public ICommand TakeVideoCommand
 		{
 			get { return new Command((object arg) => {
-
 					currentDateViewModel.RecordVideoCommand.Execute(null);
-
 				}); 
 			}
+		}
+
+		public ICommand AboutCommand {
+			get { return new Command((object arg) => { navigator.NavigateTo("about_view", new Args()); }); }
 		}
 
 		private string currentMonthTitle;

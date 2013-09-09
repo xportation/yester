@@ -29,6 +29,7 @@ namespace iSeconds.Domain
       MediaInfo GetMediaByPath(string videopath);
       IList<MediaInfo> GetMediasForDay(DayInfo day);
 
-      IList<string> GetVideosFromRange (DateTime start, DateTime end, int timelineId);
+      IList<string> GetVideosFromRange(DateTime start, DateTime end, int timelineId);
+		IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId);
    }
 }

@@ -183,7 +183,7 @@ namespace iSeconds.Droid
 
 			Button aboutButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_about);
 			aboutButton.Click += (object sender, EventArgs e) => {
-				// TODO:
+				viewModel.AboutCommand.Execute(null);
 				popupWindow.Dismiss();
 			};
 

@@ -58,7 +58,9 @@
     <Compile Include="AndroidPresenter.cs" />
     <Compile Include="CalendarMonthView\CalendarMonthView.cs" />
     <Compile Include="CalendarMonthView\CalendarMonthViewWeekNames.cs" />
-    <Compile Include="DayOptionsActivity.cs" />
+    <Compile Include="DayOptionsActivity.cs">
+      <DependentUpon>ISecondsActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="ISecondsActivity.cs" />
     <Compile Include="MediaServiceAndroid.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="TimelineActivity.cs" />
     <Compile Include="SettingsActivity.cs" />
     <Compile Include="OptionDialogServiceAndroid.cs" />
+    <Compile Include="AboutActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -152,6 +155,12 @@
     <AndroidResource Include="Resources\drawable-mdpi\ic_camera.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_camera.png" />
     <AndroidResource Include="Resources\layout\OverflowMenu.axml" />
+    <AndroidResource Include="Resources\layout\VideoUpload.axml" />
+    <AndroidResource Include="Resources\layout\VideoUploadItem.axml" />
+    <AndroidResource Include="Resources\layout\AboutView.axml" />
+    <AndroidResource Include="Resources\drawable\broditech_power.png" />
+    <AndroidResource Include="Resources\drawable\facebook.png" />
+    <AndroidResource Include="Resources\drawable\twitter.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

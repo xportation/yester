@@ -29,11 +29,11 @@ namespace iSeconds.Droid
 			this.SetContentView (Resource.Layout.ShareView);
 
 			ISecondsApplication application = (ISecondsApplication)this.Application;
-			pathService = application.GetPathService ();
+			pathService = application.GetPathService();
 
-			repository = application.GetRepository ();
+			repository = application.GetRepository();
 
-			timelineId = Convert.ToInt32 (this.Intent.Extras.GetString ("TimelineId"));
+			timelineId = Convert.ToInt32 (this.Intent.Extras.GetString("TimelineId"));
 
 			configureActionBar (true);
 			configureTextViewFonts ();
@@ -56,12 +56,17 @@ namespace iSeconds.Droid
 		{
 			Button shareButton = this.FindViewById<Button> (Resource.Id.shareButton);
 			shareButton.Click += (sender, e) => {
-
 				DatePicker start = this.FindViewById<DatePicker> (Resource.Id.dateStartPeriod);
 				DatePicker end = this.FindViewById<DatePicker> (Resource.Id.dateEndPeriod);
 
 				DateTime startDate = new DateTime (start.Year, start.Month + 1, start.DayOfMonth);
 				DateTime endDate = new DateTime (end.Year, end.Month + 1, end.DayOfMonth);
+//								
+//				Intent intent= new Intent(this, typeof(VideoUploadActivity));
+//				intent.PutExtra("ShareDate_Start", startDate.ToBinary());
+//				intent.PutExtra("ShareDate_End", endDate.ToBinary());
+//				intent.PutExtra("ShareDate_TimelineId", timelineId);
+//				this.StartActivity(intent);
 
 				string result = concat (startDate, endDate);
 				share (result);
@@ -115,9 +120,9 @@ namespace iSeconds.Droid
 		void share (string result)
 		{
 			Intent intent = new Intent (Intent.ActionSend);
-			Android.Net.Uri videoUri = Android.Net.Uri.Parse (result);
-			intent.SetType ("video/mp4");
-			intent.PutExtra (Intent.ExtraStream, videoUri);
+         Java.IO.File filePath= new Java.IO.File(result);
+         intent.SetType ("video/mp4");
+         intent.PutExtra(Intent.ExtraStream, Android.Net.Uri.FromFile(filePath));
 			StartActivity (Intent.CreateChooser (intent, "Share your timeline to..."));
 		}
 

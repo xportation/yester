@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/secondary_activities_background">
+    <legacybar.library.bar.LegacyBar
+        android:id="@+id/actionbar"
+        style="@style/actionbar"
+        ab:title="@string/about"
+        ab:separator="@color/actionbar_background"
+        ab:background="@color/actionbar_background"
+        ab:background_item="@drawable/actionbar_button" />
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/linearLayout1">
+            <ImageView
+                android:src="@drawable/broditech_power"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageBroditech"
+                android:layout_marginTop="10.0dp"
+                android:layout_marginBottom="10.0dp" />
+            <TextView
+                android:text="We all are millionaries. We have big salaries. In restaurants we eat for free..."
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textAbout"
+                android:layout_marginTop="10.0dp"
+                android:textColor="@color/second_item_color" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout3"
+                android:layout_marginTop="10.0dp"
+                android:layout_marginBottom="10.0dp"
+                android:layout_gravity="center_horizontal">
+                <TextView
+                    android:text="www.broditech.com"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/textSite"
+                    android:autoLink="web"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:textColor="@color/first_item_color" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2"
+                android:layout_gravity="center_horizontal">
+                <ImageView
+                    android:src="@drawable/facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imageFacebook"
+                    android:layout_marginLeft="10.0dp"
+                    android:layout_marginRight="10.0dp" />
+                <ImageView
+                    android:src="@drawable/twitter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imageTwitter"
+                    android:layout_marginLeft="10.0dp"
+                    android:layout_marginRight="10.0dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

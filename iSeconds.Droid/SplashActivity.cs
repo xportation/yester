@@ -3,6 +3,7 @@ using Android.App;
 using Android.OS;
 using iSeconds.Domain;
 using Android.Views;
+using Android.Widget;
 
 namespace iSeconds.Droid
 {
@@ -12,13 +13,11 @@ namespace iSeconds.Droid
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-
-			UserService userService = ((ISecondsApplication)this.Application).GetUserService();
-			
-			if (userService.CurrentUser != null)
-				this.StartActivity(typeof(TimelineActivity));
-			// else
-			// this.StartActivity<LoginActivity>();
+         try {            
+            this.StartActivity(typeof(TimelineActivity));
+         } catch (Exception ex) {
+            this.Finish();
+         }
 		}
 	}
 }

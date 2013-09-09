@@ -40,6 +40,7 @@ namespace iSeconds
          navigator.RegisterNavigation ("timeline_view", new AndroidPresenter (this.activityTracker, typeof(TimelineActivity)));
 			navigator.RegisterNavigation("settings_view", new AndroidPresenter(this.activityTracker, typeof(SettingsActivity)));
 			navigator.RegisterNavigation("share_view", new AndroidPresenter(this.activityTracker, typeof(ShareActivity)));
+			navigator.RegisterNavigation("about_view", new AndroidPresenter(this.activityTracker, typeof(AboutActivity)));
 
 			optionsDialogService = new OptionDialogServiceAndroid (activityTracker);
       }
