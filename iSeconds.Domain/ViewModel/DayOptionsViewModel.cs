@@ -12,15 +12,17 @@ namespace iSeconds.Domain
 		private DayInfo model = null;
 		private INavigator navigator = null;
 		private IOptionsDialogService optionsDialogService = null;
+		private Timeline timeline = null;
 
 		public DayInfo Model 
 		{
 			get { return model; }
 		}
 
-		public DayOptionsViewModel(DayInfo model, INavigator navigator, IMediaService mediaService
+		public DayOptionsViewModel(Timeline timeline, DayInfo model, INavigator navigator, IMediaService mediaService
 		                           , IOptionsDialogService optionsDialogService)
 		{
+			this.timeline = timeline;
 			this.model = model;
 			this.navigator = navigator;
 			this.mediaService = mediaService;
@@ -148,40 +150,50 @@ namespace iSeconds.Domain
 			}
 		}
 
+		public ICommand DeleteVideoCommand
+		{
+			get {
+				return new Command ((object arg) => {
+					int selectedVideo = (int)arg;
+
+					optionsDialogService.AskForConfirmation(
+						"Are you sure? This operation cannot be undone!",
+						() => {
+							this.timeline.DeleteVideoAt(model.Date, this.videos[selectedVideo].Model.Path);
+							this.Init();
+						}, // confirmcallback
+
+						() => {} //cancelcallback
+					);
+					                                        
+				});
+			}
+		}
+
+
+
 		public class VideoOptionsList : OptionsList
 		{
 			public VideoOptionsList(DayOptionsViewModel viewModel, int selectedVideo)
 			{
 				AddEntry(new OptionsEntry("Set as default", () => { viewModel.CheckVideoCommand.Execute(selectedVideo); }));
 
+				AddEntry(new OptionsEntry("Delete video", () => {
+					viewModel.DeleteVideoCommand.Execute(0);
+				}));
+
 				AddEntry(new OptionsEntry("Rename file", () => {
 					// TODO:
 				}));
 			}
-
-			public string[] ListNames()
-			{
-				string[] names= new string[OptionsEntries.Count];
-				for (int i = 0; i < OptionsEntries.Count; i++)
-					names[i] = OptionsEntries[i].Name;
-
-				return names;
-			}
 		}
 
-		private InteractionRequest<VideoOptionsList> videoOptionsRequest = new InteractionRequest<VideoOptionsList>();
-
-		public InteractionRequest<VideoOptionsList> VideoOptionsRequest
-		{
-			get { return videoOptionsRequest; }
-		}
 
 		public ICommand ShowVideoOptionsCommand
 		{
 			get {
 				return new Command ((object arg) => {
 					int selectedVideo = (int)arg;
-					//VideoOptionsRequest.Raise(new VideoOptionsList(this, selectedVideo));
 					optionsDialogService.ShowModal(new VideoOptionsList(this, selectedVideo));
 				});
 			}

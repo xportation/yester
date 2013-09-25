@@ -42,7 +42,7 @@ Global
 		{B5AB26F4-94D4-4FA3-BE1D-0517F54B560D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = iSeconds.Droid\iSeconds.Droid.csproj
+		StartupItem = iSeconds.Domain.Test\iSeconds.Domain.Test.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

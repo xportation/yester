@@ -38,6 +38,31 @@ namespace iSeconds.Domain
 			this.repository.SaveItem(this); 
       }
 
+		public void DeleteVideo(string url)
+		{
+			Debug.Assert(repository != null); // you should bind a repository with SetRepository() method
+
+			MediaInfo media = this.repository.GetMediaByPath (url);
+
+			int deleteMediaId = media.Id;
+
+			this.repository.DeleteMedia (media);
+
+			if (deleteMediaId == this.DefaultVideoId)
+				chooseNewDefaultVideo ();
+		}
+
+		private void chooseNewDefaultVideo()
+		{
+			IList<MediaInfo> medias = GetVideos ();
+
+			// se ainda houver videos no dia, o default video sera o primeiro retornado
+			if (medias.Count != 0)
+				SetDefaultVideo (medias [0].Id);
+			else // nao havendo videos obviamente nao havera default
+				SetDefaultVideo (-1);
+		}
+
 		public void SetDefaultVideo (int mediaId)
 		{
 			this.DefaultVideoId = mediaId;

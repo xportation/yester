@@ -1,6 +1,7 @@
 using System;
 using iSeconds.Domain;
 using Android.App;
+using Android.Content;
 
 namespace iSeconds.Droid
 {
@@ -17,8 +18,22 @@ namespace iSeconds.Droid
 		{
 			var builder = new AlertDialog.Builder(tracker.GetCurrentActivity());
 			builder.SetTitle(string.Empty);
-			builder.SetItems(options.ListNames(), (sender, eventArgs) => options.DayEntryClicked.Execute(eventArgs.Which));
+			builder.SetItems(options.ListNames(), (sender, eventArgs) => options.EntryClicked.Execute(eventArgs.Which));
 			builder.Create().Show();
+		}
+
+		public void AskForConfirmation(string msg, Action userConfirmedCallback, Action userCanceledCallback )
+		{
+			new AlertDialog.Builder(tracker.GetCurrentActivity())
+				.SetTitle(String.Empty)
+					.SetMessage(msg)
+					.SetPositiveButton(Resource.String.ok, delegate	{
+						userConfirmedCallback.Invoke();
+					})
+					.SetNegativeButton(Resource.String.cancel, delegate {
+						userCanceledCallback.Invoke();
+					})
+					.Show();
 		}
 
 	}

@@ -70,6 +70,35 @@ namespace iSeconds.Domain.Test
 			//Assert.That(timeline.GetVideosFromRange (new DateTime(2011,1,1), new DateTime(2013,1,1)).Count, Is.EqualTo(2));
 		}
 
+		[Test()]
+		public void TestShouldBeAbleToDeleteAVideo()
+		{
+			DateTime date1 = new DateTime (2012, 1, 1);
+			timeline.AddVideoAt(date1, "sdcard/iseconds/video.mpeg");
+			Assert.That(timeline.GetVideosAt(date1).Count, Is.EqualTo(1));
+
+			timeline.DeleteVideoAt (date1, "sdcard/iseconds/video.mpeg");
+			Assert.That(timeline.GetVideosAt(date1).Count, Is.EqualTo(0));
+		}
+
+		[Test()]
+		public void TestOnDeleteADefaultVideoTheDefaultIsUpdated()
+		{
+			DateTime date1 = new DateTime (2012, 1, 1);
+			timeline.AddVideoAt(date1, "sdcard/iseconds/video.mpeg");
+			timeline.AddVideoAt(date1, "sdcard/iseconds/video2.mpeg");
+
+			Assert.That (timeline.GetDayAt (date1).GetDefaultVideoPath (), Is.EqualTo("sdcard/iseconds/video2.mpeg"));
+
+			timeline.DeleteVideoAt (date1, "sdcard/iseconds/video2.mpeg");
+			Assert.That (timeline.GetDayAt (date1).GetDefaultVideoPath (), Is.EqualTo("sdcard/iseconds/video.mpeg"));
+
+			timeline.DeleteVideoAt (date1, "sdcard/iseconds/video.mpeg");
+			Assert.That (timeline.GetDayAt (date1).DefaultVideoId, Is.EqualTo(-1));
+			Assert.That (timeline.GetDayAt (date1).GetDefaultVideoPath (), Is.EqualTo(""));
+		}
+
+
 
 
 

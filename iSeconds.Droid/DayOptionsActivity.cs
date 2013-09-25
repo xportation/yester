@@ -105,7 +105,7 @@ namespace iSeconds.Droid
 			IMediaService mediaService = ((ISecondsApplication)this.Application).GetMediaService();
 			IOptionsDialogService optionsDialogService = ((ISecondsApplication)this.Application).GetOptionsDialogService();
 
-         viewModel = new DayOptionsViewModel (dayInfo, navigator, mediaService, optionsDialogService);
+         viewModel = new DayOptionsViewModel (timeline, dayInfo, navigator, mediaService, optionsDialogService);
 
 			adapter = new VideoListAdapter (this, viewModel);
 			listView = this.FindViewById<ListView> (Resource.Id.videosList);

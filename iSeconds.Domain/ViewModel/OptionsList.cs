@@ -25,7 +25,7 @@ namespace iSeconds.Domain
          get { return entries; }
       }
 
-      public ICommand DayEntryClicked
+      public ICommand EntryClicked
       {
          get
          {

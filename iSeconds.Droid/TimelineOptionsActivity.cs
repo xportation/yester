@@ -232,7 +232,7 @@ namespace iSeconds.Droid
 			
          var builder = new AlertDialog.Builder(this);
 			builder.SetTitle(string.Empty);
-         builder.SetItems(optionsList.ListNames(), (sender, eventArgs) => optionsList.DayEntryClicked.Execute(eventArgs.Which));
+         builder.SetItems(optionsList.ListNames(), (sender, eventArgs) => optionsList.EntryClicked.Execute(eventArgs.Which));
 
          return builder.Create();
       }

@@ -35,7 +35,7 @@ namespace iSeconds.Domain.Test
 
 			dayInfo = timeline.GetDayAt(date);
 			
-			viewModel = new DayOptionsViewModel(dayInfo, navigator, mockMediaService, mockOptionsDialog);
+			viewModel = new DayOptionsViewModel(timeline, dayInfo, navigator, mockMediaService, mockOptionsDialog);
 		}
 
 		[Test()]
@@ -62,6 +62,24 @@ namespace iSeconds.Domain.Test
 			viewModel.CheckVideoCommand.Execute(1);
 			Assert.That(viewModel.CheckedVideo, Is.EqualTo(1));
 			Assert.That(viewModel.Model.DefaultVideoId, Is.EqualTo(viewModel.Videos[1].Model.Id));
+		}
+
+		[Test()]
+		public void TestShouldBeAbleToDeleteAVideo()
+		{
+			Assert.That(viewModel.Model.GetVideoCount(), Is.EqualTo(2));
+
+			// se usuario cancelar confirmacao nao deve excluir
+			mockOptionsDialog.SetConfirmationResult (false);
+			viewModel.DeleteVideoCommand.Execute (0);
+			Assert.That(viewModel.Model.GetVideoCount(), Is.EqualTo(2));
+
+			mockOptionsDialog.SetConfirmationResult (true);
+			viewModel.DeleteVideoCommand.Execute (1);
+			Assert.That(viewModel.Model.GetVideoCount(), Is.EqualTo(1));
+
+			viewModel.DeleteVideoCommand.Execute (0);
+			Assert.That(viewModel.Model.GetVideoCount(), Is.EqualTo(0));
 		}
 	}
 }

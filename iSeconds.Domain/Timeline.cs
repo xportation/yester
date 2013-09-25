@@ -34,6 +34,14 @@ namespace iSeconds.Domain
 			day.AddVideo(url);
 		}
 
+		public void DeleteVideoAt (DateTime date, string url)
+		{
+			Debug.Assert (repository != null);
+
+			DayInfo day = repository.GetDayInfoAt(date, Id);
+			day.DeleteVideo (url);
+		}
+
 		public IList<MediaInfo> GetVideosAt(DateTime date)
 		{
 			Debug.Assert(repository != null);

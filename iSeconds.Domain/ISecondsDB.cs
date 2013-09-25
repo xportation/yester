@@ -31,6 +31,7 @@ namespace iSeconds.Domain
 		{
 			this.SaveItem (timeline);
 
+			// TODO: ver se isso ainda eh usado
 			if (OnSaveTimeline != null)
 				OnSaveTimeline (this, new GenericEventArgs<Timeline> (timeline));
 		}
@@ -39,6 +40,7 @@ namespace iSeconds.Domain
 		{
 			this.DeleteItem (timeline);
 
+			// TODO: ver se isso ainda eh usado
 			if (OnDeleteTimeline != null)
 				OnDeleteTimeline (this, new GenericEventArgs<Timeline> (timeline));
 		}
@@ -72,6 +74,11 @@ namespace iSeconds.Domain
 			lock (locker) {
 				return (from i in Table<MediaInfo> () where i.Path == videopath select i).FirstOrDefault ();
 			}
+		}
+
+		public void DeleteMedia (MediaInfo media)
+		{
+			this.DeleteItem (media);
 		}
 
 		public User GetUser (string userName)
