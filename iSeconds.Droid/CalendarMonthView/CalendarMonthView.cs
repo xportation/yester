@@ -422,13 +422,26 @@ namespace iSeconds.Droid
 
 	   #endregion
 
+		// workaround para corrigir o bug de ao gravar um video e voltar
+		// o calendário fica com um tamanho maior...
+		// o problema é que esse OnLayout é chamado várias vezes nessa volta. Algumas
+		// vezes o tamanho que chega é como se fosse da tela inteira, sem a action bar
+		// nesse momento ele está criando um cache errado, com o tamanho da tela inteira
+		// na última vez que chama OnLayout até chega com o tamanho certo mas o if
+		// acabava não permitindo que um novo bitmap fosse gerado (com o tamanho correto)
+		// estou adicionando mais uma condição para a criação do bitmap: se o tamanho mudou 
+		// (por enquanto precisou apenas a altura)
+		private int lastHeight = 0;
+
 	   protected override void OnLayout(bool changed, int left, int top, int right, int bottom)
 		{
 			base.OnLayout(changed, left, top, right, bottom);
 			
-			if (viewedDays != null && calendarMonthCache == null)
+			if ((viewedDays != null && calendarMonthCache == null) 
+				|| lastHeight != this.Height) // necessário pois não estava entrando no if para criar o cache com o tamanho atual e correto
 			{
 				createCacheDisplay(ref calendarMonthCache, viewedDays);
+				lastHeight = this.Height;
 			}
 		}
 		

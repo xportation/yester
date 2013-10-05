@@ -190,13 +190,7 @@ namespace iSeconds.Droid
 			popupWindow.Update(moreContentView.MeasuredWidth, moreContentView.MeasuredHeight);
 		}
 
-		public override void OnWindowFocusChanged (bool hasFocus)
-		{
-			base.OnWindowFocusChanged (hasFocus);
-			// precisei fazer pois depois do menu de contexto aberto, se apertarmos o back button a seleção não é removida
-			if (hasFocus)
-				monthView.Invalidate();
-		}
+
 
 
 	}
