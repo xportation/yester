@@ -28,7 +28,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
+    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -38,6 +40,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <AndroidLinkMode>Full</AndroidLinkMode>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
@@ -48,9 +51,6 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.Mobile">
       <HintPath>..\Third_Party\XamarinMobileApi_Android\Xamarin.Mobile.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp.MonoDroid">
-      <HintPath>..\Components\restsharp-104.1.0\lib\android\RestSharp.MonoDroid.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +75,11 @@
     <Compile Include="SettingsActivity.cs" />
     <Compile Include="OptionDialogServiceAndroid.cs" />
     <Compile Include="AboutActivity.cs" />
+    <Compile Include="VideoUploadService\Session.cs" />
+    <Compile Include="VideoUploadService\VideoUploadNotificationReceiver.cs" />
+    <Compile Include="VideoUploadService\VideoUploadService.cs" />
+    <Compile Include="VideoUploadActivity.cs" />
+    <Compile Include="VideoPlayerActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -161,6 +166,8 @@
     <AndroidResource Include="Resources\drawable\broditech_power.png" />
     <AndroidResource Include="Resources\drawable\facebook.png" />
     <AndroidResource Include="Resources\drawable\twitter.png" />
+    <AndroidResource Include="Resources\layout\VideoPlayer.axml" />
+    <AndroidResource Include="Resources\layout\VideoThumbnail.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -174,6 +181,10 @@
     <ProjectReference Include="..\LegacyBar.Library\LegacyBar.Library.csproj">
       <Project>{371657B5-2C38-4D23-B7C1-6C053EB55FB8}</Project>
       <Name>LegacyBar.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Third_Party\RestSharp\RestSharp.MonoDroid\RestSharp.MonoDroid.csproj">
+      <Project>{1B662C38-984F-4B6A-89B5-AFF7FCBE43A2}</Project>
+      <Name>RestSharp.MonoDroid</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -234,12 +245,5 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\ic_share.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <XamarinComponentReference Include="restsharp">
-      <InstallationInProgress>False</InstallationInProgress>
-      <Version>104.1.0</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
   </ItemGroup>
 </Project>

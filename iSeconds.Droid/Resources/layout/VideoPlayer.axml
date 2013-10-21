@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/secondary_activities_background">
+    <legacybar.library.bar.LegacyBar
+        android:id="@+id/actionbar"
+        style="@style/actionbar"
+        ab:title="@string/timeline_default"
+        ab:separator="@color/actionbar_background"
+        ab:background="@color/actionbar_background"
+        ab:background_item="@drawable/actionbar_button" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/linearLayout">
+        <ListView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="108px"
+            android:layout_height="fill_parent"
+            android:id="@+id/videoThumbnails"
+            android:layout_margin="4dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/linearLayout2"
+            android:layout_margin="4dp">
+            <SurfaceView
+                android:id="@+id/surfaceView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

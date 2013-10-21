@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using Android.Content;
 using iSeconds.Domain.Framework;
 
-namespace iSeconds
+namespace iSeconds.Droid
 {
    [Application(Debuggable=true)]
    public class ISecondsApplication : Application

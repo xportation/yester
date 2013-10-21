@@ -11,7 +11,7 @@ using Android.Graphics.Drawables;
 
 namespace iSeconds.Droid
 {
-	[Activity (Label = "TimelineActivity")]			
+   [Activity (Label = "TimelineActivity")]
 	public class TimelineActivity : ISecondsActivity
 	{
 		private CalendarMonthView monthView;

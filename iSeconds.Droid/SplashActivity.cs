@@ -15,7 +15,7 @@ namespace iSeconds.Droid
 			base.OnCreate (bundle);
          try {            
             this.StartActivity(typeof(TimelineActivity));
-         } catch (Exception ex) {
+         } catch (Exception) {
             this.Finish();
          }
 		}
