@@ -22,9 +22,6 @@ namespace iSeconds.Droid
 		private IRepository repository = null;
 		private int timelineId = -1;
 
-		private Intent videoUploadServiceIntent;
-      private VideoUploadServiceConnection serviceConnection;
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -43,9 +40,6 @@ namespace iSeconds.Droid
 			configureActionBar(true);
 			configureTextViewFonts();
 			connectToShareButton();
-//         setShareButtonEnabled(false);
-//         startVideoUploadService();
-//			connectToService();
 		}
 
 		private void configureTextViewFonts ()
@@ -76,21 +70,6 @@ namespace iSeconds.Droid
 				intent.PutExtra("ShareDate_TimelineId", timelineId);
 				this.StartActivity(intent);
 			};
-		}
-
-      private void startVideoUploadService()
-      {
-			videoUploadServiceIntent = new Intent(this, typeof(VideoUploadService));
-			StartService(videoUploadServiceIntent);
-      }
-
-		private void connectToService()
-		{
-         serviceConnection = new VideoUploadServiceConnection();
-         BindService(videoUploadServiceIntent, serviceConnection, Bind.AutoCreate);
-
-         serviceConnection.onServiceConnected+= () => this.setShareButtonEnabled(true);
-         serviceConnection.onServiceDisconnected+= () => this.setShareButtonEnabled(false);
 		}
 
       private void setShareButtonEnabled(bool enabled)

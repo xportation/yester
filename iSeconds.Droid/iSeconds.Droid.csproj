@@ -75,10 +75,6 @@
     <Compile Include="SettingsActivity.cs" />
     <Compile Include="OptionDialogServiceAndroid.cs" />
     <Compile Include="AboutActivity.cs" />
-    <Compile Include="VideoUploadService\Session.cs" />
-    <Compile Include="VideoUploadService\VideoUploadNotificationReceiver.cs" />
-    <Compile Include="VideoUploadService\VideoUploadService.cs" />
-    <Compile Include="VideoUploadActivity.cs" />
     <Compile Include="VideoPlayerActivity.cs" />
   </ItemGroup>
   <ItemGroup>
