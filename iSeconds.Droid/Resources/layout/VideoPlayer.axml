@@ -26,19 +26,22 @@
             android:layout_height="fill_parent"
             android:id="@+id/videoThumbnails"
             android:layout_margin="4dp" />
-        <LinearLayout
-            android:orientation="vertical"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/linearLayout2"
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/surfaceLayout"
             android:layout_margin="4dp">
             <SurfaceView
                 android:id="@+id/surfaceView"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
-        </LinearLayout>
+            <ImageView
+                android:src="@drawable/ic_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imagePausePlay"
+                android:layout_gravity="center" />
+        </FrameLayout>
     </LinearLayout>
 </LinearLayout>

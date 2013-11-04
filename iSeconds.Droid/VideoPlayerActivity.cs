@@ -78,7 +78,6 @@ namespace iSeconds.Droid
       }
 	}
 
-
    [Activity (Label = "VideoPlayerActivity", ScreenOrientation = ScreenOrientation.Landscape)]
 	public class VideoPlayerActivity : ISecondsActivity, ISurfaceHolderCallback
 	{
@@ -92,11 +91,14 @@ namespace iSeconds.Droid
       private int currentVideo = 0;
       private ListView thumbnails = null;
       private IList<MediaInfo> videos= null;
-      private VideoThumbnailsViewAdapter viewAdapter= null;
+      private VideoThumbnailsViewAdapter viewAdapter = null;
 
-		Android.Media.MediaPlayer mediaPlayer;
-		ISurfaceHolder surfaceHolder;
-		SurfaceView playerSurfaceView;
+      private Android.Media.MediaPlayer mediaPlayer;
+
+		private ISurfaceHolder surfaceHolder;
+		private SurfaceView surfaceView;
+      private ImageView playOverImage;
+      private bool canPlayOnTouch;
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -108,6 +110,9 @@ namespace iSeconds.Droid
 			ISecondsApplication application = (ISecondsApplication)this.Application;
 			pathService = application.GetPathService();
 			repository = application.GetRepository();
+
+         canPlayOnTouch = true;
+         playOverImage= FindViewById<ImageView>(Resource.Id.imagePausePlay);
 
 			startDate= DateTime.FromBinary(this.Intent.Extras.GetLong("ShareDate_Start"));
 			endDate= DateTime.FromBinary(this.Intent.Extras.GetLong("ShareDate_End"));
@@ -121,32 +126,46 @@ namespace iSeconds.Droid
 			thumbnails.Clickable = true;
          
          thumbnails.ItemClick += (sender, e) => 
-            mediaPlayer.Start();
+            playVideo(e.Position);
 		}
 
       protected override void OnStart()
       {
          base.OnStart();
 
-         playerSurfaceView = (SurfaceView)FindViewById(Resource.Id.surfaceView);
+         surfaceView = (SurfaceView)FindViewById(Resource.Id.surfaceView);
 
-         surfaceHolder = playerSurfaceView.Holder;
+         surfaceHolder = surfaceView.Holder;
          surfaceHolder.AddCallback(this);
          surfaceHolder.SetType(SurfaceType.PushBuffers);
       }
 
+		protected override void OnStop()
+		{
+			mediaPlayer.Release();
+
+			base.OnStop();
+		}
+
       private void playVideo(int videoPosition)
       {
          if (videoPosition < videos.Count) {
-				if (mediaPlayer.IsPlaying)
-					mediaPlayer.Stop();
+            if (mediaPlayer.IsPlaying)
+               mediaPlayer.Stop();
 
+            canPlayOnTouch = true;
             currentVideo = videoPosition;
+            showPlayButton(false);
+            viewAdapter.SelectViewItem(currentVideo);
 
-				mediaPlayer.Reset();
-				string filePath = videos[currentVideo].Path;
-				mediaPlayer.SetDataSource(filePath);
-				mediaPlayer.PrepareAsync();
+            string filePath = videos[currentVideo].Path;
+
+            mediaPlayer.Reset();
+            mediaPlayer.SetDataSource(filePath);
+            mediaPlayer.PrepareAsync();
+         } else {
+            canPlayOnTouch = false;
+            showPlayButton(true);
          }
       }
 
@@ -158,25 +177,77 @@ namespace iSeconds.Droid
 
 		public void SurfaceCreated(ISurfaceHolder holder)
 		{
-			mediaPlayer = new Android.Media.MediaPlayer();
+         mediaPlayer = new Android.Media.MediaPlayer();
+         mediaPlayer.SetWakeMode(this, WakeLockFlags.Full);
          mediaPlayer.SetDisplay(surfaceHolder);
-                  
-			mediaPlayer.Completion += (sender, e) => {
-				if (currentVideo + 1 < videos.Count)
-					playVideo(currentVideo + 1);
-			};
 
-			mediaPlayer.Prepared += (sender, e) => 
-				mediaPlayer.Start();
+         mediaPlayer.Completion += (sender, e) => {
+            playVideo(currentVideo + 1);
+         };
 
-			playVideo(currentVideo);
+         mediaPlayer.Prepared += (sender, e) => {
+            mediaPlayer.Start();
+         };
+
+			prepareSurface();
 		}
 
 		public void SurfaceDestroyed(ISurfaceHolder holder)
 		{
+			mediaPlayer.Release();
 		}
 
 		#endregion
+
+		private void prepareSurface()
+		{
+			if (videos.Count > 0) {
+				currentVideo = 0;
+            showPlayButton(false);
+            viewAdapter.SelectViewItem(currentVideo);
+				mediaPlayer.SetDataSource(videos[currentVideo].Path);
+				mediaPlayer.Prepare();
+
+				int surfaceView_Width = surfaceView.Width;
+				int surfaceView_Height = surfaceView.Height;
+
+				float video_Width = mediaPlayer.VideoWidth;
+				float video_Height = mediaPlayer.VideoHeight;
+
+				float ratio_width = surfaceView_Width/video_Width;
+				float ratio_height = surfaceView_Height/video_Height;
+				float aspectratio = video_Width/video_Height;
+
+				var layoutParams = surfaceView.LayoutParameters;
+
+				if (ratio_width > ratio_height){
+					layoutParams.Width = (int) (surfaceView_Height * aspectratio);
+					layoutParams.Height = surfaceView_Height;
+				}else{
+					layoutParams.Width = surfaceView_Width;
+					layoutParams.Height = (int) (surfaceView_Width / aspectratio);
+				}
+
+				surfaceView.LayoutParameters= layoutParams;
+
+				surfaceView.Click += (sender, e) => {
+					if (mediaPlayer.IsPlaying)
+						mediaPlayer.Pause();
+					else
+						mediaPlayer.Start();
+
+					showPlayButton(!mediaPlayer.IsPlaying);
+				};
+			}
+		}
+
+		private void showPlayButton(bool mustShow)
+		{
+         if (mustShow)
+            playOverImage.Visibility = ViewStates.Visible;
+         else
+            playOverImage.Visibility = ViewStates.Gone;
+		}
 	}
 }
 
