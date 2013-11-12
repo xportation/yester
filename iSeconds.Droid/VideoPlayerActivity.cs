@@ -89,6 +89,7 @@ namespace iSeconds.Droid
 		private int timelineId= 0;
 
       private int currentVideo = 0;
+		private TextView date = null;
       private ListView thumbnails = null;
       private IList<MediaInfo> videos= null;
       private VideoThumbnailsViewAdapter viewAdapter = null;
@@ -97,8 +98,7 @@ namespace iSeconds.Droid
 
 		private ISurfaceHolder surfaceHolder;
 		private SurfaceView surfaceView;
-      private ImageView playOverImage;
-      private bool canPlayOnTouch;
+		private ImageView playOverImage;
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -111,8 +111,11 @@ namespace iSeconds.Droid
 			pathService = application.GetPathService();
 			repository = application.GetRepository();
 
-         canPlayOnTouch = true;
          playOverImage= FindViewById<ImageView>(Resource.Id.imagePausePlay);
+			date = FindViewById<TextView>(Resource.Id.textViewDate);
+			TextViewUtil.ChangeForDefaultFont(date, this, 22f);
+
+			configureActionBar(true);
 
 			startDate= DateTime.FromBinary(this.Intent.Extras.GetLong("ShareDate_Start"));
 			endDate= DateTime.FromBinary(this.Intent.Extras.GetLong("ShareDate_End"));
@@ -153,7 +156,6 @@ namespace iSeconds.Droid
             if (mediaPlayer.IsPlaying)
                mediaPlayer.Stop();
 
-            canPlayOnTouch = true;
             currentVideo = videoPosition;
             showPlayButton(false);
             viewAdapter.SelectViewItem(currentVideo);
@@ -164,7 +166,6 @@ namespace iSeconds.Droid
             mediaPlayer.SetDataSource(filePath);
             mediaPlayer.PrepareAsync();
          } else {
-            canPlayOnTouch = false;
             showPlayButton(true);
          }
       }
@@ -186,6 +187,7 @@ namespace iSeconds.Droid
          };
 
          mediaPlayer.Prepared += (sender, e) => {
+				setDateLabel();
             mediaPlayer.Start();
          };
 
@@ -198,6 +200,16 @@ namespace iSeconds.Droid
 		}
 
 		#endregion
+
+		private void setDateLabel()
+		{
+			if (currentVideo < videos.Count) {
+				MediaInfo media = videos[currentVideo];
+				DayInfo day = repository.GetDayInfo(media.DayId);
+
+				date.Text= String.Format("{0:g}", day.Date);
+			}
+		}
 
 		private void prepareSurface()
 		{

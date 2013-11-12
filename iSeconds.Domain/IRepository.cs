@@ -20,6 +20,8 @@ namespace iSeconds.Domain
       
       DayInfo GetDayInfoAt(DateTime dateTime, int timelineId);
 
+		DayInfo GetDayInfo(int dayId);
+
 		User GetUser(string userName);
 		void SaveUser(User user);
 

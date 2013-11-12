@@ -62,6 +62,11 @@ namespace iSeconds.Domain
 			return dayInfo;
 		}
 
+		public DayInfo GetDayInfo(int dayId)
+		{
+			return (from i in Table<DayInfo> () where i.Id == dayId select i).FirstOrDefault ();
+		}
+
 		public MediaInfo GetMediaById (int id)
 		{
 			lock (locker) {
