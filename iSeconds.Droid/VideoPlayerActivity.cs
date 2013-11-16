@@ -100,9 +100,11 @@ namespace iSeconds.Droid
 		private SurfaceView surfaceView;
 		private ImageView playOverImage;
 
-		protected override void OnCreate(Bundle bundle)
+		private const string CurrentVideoPlaying= "currentVideoPlaying";
+
+		protected override void OnCreate(Bundle savedInstanceState)
 		{
-			base.OnCreate (bundle);
+			base.OnCreate(savedInstanceState);
 
 			this.RequestWindowFeature(WindowFeatures.NoTitle);
 			this.SetContentView(Resource.Layout.VideoPlayer);
@@ -130,6 +132,17 @@ namespace iSeconds.Droid
          
          thumbnails.ItemClick += (sender, e) => 
             playVideo(e.Position);
+
+			loadState(savedInstanceState);
+		}
+
+		private void loadState(Bundle bundle)
+		{
+			if (bundle != null) {
+				if (bundle.ContainsKey(CurrentVideoPlaying)) {
+					currentVideo = bundle.GetInt(CurrentVideoPlaying);
+				}
+			}
 		}
 
       protected override void OnStart()
@@ -143,11 +156,23 @@ namespace iSeconds.Droid
          surfaceHolder.SetType(SurfaceType.PushBuffers);
       }
 
-		protected override void OnStop()
+		protected override void OnSaveInstanceState(Bundle outState)
 		{
-			mediaPlayer.Release();
+			base.OnSaveInstanceState(outState);
 
-			base.OnStop();
+			outState.PutInt(CurrentVideoPlaying, currentVideo);
+		}
+
+		protected override void OnPause()
+		{
+			base.OnPause();
+			releaseMediaPlayer();
+		}
+
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+			releaseMediaPlayer();
 		}
 
       private void playVideo(int videoPosition)
@@ -170,6 +195,15 @@ namespace iSeconds.Droid
          }
       }
 
+		private void releaseMediaPlayer()
+		{
+			if (mediaPlayer != null)
+			{
+				mediaPlayer.Release();
+				mediaPlayer = null;
+			}
+		}
+
 		#region ISurfaceHolderCallback implementation
 
 		public void SurfaceChanged(ISurfaceHolder holder, Format format, int width, int height)
@@ -178,7 +212,7 @@ namespace iSeconds.Droid
 
 		public void SurfaceCreated(ISurfaceHolder holder)
 		{
-         mediaPlayer = new Android.Media.MediaPlayer();
+			mediaPlayer = new Android.Media.MediaPlayer();
          mediaPlayer.SetWakeMode(this, WakeLockFlags.Full);
          mediaPlayer.SetDisplay(surfaceHolder);
 
@@ -188,7 +222,7 @@ namespace iSeconds.Droid
 
          mediaPlayer.Prepared += (sender, e) => {
 				setDateLabel();
-            mediaPlayer.Start();
+				mediaPlayer.Start();
          };
 
 			prepareSurface();
@@ -196,7 +230,7 @@ namespace iSeconds.Droid
 
 		public void SurfaceDestroyed(ISurfaceHolder holder)
 		{
-			mediaPlayer.Release();
+			releaseMediaPlayer();
 		}
 
 		#endregion
@@ -214,8 +248,7 @@ namespace iSeconds.Droid
 		private void prepareSurface()
 		{
 			if (videos.Count > 0) {
-				currentVideo = 0;
-            showPlayButton(false);
+				showPlayButton(false);
             viewAdapter.SelectViewItem(currentVideo);
 				mediaPlayer.SetDataSource(videos[currentVideo].Path);
 				mediaPlayer.Prepare();
