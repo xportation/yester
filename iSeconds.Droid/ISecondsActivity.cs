@@ -40,7 +40,7 @@ namespace iSeconds.Droid
 				activityTracker.SetCurrentActivity(null);
 		}
 
-		protected void configureActionBar(bool addHomeAction)
+		protected void configureActionBar(bool addHomeAction, string title)
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
 
@@ -48,6 +48,8 @@ namespace iSeconds.Droid
 
 			TextView titleView = actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
 			TextViewUtil.ChangeFontForActionBarTitle(titleView, this, 26f);
+			if (title.Length != 0)
+				titleView.Text = title;
 
 			ScrollingTextView sTextView = (ScrollingTextView)titleView;
 

@@ -113,8 +113,7 @@ namespace iSeconds.Droid
 			listView.ItemClick += (sender, e) => viewModel.PlayVideoCommand.Execute(e.Position);
 			listView.ItemLongClick += (sender, e) => viewModel.ShowVideoOptionsCommand.Execute (e.Position);
 
-			configureActionBar(true);
-			configureActionBarTitle();
+			configureActionBar(true, getTitle());
 			addActionBarItems ();
       }
 
@@ -132,13 +131,11 @@ namespace iSeconds.Droid
 			actionBar.AddAction (takeVideoAction);
 		}
 
-      private void configureActionBarTitle()
-      {
-         var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			TextView titleView= actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
-         DateTimeFormatInfo format = CultureInfo.CurrentCulture.DateTimeFormat;
-         titleView.Text = viewModel.Model.Date.ToString(format.ShortDatePattern);
-      }
+		private string getTitle()
+		{
+			DateTimeFormatInfo format = CultureInfo.CurrentCulture.DateTimeFormat;
+			return viewModel.Model.Date.ToString(format.ShortDatePattern);
+		}
 
       public override bool OnOptionsItemSelected(IMenuItem item)
       {

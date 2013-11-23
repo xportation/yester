@@ -20,6 +20,7 @@ namespace iSeconds.Droid
 		private Color inactiveTextColor;
 		private bool isTextShadow;
 		private Color selectionColor;
+		private Color rangeDelimiterColor;
 		private Color todayColor;
 		private float textStrokeWidth;
 		private Paint.Align textAlign;
@@ -75,6 +76,12 @@ namespace iSeconds.Droid
 		{
 			get { return selectionColor; }
 			set { selectionColor = value; }
+		}
+
+		public Color RangeDelimiterColor
+		{
+			get { return rangeDelimiterColor; }
+			set { rangeDelimiterColor = value; }
 		}
 		
 		public Color TextColor
@@ -135,6 +142,7 @@ namespace iSeconds.Droid
 			todayColor = Color.Argb(255, 0, 180, 255);
 			todayStrokeWidth = 6f;
 			selectionColor = Color.Argb(100, 0, 180, 255);
+			rangeDelimiterColor = Color.Argb(100, 0, 255, 0);
 			selectionShadowColor = Color.Rgb(200, 220, 255);
 			textColor = Color.Rgb(51,65,90);
 			inactiveTextColor = Color.Rgb(127,147,182);
@@ -213,9 +221,12 @@ namespace iSeconds.Droid
 		private Paint todayPaint;
 		private Timer transitionTimer;
 
-		private bool isPressed = false;
 		private RectangleF pressedRect;
+
+		//private List<Tuple<RectangleF, DayViewModel>> pressedRange = new List<Tuple<RectangleF, DayViewModel>>();
+
 		private Paint pressedPaint;
+		private Paint rangeDelimiterPaint;
 
 		private bool shouldAnimate = false;
 
@@ -269,6 +280,10 @@ namespace iSeconds.Droid
 			pressedPaint.Color = theme.SelectionColor;
 			pressedPaint.SetStyle(Paint.Style.Fill);
 
+			rangeDelimiterPaint = new Paint();
+			rangeDelimiterPaint.Color = theme.SelectionColor;
+			rangeDelimiterPaint.SetStyle(Paint.Style.Fill);
+
 	      gestureDetector = new GestureDetector(this);
 
 			dayMoreMoviesIndicator = BitmapFactory.DecodeResource (this.Context.Resources, Resource.Drawable.ic_day_videos);
@@ -288,6 +303,8 @@ namespace iSeconds.Droid
 	      transitionTimer.Elapsed += OnTimedEvent;
 	   }
       #endregion
+
+		public bool AllowMultiSelection { get; set; }
 
 		private List<DayViewModel> viewedDays;
       public List<DayViewModel> ViewedDays
@@ -354,7 +371,7 @@ namespace iSeconds.Droid
 
 	   public void OnLongPress(MotionEvent e)
 	   {
-	      if (animation.IsAnimating())
+	      if (animation.IsAnimating() || !AllowMultiSelection)
 	         return;
 
 			// deixei para caso precisarmos adicionar algo no long press..
@@ -373,8 +390,8 @@ namespace iSeconds.Droid
 
 			float x = e.GetX();
 			float y = e.GetY();
-			
-			findAndSelectDay (x, y);
+
+			//findAndSelectDay (x, y);
 		}
 
 		private Tuple<RectangleF, DayViewModel> findAndSelectDay (float x, float y)
@@ -382,8 +399,13 @@ namespace iSeconds.Droid
 			var dayRegion = this.findDayOnXY (x, y);
 			if (dayRegion != null) 
 			{
-				isPressed = true;
 				pressedRect = dayRegion.Item1;
+
+				if (AllowMultiSelection)
+					ViewModel.ToggleSelectionDayCommand.Execute (dayRegion.Item2.Model.Date);
+				else
+					ViewModel.SelectOnlyCommand.Execute (dayRegion.Item2.Model.Date);
+
 				this.Invalidate ();
 			}
 			return dayRegion;
@@ -412,7 +434,9 @@ namespace iSeconds.Droid
 			var dayRegion = findAndSelectDay(x, y);
 			if (dayRegion != null)
 			{
-				dayRegion.Item2.DayClickedCommand.Execute(null);
+				if (!AllowMultiSelection)
+					dayRegion.Item2.DayClickedCommand.Execute(null);
+
 				return true;
 			}
 
@@ -487,11 +511,26 @@ namespace iSeconds.Droid
 
 		void drawSelection (Canvas canvas)
 		{
-			if (isPressed) 
+			// se tiver range selecionado nao desenhamos a seleçao solitaria
+			if (!animation.IsAnimating()) 
+			{
+				foreach (Tuple<RectangleF, DayViewModel> day in daysRegions) {
+
+					if (ViewModel.Range.Contains(day.Item2.Model.Date)) {
+						RectF rect = new RectF (day.Item1.Left, day.Item1.Top, day.Item1.Right, day.Item1.Bottom);
+						canvas.DrawRect (rect, rangeDelimiterPaint);
+					}
+					if (ViewModel.SelectedDays.Contains(day.Item2.Model.Date)) {
+						RectF rect = new RectF (day.Item1.Left, day.Item1.Top, day.Item1.Right, day.Item1.Bottom);
+						canvas.DrawRect (rect, pressedPaint);
+					}
+				}
+			}
+			/*else if (isPressed) 
 			{
 				isPressed = false;
-				canvas.DrawRect (pressedRect.Left, pressedRect.Top, pressedRect.Right, pressedRect.Bottom, pressedPaint);
-			}
+				canvas.DrawRect (pressedRect.Left, pressedRect.Top, pressedRect.Right, pressedRect.Bottom, pressedPaint);			
+			}*/
 		}
 
 		private void createCacheDisplay(ref Bitmap bitmap, List<DayViewModel> days)

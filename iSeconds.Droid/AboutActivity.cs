@@ -21,7 +21,7 @@ namespace iSeconds.Droid
 			this.RequestWindowFeature(WindowFeatures.NoTitle);
 			this.SetContentView(Resource.Layout.AboutView);
 
-			configureActionBar(true);
+			configureActionBar(true, "");
 			configureFonts();
 			configureHyperlinks();
 		}

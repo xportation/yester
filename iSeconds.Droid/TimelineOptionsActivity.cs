@@ -97,7 +97,7 @@ namespace iSeconds.Droid
 			
 			viewModelRequests();
 
-			configureActionBar(true);
+			configureActionBar(true, "");
 			configureActionBarActions();
       }
 

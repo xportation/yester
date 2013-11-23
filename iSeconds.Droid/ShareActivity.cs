@@ -12,6 +12,7 @@ using iSeconds.Domain;
 using System.IO;
 using System.Collections.Generic;
 using Android.Util;
+using iSeconds.Domain.Framework;
 
 namespace iSeconds.Droid
 {
@@ -20,6 +21,7 @@ namespace iSeconds.Droid
 	{
 		private IPathService pathService = null;
 		private IRepository repository = null;
+		private INavigator navigator = null;
 		private int timelineId = -1;
 
 		protected override void OnCreate (Bundle bundle)
@@ -34,12 +36,14 @@ namespace iSeconds.Droid
 
 			repository = application.GetRepository();
 
+			navigator = application.GetNavigator ();
+
          if (this.Intent.Extras.ContainsKey("TimelineId"))
 			   timelineId = Convert.ToInt32(this.Intent.Extras.GetString("TimelineId"));
 
-			configureActionBar(true);
-			configureTextViewFonts();
-			connectToShareButton();
+			configureActionBar (true, "");
+			configureTextViewFonts ();
+			connectToShareButton ();
 		}
 
 		private void configureTextViewFonts ()
@@ -63,12 +67,13 @@ namespace iSeconds.Droid
 
 				DateTime startDate = new DateTime (start.Year, start.Month + 1, start.DayOfMonth);
 				DateTime endDate = new DateTime (end.Year, end.Month + 1, end.DayOfMonth);
-								
-				Intent intent= new Intent(this, typeof(VideoPlayerActivity));
-				intent.PutExtra("ShareDate_Start", startDate.ToBinary());
-				intent.PutExtra("ShareDate_End", endDate.ToBinary());
-				intent.PutExtra("ShareDate_TimelineId", timelineId);
-				this.StartActivity(intent);
+
+				Args args = new Args();
+				args.Put("ShareDate_Start", startDate.ToBinary().ToString());
+				args.Put("ShareDate_End", endDate.ToBinary().ToString());
+				args.Put("ShareDate_TimelineId", timelineId.ToString());
+				this.navigator.NavigateTo("video_player", args);							
+
 			};
 		}
 

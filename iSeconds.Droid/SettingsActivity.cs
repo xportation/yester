@@ -24,7 +24,7 @@ namespace iSeconds.Droid
 			ISecondsApplication application = (ISecondsApplication) this.Application;
 			viewModel = new SettingsViewModel(application.GetUserService().CurrentUser);
 
-			configureActionBar(true);
+			configureActionBar(true, "");
 			configureFonts();
 			configureRadioButton();
 		}

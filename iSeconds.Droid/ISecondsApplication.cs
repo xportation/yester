@@ -40,7 +40,15 @@ namespace iSeconds.Droid
          navigator.RegisterNavigation ("timeline_view", new AndroidPresenter (this.activityTracker, typeof(TimelineActivity)));
 			navigator.RegisterNavigation("settings_view", new AndroidPresenter(this.activityTracker, typeof(SettingsActivity)));
 			navigator.RegisterNavigation("share_view", new AndroidPresenter(this.activityTracker, typeof(ShareActivity)));
+// temporario apenas para manter no historico
+			//navigator.RegisterNavigation("range_selector", new AndroidPresenter(this.activityTracker, typeof(RangeSelectorActivity)));
+// ---
+			navigator.RegisterNavigation("range_selector", new AndroidPresenter(this.activityTracker, typeof(RangeSelectorByDayActivity)));
+			navigator.RegisterNavigation("range_selector_by_day", new AndroidPresenter(this.activityTracker, typeof(RangeSelectorByDayActivity)));
+			navigator.RegisterNavigation("range_selector_by_month", new AndroidPresenter(this.activityTracker, typeof(RangeSelectorByMonthActivity)));
+			navigator.RegisterNavigation("range_selector_by_year", new AndroidPresenter(this.activityTracker, typeof(RangeSelectorByMonthActivity)));
 			navigator.RegisterNavigation("about_view", new AndroidPresenter(this.activityTracker, typeof(AboutActivity)));
+			navigator.RegisterNavigation("video_player", new AndroidPresenter(this.activityTracker, typeof(VideoPlayerActivity)));
 
 			optionsDialogService = new OptionDialogServiceAndroid (activityTracker);
       }

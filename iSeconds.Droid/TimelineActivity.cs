@@ -36,7 +36,7 @@ namespace iSeconds.Droid
 				viewModel.CurrentDate= DateTime.FromBinary(bundle.GetLong(CurrentDateState));
 			}
 
-			configureActionBar(false);
+			configureActionBar(false, "");
 			addActionBarItems();
 			setupCalendar();
 		}
@@ -94,6 +94,8 @@ namespace iSeconds.Droid
 			monthView.ViewedDays = viewModel.VisibleDays;
 			monthView.ViewModel = viewModel;
 
+			monthView.AllowMultiSelection = false;
+
 			this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
 				{
 					if (e.PropertyName == "CurrentMonthTitle") {
@@ -146,7 +148,6 @@ namespace iSeconds.Droid
 			popupWindow.ContentView = moreContentView;
 			// xunxo para pegar o ImageView do overflow adicionado como action pelo LegacyBar
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			TextView titleView = actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
 			var layout = actionBar.FindViewById<LinearLayout>(Resource.Id.actionbar_actions);
 			View view = layout.GetChildAt (layout.ChildCount - 1); // pegamos o ultimo... nao consegui fazer de outro jeito..
 			ImageView imageView = (ImageView)view;
@@ -178,6 +179,12 @@ namespace iSeconds.Droid
 			Button shareButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_share);
 			shareButton.Click += (object sender, EventArgs e) => {
 				viewModel.ShareCommand.Execute(null);
+				popupWindow.Dismiss();
+			};
+
+			Button playButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_play);
+			playButton.Click += (object sender, EventArgs e) => {
+				viewModel.PlayCommand.Execute(null);
 				popupWindow.Dismiss();
 			};
 

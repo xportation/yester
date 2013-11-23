@@ -117,11 +117,11 @@ namespace iSeconds.Droid
 			date = FindViewById<TextView>(Resource.Id.textViewDate);
 			TextViewUtil.ChangeForDefaultFont(date, this, 22f);
 
-			configureActionBar(true);
+			configureActionBar(true, "");
 
-			startDate= DateTime.FromBinary(this.Intent.Extras.GetLong("ShareDate_Start"));
-			endDate= DateTime.FromBinary(this.Intent.Extras.GetLong("ShareDate_End"));
-			timelineId= this.Intent.Extras.GetInt("ShareDate_TimelineId");
+			startDate= DateTime.FromBinary(Convert.ToInt64(this.Intent.Extras.GetString("ShareDate_Start")));
+			endDate= DateTime.FromBinary(Convert.ToInt64(this.Intent.Extras.GetString("ShareDate_End")));
+			timelineId= Convert.ToInt32(this.Intent.Extras.GetString("ShareDate_TimelineId"));
 
          videos = repository.GetMediaInfoByPeriod(startDate, endDate, timelineId);
 			viewAdapter = new VideoThumbnailsViewAdapter(this, videos);

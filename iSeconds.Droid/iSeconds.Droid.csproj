@@ -30,6 +30,7 @@
     <ConsolePause>False</ConsolePause>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -75,6 +76,11 @@
     <Compile Include="SettingsActivity.cs" />
     <Compile Include="OptionDialogServiceAndroid.cs" />
     <Compile Include="AboutActivity.cs" />
+    <Compile Include="RangeSelectorByDayActivity.cs" />
+    <Compile Include="RangeSelectorActivity.cs" />
+    <Compile Include="ISecondsListView.cs" />
+    <Compile Include="ExpandableListAdapter.cs" />
+    <Compile Include="RangeSelectorByMonthActivity.cs" />
     <Compile Include="VideoPlayerActivity.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -162,9 +168,15 @@
     <AndroidResource Include="Resources\drawable\broditech_power.png" />
     <AndroidResource Include="Resources\drawable\facebook.png" />
     <AndroidResource Include="Resources\drawable\twitter.png" />
+    <AndroidResource Include="Resources\layout\CalendarRangeSelector.axml" />
+    <AndroidResource Include="Resources\layout\RangeSelector.axml" />
+    <AndroidResource Include="Resources\layout\TextViewItem.axml" />
+    <AndroidResource Include="Resources\layout\ExpandableList.axml" />
+    <AndroidResource Include="Resources\layout\ExpandableGroupLayout.axml" />
     <AndroidResource Include="Resources\layout\VideoPlayer.axml" />
     <AndroidResource Include="Resources\layout\VideoThumbnail.axml" />
     <AndroidResource Include="Resources\drawable\ic_play.png" />
+    <AndroidResource Include="Resources\layout\DatePickerView.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

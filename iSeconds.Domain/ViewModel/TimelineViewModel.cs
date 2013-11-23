@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace iSeconds.Domain
 {
@@ -166,6 +167,27 @@ namespace iSeconds.Domain
 			get { return new Command((object arg) => { navigator.NavigateTo("about_view", new Args()); }); }
 		}
 
+		public ICommand PlayCommand {
+			get { return new Command((object arg) => { navigator.NavigateTo("range_selector", new Args()); }); }
+		}
+
+		public ICommand PlaySelectionCommand {
+			get {
+				return new Command ((object arg) => { 
+
+					Tuple<DateTime, DateTime> rangeDelimiters = getRangeDelimiters();
+
+					Args args = new Args();
+					args.Put("ShareDate_Start", rangeDelimiters.Item1.ToBinary().ToString());
+					args.Put("ShareDate_End", rangeDelimiters.Item2.ToBinary().ToString());
+					args.Put("ShareDate_TimelineId", this.timeline.Id.ToString());
+
+					this.navigator.NavigateTo("video_player", args);
+				
+				});
+			}
+		}
+
 		private string currentMonthTitle;
 
 		public string CurrentMonthTitle
@@ -181,5 +203,101 @@ namespace iSeconds.Domain
 			get { return timelineName; }
 			set { this.SetField(ref timelineName, value, "TimelineName"); }
 		}
+
+		private void selectDay(DateTime day, bool select)
+		{
+			if (select)
+				selectedDays.Add(day);
+			else
+				selectedDays.Remove(day);
+		}
+
+		private Tuple<DateTime, DateTime> getRangeDelimiters()
+		{
+			Debug.Assert (range.Count == 2);
+			DateTime[] dates = new DateTime[2];
+			range.CopyTo (dates);
+
+			Tuple<DateTime, DateTime> result = new Tuple<DateTime, DateTime> (
+				dates [0] < dates [1] ? dates [0] : dates [1],
+				dates [0] > dates [1] ? dates [0] : dates [1]
+				);
+
+			return result;
+		}
+
+		private HashSet<DateTime> range = new HashSet<DateTime>();
+		public HashSet<DateTime> Range 
+		{
+			get {
+				return range;
+			}
+		}
+
+		private void selectRangeBetween (DateTime day1, DateTime day2)
+		{
+			foreach (DateTime day in EachDay(day1, day2)) {
+				selectedDays.Add (day);
+			}
+		}
+
+		public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
+		{
+			for(var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
+				yield return day;
+		}
+
+		public ICommand ToggleSelectionDayCommand
+		{
+			get {
+				return new Command ((object arg) => { 
+
+					DateTime day = (DateTime)arg;
+
+					if (range.Count == 2) {
+						range.Clear();
+						range.Add(day);
+						selectedDays.Clear();
+						selectedDays.Add(day);
+						return;
+					}
+
+					if (range.Count < 2) {
+						range.Add(day);
+						selectedDays.Add(day);
+					}
+					if (range.Count == 2) {
+
+						DateTime[] days = new DateTime[2];
+						selectedDays.CopyTo(days);
+						DateTime first = days[0] < days[1] ? days[0] : days[1];
+						DateTime second = days[0] > days[1] ? days[0] : days[1];
+						selectRangeBetween(first, second);
+					}
+
+				});
+			}
+		}
+
+		public ICommand SelectOnlyCommand
+		{
+			get {
+				return new Command ((object arg) => { 
+
+					DateTime day = (DateTime)arg;
+
+					selectedDays.Clear();
+					selectDay(day, true);
+
+				});
+			}
+		}
+
+		private HashSet<DateTime> selectedDays = new HashSet<DateTime>();
+		public HashSet<DateTime> SelectedDays 
+		{
+			get { return selectedDays; }
+		}		
+
 	}
 }

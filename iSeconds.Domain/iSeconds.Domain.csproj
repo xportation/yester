@@ -68,6 +68,7 @@
     <Compile Include="IPathService.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="IOptionsDialogService.cs" />
+    <Compile Include="ViewModel\ListItemViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

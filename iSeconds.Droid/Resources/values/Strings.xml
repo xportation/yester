@@ -40,4 +40,8 @@
    <string name="video_upload_total_progress">Total Progress:</string>
 	<string name="more">More options</string>
 	<string name="about">About</string>
+	<string name="play_video">Play</string>
+	<string name="play_title">Play</string>
+	<string name="range_selector">Range Selector</string>
+	
 </resources>
