@@ -48,18 +48,6 @@ namespace iSeconds.Droid
 				StartActivity(intent);
 			};
 		}
-
-		public override bool OnOptionsItemSelected(IMenuItem item)
-		{
-			switch (item.ItemId)
-			{
-			case Resource.Id.actionbar_back_to_home:
-				OnSearchRequested();
-				this.Finish();
-				return true;   
-			}
-			return base.OnOptionsItemSelected(item);
-		}
 	}
 }
 

@@ -9,7 +9,7 @@
 	<string name="timeline_default">Default Timeline</string>
 	<string name="timeline_options_title">Timelines</string>
 	<string name="timeline_menu_options">Timeline Settings</string>
-	<string name="timeline_options_message">*Hold on a timeline for options menu</string>
+	<string name="timeline_options_message">Hold on a timeline for options menu</string>
 	<string name="timeline_options_dialog_textName">Name</string>
 	<string name="timeline_options_dialog_textDescription">Description</string>
 	<string name="timeline_options_dialog_new_timeline">New Timeline</string>
@@ -23,7 +23,7 @@
 	<string name="timeline_options_dialog_delete_alert">Are you sure to delete this timeline? \nThis operation can not be undone.</string>   
    <string name="day_options_title">Day</string>
    <string name="day_options_video_description">Video description:</string>
-   <string name="item_options_message">*Long press on an item for options menu\n*Tap to play the video</string>
+   <string name="item_options_message">Long press on an item for options menu\nTap to play the video</string>
 	<string name="settings">Settings</string>
 	<string name="settings_movies_size_title">Movie size:</string>
 	<string name="settings_movies_size_description">It\'s the default size of the movies when you\'ll record. You can change it any time.</string>
@@ -40,6 +40,7 @@
    <string name="video_upload_total_progress">Total Progress:</string>
 	<string name="more">More options</string>
 	<string name="about">About</string>
+	<string name="video_player">Video Player</string>
 	<string name="play_video">Play</string>
 	<string name="play_title">Play</string>
 	<string name="range_selector">Range Selector</string>

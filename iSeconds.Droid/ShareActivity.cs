@@ -92,18 +92,5 @@ namespace iSeconds.Droid
 			StartActivity (Intent.CreateChooser (intent, "Share your timeline to..."));
 		}
 
-		public override bool OnOptionsItemSelected (IMenuItem item)
-		{
-			switch (item.ItemId) {
-			case Resource.Id.actionbar_back_to_home:
-				OnSearchRequested ();
-					//viewModel.BackToHomeCommand.Execute(null);
-				this.Finish ();
-				return true;
-			}
-
-			return base.OnOptionsItemSelected (item);
-		}
 	}
-
 }

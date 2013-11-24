@@ -63,19 +63,6 @@ namespace iSeconds.Droid
 			mediumView.Click+= (sender, e) => viewModel.ChangeTimeCommand.Execute(MEDIUM_SIZE);
 			largeView.Click+= (sender, e) => viewModel.ChangeTimeCommand.Execute(LARGE_SIZE);
 		}
-
-		public override bool OnOptionsItemSelected(IMenuItem item)
-		{
-			switch (item.ItemId)
-			{
-			case Resource.Id.actionbar_back_to_home:
-				OnSearchRequested();
-				this.Finish();
-				return true;         
-			}
-
-			return base.OnOptionsItemSelected(item);
-		}
 	}
 }
 

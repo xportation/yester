@@ -1,5 +1,6 @@
 using iSeconds.Domain.Framework;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 
 namespace iSeconds.Domain
@@ -49,7 +50,9 @@ namespace iSeconds.Domain
                   mediaService.TakeVideo(this.model.Date, (string videoPath) =>
                      {
                         this.AddVideoCommand.Execute(videoPath);
-								mediaService.SaveVideoThumbnail(model.GetDefaultThumbnail(), model.GetDefaultVideoPath());
+								Task.Factory.StartNew(()=>
+									mediaService.SaveVideoThumbnail(model.GetDefaultThumbnail(), model.GetDefaultVideoPath())
+								);
 								OnPropertyChanged("VideoRecorded");
                      });
                });

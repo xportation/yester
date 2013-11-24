@@ -8,7 +8,7 @@
     <legacybar.library.bar.LegacyBar
         android:id="@+id/actionbar"
         style="@style/actionbar"
-        ab:title="@string/timeline_default"
+        ab:title="@string/video_player"
         ab:separator="@color/actionbar_background"
         ab:background="@color/actionbar_background"
         ab:background_item="@drawable/actionbar_button" />
@@ -32,11 +32,11 @@
             android:layout_height="match_parent"
             android:id="@+id/surfaceLayout"
             android:layout_margin="4dp">
-            <SurfaceView
-                android:id="@+id/surfaceView"
+            <VideoView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:id="@+id/videoView" />
             <ImageView
                 android:src="@drawable/ic_play"
                 android:layout_width="wrap_content"

@@ -24,14 +24,4 @@
         android:dividerHeight="1sp"
         android:choiceMode="singleChoice"
         android:cacheColorHint="@android:color/transparent" />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/timelineOptionsMessage"
-        android:textStyle="italic"
-        android:paddingLeft="2dip"
-        android:text="@string/item_options_message"
-        android:background="@color/actionbar_background"
-        android:textColor="#FFFFFFFF" />
 </LinearLayout>

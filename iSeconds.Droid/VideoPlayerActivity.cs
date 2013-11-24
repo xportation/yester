@@ -17,12 +17,15 @@ namespace iSeconds.Droid
 {
 	class VideoThumbnailsViewAdapter : BaseAdapter
 	{
+		private int selectedItem;
       private Activity activity;
       private IList<MediaInfo> videos;
       private Dictionary<int, View> viewItems;
 
+
       public VideoThumbnailsViewAdapter(Activity activity, IList<MediaInfo> videos)
 		{
+			selectedItem = -1;
 			this.videos = videos;
 			this.activity = activity;
 
@@ -52,7 +55,7 @@ namespace iSeconds.Droid
             ImageView imageView = view.FindViewById<ImageView>(Resource.Id.videoPlayerThumbnail);
             Bitmap thumbnail = BitmapFactory.DecodeFile(media.GetThumbnailPath());
             imageView.SetImageBitmap(thumbnail);
-            view.SetBackgroundColor(Color.White);
+				setBackgroundColor(position, view);
             viewItems[position]= view;
          }
 
@@ -66,20 +69,47 @@ namespace iSeconds.Droid
 
       public void SelectViewItem(int position)
       {
+			selectedItem = position;
          foreach (KeyValuePair<int, View> viewItemPair in viewItems) {
             if (viewItemPair.Value == null)
                continue;
 
-            if (viewItemPair.Key == position)
-               viewItemPair.Value.SetBackgroundColor(Color.Orange);
-            else
-               viewItemPair.Value.SetBackgroundColor(Color.White);
+				setBackgroundColor(viewItemPair.Key, viewItemPair.Value);
          }
       }
+
+		private void setBackgroundColor(int position, View view)
+		{
+			if (position == selectedItem)
+				view.SetBackgroundColor(Color.Orange);
+			else
+				view.SetBackgroundColor(Color.White);
+		}
 	}
 
-   [Activity (Label = "VideoPlayerActivity", ScreenOrientation = ScreenOrientation.Landscape)]
-	public class VideoPlayerActivity : ISecondsActivity, ISurfaceHolderCallback
+	interface VideoViewPreparer
+	{
+		void Prepare();
+	}
+
+	class ScreenUnlockReceiver : BroadcastReceiver
+	{
+		private VideoViewPreparer videoViewPreparer;
+
+		public ScreenUnlockReceiver(VideoViewPreparer videoViewPreparer)
+		{
+			this.videoViewPreparer = videoViewPreparer;
+		}
+
+		public override void OnReceive(Context context, Android.Content.Intent intent)
+		{
+			videoViewPreparer.Prepare();
+		}
+	}
+
+	[Activity (Label = "VideoPlayerActivity", ScreenOrientation = ScreenOrientation.Landscape, 
+		ConfigurationChanges = ConfigChanges.KeyboardHidden|ConfigChanges.Orientation)]
+	public class VideoPlayerActivity : ISecondsActivity, VideoViewPreparer
 	{
 		private IPathService pathService = null;
 		private IRepository repository = null;
@@ -94,13 +124,17 @@ namespace iSeconds.Droid
       private IList<MediaInfo> videos= null;
       private VideoThumbnailsViewAdapter viewAdapter = null;
 
-      private Android.Media.MediaPlayer mediaPlayer;
-
-		private ISurfaceHolder surfaceHolder;
-		private SurfaceView surfaceView;
+		private VideoView videoView;
 		private ImageView playOverImage;
 
+		private int lastVideoPosition = 0;
+		private bool startingPaused = false;
+		private bool alreadyPrepared = false;
+		private ScreenUnlockReceiver screenUnlockReceiver = null;
+
+		private const string CurrentVideoPaused= "currentVideoPaused";
 		private const string CurrentVideoPlaying= "currentVideoPlaying";
+		private const string CurrentVideoPosition= "currentVideoPosition";
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -113,6 +147,7 @@ namespace iSeconds.Droid
 			pathService = application.GetPathService();
 			repository = application.GetRepository();
 
+			videoView = FindViewById<VideoView>(Resource.Id.videoView);
          playOverImage= FindViewById<ImageView>(Resource.Id.imagePausePlay);
 			date = FindViewById<TextView>(Resource.Id.textViewDate);
 			TextViewUtil.ChangeForDefaultFont(date, this, 22f);
@@ -134,106 +169,106 @@ namespace iSeconds.Droid
             playVideo(e.Position);
 
 			loadState(savedInstanceState);
+
+			screenUnlockReceiver = new ScreenUnlockReceiver(this);
+			IntentFilter filter = new IntentFilter(Intent.ActionUserPresent);
+			RegisterReceiver(screenUnlockReceiver, filter);
+
+			configureActions();
+			Prepare();
+		}
+
+		protected override void OnDestroy()
+		{
+			UnregisterReceiver(screenUnlockReceiver);
+			base.OnDestroy();
 		}
 
 		private void loadState(Bundle bundle)
 		{
 			if (bundle != null) {
-				if (bundle.ContainsKey(CurrentVideoPlaying)) {
+				if (bundle.ContainsKey(CurrentVideoPlaying))
 					currentVideo = bundle.GetInt(CurrentVideoPlaying);
-				}
+
+				if (bundle.ContainsKey(CurrentVideoPaused))
+					startingPaused = bundle.GetBoolean(CurrentVideoPaused);
+
+				if (bundle.ContainsKey(CurrentVideoPosition))
+					lastVideoPosition = bundle.GetInt(CurrentVideoPosition);
 			}
 		}
 
-      protected override void OnStart()
-      {
-         base.OnStart();
+		private void configureActions()
+		{
+			startingPaused = false;
+			alreadyPrepared = false;
+			videoView.Completion+= (sender, e) => {
+				playVideo(currentVideo+1);
+			};
 
-         surfaceView = (SurfaceView)FindViewById(Resource.Id.surfaceView);
+			videoView.Prepared += (sender, e) => {
+				setDateLabel();
+				videoView.Start();
 
-         surfaceHolder = surfaceView.Holder;
-         surfaceHolder.AddCallback(this);
-         surfaceHolder.SetType(SurfaceType.PushBuffers);
-      }
+				if (startingPaused) {
+					RunOnUiThread (() => {
+						videoView.SeekTo(lastVideoPosition);
+						showPlayButton(true);
+					});
+					RunOnUiThread (() => {
+						videoView.Pause();
+					});
+				}
+
+				startingPaused= false;
+			};
+
+			videoView.Touch+= (object sender, View.TouchEventArgs e) => {
+				if ((e.Event.Action & MotionEventActions.Mask) == MotionEventActions.Down) {
+					if (videoView.IsPlaying)
+						videoView.Pause();
+					else
+						videoView.Start();
+
+					showPlayButton(!videoView.IsPlaying);
+				}
+			};
+		}
 
 		protected override void OnSaveInstanceState(Bundle outState)
 		{
 			base.OnSaveInstanceState(outState);
-
+			startingPaused = !videoView.IsPlaying;
+			outState.PutBoolean(CurrentVideoPaused, startingPaused);
 			outState.PutInt(CurrentVideoPlaying, currentVideo);
+
+			lastVideoPosition = videoView.CurrentPosition;
+			outState.PutInt(CurrentVideoPosition, lastVideoPosition);
 		}
 
 		protected override void OnPause()
 		{
+			alreadyPrepared = false;
+			videoView.StopPlayback();
 			base.OnPause();
-			releaseMediaPlayer();
-		}
-
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
-			releaseMediaPlayer();
 		}
 
       private void playVideo(int videoPosition)
       {
          if (videoPosition < videos.Count) {
-            if (mediaPlayer.IsPlaying)
-               mediaPlayer.Stop();
+				if (videoView.IsPlaying)
+					videoView.StopPlayback();
 
             currentVideo = videoPosition;
             showPlayButton(false);
             viewAdapter.SelectViewItem(currentVideo);
 
             string filePath = videos[currentVideo].Path;
-
-            mediaPlayer.Reset();
-            mediaPlayer.SetDataSource(filePath);
-            mediaPlayer.PrepareAsync();
+				videoView.SetVideoPath(filePath);
          } else {
             showPlayButton(true);
          }
       }
-
-		private void releaseMediaPlayer()
-		{
-			if (mediaPlayer != null)
-			{
-				mediaPlayer.Release();
-				mediaPlayer = null;
-			}
-		}
-
-		#region ISurfaceHolderCallback implementation
-
-		public void SurfaceChanged(ISurfaceHolder holder, Format format, int width, int height)
-		{
-		}
-
-		public void SurfaceCreated(ISurfaceHolder holder)
-		{
-			mediaPlayer = new Android.Media.MediaPlayer();
-         mediaPlayer.SetWakeMode(this, WakeLockFlags.Full);
-         mediaPlayer.SetDisplay(surfaceHolder);
-
-         mediaPlayer.Completion += (sender, e) => {
-            playVideo(currentVideo + 1);
-         };
-
-         mediaPlayer.Prepared += (sender, e) => {
-				setDateLabel();
-				mediaPlayer.Start();
-         };
-
-			prepareSurface();
-		}
-
-		public void SurfaceDestroyed(ISurfaceHolder holder)
-		{
-			releaseMediaPlayer();
-		}
-
-		#endregion
 
 		private void setDateLabel()
 		{
@@ -245,46 +280,19 @@ namespace iSeconds.Droid
 			}
 		}
 
-		private void prepareSurface()
+		#region VideoViewPreparer implementation
+
+		public void Prepare()
 		{
-			if (videos.Count > 0) {
+			if (videos.Count > 0 && videoView != null && !alreadyPrepared) {
+				alreadyPrepared = true;
 				showPlayButton(false);
-            viewAdapter.SelectViewItem(currentVideo);
-				mediaPlayer.SetDataSource(videos[currentVideo].Path);
-				mediaPlayer.Prepare();
-
-				int surfaceView_Width = surfaceView.Width;
-				int surfaceView_Height = surfaceView.Height;
-
-				float video_Width = mediaPlayer.VideoWidth;
-				float video_Height = mediaPlayer.VideoHeight;
-
-				float ratio_width = surfaceView_Width/video_Width;
-				float ratio_height = surfaceView_Height/video_Height;
-				float aspectratio = video_Width/video_Height;
-
-				var layoutParams = surfaceView.LayoutParameters;
-
-				if (ratio_width > ratio_height){
-					layoutParams.Width = (int) (surfaceView_Height * aspectratio);
-					layoutParams.Height = surfaceView_Height;
-				}else{
-					layoutParams.Width = surfaceView_Width;
-					layoutParams.Height = (int) (surfaceView_Width / aspectratio);
-				}
-
-				surfaceView.LayoutParameters= layoutParams;
-
-				surfaceView.Click += (sender, e) => {
-					if (mediaPlayer.IsPlaying)
-						mediaPlayer.Pause();
-					else
-						mediaPlayer.Start();
-
-					showPlayButton(!mediaPlayer.IsPlaying);
-				};
+				viewAdapter.SelectViewItem(currentVideo);
+				videoView.SetVideoPath(videos[currentVideo].Path);
 			}
 		}
+
+		#endregion
 
 		private void showPlayButton(bool mustShow)
 		{

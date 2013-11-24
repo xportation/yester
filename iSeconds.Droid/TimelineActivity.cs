@@ -11,8 +11,30 @@ using Android.Graphics.Drawables;
 
 namespace iSeconds.Droid
 {
+	interface FileObserverNotify
+	{
+		void OnFileCreated();
+	}
+
+	class FileObservadoro : FileObserver
+	{
+		private FileObserverNotify notifier;
+
+		public FileObservadoro(string path, FileObserverNotify notifier)
+			:	base(path, FileObserverEvents.Create)
+		{
+			this.notifier = notifier;
+		}
+
+		public override void OnEvent(FileObserverEvents e, string path)
+		{
+			if (e == FileObserverEvents.Create)
+				notifier.OnFileCreated();
+		}
+	}
+
    [Activity (Label = "TimelineActivity")]
-	public class TimelineActivity : ISecondsActivity
+	public class TimelineActivity : ISecondsActivity, FileObserverNotify
 	{
 		private CalendarMonthView monthView;
 		private TimelineViewModel viewModel;
@@ -20,10 +42,14 @@ namespace iSeconds.Droid
 		private const string CurrentDateState= "currenteDateState";
 		private const int ShowOptionsMenu= 101;
 
+		private FileObservadoro fileObservadoro;
+		private bool takingVideo = false;
+		private const string TakingVideo= "TakingVideo";
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+			this.DisableBackButtonNavigation= true;
 
 			this.RequestWindowFeature(WindowFeatures.NoTitle);
 			this.SetContentView(Resource.Layout.TimelineView);
@@ -32,14 +58,34 @@ namespace iSeconds.Droid
 			viewModel = new TimelineViewModel(application.GetUserService().CurrentUser, application.GetRepository(), 
 			                                  application.GetMediaService(), application.GetNavigator());
 
-			if (bundle != null) {
-				viewModel.CurrentDate= DateTime.FromBinary(bundle.GetLong(CurrentDateState));
-			}
+			IPathService pathService = application.GetPathService();
+			fileObservadoro = new FileObservadoro(pathService.GetMediaPath(), this);
+
+			loadSavedState(bundle);
+
+			if (takingVideo)
+				fileObservadoro.StartWatching();
 
 			configureActionBar(false, "");
 			addActionBarItems();
 			setupCalendar();
+
+			takingVideo = false;
 		}
+
+		#region FileObserverNotify implementation
+
+		public void OnFileCreated()
+		{
+			RunOnUiThread(
+				() => {
+					viewModel.Invalidate();
+					setProgressVisibility(false);
+				}
+			);
+		}
+
+		#endregion
 
 		protected override void OnResume()
 		{
@@ -52,11 +98,24 @@ namespace iSeconds.Droid
 			base.OnSaveInstanceState(outState);
 
 			outState.PutLong(CurrentDateState, viewModel.CurrentDate.ToBinary());
+			outState.PutBoolean(TakingVideo, takingVideo);
+		}
+
+		void loadSavedState(Bundle savedState)
+		{
+			if (savedState != null) {
+				if (savedState.ContainsKey(CurrentDateState))
+					viewModel.CurrentDate = DateTime.FromBinary(savedState.GetLong(CurrentDateState));
+				
+				if (savedState.ContainsKey(TakingVideo))
+					takingVideo = savedState.GetBoolean(TakingVideo);
+			}
 		}
 
 		private void addActionBarItems()
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+			setProgressVisibility(takingVideo);
 
 			var takeVideoAction = new MenuItemLegacyBarAction(
 				this, this, Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_camera,
@@ -74,7 +133,16 @@ namespace iSeconds.Droid
 
 			actionBar.AddAction(takeVideoAction);
 			actionBar.AddAction(moreAction);
+		}
 
+		private void setProgressVisibility(bool isVisible)
+		{
+			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+
+			if (isVisible)
+				actionBar.ProgressBarVisibility = ViewStates.Visible;
+			else
+				actionBar.ProgressBarVisibility = ViewStates.Gone;
 		}
 
 		private void setupCalendar()
@@ -110,7 +178,6 @@ namespace iSeconds.Droid
 						setActionBarTitle();
 					}
 				};
-
 		}
 
 		private void setActionBarTitle()
@@ -119,13 +186,13 @@ namespace iSeconds.Droid
 			actionBar.Title = this.viewModel.TimelineName;
 		}
 
-
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
 			switch (item.ItemId)
 			{			
 			case Resource.Id.actionbar_takeVideo:
-				OnSearchRequested ();
+				OnSearchRequested();
+				takingVideo = true;
 				viewModel.TakeVideoCommand.Execute(null);				
 				return true;
 			case Resource.Id.actionbar_more:
@@ -153,7 +220,6 @@ namespace iSeconds.Droid
 			ImageView imageView = (ImageView)view;
 			imageView.Selected = true;
 			popupWindow.ShowAsDropDown (view);
-
 
 			popupWindow.Touchable = true;
 			popupWindow.Focusable = true;
@@ -196,10 +262,6 @@ namespace iSeconds.Droid
 
 			popupWindow.Update(moreContentView.MeasuredWidth, moreContentView.MeasuredHeight);
 		}
-
-
-
-
 	}
 }
 

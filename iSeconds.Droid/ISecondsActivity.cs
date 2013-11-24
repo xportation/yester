@@ -2,17 +2,23 @@ using Android.App;
 using Android.OS;
 using Android.Widget;
 using LegacyBar.Library.Bar;
+using iSeconds.Domain.Framework;
 
 namespace iSeconds.Droid
 {
 	public class ISecondsActivity : Activity
 	{
+		protected INavigator navigator = null;
 		protected ActivityTracker activityTracker = null;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-			activityTracker = ((ISecondsApplication) this.Application).GetActivityTracker();
+
+			this.DisableBackButtonNavigation = false;
+			ISecondsApplication application = (ISecondsApplication) this.Application;
+			activityTracker = application.GetActivityTracker();
+			navigator = application.GetNavigator();
 		}
 
 		protected override void OnResume()
@@ -31,6 +37,12 @@ namespace iSeconds.Droid
 		{
 			clearReferences();
 			base.OnDestroy();
+		}
+
+		public bool DisableBackButtonNavigation 
+		{
+			get;
+			set;
 		}
 
 		private void clearReferences()
@@ -66,6 +78,27 @@ namespace iSeconds.Droid
 
 				actionBar.SetHomeAction(itemActionBarAction);
 			}
+		}
+
+		public override bool OnOptionsItemSelected(Android.Views.IMenuItem item)
+		{
+			switch (item.ItemId)
+			{
+			case Resource.Id.actionbar_back_to_home:
+				OnSearchRequested();
+				navigator.NavigateBack();
+				return true;         
+			}
+
+			return base.OnOptionsItemSelected(item);
+		}
+
+		public override void OnBackPressed()
+		{
+			if (!this.DisableBackButtonNavigation)
+				navigator.NavigateBack();
+			else
+				base.OnBackPressed();
 		}
 	}
 }
