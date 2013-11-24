@@ -223,12 +223,12 @@ namespace iSeconds.Droid
 
 		private RectangleF pressedRect;
 
-		//private List<Tuple<RectangleF, DayViewModel>> pressedRange = new List<Tuple<RectangleF, DayViewModel>>();
-
 		private Paint pressedPaint;
 		private Paint rangeDelimiterPaint;
 
 		private bool shouldAnimate = false;
+
+		private bool isPressed = false;
 
       #region Constructors
       public CalendarMonthView(Context context)
@@ -304,7 +304,7 @@ namespace iSeconds.Droid
 	   }
       #endregion
 
-		public bool AllowMultiSelection { get; set; }
+		public bool RangeSelectionMode { get; set; }
 
 		private List<DayViewModel> viewedDays;
       public List<DayViewModel> ViewedDays
@@ -371,7 +371,7 @@ namespace iSeconds.Droid
 
 	   public void OnLongPress(MotionEvent e)
 	   {
-	      if (animation.IsAnimating() || !AllowMultiSelection)
+	      if (animation.IsAnimating() || !RangeSelectionMode)
 	         return;
 
 			// deixei para caso precisarmos adicionar algo no long press..
@@ -391,24 +391,28 @@ namespace iSeconds.Droid
 			float x = e.GetX();
 			float y = e.GetY();
 
-			//findAndSelectDay (x, y);
+			findAndSelectDay (x, y);
 		}
 
-		private Tuple<RectangleF, DayViewModel> findAndSelectDay (float x, float y)
+		private bool findAndSelectDay (float x, float y)
 		{
 			var dayRegion = this.findDayOnXY (x, y);
 			if (dayRegion != null) 
 			{
-				pressedRect = dayRegion.Item1;
-
-				if (AllowMultiSelection)
-					ViewModel.ToggleSelectionDayCommand.Execute (dayRegion.Item2.Model.Date);
-				else
-					ViewModel.SelectOnlyCommand.Execute (dayRegion.Item2.Model.Date);
+				if (RangeSelectionMode) {
+					ViewModel.RangeSelectionCommand.Execute (dayRegion.Item2.Model.Date);
+				}
+				else {
+					pressedRect = dayRegion.Item1;
+					isPressed = true;
+					dayRegion.Item2.DayClickedCommand.Execute (null);
+				}
 
 				this.Invalidate ();
+
+				return true;
 			}
-			return dayRegion;
+			return false;
 		}
 
 		private Tuple<RectangleF, DayViewModel> findDayOnXY(float x, float y)
@@ -431,17 +435,7 @@ namespace iSeconds.Droid
 			float x = e.GetX();
 			float y = e.GetY();
 
-			var dayRegion = findAndSelectDay(x, y);
-			if (dayRegion != null)
-			{
-				if (!AllowMultiSelection)
-					dayRegion.Item2.DayClickedCommand.Execute(null);
-
-				return true;
-			}
-
-
-			return false;
+			return findAndSelectDay (x, y);
 		}
 
 	   #endregion
@@ -514,23 +508,24 @@ namespace iSeconds.Droid
 			// se tiver range selecionado nao desenhamos a seleçao solitaria
 			if (!animation.IsAnimating()) 
 			{
-				foreach (Tuple<RectangleF, DayViewModel> day in daysRegions) {
+				if (RangeSelectionMode) {
+					foreach (Tuple<RectangleF, DayViewModel> day in daysRegions) {
 
-					if (ViewModel.Range.Contains(day.Item2.Model.Date)) {
-						RectF rect = new RectF (day.Item1.Left, day.Item1.Top, day.Item1.Right, day.Item1.Bottom);
-						canvas.DrawRect (rect, rangeDelimiterPaint);
+						if (ViewModel.Range.Contains (day.Item2.Model.Date)) {
+							RectF rect = new RectF (day.Item1.Left, day.Item1.Top, day.Item1.Right, day.Item1.Bottom);
+							canvas.DrawRect (rect, rangeDelimiterPaint);
+						}
+						if (ViewModel.SelectedDays.Contains (day.Item2.Model.Date)) {
+							RectF rect = new RectF (day.Item1.Left, day.Item1.Top, day.Item1.Right, day.Item1.Bottom);
+							canvas.DrawRect (rect, pressedPaint);
+						}
 					}
-					if (ViewModel.SelectedDays.Contains(day.Item2.Model.Date)) {
-						RectF rect = new RectF (day.Item1.Left, day.Item1.Top, day.Item1.Right, day.Item1.Bottom);
-						canvas.DrawRect (rect, pressedPaint);
-					}
+				} else if (isPressed) {
+					isPressed = false;
+					canvas.DrawRect (pressedRect.Left, pressedRect.Top, pressedRect.Right, pressedRect.Bottom, pressedPaint);			
 				}
-			}
-			/*else if (isPressed) 
-			{
-				isPressed = false;
-				canvas.DrawRect (pressedRect.Left, pressedRect.Top, pressedRect.Right, pressedRect.Bottom, pressedPaint);			
-			}*/
+
+			}		
 		}
 
 		private void createCacheDisplay(ref Bitmap bitmap, List<DayViewModel> days)

@@ -34,8 +34,5 @@ namespace iSeconds.Domain
 
       IList<string> GetVideosFromRange(DateTime start, DateTime end, int timelineId);
 		IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId);
-/* temporario.. subindo pra ficar no historico*/
-		IList<int> GetYearsWithContent (int id);
-		IList<int> GetMonthsWithContent (int id, int year);
-   }
+	}
 }

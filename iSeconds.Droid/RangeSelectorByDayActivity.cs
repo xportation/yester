@@ -93,8 +93,8 @@ namespace iSeconds.Droid
 				DatePicker beginPicker = dialog.FindViewById<DatePicker>(Resource.Id.dateStartPeriod);
 				DatePicker endPicker = dialog.FindViewById<DatePicker>(Resource.Id.dateEndPeriod);
 
-				viewModel.ToggleSelectionDayCommand.Execute(beginPicker.DateTime);
-				viewModel.ToggleSelectionDayCommand.Execute(endPicker.DateTime);
+				viewModel.RangeSelectionCommand.Execute(beginPicker.DateTime);
+				viewModel.RangeSelectionCommand.Execute(endPicker.DateTime);
 
 				dialog.Dismiss();
 				monthView.Invalidate();
@@ -107,8 +107,8 @@ namespace iSeconds.Droid
 				DatePicker beginPicker = dialog.FindViewById<DatePicker>(Resource.Id.dateStartPeriod);
 				DatePicker endPicker = dialog.FindViewById<DatePicker>(Resource.Id.dateEndPeriod);
 
-				viewModel.ToggleSelectionDayCommand.Execute(beginPicker.DateTime);
-				viewModel.ToggleSelectionDayCommand.Execute(endPicker.DateTime);
+				viewModel.RangeSelectionCommand.Execute(beginPicker.DateTime);
+				viewModel.RangeSelectionCommand.Execute(endPicker.DateTime);
 				viewModel.PlaySelectionCommand.Execute(null);
 			};
 
@@ -133,7 +133,7 @@ namespace iSeconds.Droid
 
 			monthView = FindViewById<CalendarMonthView> (Resource.Id.calendarView);
 
-			monthView.AllowMultiSelection = true;
+			monthView.RangeSelectionMode = true;
 
 			monthView.ViewedDays = viewModel.VisibleDays;
 			monthView.ViewModel = viewModel;

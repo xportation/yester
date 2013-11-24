@@ -187,22 +187,7 @@ namespace iSeconds.Domain
 			}
 
 			return medias;
-		}
-		
-// temporario.. subindo soh pra ficar no historico
-		public IList<int> GetYearsWithContent (int timelineId)
-		{
-			IEnumerable<DayInfo> days = (from i in Table<DayInfo> () where i.TimelineId == timelineId select i);
-			return days.Select (e => e.Date.Year).Distinct().ToList();
-		}
-// temporario.. subindo soh pra ficar no historico
-		public IList<int> GetMonthsWithContent (int timelineId, int year)
-		{
-			IEnumerable<DayInfo> days = (from i in Table<DayInfo> () where i.TimelineId == timelineId select i);
-
-			List<DayInfo> days_ = days.ToList ();
-			return days.Select (e => e.Date).Where(e => e.Date.Year == year).Select(e => e.Date.Month).Distinct().ToList();
-		}
+		}	
 
 		public IList<T> GetItems<T> () where T : IModel, new()
 		{

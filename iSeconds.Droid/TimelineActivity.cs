@@ -94,7 +94,7 @@ namespace iSeconds.Droid
 			monthView.ViewedDays = viewModel.VisibleDays;
 			monthView.ViewModel = viewModel;
 
-			monthView.AllowMultiSelection = false;
+			monthView.RangeSelectionMode = false;
 
 			this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
 				{

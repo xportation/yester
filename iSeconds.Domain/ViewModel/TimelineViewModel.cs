@@ -247,7 +247,7 @@ namespace iSeconds.Domain
 				yield return day;
 		}
 
-		public ICommand ToggleSelectionDayCommand
+		public ICommand RangeSelectionCommand
 		{
 			get {
 				return new Command ((object arg) => { 
@@ -279,7 +279,7 @@ namespace iSeconds.Domain
 			}
 		}
 
-		public ICommand SelectOnlyCommand
+		public ICommand SingleSelectionCommand
 		{
 			get {
 				return new Command ((object arg) => { 

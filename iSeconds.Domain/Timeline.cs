@@ -19,8 +19,6 @@ namespace iSeconds.Domain
 		{
 		}
 
-		public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
-
 		public void SetRepository(IRepository repository)
 		{
 			this.repository = repository;
@@ -55,21 +53,6 @@ namespace iSeconds.Domain
 			Debug.Assert(repository != null);
 
 			return repository.GetDayInfoAt(date, Id);
-		}
-
-		/* 
-		*	Temporario.. estou subindo soh pra ficar no historico
-		*/
-		public IList<int> GetYearsWithContent ()
-		{
-			Debug.Assert(repository != null);
-			return repository.GetYearsWithContent (Id);
-		}
-
-		public IList<int> GetMonthsWithContent (int year)
-		{
-			Debug.Assert(repository != null);
-			return repository.GetMonthsWithContent (Id, year);
 		}
 
 	public IList<string> GetVideosFromRange(DateTime start, DateTime end)
