@@ -11,13 +11,6 @@
         ab:separator="@color/actionbar_background"
         ab:background="@color/actionbar_background"
         ab:background_item="@drawable/actionbar_button" />
-    <TextView
-        android:text="Select the first and last day and touch play\n*Hint: You can select a long range clicking on the range selector above"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/selector_hint" />
     <include
         layout="@layout/CalendarMonthViewLayout" />
-<!--android:textColor="@color/first_item_color"
-        android:padding="5px" -->
 </LinearLayout>

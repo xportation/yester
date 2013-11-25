@@ -186,6 +186,12 @@ namespace iSeconds.Droid
 			actionBar.Title = this.viewModel.TimelineName;
 		}
 
+		public override bool OnCreateOptionsMenu(IMenu menu)
+		{
+			showPopup();
+			return false;
+		}
+
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
 			switch (item.ItemId)

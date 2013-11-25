@@ -38,7 +38,7 @@
                 android:layout_gravity="center"
                 android:id="@+id/videoView" />
             <ImageView
-                android:src="@drawable/ic_play"
+                android:src="@drawable/ic_play_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imagePausePlay"

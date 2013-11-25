@@ -44,5 +44,6 @@
 	<string name="play_video">Play</string>
 	<string name="play_title">Play</string>
 	<string name="range_selector">Range Selector</string>
+	<string name="range_selector_tip">Select the first and last day and touch play\n*Hint: You can select a long range clicking on the range selector above</string>
 	
 </resources>

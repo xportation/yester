@@ -435,7 +435,7 @@ namespace iSeconds.Droid
 			float x = e.GetX();
 			float y = e.GetY();
 
-			return findAndSelectDay (x, y);
+			return findAndSelectDay(x, y);
 		}
 
 	   #endregion
@@ -500,10 +500,10 @@ namespace iSeconds.Droid
 			if (calendarNextMonthCache != null && animation.IsAnimating())
 				canvas.DrawBitmap(calendarNextMonthCache, 0, heightMoviment + heightIncrement, cacheDisplayPaint);
 
-			drawSelection (canvas);
+			drawSelection(canvas);
 		}
 
-		void drawSelection (Canvas canvas)
+		void drawSelection(Canvas canvas)
 		{
 			// se tiver range selecionado nao desenhamos a seleçao solitaria
 			if (!animation.IsAnimating()) 
@@ -524,7 +524,6 @@ namespace iSeconds.Droid
 					isPressed = false;
 					canvas.DrawRect (pressedRect.Left, pressedRect.Top, pressedRect.Right, pressedRect.Bottom, pressedPaint);			
 				}
-
 			}		
 		}
 

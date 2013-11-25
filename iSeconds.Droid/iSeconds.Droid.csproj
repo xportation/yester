@@ -171,6 +171,16 @@
     <AndroidResource Include="Resources\layout\VideoThumbnail.axml" />
     <AndroidResource Include="Resources\drawable\ic_play.png" />
     <AndroidResource Include="Resources\layout\DatePickerView.axml" />
+    <AndroidResource Include="Resources\drawable\ic_play_video.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_play.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_play.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_play.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_play.png" />
+    <AndroidResource Include="Resources\drawable\ic_period.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_period.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_period.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_period.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_period.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
