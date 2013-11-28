@@ -59,9 +59,6 @@
     <Compile Include="AndroidPresenter.cs" />
     <Compile Include="CalendarMonthView\CalendarMonthView.cs" />
     <Compile Include="CalendarMonthView\CalendarMonthViewWeekNames.cs" />
-    <Compile Include="DayOptionsActivity.cs">
-      <DependentUpon>ISecondsActivity.cs</DependentUpon>
-    </Compile>
     <Compile Include="ISecondsActivity.cs" />
     <Compile Include="MediaServiceAndroid.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -79,6 +76,7 @@
     <Compile Include="RangeSelectorByDayActivity.cs" />
     <Compile Include="ISecondsListView.cs" />
     <Compile Include="VideoPlayerActivity.cs" />
+    <Compile Include="DayOptionsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

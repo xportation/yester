@@ -7,7 +7,6 @@ namespace iSeconds.Domain
    {
       event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
       event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
-      event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
 
       //User GetUser(int id);
 

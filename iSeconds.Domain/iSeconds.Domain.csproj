@@ -54,7 +54,6 @@
     <Compile Include="UserService.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="ISecondsDB.cs" />
-    <Compile Include="MediaInfo.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ViewModel\DayViewModel.cs" />
@@ -69,6 +68,7 @@
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="IOptionsDialogService.cs" />
     <Compile Include="ViewModel\ListItemViewModel.cs" />
+    <Compile Include="MediaInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

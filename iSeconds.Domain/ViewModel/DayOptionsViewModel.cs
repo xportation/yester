@@ -179,11 +179,7 @@ namespace iSeconds.Domain
 				AddEntry(new OptionsEntry("Set as default", () => { viewModel.CheckVideoCommand.Execute(selectedVideo); }));
 
 				AddEntry(new OptionsEntry("Delete video", () => {
-					viewModel.DeleteVideoCommand.Execute(0);
-				}));
-
-				AddEntry(new OptionsEntry("Rename file", () => {
-					// TODO:
+					viewModel.DeleteVideoCommand.Execute(selectedVideo);
 				}));
 			}
 		}

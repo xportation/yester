@@ -276,7 +276,8 @@ namespace iSeconds.Droid
 				MediaInfo media = videos[currentVideo];
 				DayInfo day = repository.GetDayInfo(media.DayId);
 
-				date.Text= String.Format("{0:g}", day.Date);
+				DateTime dateTime = day.Date + media.TimeOfDay;
+				date.Text= String.Format("{0:g}", dateTime);
 			}
 		}
 

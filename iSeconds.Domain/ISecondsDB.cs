@@ -25,7 +25,6 @@ namespace iSeconds.Domain
 
 		public event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
 		public event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
-		public event EventHandler<GenericEventArgs<DayInfo>> OnDayChanged;
 
 		public void SaveTimeline (Timeline timeline)
 		{

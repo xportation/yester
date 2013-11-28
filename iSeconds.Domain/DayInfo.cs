@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using SQLite;
 using System.Diagnostics;
+using System.IO;
 
 namespace iSeconds.Domain
 {
@@ -28,7 +29,7 @@ namespace iSeconds.Domain
          // TODO: ver se isso basta.. salvamos o dia apenas se ele tiver video
          this.repository.SaveItem(this);
 
-         MediaInfo media = new MediaInfo(this.Id, url);
+			MediaInfo media = new MediaInfo(this.Id, url, DateTime.Now.TimeOfDay);
          this.repository.SaveItem(media);
 
 			this.DefaultVideoId = media.Id;
@@ -47,6 +48,11 @@ namespace iSeconds.Domain
 			int deleteMediaId = media.Id;
 
 			this.repository.DeleteMedia (media);
+
+			try {
+				File.Delete(url);
+			} catch (Exception) {
+			}
 
 			if (deleteMediaId == this.DefaultVideoId)
 				chooseNewDefaultVideo ();

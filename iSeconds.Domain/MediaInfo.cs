@@ -5,10 +5,11 @@ namespace iSeconds.Domain
 {
 	public class MediaInfo : IModel
 	{
-		public MediaInfo (int dayId, string path) 
+		public MediaInfo (int dayId, string path, TimeSpan timeOfDay) 
 		{
 			this.DayId = dayId;
 			this.Path = path;
+			this.TimeOfDay = timeOfDay;
 		}
 
      	public MediaInfo()
@@ -29,6 +30,7 @@ namespace iSeconds.Domain
 		public int DayId { get; set; }
 		// TODO: ver o tamanho para essa string
 		public string Path { get; set; }
+		public TimeSpan TimeOfDay { get; set; }
 		#endregion
 	}
 }
