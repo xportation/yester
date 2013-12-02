@@ -95,16 +95,14 @@ namespace iSeconds.Droid
 				DatePicker start = dialog.FindViewById<DatePicker>(Resource.Id.dateStartPeriod);
 				DatePicker end = dialog.FindViewById<DatePicker>(Resource.Id.dateEndPeriod);
 
-            DateTime startDate = new DateTime (start.Year, start.Month, start.DayOfMonth);
-            DateTime endDate = new DateTime (end.Year, end.Month, end.DayOfMonth);
+				DateTime startDate = new DateTime (start.Year, start.Month + 1, start.DayOfMonth);
+				DateTime endDate = new DateTime (end.Year, end.Month + 1, end.DayOfMonth);
 
 				viewModel.RangeSelectionCommand.Execute(startDate);
 				viewModel.RangeSelectionCommand.Execute(endDate);
 
 				dialog.Dismiss();
 				monthView.Invalidate();
-
-				//viewModel.PlaySelectionCommand.Execute(null);
 			};
 
 			Button playButton = dialog.FindViewById<Button> (Resource.Id.playButton);
@@ -112,8 +110,8 @@ namespace iSeconds.Droid
             DatePicker start = dialog.FindViewById<DatePicker>(Resource.Id.dateStartPeriod);
             DatePicker end = dialog.FindViewById<DatePicker>(Resource.Id.dateEndPeriod);
 
-            DateTime startDate = new DateTime (start.Year, start.Month, start.DayOfMonth);
-            DateTime endDate = new DateTime (end.Year, end.Month, end.DayOfMonth);
+				DateTime startDate = new DateTime (start.Year, start.Month + 1, start.DayOfMonth);
+				DateTime endDate = new DateTime (end.Year, end.Month + 1, end.DayOfMonth);
 
 				viewModel.RangeSelectionCommand.Execute(startDate);
 				viewModel.RangeSelectionCommand.Execute(endDate);
