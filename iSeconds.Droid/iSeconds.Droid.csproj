@@ -77,6 +77,7 @@
     <Compile Include="ISecondsListView.cs" />
     <Compile Include="VideoPlayerActivity.cs" />
     <Compile Include="DayOptionsActivity.cs" />
+    <Compile Include="FFMpegService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -179,6 +180,13 @@
     <AndroidResource Include="Resources\drawable-ldpi\ic_period.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_period.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_period.png" />
+    <None Include="Assets\ffmpeg" />
+    <None Include="Assets\libavcodec-55.so" />
+    <None Include="Assets\libavfilter-3.so" />
+    <None Include="Assets\libavformat-55.so" />
+    <None Include="Assets\libavutil-52.so" />
+    <None Include="Assets\libswresample-0.so" />
+    <None Include="Assets\libswscale-2.so" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
