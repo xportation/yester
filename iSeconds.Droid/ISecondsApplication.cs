@@ -40,8 +40,6 @@ namespace iSeconds.Droid
          navigator.RegisterNavigation ("timeline_view", new AndroidPresenter (this.activityTracker, typeof(TimelineActivity)));
 			navigator.RegisterNavigation ("settings_view", new AndroidPresenter(this.activityTracker, typeof(SettingsActivity)));
 			navigator.RegisterNavigation ("share_view", new AndroidPresenter(this.activityTracker, typeof(ShareActivity)));
-			navigator.RegisterNavigation ("play_range_selector", new AndroidPresenter(this.activityTracker, typeof(RangeSelectorByDayActivity)));
-			navigator.RegisterNavigation ("compile_range_selector", new AndroidPresenter(this.activityTracker, typeof(RangeSelectorByDayActivity)));
 			navigator.RegisterNavigation ("about_view", new AndroidPresenter(this.activityTracker, typeof(AboutActivity)));
 			navigator.RegisterNavigation ("video_player", new AndroidPresenter(this.activityTracker, typeof(VideoPlayerActivity)));
 			navigator.RegisterNavigation ("compilations_view", new AndroidPresenter(this.activityTracker, typeof(CompilationActivity)));

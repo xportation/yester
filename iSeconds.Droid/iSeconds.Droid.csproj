@@ -73,7 +73,6 @@
     <Compile Include="SettingsActivity.cs" />
     <Compile Include="OptionDialogServiceAndroid.cs" />
     <Compile Include="AboutActivity.cs" />
-    <Compile Include="RangeSelectorByDayActivity.cs" />
     <Compile Include="ISecondsListView.cs" />
     <Compile Include="VideoPlayerActivity.cs" />
     <Compile Include="DayOptionsActivity.cs" />
@@ -109,23 +108,17 @@
     <AndroidResource Include="Resources\Drawable-hdpi\ic_add.png" />
     <AndroidResource Include="Resources\Drawable-hdpi\ic_check.png" />
     <AndroidResource Include="Resources\Drawable-hdpi\ic_home.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_logo.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_setting.png" />
     <AndroidResource Include="Resources\Drawable-hdpi\ic_uncheck.png" />
     <AndroidResource Include="Resources\Drawable-hdpi\splash_title.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_add.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_check.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_home.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\ic_logo.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\ic_settings.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_uncheck.png" />
     <AndroidResource Include="Resources\drawable-ldpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-ldpi\splash_title.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_add.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_check.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_home.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_logo.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_setting.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_uncheck.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\splash_title.png" />
@@ -140,16 +133,9 @@
     <AndroidResource Include="Resources\drawable-mdpi\ic_add.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_check.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_home.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_logo.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_settings.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_uncheck.png" />
     <AndroidResource Include="Resources\drawable-mdpi\splash_title.png" />
     <AndroidResource Include="Resources\layout\SettingsView.axml" />
-    <AndroidResource Include="Resources\drawable\ic_menu.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\ic_menu.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\ic_menu.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_menu.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_menu.png" />
     <AndroidResource Include="Resources\Menu\menu.xml" />
     <AndroidResource Include="Resources\layout\ShareView.axml">
       <SubType>AndroidResource</SubType>
@@ -177,11 +163,6 @@
     <AndroidResource Include="Resources\drawable-ldpi\ic_play.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_play.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_play.png" />
-    <AndroidResource Include="Resources\drawable\ic_period.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\ic_period.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\ic_period.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_period.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_period.png" />
     <None Include="Assets\ffmpeg" />
     <None Include="Assets\libavcodec-55.so" />
     <None Include="Assets\libavfilter-3.so" />
@@ -196,6 +177,11 @@
     <AndroidResource Include="Resources\drawable-ldpi\ic_compile.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_compile.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_compile.png" />
+    <AndroidResource Include="Resources\drawable\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_menu.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -235,9 +221,6 @@
     <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_settings.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_add.png" />
   </ItemGroup>
   <ItemGroup>
@@ -253,25 +236,7 @@
     <AndroidResource Include="Resources\drawable\ic_uncheck.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\fonts\augie.ttf" />
     <AndroidAsset Include="Assets\fonts\123Marker.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_share.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_share.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\ic_share.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\ic_share.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_share.png" />
   </ItemGroup>
 </Project>

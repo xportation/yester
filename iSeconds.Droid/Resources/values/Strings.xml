@@ -39,7 +39,7 @@
    <string name="takeVideo">Take video on actual day</string>
 	<string name="video_upload_progress">Upload Progress</string>
    <string name="video_upload_total_progress">Total Progress:</string>
-	<string name="more">More options</string>
+	<string name="menu">Menu options</string>
 	<string name="about">About</string>
 	<string name="video_player">Video Player</string>
 	<string name="play_video">Play</string>

@@ -5,8 +5,8 @@ PathClear false
 FileFormat png
 FilePrefix ''
 
-Array MySvgFiles 'camera_icon.svg':'compile_icon.svg':'date_icon.svg':'home_icon.svg':'menu_icon.svg':'pause_icon.svg':'play_icon.svg':'play_video_icon.svg':'share_icon.svg'
-Array MyExportFiles 'ic_camera':'ic_compile':'ic_date':'ic_home':ic_'menu':'ic_pause':ic_'play':'ic_play_video':'ic_share'
+Array MySvgFiles 'camera_icon.svg':'compile_icon.svg':'home_icon.svg':'play_icon.svg':'menu_icon.svg'
+Array MyExportFiles 'ic_camera':'ic_compile':'ic_home':ic_'play':'ic_menu'
 
 // Conversion 1
 PathExport '..\iSeconds.Droid\Resources\'PathsToExport:1
@@ -63,3 +63,11 @@ Loop MySvgFiles 3
     FileName MyExportFiles:Index
     Convert
 
+// Play video player
+PathExport '..\iSeconds.Droid\Resources\drawable'
+ExportWidth 96
+ExportHeight 96
+
+FileSvg  'play_video_icon.svg'
+FileName 'ic_play_video'
+Convert

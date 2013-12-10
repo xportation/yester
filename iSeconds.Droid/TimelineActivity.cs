@@ -124,7 +124,7 @@ namespace iSeconds.Droid
 			}
 
 			actionBar.AddAction(createAction(Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_camera, Resource.String.takeVideo));
-			actionBar.AddAction(createAction(Resource.Id.actionbar_more, Resource.Drawable.ic_action_overflow_dark, Resource.String.more));
+			actionBar.AddAction(createAction(Resource.Id.actionbar_menu, Resource.Drawable.ic_action_overflow_dark, Resource.String.menu));
 		}
 
 		private LegacyBar.Library.Bar.LegacyBarAction createAction(int menuId, int drawable, int popupId)
@@ -207,7 +207,7 @@ namespace iSeconds.Droid
 				takingVideo = true;
 				viewModel.TakeVideoCommand.Execute(null);				
 				return true;
-			case Resource.Id.actionbar_more:
+			case Resource.Id.actionbar_menu:
 				OnSearchRequested();
 				showPopup ();
 				return true;
