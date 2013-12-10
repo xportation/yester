@@ -19,6 +19,7 @@
 	<string name="cancel">Cancel</string>
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
+	<string name="select">Select</string>
 	<string name="timeline_options_dialog_delete_ask">Delete timeline?</string>
 	<string name="timeline_options_dialog_delete_alert">Are you sure to delete this timeline? \nThis operation can not be undone.</string>   
    <string name="day_options_title">Day</string>
@@ -44,6 +45,12 @@
 	<string name="play_video">Play</string>
 	<string name="play_title">Play</string>
 	<string name="range_selector">Range Selector</string>
-	<string name="range_selector_tip">Select the first and last day and touch play\n*Hint: You can select a long range clicking on the range selector above</string>
-	
+	<string name="range_selector_tip">Select the first and last day and touch play</string>
+	<string name="compilation_view_title">Compilations</string>
+	<string name="compile">Compile</string>
+	<string name="overflow_menu_range_selector">Range Selector</string>
+	<string name="overflow_menu_timelines">Timelines</string>
+	<string name="overflow_menu_compilations">Compilations</string>
+	<string name="overflow_menu_settings">Settings</string>
+	<string name="overflow_menu_about">About</string>
 </resources>

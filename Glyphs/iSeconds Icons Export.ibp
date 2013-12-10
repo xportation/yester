@@ -1,0 +1,65 @@
+Array PathsToExport 'drawable':'drawable-hdpi':'drawable-ldpi':'drawable-mdpi':'drawable-xhdpi'
+Array ExportSizes 48:72:32:48:96
+
+PathClear false
+FileFormat png
+FilePrefix ''
+
+Array MySvgFiles 'camera_icon.svg':'compile_icon.svg':'date_icon.svg':'home_icon.svg':'menu_icon.svg':'pause_icon.svg':'play_icon.svg':'play_video_icon.svg':'share_icon.svg'
+Array MyExportFiles 'ic_camera':'ic_compile':'ic_date':'ic_home':ic_'menu':'ic_pause':ic_'play':'ic_play_video':'ic_share'
+
+// Conversion 1
+PathExport '..\iSeconds.Droid\Resources\'PathsToExport:1
+
+ExportWidth ExportSizes:1
+ExportHeight ExportSizes:1
+
+Loop MySvgFiles 3
+    FileSvg MySvgFiles:Index
+    FileName MyExportFiles:Index
+    Convert
+
+// Conversion 2
+PathExport '..\iSeconds.Droid\Resources\'PathsToExport:2
+
+ExportWidth ExportSizes:2
+ExportHeight ExportSizes:2
+
+Loop MySvgFiles 3
+    FileSvg MySvgFiles:Index
+    FileName MyExportFiles:Index
+    Convert
+
+// Conversion 1
+PathExport '..\iSeconds.Droid\Resources\'PathsToExport:3
+
+ExportWidth ExportSizes:3
+ExportHeight ExportSizes:3
+
+Loop MySvgFiles 3
+    FileSvg MySvgFiles:Index
+    FileName MyExportFiles:Index
+    Convert
+
+// Conversion 1
+PathExport '..\iSeconds.Droid\Resources\'PathsToExport:4
+
+ExportWidth ExportSizes:4
+ExportHeight ExportSizes:4
+
+Loop MySvgFiles 3
+    FileSvg MySvgFiles:Index
+    FileName MyExportFiles:Index
+    Convert
+
+// Conversion 5
+PathExport '..\iSeconds.Droid\Resources\'PathsToExport:5
+
+ExportWidth ExportSizes:5
+ExportHeight ExportSizes:5
+
+Loop MySvgFiles 3
+    FileSvg MySvgFiles:Index
+    FileName MyExportFiles:Index
+    Convert
+

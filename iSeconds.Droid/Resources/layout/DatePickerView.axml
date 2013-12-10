@@ -35,19 +35,13 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/linearLayout2">
                 <Button
-                    android:text="Select"
+                    android:text="@string/select"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".33"
                     android:id="@+id/selectButton" />
                 <Button
-                    android:text="Play"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".33"
-                    android:id="@+id/playButton" />
-                <Button
-                    android:text="Cancel"
+                    android:text="@string/cancel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".33"

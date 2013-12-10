@@ -105,19 +105,6 @@ namespace iSeconds.Droid
 				monthView.Invalidate();
 			};
 
-			Button playButton = dialog.FindViewById<Button> (Resource.Id.playButton);
-			playButton.Click += (object sender, EventArgs e) => {
-            DatePicker start = dialog.FindViewById<DatePicker>(Resource.Id.dateStartPeriod);
-            DatePicker end = dialog.FindViewById<DatePicker>(Resource.Id.dateEndPeriod);
-
-				DateTime startDate = new DateTime (start.Year, start.Month + 1, start.DayOfMonth);
-				DateTime endDate = new DateTime (end.Year, end.Month + 1, end.DayOfMonth);
-
-				viewModel.RangeSelectionCommand.Execute(startDate);
-				viewModel.RangeSelectionCommand.Execute(endDate);
-				viewModel.PlaySelectionCommand.Execute(null);
-			};
-
 			Button cancelButton = dialog.FindViewById<Button> (Resource.Id.cancelButton);
 			cancelButton.Click += (object sender, EventArgs e) =>  {
 				dialog.Dismiss();

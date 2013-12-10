@@ -67,7 +67,7 @@ namespace iSeconds.Droid
 				fileObservadoro.StartWatching();
 
 			configureActionBar(false, "");
-			addActionBarItems();
+			addActionBarItems(false);
 			setupCalendar();
 
 			takingVideo = false;
@@ -112,27 +112,30 @@ namespace iSeconds.Droid
 			}
 		}
 
-		private void addActionBarItems()
+		private void addActionBarItems(bool isPlayModeEnabled)
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			setProgressVisibility(takingVideo);
+			//setProgressVisibility(takingVideo);
+			actionBar.RemoveAllActions();
 
-			var takeVideoAction = new MenuItemLegacyBarAction(
-				this, this, Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_camera,
-				Resource.String.takeVideo)
-			{
-				ActionType = ActionType.Always
-			};			
+			if (isPlayModeEnabled) {
+				actionBar.AddAction(createAction(Resource.Id.actionbar_playVideo, Resource.Drawable.ic_play, Resource.String.play_video));
+				actionBar.AddAction(createAction(Resource.Id.actionbar_compile, Resource.Drawable.ic_compile, Resource.String.compile));
+			}
 
-			var moreAction = new MenuItemLegacyBarAction(
-				this, this, Resource.Id.actionbar_more, Resource.Drawable.ic_action_overflow_dark,
-				Resource.String.more)
+			actionBar.AddAction(createAction(Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_camera, Resource.String.takeVideo));
+			actionBar.AddAction(createAction(Resource.Id.actionbar_more, Resource.Drawable.ic_action_overflow_dark, Resource.String.more));
+		}
+
+		private LegacyBar.Library.Bar.LegacyBarAction createAction(int menuId, int drawable, int popupId)
+		{
+			var action = new MenuItemLegacyBarAction(
+				this, this, menuId, drawable, popupId)
 			{
 				ActionType = ActionType.Always
 			};
 
-			actionBar.AddAction(takeVideoAction);
-			actionBar.AddAction(moreAction);
+			return action;
 		}
 
 		private void setProgressVisibility(bool isVisible)
@@ -162,22 +165,25 @@ namespace iSeconds.Droid
 			monthView.ViewedDays = viewModel.VisibleDays;
 			monthView.ViewModel = viewModel;
 
-			monthView.RangeSelectionMode = false;
+			monthView.RangeSelectionMode = true;
 
-			this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
-				{
-					if (e.PropertyName == "CurrentMonthTitle") {
-						monthLabel.Text = this.viewModel.CurrentMonthTitle;
-					}
+			this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) => {
+				if (e.PropertyName == "CurrentMonthTitle") {
+					monthLabel.Text = this.viewModel.CurrentMonthTitle;
+				}
 
-					if (e.PropertyName == "VisibleDays") {
-						monthView.ViewedDays = viewModel.VisibleDays;
-					}
+				if (e.PropertyName == "VisibleDays") {
+					monthView.ViewedDays = viewModel.VisibleDays;
+				}
 
-					if (e.PropertyName == "TimelineName") {
-						setActionBarTitle();
-					}
-				};
+				if (e.PropertyName == "TimelineName") {
+					setActionBarTitle();
+				}
+
+				if (e.PropertyName == "RangeSelection") {
+					addActionBarItems(viewModel.Range.Count == 2);
+				}
+			};
 		}
 
 		private void setActionBarTitle()
@@ -202,8 +208,12 @@ namespace iSeconds.Droid
 				viewModel.TakeVideoCommand.Execute(null);				
 				return true;
 			case Resource.Id.actionbar_more:
-				OnSearchRequested ();
+				OnSearchRequested();
 				showPopup ();
+				return true;
+			case Resource.Id.actionbar_playVideo:
+				OnSearchRequested();
+				viewModel.PlaySelectionCommand.Execute(null);
 				return true;
 			}
 
@@ -212,61 +222,7 @@ namespace iSeconds.Droid
 
 		private void showPopup()
 		{
-			LinearLayout moreContentView = (LinearLayout) this.LayoutInflater.Inflate(Resource.Layout.OverflowMenu, null);
-
-			moreContentView.Measure(Android.Views.View.MeasureSpec.MakeMeasureSpec (0, MeasureSpecMode.Unspecified)
-			                        , Android.Views.View.MeasureSpec.MakeMeasureSpec (0, MeasureSpecMode.Unspecified));
-			PopupWindow popupWindow = new PopupWindow(this);
-			popupWindow.SetBackgroundDrawable(new ColorDrawable(this.Resources.GetColor(Resource.Color.white))); // acaba sendo a cor que da a impressao de bordas
-			popupWindow.ContentView = moreContentView;
-			// xunxo para pegar o ImageView do overflow adicionado como action pelo LegacyBar
-			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			var layout = actionBar.FindViewById<LinearLayout>(Resource.Id.actionbar_actions);
-			View view = layout.GetChildAt (layout.ChildCount - 1); // pegamos o ultimo... nao consegui fazer de outro jeito..
-			ImageView imageView = (ImageView)view;
-			imageView.Selected = true;
-			popupWindow.ShowAsDropDown (view);
-
-			popupWindow.Touchable = true;
-			popupWindow.Focusable = true;
-			popupWindow.OutsideTouchable = true;
-			popupWindow.DismissEvent += (object sender, EventArgs e) => {
-				imageView.Selected = false;
-			};
-
-			Button settingsButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_settings);
-			settingsButton.Click += (object sender, EventArgs e) =>  {
-
-				viewModel.SettingsCommand.Execute(null);
-				popupWindow.Dismiss();
-
-			};
-
-			Button timelineOptionsButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_timeline_options);
-			timelineOptionsButton.Click += (object sender, EventArgs e) => {
-				viewModel.OptionsCommand.Execute(null);
-				popupWindow.Dismiss();
-			};
-
-			Button shareButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_share);
-			shareButton.Click += (object sender, EventArgs e) => {
-				viewModel.ShareCommand.Execute(null);
-				popupWindow.Dismiss();
-			};
-
-			Button playButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_play);
-			playButton.Click += (object sender, EventArgs e) => {
-				viewModel.PlayCommand.Execute(null);
-				popupWindow.Dismiss();
-			};
-
-			Button aboutButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_about);
-			aboutButton.Click += (object sender, EventArgs e) => {
-				viewModel.AboutCommand.Execute(null);
-				popupWindow.Dismiss();
-			};
-
-			popupWindow.Update(moreContentView.MeasuredWidth, moreContentView.MeasuredHeight);
+			TimelineOptionsPopup.Show(this, viewModel);
 		}
 	}
 }

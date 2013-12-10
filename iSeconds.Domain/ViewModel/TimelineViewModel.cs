@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Input;
 using System.Diagnostics;
+using System.Collections;
 
 namespace iSeconds.Domain
 {
@@ -168,7 +169,7 @@ namespace iSeconds.Domain
 		}
 
 		public ICommand PlayCommand {
-			get { return new Command((object arg) => { navigator.NavigateTo("range_selector", new Args()); }); }
+			get { return new Command((object arg) => { navigator.NavigateTo("play_selector", new Args()); }); }
 		}
 
 		public ICommand PlaySelectionCommand {
@@ -204,14 +205,6 @@ namespace iSeconds.Domain
 			set { this.SetField(ref timelineName, value, "TimelineName"); }
 		}
 
-		private void selectDay(DateTime day, bool select)
-		{
-			if (select)
-				selectedDays.Add(day);
-			else
-				selectedDays.Remove(day);
-		}
-
 		private Tuple<DateTime, DateTime> getRangeDelimiters()
 		{
 			Debug.Assert (range.Count == 2);
@@ -226,12 +219,18 @@ namespace iSeconds.Domain
 			return result;
 		}
 
-		private HashSet<DateTime> range = new HashSet<DateTime>();
-		public HashSet<DateTime> Range 
+		private SortedSet<DateTime> range = new SortedSet<DateTime>();
+		public SortedSet<DateTime> Range 
 		{
 			get {
 				return range;
 			}
+		}
+
+		public void ClearSelection()
+		{
+			range.Clear();
+			selectedDays.Clear();
 		}
 
 		private void selectRangeBetween (DateTime day1, DateTime day2)
@@ -250,46 +249,28 @@ namespace iSeconds.Domain
 		public ICommand RangeSelectionCommand
 		{
 			get {
-				return new Command ((object arg) => { 
+				return new Command ((object arg) => 
+					{ 
+						DateTime day = (DateTime)arg;
+						if (range.Count == 2) {
+							this.ClearSelection();
+							range.Add(day);
+							selectedDays.Add(day);
+						} else {
+							range.Add(day);
+							selectedDays.Add(day);
+						}
 
-					DateTime day = (DateTime)arg;
-
-					if (range.Count == 2) {
-						range.Clear();
-						range.Add(day);
-						selectedDays.Clear();
-						selectedDays.Add(day);
-						return;
+						if (range.Count == 2) {
+							DateTime[] days = new DateTime[2];
+							selectedDays.CopyTo(days);
+							DateTime first = days[0] < days[1] ? days[0] : days[1];
+							DateTime second = days[0] > days[1] ? days[0] : days[1];
+							selectRangeBetween(first, second);
+						}
+						OnPropertyChanged("RangeSelection");
 					}
-
-					if (range.Count < 2) {
-						range.Add(day);
-						selectedDays.Add(day);
-					}
-					if (range.Count == 2) {
-
-						DateTime[] days = new DateTime[2];
-						selectedDays.CopyTo(days);
-						DateTime first = days[0] < days[1] ? days[0] : days[1];
-						DateTime second = days[0] > days[1] ? days[0] : days[1];
-						selectRangeBetween(first, second);
-					}
-
-				});
-			}
-		}
-
-		public ICommand SingleSelectionCommand
-		{
-			get {
-				return new Command ((object arg) => { 
-
-					DateTime day = (DateTime)arg;
-
-					selectedDays.Clear();
-					selectDay(day, true);
-
-				});
+				);
 			}
 		}
 
@@ -299,5 +280,12 @@ namespace iSeconds.Domain
 			get { return selectedDays; }
 		}		
 
+		public ICommand CompileCommand {
+			get { return new Command((object arg) => { navigator.NavigateTo("compile_range_selector", new Args()); }); }
+		}
+
+		public ICommand CompilationsCommand {
+			get { return new Command((object arg) => { navigator.NavigateTo("compilations_view", new Args()); }); }
+		}
 	}
 }

@@ -3,6 +3,7 @@ using Android.OS;
 using Android.Widget;
 using LegacyBar.Library.Bar;
 using iSeconds.Domain.Framework;
+using Android.Text;
 
 namespace iSeconds.Droid
 {
@@ -63,10 +64,9 @@ namespace iSeconds.Droid
 			if (title.Length != 0)
 				titleView.Text = title;
 
-			ScrollingTextView sTextView = (ScrollingTextView)titleView;
-
-			// removendo esse efeito horroroso...
-			sTextView.SetHorizontallyScrolling (false);
+			titleView.Ellipsize = TextUtils.TruncateAt.Marquee;
+			titleView.SetSingleLine();
+			titleView.SetMarqueeRepeatLimit(0);
 
 			if (addHomeAction)
 			{

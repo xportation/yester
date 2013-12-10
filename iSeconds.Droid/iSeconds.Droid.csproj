@@ -78,6 +78,8 @@
     <Compile Include="VideoPlayerActivity.cs" />
     <Compile Include="DayOptionsActivity.cs" />
     <Compile Include="FFMpegService.cs" />
+    <Compile Include="CompilationActivity.cs" />
+    <Compile Include="TimelineOptionsPopup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -187,6 +189,13 @@
     <None Include="Assets\libavutil-52.so" />
     <None Include="Assets\libswresample-0.so" />
     <None Include="Assets\libswscale-2.so" />
+    <AndroidResource Include="Resources\layout\CompilationView.axml" />
+    <AndroidResource Include="Resources\layout\CompilationViewItem.axml" />
+    <AndroidResource Include="Resources\drawable\ic_compile.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_compile.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_compile.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_compile.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_compile.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

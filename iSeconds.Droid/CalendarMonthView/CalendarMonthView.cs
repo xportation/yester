@@ -9,6 +9,7 @@ using Android.Util;
 using Android.Views;
 using iSeconds.Domain;
 using Color = Android.Graphics.Color;
+using Android.OS;
 
 namespace iSeconds.Droid
 {
@@ -227,8 +228,8 @@ namespace iSeconds.Droid
 		private Paint rangeDelimiterPaint;
 
 		private bool shouldAnimate = false;
-
 		private bool isPressed = false;
+		private Vibrator vibe = null;
 
       #region Constructors
       public CalendarMonthView(Context context)
@@ -291,6 +292,8 @@ namespace iSeconds.Droid
 	      initBitmapCache();
 
 	      isNextMonthByGesture = false;
+
+			vibe = (Vibrator)this.Context.GetSystemService(Context.VibratorService);
 	   }
 
 	   private void initBitmapCache()
@@ -332,7 +335,22 @@ namespace iSeconds.Droid
 			}
 		}
 
-		public TimelineViewModel ViewModel { get; set; }
+		private TimelineViewModel timelineViewModel = null;
+		public TimelineViewModel ViewModel { 
+			get {
+				return timelineViewModel; 
+			}
+			set {
+				if (timelineViewModel != value) 
+				{
+					timelineViewModel = value; 
+					timelineViewModel.PropertyChanged += (sender, e) => {
+						if (e.PropertyName == "RangeSelection")
+							this.Invalidate();
+					};
+				}
+			}
+		}
 
 	   #region Gestures
 	   public bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
@@ -374,8 +392,10 @@ namespace iSeconds.Droid
 	      if (animation.IsAnimating() || !RangeSelectionMode)
 	         return;
 
-			// deixei para caso precisarmos adicionar algo no long press..
+			if (vibe != null)
+				vibe.Vibrate(30);
 
+			findAndSelectDay(e.GetX(), e.GetY(), true);
 		}
 
 	   public bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
@@ -385,21 +405,14 @@ namespace iSeconds.Droid
 
 	   public void OnShowPress(MotionEvent e)
 		{
-			if (animation.IsAnimating())
-				return; 
-
-			float x = e.GetX();
-			float y = e.GetY();
-
-			findAndSelectDay (x, y);
 		}
 
-		private bool findAndSelectDay (float x, float y)
+		private bool findAndSelectDay (float x, float y, bool isLongPress)
 		{
 			var dayRegion = this.findDayOnXY (x, y);
 			if (dayRegion != null) 
 			{
-				if (RangeSelectionMode) {
+				if (RangeSelectionMode && !isLongPress) {
 					ViewModel.RangeSelectionCommand.Execute (dayRegion.Item2.Model.Date);
 				}
 				else {
@@ -435,7 +448,7 @@ namespace iSeconds.Droid
 			float x = e.GetX();
 			float y = e.GetY();
 
-			return findAndSelectDay(x, y);
+			return findAndSelectDay(x, y, false);
 		}
 
 	   #endregion

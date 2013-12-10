@@ -37,12 +37,12 @@ namespace iSeconds.Droid
 
       public PathServiceAndroid()
       {
-			appPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/iSeconds";
+			appPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "iSeconds");
 			if (MemoryUtils.IsExternalMemoryBestChoice())
-				appPath = Android.OS.Environment.ExternalStorageDirectory + "/iSeconds";
+				appPath = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.Path, "iSeconds");
 
-			mediaPath = appPath + "/Videos";
-			dbPath = appPath + "/Db"; 
+			mediaPath = System.IO.Path.Combine(appPath, "Videos");
+			dbPath = System.IO.Path.Combine(appPath, "Db"); 
 
          createPaths();
       }
