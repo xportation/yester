@@ -40,6 +40,8 @@ namespace iSeconds.Droid
 		private TimelineViewModel viewModel;
 
 		private const string CurrentDateState= "currenteDateState";
+		private const string FirstDateSelected= "firstDateSelected";
+		private const string SecondDateSelected= "secondDateSelected";
 		private const int ShowOptionsMenu= 101;
 
 		private FileObservadoro fileObservadoro;
@@ -99,6 +101,14 @@ namespace iSeconds.Droid
 
 			outState.PutLong(CurrentDateState, viewModel.CurrentDate.ToBinary());
 			outState.PutBoolean(TakingVideo, takingVideo);
+
+			if (viewModel.Range.Count > 0) {
+				DateTime[] dateTime = new DateTime[viewModel.Range.Count];
+				viewModel.Range.CopyTo(dateTime);
+				outState.PutLong(FirstDateSelected, dateTime[0].ToBinary());
+				if (viewModel.Range.Count == 2)
+					outState.PutLong(SecondDateSelected, dateTime[1].ToBinary());
+			}
 		}
 
 		void loadSavedState(Bundle savedState)
@@ -109,6 +119,12 @@ namespace iSeconds.Droid
 				
 				if (savedState.ContainsKey(TakingVideo))
 					takingVideo = savedState.GetBoolean(TakingVideo);
+
+				if (savedState.ContainsKey(FirstDateSelected))
+					viewModel.RangeSelectionCommand.Execute(DateTime.FromBinary(savedState.GetLong(FirstDateSelected)));
+
+				if (savedState.ContainsKey(SecondDateSelected))
+					viewModel.RangeSelectionCommand.Execute(DateTime.FromBinary(savedState.GetLong(SecondDateSelected)));
 			}
 		}
 
