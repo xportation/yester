@@ -203,7 +203,8 @@ namespace iSeconds.Droid
 			startingPaused = false;
 			alreadyPrepared = false;
 			videoView.Completion+= (sender, e) => {
-				playVideo(currentVideo+1);
+				if (!playOverImage.IsShown)
+					playVideo(currentVideo+1);
 			};
 
 			videoView.Prepared += (sender, e) => {
