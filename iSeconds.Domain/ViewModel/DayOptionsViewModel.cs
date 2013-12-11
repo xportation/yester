@@ -181,6 +181,8 @@ namespace iSeconds.Domain
 				AddEntry(new OptionsEntry("Delete video", () => {
 					viewModel.DeleteVideoCommand.Execute(selectedVideo);
 				}));
+
+				AddEntry(new OptionsEntry("Cancel", () => {}));
 			}
 		}
 
