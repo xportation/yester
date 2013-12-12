@@ -32,6 +32,7 @@
 	<string name="settings_movies_size_small">Small (1 second)</string>
 	<string name="settings_movies_size_medium">Medium (3 seconds)</string>
 	<string name="settings_movies_size_large">Large (5 seconds)</string>
+	<string name="settings_only_default_video_of_the_day">Uses only default video of the day when compile</string>
 	<string name="share">Sharing</string>
 	<string name="share_start_period">Choose the begin:</string>
 	<string name="share_end_period">Choose the end:</string>

@@ -33,8 +33,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/settingsVideoSizeGroup"
-        android:padding="5px"
-        android:layout_weight="1">
+        android:padding="5px">
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +55,24 @@
             android:id="@+id/settingsVideoSizeLarge"
             android:textColor="@color/first_item_color" />
     </RadioGroup>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:id="@+id/view2"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/second_item_color" />
+    <CheckBox
+        android:text="@string/settings_only_default_video_of_the_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settingsOnlyDefaultVideos"
+        android:textColor="@color/first_item_color" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/view1"
+        android:layout_weight="1" />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

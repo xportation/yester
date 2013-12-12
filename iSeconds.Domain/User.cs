@@ -120,6 +120,16 @@ namespace iSeconds.Domain
 			repository.SaveUser(this);
 		}
 
+		/// <summary>
+		/// Sets to use only default video.
+		/// </summary>
+		/// <param name="onlyDefaultVideo">onlyDefaultVideo.</param>
+		public void SetUsesOnlyDefaultVideo(bool onlyDefaultVideo)
+		{
+			this.UsesOnlyDefaultVideo = onlyDefaultVideo;
+			repository.SaveUser(this);
+		}
+
 	   #region db
 
 	   public string Name { get; set; }
@@ -130,6 +140,8 @@ namespace iSeconds.Domain
 		public int CurrentTimelineId { get; set; }
 
 		public int RecordDuration { get; set; }
+
+		public bool UsesOnlyDefaultVideo { get; set; }
 
 	   #endregion
 	}

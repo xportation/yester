@@ -27,6 +27,7 @@ namespace iSeconds.Droid
 			configureActionBar(true, "");
 			configureFonts();
 			configureRadioButton();
+			configureCheckBox();
 		}
 		
 		void configureFonts()
@@ -36,12 +37,14 @@ namespace iSeconds.Droid
 			RadioButton smallView= FindViewById<RadioButton>(Resource.Id.settingsVideoSizeSmall);
 			RadioButton mediumView= FindViewById<RadioButton>(Resource.Id.settingsVideoSizeMedium);
 			RadioButton largeView= FindViewById<RadioButton>(Resource.Id.settingsVideoSizeLarge);
+			CheckBox checkOnlyDefaultVideo = FindViewById<CheckBox>(Resource.Id.settingsOnlyDefaultVideos);
 
 			TextViewUtil.ChangeForDefaultFont(titleView,this,22f);
 			TextViewUtil.ChangeForDefaultFont(descriptionView,this,18f);
 			TextViewUtil.ChangeForDefaultFont(smallView,this,18f);
 			TextViewUtil.ChangeForDefaultFont(mediumView,this,18f);
 			TextViewUtil.ChangeForDefaultFont(largeView,this,18f);
+			TextViewUtil.ChangeForDefaultFont(checkOnlyDefaultVideo,this,18f);
 		}
 
 		void configureRadioButton()
@@ -62,6 +65,14 @@ namespace iSeconds.Droid
 			smallView.Click+= (sender, e) => viewModel.ChangeTimeCommand.Execute(SMALL_SIZE);
 			mediumView.Click+= (sender, e) => viewModel.ChangeTimeCommand.Execute(MEDIUM_SIZE);
 			largeView.Click+= (sender, e) => viewModel.ChangeTimeCommand.Execute(LARGE_SIZE);
+		}
+
+		void configureCheckBox()
+		{
+			CheckBox checkOnlyDefaultVideo = FindViewById<CheckBox>(Resource.Id.settingsOnlyDefaultVideos);
+			checkOnlyDefaultVideo.Checked = viewModel.UsesOnlyDefaultVideo();
+
+			checkOnlyDefaultVideo.CheckedChange+= (sender, e) => viewModel.ChangeUsesOnlyDefaultVideoCommand.Execute(e.IsChecked);
 		}
 	}
 }

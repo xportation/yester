@@ -21,6 +21,16 @@ namespace iSeconds.Domain
 		{
 			get { return new Command((object arg) => { user.SetRecordDuration((int)arg); }); }
 		}
+
+		public bool UsesOnlyDefaultVideo()
+		{
+			return user.UsesOnlyDefaultVideo;
+		}
+
+		public ICommand ChangeUsesOnlyDefaultVideoCommand
+		{
+			get { return new Command((object arg) => { user.SetUsesOnlyDefaultVideo((bool)arg); }); }
+		}
 	}
 }
 
