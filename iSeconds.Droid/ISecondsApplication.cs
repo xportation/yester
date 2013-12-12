@@ -20,6 +20,7 @@ namespace iSeconds.Droid
       private INavigator navigator = null;
       private IPathService pathService = null;
 		private IOptionsDialogService optionsDialogService = null;
+		private I18nService i18nService = null;
 
       public ISecondsApplication (IntPtr javaReference, JniHandleOwnership transfer)
          : base(javaReference, transfer)
@@ -27,7 +28,8 @@ namespace iSeconds.Droid
 			pathService = new PathServiceAndroid();
 			repository = new ISecondsDB (pathService.GetDbPath());
 
-			userService = new UserService (repository);
+			i18nService = new I18nServiceAndroid(this.BaseContext);
+			userService = new UserService (repository, i18nService);
 			if (!userService.Login ("user", "password"))
 				userService.CreateUser ("user");
          
@@ -80,6 +82,11 @@ namespace iSeconds.Droid
 		public IOptionsDialogService GetOptionsDialogService ()
 		{
 			return optionsDialogService;
+		}
+
+		public I18nService GetI18nService()
+		{
+			return i18nService;
 		}
    }
 

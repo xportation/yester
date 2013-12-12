@@ -7,11 +7,13 @@ namespace iSeconds.Domain
 	public class TimelineOptionsViewModel: ViewModel
 	{
 		private User user = null;
+		private I18nService i18n = null;
 		private INavigator navigator = null;
 		
-      public TimelineOptionsViewModel(INavigator navigador, User user, IRepository repository)
+		public TimelineOptionsViewModel(INavigator navigador, User user, IRepository repository, I18nService i18n)
 		{
 			this.user = user;
+			this.i18n = i18n;
 			this.navigator = navigador;
 			
 	      this.user.OnCurrentTimelineChanged += (sender, args) => notifyChanges();
@@ -60,7 +62,7 @@ namespace iSeconds.Domain
          user.DeleteTimeline(timeline);
 
 		   if (user.GetTimelineCount() == 0)
-			   user.CreateTimeline("Default", "Default Timeline");
+				user.CreateTimeline(i18n.Msg("Default Timeline"), i18n.Msg("Default Timeline"));
 	   }
 
 		public void SetCurrentTimeline(Timeline timeline)
@@ -77,20 +79,22 @@ namespace iSeconds.Domain
 
 		public class TimelineOptionsList : OptionsList
 		{
+			private I18nService i18n = null;
 			private Timeline currentTimeline;
 
-			public TimelineOptionsList(TimelineOptionsViewModel viewModel, Timeline currentTimeline)
+			public TimelineOptionsList(TimelineOptionsViewModel viewModel, Timeline currentTimeline, I18nService i18n)
 			{
+				this.i18n = i18n;
 				this.currentTimeline = currentTimeline;
 
-				AddEntry(new OptionsEntry("Edit Timeline", 
+				AddEntry(new OptionsEntry(i18n.Msg("Edit Timeline"), 
 					() => 
 						viewModel.TimelineEditionRequest.Raise(new TimelineEditionModel(viewModel,this.currentTimeline))
 				));
 
-				AddEntry(new OptionsEntry("Set as current", () => viewModel.SetCurrentTimeline(this.currentTimeline)));
-				AddEntry(new OptionsEntry("Delete", () => viewModel.TimelineDeleteRequest.Raise(new TimelineDeleteModel(viewModel, this.currentTimeline))));
-				AddEntry(new OptionsEntry("Cancel", () => { /*nothing to do*/ }));
+				AddEntry(new OptionsEntry(i18n.Msg("Set as current"), () => viewModel.SetCurrentTimeline(this.currentTimeline)));
+				AddEntry(new OptionsEntry(i18n.Msg("Delete"), () => viewModel.TimelineDeleteRequest.Raise(new TimelineDeleteModel(viewModel, this.currentTimeline))));
+				AddEntry(new OptionsEntry(i18n.Msg("Cancel"), () => { /*nothing to do*/ }));
 			}
 
 			public string[] ListNames()
@@ -117,7 +121,7 @@ namespace iSeconds.Domain
 				return new Command((object arg) =>
 					{
 						var currentTimelineInEdition = this.TimelineAt((int) arg);
-						TimelineOptionsRequest.Raise(new TimelineOptionsList(this, currentTimelineInEdition));
+						TimelineOptionsRequest.Raise(new TimelineOptionsList(this, currentTimelineInEdition, i18n));
 					}); 
 			}
 		}

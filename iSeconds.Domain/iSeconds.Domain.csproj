@@ -69,6 +69,7 @@
     <Compile Include="IOptionsDialogService.cs" />
     <Compile Include="ViewModel\ListItemViewModel.cs" />
     <Compile Include="MediaInfo.cs" />
+    <Compile Include="I18nService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

@@ -97,15 +97,17 @@ namespace iSeconds.Droid
          int year = Convert.ToInt32 (this.Intent.Extras.GetString ("Year"));
          int timelineId = Convert.ToInt32 (this.Intent.Extras.GetString ("TimelineId"));
 
-			User currentUser = ((ISecondsApplication)this.Application).GetUserService ().CurrentUser;
+			ISecondsApplication application = (ISecondsApplication)this.Application;
+			User currentUser = application.GetUserService ().CurrentUser;
          Timeline timeline = currentUser.GetTimelineById (timelineId);
          DayInfo dayInfo = timeline.GetDayAt (new DateTime (year, month, day));
 
-         INavigator navigator = ((ISecondsApplication)this.Application).GetNavigator();
-			IMediaService mediaService = ((ISecondsApplication)this.Application).GetMediaService();
-			IOptionsDialogService optionsDialogService = ((ISecondsApplication)this.Application).GetOptionsDialogService();
+			INavigator navigator = application.GetNavigator();
+			IMediaService mediaService = application.GetMediaService();
+			IOptionsDialogService optionsDialogService = application.GetOptionsDialogService();
+			I18nService i18n = application.GetI18nService();
 
-         viewModel = new DayOptionsViewModel (timeline, dayInfo, navigator, mediaService, optionsDialogService);
+			viewModel = new DayOptionsViewModel (timeline, dayInfo, navigator, mediaService, optionsDialogService, i18n);
 
 			adapter = new VideoListAdapter (this, viewModel);
 			listView = this.FindViewById<ListView> (Resource.Id.videosList);

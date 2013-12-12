@@ -13,6 +13,7 @@ namespace iSeconds.Domain
 		private INavigator navigator = null;
 		private IOptionsDialogService optionsDialogService = null;
 		private Timeline timeline = null;
+		private I18nService i18n = null;
 
 		public DayInfo Model 
 		{
@@ -20,13 +21,14 @@ namespace iSeconds.Domain
 		}
 
 		public DayOptionsViewModel(Timeline timeline, DayInfo model, INavigator navigator, IMediaService mediaService
-		                           , IOptionsDialogService optionsDialogService)
+			, IOptionsDialogService optionsDialogService, I18nService i18n)
 		{
 			this.timeline = timeline;
 			this.model = model;
 			this.navigator = navigator;
 			this.mediaService = mediaService;
 			this.optionsDialogService = optionsDialogService;
+			this.i18n = i18n;
 			this.Init();
 		}
 
@@ -157,7 +159,7 @@ namespace iSeconds.Domain
 					int selectedVideo = (int)arg;
 
 					optionsDialogService.AskForConfirmation(
-						"Are you sure? This operation cannot be undone!",
+						i18n.Msg("Are you sure? This operation cannot be undone!"),
 						() => {
 							this.timeline.DeleteVideoAt(model.Date, this.videos[selectedVideo].Model.Path);
 							this.Init();
@@ -174,15 +176,15 @@ namespace iSeconds.Domain
 
 		public class VideoOptionsList : OptionsList
 		{
-			public VideoOptionsList(DayOptionsViewModel viewModel, int selectedVideo)
+			public VideoOptionsList(DayOptionsViewModel viewModel, int selectedVideo, I18nService i18n)
 			{
-				AddEntry(new OptionsEntry("Set as default", () => { viewModel.CheckVideoCommand.Execute(selectedVideo); }));
+				AddEntry(new OptionsEntry(i18n.Msg("Set as default"), () => { viewModel.CheckVideoCommand.Execute(selectedVideo); }));
 
-				AddEntry(new OptionsEntry("Delete video", () => {
+				AddEntry(new OptionsEntry(i18n.Msg("Delete video"), () => {
 					viewModel.DeleteVideoCommand.Execute(selectedVideo);
 				}));
 
-				AddEntry(new OptionsEntry("Cancel", () => {}));
+				AddEntry(new OptionsEntry(i18n.Msg("Cancel"), () => {}));
 			}
 		}
 
@@ -192,7 +194,7 @@ namespace iSeconds.Domain
 			get {
 				return new Command ((object arg) => {
 					int selectedVideo = (int)arg;
-					optionsDialogService.ShowModal(new VideoOptionsList(this, selectedVideo));
+					optionsDialogService.ShowModal(new VideoOptionsList(this, selectedVideo, i18n));
 				});
 			}
 		}

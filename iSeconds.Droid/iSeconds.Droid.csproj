@@ -79,6 +79,7 @@
     <Compile Include="FFMpegService.cs" />
     <Compile Include="CompilationActivity.cs" />
     <Compile Include="TimelineOptionsPopup.cs" />
+    <Compile Include="I18nServiceAndroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

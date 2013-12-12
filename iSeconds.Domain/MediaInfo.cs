@@ -21,7 +21,8 @@ namespace iSeconds.Domain
 			if (Path.Length == 0)
 				return "";
 
-			return System.IO.Path.GetDirectoryName(Path) + "/" + System.IO.Path.GetFileNameWithoutExtension(Path) + ".png";
+			string fileName = System.IO.Path.ChangeExtension(this.Path, ".png");
+			return System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Path), fileName);
 		}
 
 		#region db

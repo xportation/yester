@@ -9,10 +9,12 @@ namespace iSeconds.Domain
 	 */
 	public class UserService
 	{
+		private I18nService i18n;
 		private IRepository repository;
 
-		public UserService(IRepository repository)
+		public UserService(IRepository repository, I18nService i18n)
 		{
+			this.i18n = i18n;
 			this.repository= repository;
 		}
 
@@ -33,7 +35,7 @@ namespace iSeconds.Domain
 		{
 			User user = new User (name, repository);
 			repository.SaveUser (user);
-			user.CreateTimeline ("Default Timeline", "This is a default timeline");
+			user.CreateTimeline (i18n.Msg("Default Timeline"), i18n.Msg("This is a default timeline"));
 			currentUser = user;
 		}
 	}

@@ -82,7 +82,8 @@ namespace iSeconds.Droid
          base.OnCreate(bundle);
 
          ISecondsApplication application = (ISecondsApplication) this.Application;
-         viewModel = new TimelineOptionsViewModel(application.GetNavigator(), application.GetUserService().CurrentUser, application.GetRepository());
+         viewModel = new TimelineOptionsViewModel(application.GetNavigator(), application.GetUserService().CurrentUser, 
+				application.GetRepository(), application.GetI18nService());
 			
 			this.RequestWindowFeature(WindowFeatures.NoTitle);
          this.SetContentView(Resource.Layout.TimelineOptions);
