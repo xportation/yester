@@ -64,4 +64,7 @@
 	<string name="raw_are_you_sure_this_operation_cannot_be_undone">Are you sure? This operation cannot be undone.</string>
 	<string name="raw_set_as_default">Set as default</string>
 	<string name="raw_delete_video">Delete video</string>
+
+	<string name="about_us">We are milionaries, we have big salaries, in restaurante we eat for free!!</string>
+	<string name="about_tutorial">Tutorial</string>
 </resources>

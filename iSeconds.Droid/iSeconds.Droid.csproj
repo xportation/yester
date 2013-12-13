@@ -177,6 +177,10 @@
     <AndroidResource Include="Resources\drawable-ldpi\ic_menu.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_menu.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable\tutorial1.png" />
+    <AndroidResource Include="Resources\drawable\tutorial2.png" />
+    <AndroidResource Include="Resources\drawable\tutorial3.png" />
+    <AndroidResource Include="Resources\layout\TutorialView.axml" />
     <AndroidResource Include="Resources\layout\CompileView.axml" />
   </ItemGroup>
   <ItemGroup>

@@ -24,14 +24,17 @@ namespace iSeconds.Droid
 			configureActionBar(true, "");
 			configureFonts();
 			configureHyperlinks();
+			configureButtonTutorial();
 		}
 
 		void configureFonts()
 		{
 			TextView aboutTextView= FindViewById<TextView>(Resource.Id.textAbout);
 			TextView siteTextView= FindViewById<TextView>(Resource.Id.textSite);
+			Button buttonTutorial= FindViewById<Button>(Resource.Id.buttonTutorial);
 			TextViewUtil.ChangeForDefaultFont(aboutTextView,this,18f);
 			TextViewUtil.ChangeForDefaultFont(siteTextView,this,18f);
+			TextViewUtil.ChangeForDefaultFont(buttonTutorial,this,18f);
 		}
 
 		void configureHyperlinks()
@@ -47,6 +50,23 @@ namespace iSeconds.Droid
 				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://www.twitter.com/broditech"));
 				StartActivity(intent);
 			};
+		}
+
+		void configureButtonTutorial()
+		{
+			Button buttonTutorial = FindViewById<Button>(Resource.Id.buttonTutorial);
+			buttonTutorial.Click+= (sender, e) => {
+				this.ShowDialog(0);
+			};
+		}
+
+		protected override Dialog OnCreateDialog(int dialogId)
+		{
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+			LayoutInflater inflater = this.LayoutInflater;
+			builder.SetView(inflater.Inflate(Resource.Layout.TutorialView, null));
+			return builder.Create();
 		}
 	}
 }
