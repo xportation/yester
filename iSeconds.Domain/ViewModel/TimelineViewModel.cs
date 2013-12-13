@@ -281,7 +281,16 @@ namespace iSeconds.Domain
 		}		
 
 		public ICommand CompileCommand {
-			get { return new Command((object arg) => { navigator.NavigateTo("compile_range_selector", new Args()); }); }
+			get { return new Command((object arg) => { 
+					Tuple<DateTime, DateTime> rangeDelimiters = getRangeDelimiters();
+
+					Args args = new Args();
+					args.Put("ShareDate_Start", rangeDelimiters.Item1.ToBinary().ToString());
+					args.Put("ShareDate_End", rangeDelimiters.Item2.ToBinary().ToString());
+					args.Put("ShareDate_TimelineId", this.timeline.Id.ToString());
+
+					navigator.NavigateTo("compile_range_selector", args); }); 
+			}
 		}
 
 		public ICommand CompilationsCommand {

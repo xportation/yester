@@ -231,6 +231,10 @@ namespace iSeconds.Droid
 				OnSearchRequested();
 				viewModel.PlaySelectionCommand.Execute(null);
 				return true;
+			case Resource.Id.actionbar_compile:
+				OnSearchRequested();
+				viewModel.CompileCommand.Execute(null);
+				return true;
 			}
 
 			return base.OnOptionsItemSelected(item);
