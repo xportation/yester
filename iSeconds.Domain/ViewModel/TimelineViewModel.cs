@@ -296,5 +296,39 @@ namespace iSeconds.Domain
 		public ICommand CompilationsCommand {
 			get { return new Command((object arg) => { navigator.NavigateTo("compilations_view", new Args()); }); }
 		}
+
+		#region Show Tutorial
+
+		public ICommand ShowTutorialCommand {
+			get { return new Command((object arg) => { 
+				if (!user.TutorialShown)
+					tutorialShowRequest.Raise(new TutorialShowModel(user));
+				}); 
+			}
+		}
+
+		private InteractionRequest<TutorialShowModel> tutorialShowRequest = new InteractionRequest<TutorialShowModel>();
+
+		public InteractionRequest<TutorialShowModel> TutorialShowRequest
+		{
+			get { return tutorialShowRequest; }
+		}
+
+		public class TutorialShowModel
+		{
+			private User user = null;
+
+			public TutorialShowModel(User user)
+			{
+				this.user = user;
+			}
+
+			public void Finished()
+			{
+				user.SetTutorialShown(true);
+			}
+		}
+
+		#endregion
 	}
 }

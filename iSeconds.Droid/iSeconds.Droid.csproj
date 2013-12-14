@@ -81,6 +81,7 @@
     <Compile Include="TimelineOptionsPopup.cs" />
     <Compile Include="CompileActivity.cs" />
     <Compile Include="I18nServiceAndroid.cs" />
+    <Compile Include="TutorialDialogFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -179,9 +180,10 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_menu.png" />
     <AndroidResource Include="Resources\drawable\tutorial1.png" />
     <AndroidResource Include="Resources\drawable\tutorial2.png" />
-    <AndroidResource Include="Resources\drawable\tutorial3.png" />
     <AndroidResource Include="Resources\layout\TutorialView.axml" />
     <AndroidResource Include="Resources\layout\CompileView.axml" />
+    <AndroidResource Include="Resources\drawable\fling.png" />
+    <AndroidResource Include="Resources\drawable\hold.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

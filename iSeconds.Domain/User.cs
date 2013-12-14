@@ -13,6 +13,7 @@ namespace iSeconds.Domain
 			Name = name;
 			CurrentTimelineId = -1;
 			RecordDuration = 3;
+			TutorialShown = false;
 			this.repository = repository;
 		}
 
@@ -130,6 +131,16 @@ namespace iSeconds.Domain
 			repository.SaveUser(this);
 		}
 
+		/// <summary>
+		/// Sets the tutorial shown.
+		/// </summary>
+		/// <param name="shown">shown.</param>
+		public void SetTutorialShown(bool shown)
+		{
+			this.TutorialShown = shown;
+			repository.SaveUser(this);
+		}
+
 	   #region db
 
 	   public string Name { get; set; }
@@ -142,6 +153,8 @@ namespace iSeconds.Domain
 		public int RecordDuration { get; set; }
 
 		public bool UsesOnlyDefaultVideo { get; set; }
+
+		public bool TutorialShown { get; set; }
 
 	   #endregion
 	}

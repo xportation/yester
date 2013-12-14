@@ -48,6 +48,9 @@ namespace iSeconds.Droid
 		private bool takingVideo = false;
 		private const string TakingVideo= "TakingVideo";
 
+		private const int TutorialDialogId = 15;
+		private TimelineViewModel.TutorialShowModel tutorialShowModel= null;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -72,6 +75,12 @@ namespace iSeconds.Droid
 			addActionBarItems(false);
 			setupCalendar();
 
+			viewModel.TutorialShowRequest.Raised += (sender, args) =>{
+				tutorialShowModel = args.Value;
+				ShowDialog(TutorialDialogId);
+			};
+
+			viewModel.ShowTutorialCommand.Execute(null);
 			takingVideo = false;
 		}
 
@@ -243,6 +252,14 @@ namespace iSeconds.Droid
 		private void showPopup()
 		{
 			TimelineOptionsPopup.Show(this, viewModel);
+		}
+
+		protected override Dialog OnCreateDialog(int dialogId)
+		{
+			if (dialogId == TutorialDialogId)
+				return TutorialDialogFactory.CreateDialog(this, this.LayoutInflater, () => tutorialShowModel.Finished());
+
+			return base.OnCreateDialog(dialogId);
 		}
 	}
 }

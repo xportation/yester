@@ -14,6 +14,8 @@ namespace iSeconds.Droid
 	[Activity (Label = "AboutActivity")]			
 	public class AboutActivity : ISecondsActivity
 	{
+		private const int TutorialDialogId = 20;
+
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
@@ -56,17 +58,16 @@ namespace iSeconds.Droid
 		{
 			Button buttonTutorial = FindViewById<Button>(Resource.Id.buttonTutorial);
 			buttonTutorial.Click+= (sender, e) => {
-				this.ShowDialog(0);
+				this.ShowDialog(TutorialDialogId);
 			};
 		}
 
 		protected override Dialog OnCreateDialog(int dialogId)
 		{
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			if (dialogId == TutorialDialogId)
+				return TutorialDialogFactory.CreateDialog(this, this.LayoutInflater, () => {});
 
-			LayoutInflater inflater = this.LayoutInflater;
-			builder.SetView(inflater.Inflate(Resource.Layout.TutorialView, null));
-			return builder.Create();
+			return base.OnCreateDialog(dialogId);
 		}
 	}
 }
