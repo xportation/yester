@@ -257,9 +257,15 @@ namespace iSeconds.Droid
 		protected override Dialog OnCreateDialog(int dialogId)
 		{
 			if (dialogId == TutorialDialogId)
-				return TutorialDialogFactory.CreateDialog(this, this.LayoutInflater, () => tutorialShowModel.Finished());
+				return TutorialDialogFactory.CreateDialog(this, () => tutorialShowModel.Finished());
 
 			return base.OnCreateDialog(dialogId);
+		}
+
+		protected override void OnPrepareDialog(int dialogId, Dialog dialog)
+		{
+			if (dialogId == TutorialDialogId)
+				TutorialDialogFactory.ChangeFonts(dialog, this);
 		}
 	}
 }

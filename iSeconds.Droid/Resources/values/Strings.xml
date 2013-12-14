@@ -79,4 +79,5 @@
    <string name="tutorial_fling">Fling up or down to navigate for the months.</string>
    <string name="tutorial_msg2">We hope this tutorial was helpful to you, thanks!! Please, don\'t hesitate to contact us :)</string>
    <string name="tutorial_done">Done</string>
+   <string name="tutorial_access_about">You can show this tutorial anytime on About option.</string>
 </resources>

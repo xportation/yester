@@ -9,7 +9,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1"
+        android:id="@+id/textViewWelcome"
         android:textColor="@color/first_item_color"
         android:paddingBottom="10dp" />
     <ScrollView
@@ -33,7 +33,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView2"
+                android:id="@+id/textViewMsg1"
                 android:textColor="@color/second_item_color" />
             <ImageView
                 android:src="@drawable/tutorial1"
@@ -49,14 +49,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView3"
+                android:id="@+id/textViewOption1"
                 android:textColor="@color/second_item_color" />
             <TextView
                 android:text="@string/tutorial_option2"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView4"
+                android:id="@+id/textViewOption2"
                 android:textColor="@color/second_item_color" />
             <ImageView
                 android:src="@drawable/tutorial2"
@@ -72,21 +72,21 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView5"
+                android:id="@+id/textViewOption3"
                 android:textColor="@color/second_item_color" />
             <TextView
                 android:text="@string/tutorial_option4"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView6"
+                android:id="@+id/textViewOption4"
                 android:textColor="@color/second_item_color" />
             <TextView
                 android:text="@string/tutorial_option5"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView7"
+                android:id="@+id/textViewOption5"
                 android:textColor="@color/second_item_color" />
             <LinearLayout
                 android:orientation="horizontal"
@@ -106,7 +106,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView2"
+                    android:id="@+id/textViewHold"
                     android:textColor="@color/second_item_color"
                     android:paddingLeft="10dp" />
             </LinearLayout>
@@ -128,7 +128,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView9"
+                    android:id="@+id/textViewFling"
                     android:textColor="@color/second_item_color"
                     android:paddingLeft="10dp" />
             </LinearLayout>
@@ -137,10 +137,20 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView10"
+                android:id="@+id/textViewMsg2"
                 android:textColor="@color/second_item_color"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp" />
+            <TextView
+                android:text="@string/tutorial_access_about"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewAccessAbout"
+                android:textColor="@color/second_item_color"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textStyle="italic" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
