@@ -23,6 +23,7 @@ namespace iSeconds.Droid
 		{
 			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewWelcome), context, 26f);
 			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewMsg1), context, 18f);
+			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewMsg2), context, 18f);
 			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewOption1), context, 18f);
 			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewOption2), context, 18f);
 			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewOption3), context, 18f);
@@ -30,7 +31,9 @@ namespace iSeconds.Droid
 			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewOption5), context, 18f);
 			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewHold), context, 18f);
 			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewFling), context, 18f);
-			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewMsg2), context, 18f);
+			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewMsg3), context, 18f);
+			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewMsg4), context, 18f);
+
 			TextViewUtil.ChangeForDefaultFont(dialog.FindViewById<TextView>(Resource.Id.textViewAccessAbout), context, 18f);
 		}
 	}

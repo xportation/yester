@@ -42,6 +42,14 @@
                 android:id="@+id/textAbout"
                 android:layout_marginTop="10.0dp"
                 android:textColor="@color/second_item_color" />
+            <TextView
+                android:text="@string/about_stay_in_touch"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textStayInTouch"
+                android:layout_marginTop="15.0dp"
+                android:textColor="@color/second_item_color" />
             <LinearLayout
                 android:orientation="horizontal"
                 android:minWidth="25px"

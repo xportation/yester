@@ -65,11 +65,13 @@
    <string name="raw_set_as_default">Set as default</string>
    <string name="raw_delete_video">Delete video</string>
 
-   <string name="about_us">We are milionaries, we have big salaries, in restaurante we eat for free!!</string>
+   <string name="about_us">Broditech is a business focused on the development of casual games and mobile apps. </string>
+   <string name="about_stay_in_touch">Stay in touch:</string>
    <string name="about_tutorial">Tutorial</string>
 
    <string name="tutorial_welcome">Welcome to iSeconds!!!</string>
-   <string name="tutorial_msg1">Look how easy is to know all about iSeconds:</string>
+   <string name="tutorial_msg1">iSeconds is the best way to record your memories. You can do this in short movies (1s, 3s or 5s).</string>
+   <string name="tutorial_msg2">Look how easy is to know all about iSeconds:</string>
    <string name="tutorial_option1">1. Take your movies and enjoy it!!</string>
    <string name="tutorial_option2">2. Show the menu</string>
    <string name="tutorial_option3">3. Tap to select the days range. A selection is necessary to play or to compile yours movies.</string>
@@ -77,7 +79,8 @@
    <string name="tutorial_option5">5. Compile the selected movies into another movie. You can share it later.</string>
    <string name="tutorial_hold">Hold on items is the best way to get options like share a compilation, edit a timeline or goes to day options.</string>
    <string name="tutorial_fling">Fling up or down to navigate for the months.</string>
-   <string name="tutorial_msg2">We hope this tutorial was helpful to you, thanks!! Please, don\'t hesitate to contact us :)</string>
+   <string name="tutorial_msg3">You can change the movie size anytime you want. Just go to \"Settings\" and do this.</string>
+   <string name="tutorial_msg4">We hope this tutorial was helpful to you, thanks!! Please, don\'t hesitate to contact us :)</string>
    <string name="tutorial_done">Done</string>
-   <string name="tutorial_access_about">You can show this tutorial anytime on About option.</string>
+   <string name="tutorial_access_about">This tutorial is available on \"About\".</string>
 </resources>

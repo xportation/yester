@@ -35,6 +35,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewMsg1"
                 android:textColor="@color/second_item_color" />
+            <TextView
+                android:text="@string/tutorial_msg2"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewMsg2"
+                android:textColor="@color/second_item_color"
+                android:paddingTop="15dp" />
             <ImageView
                 android:src="@drawable/tutorial1"
                 android:layout_width="match_parent"
@@ -133,11 +141,20 @@
                     android:paddingLeft="10dp" />
             </LinearLayout>
             <TextView
-                android:text="@string/tutorial_msg2"
+                android:text="@string/tutorial_msg3"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewMsg2"
+                android:id="@+id/textViewMsg3"
+                android:textColor="@color/second_item_color"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+            <TextView
+                android:text="@string/tutorial_msg4"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewMsg4"
                 android:textColor="@color/second_item_color"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp" />

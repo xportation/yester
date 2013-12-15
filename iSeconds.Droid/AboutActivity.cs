@@ -32,9 +32,11 @@ namespace iSeconds.Droid
 		void configureFonts()
 		{
 			TextView aboutTextView= FindViewById<TextView>(Resource.Id.textAbout);
+			TextView stayInTouchTextView= FindViewById<TextView>(Resource.Id.textStayInTouch);
 			TextView siteTextView= FindViewById<TextView>(Resource.Id.textSite);
 			Button buttonTutorial= FindViewById<Button>(Resource.Id.buttonTutorial);
 			TextViewUtil.ChangeForDefaultFont(aboutTextView,this,18f);
+			TextViewUtil.ChangeForDefaultFont(stayInTouchTextView,this,18f);
 			TextViewUtil.ChangeForDefaultFont(siteTextView,this,18f);
 			TextViewUtil.ChangeForDefaultFont(buttonTutorial,this,18f);
 		}

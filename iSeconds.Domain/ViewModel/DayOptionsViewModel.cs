@@ -159,7 +159,7 @@ namespace iSeconds.Domain
 					int selectedVideo = (int)arg;
 
 					optionsDialogService.AskForConfirmation(
-						i18n.Msg("Are you sure? This operation cannot be undone!"),
+						i18n.Msg("Are you sure? This operation cannot be undone."),
 						() => {
 							this.timeline.DeleteVideoAt(model.Date, this.videos[selectedVideo].Model.Path);
 							this.Init();
