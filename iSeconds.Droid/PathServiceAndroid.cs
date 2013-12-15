@@ -34,6 +34,7 @@ namespace iSeconds.Droid
       private string appPath;
       private string mediaPath;
       private string dbPath; 
+		private string compilationPath;
 
       public PathServiceAndroid()
       {
@@ -43,6 +44,7 @@ namespace iSeconds.Droid
 
 			mediaPath = System.IO.Path.Combine(appPath, "Videos");
 			dbPath = System.IO.Path.Combine(appPath, "Db"); 
+			compilationPath = System.IO.Path.Combine(appPath, "Compilations"); 
 
          createPaths();
       }
@@ -62,6 +64,11 @@ namespace iSeconds.Droid
          return System.IO.Path.Combine(dbPath, "ISeconds.db3");
       }
 
+		public string GetCompilationPath()
+		{
+			throw new NotImplementedException();
+		}
+
       void createPath (string path)
       {
          if (!System.IO.Directory.Exists (path)) {
@@ -73,7 +80,8 @@ namespace iSeconds.Droid
       {
          createPath(appPath);
          createPath(mediaPath);
-         createPath(dbPath);
+			createPath(dbPath);
+			createPath(compilationPath);
       }
 
    }

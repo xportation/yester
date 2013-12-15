@@ -24,8 +24,6 @@ namespace iSeconds.Droid
 			this.SetContentView (Resource.Layout.CompileView);
 
 			//bindService ();
-
-
 		}
 
 		public void Concat ()
@@ -69,7 +67,6 @@ namespace iSeconds.Droid
 		{
 			base.OnStart ();
 			bindService ();
-
 		}
 
 

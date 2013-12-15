@@ -45,8 +45,6 @@ namespace iSeconds.Droid
 		private const int ShowOptionsMenu= 101;
 
 		private FileObservadoro fileObservadoro;
-		private bool takingVideo = false;
-		private const string TakingVideo= "TakingVideo";
 
 		private const int TutorialDialogId = 15;
 		private TimelineViewModel.TutorialShowModel tutorialShowModel= null;
@@ -65,11 +63,9 @@ namespace iSeconds.Droid
 
 			IPathService pathService = application.GetPathService();
 			fileObservadoro = new FileObservadoro(pathService.GetMediaPath(), this);
+			fileObservadoro.StartWatching();
 
 			loadSavedState(bundle);
-
-			if (takingVideo)
-				fileObservadoro.StartWatching();
 
 			configureActionBar(false, "");
 			addActionBarItems(false);
@@ -81,7 +77,6 @@ namespace iSeconds.Droid
 			};
 
 			viewModel.ShowTutorialCommand.Execute(null);
-			takingVideo = false;
 		}
 
 		#region FileObserverNotify implementation
@@ -91,7 +86,6 @@ namespace iSeconds.Droid
 			RunOnUiThread(
 				() => {
 					viewModel.Invalidate();
-					setProgressVisibility(false);
 				}
 			);
 		}
@@ -109,7 +103,6 @@ namespace iSeconds.Droid
 			base.OnSaveInstanceState(outState);
 
 			outState.PutLong(CurrentDateState, viewModel.CurrentDate.ToBinary());
-			outState.PutBoolean(TakingVideo, takingVideo);
 
 			if (viewModel.Range.Count > 0) {
 				DateTime[] dateTime = new DateTime[viewModel.Range.Count];
@@ -125,9 +118,6 @@ namespace iSeconds.Droid
 			if (savedState != null) {
 				if (savedState.ContainsKey(CurrentDateState))
 					viewModel.CurrentDate = DateTime.FromBinary(savedState.GetLong(CurrentDateState));
-				
-				if (savedState.ContainsKey(TakingVideo))
-					takingVideo = savedState.GetBoolean(TakingVideo);
 
 				if (savedState.ContainsKey(FirstDateSelected))
 					viewModel.RangeSelectionCommand.Execute(DateTime.FromBinary(savedState.GetLong(FirstDateSelected)));
@@ -140,7 +130,6 @@ namespace iSeconds.Droid
 		private void addActionBarItems(bool isPlayModeEnabled)
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			//setProgressVisibility(takingVideo);
 			actionBar.RemoveAllActions();
 
 			if (isPlayModeEnabled) {
@@ -229,7 +218,6 @@ namespace iSeconds.Droid
 			{			
 			case Resource.Id.actionbar_takeVideo:
 				OnSearchRequested();
-				takingVideo = true;
 				viewModel.TakeVideoCommand.Execute(null);				
 				return true;
 			case Resource.Id.actionbar_menu:

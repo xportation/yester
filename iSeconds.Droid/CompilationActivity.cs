@@ -1,5 +1,6 @@
 using Android.App;
 using Android.OS;
+using Android.Views;
 
 namespace iSeconds.Droid
 {
@@ -9,6 +10,11 @@ namespace iSeconds.Droid
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
+
+			this.RequestWindowFeature(WindowFeatures.NoTitle);
+			this.SetContentView(Resource.Layout.CompilationView);
+
+			configureActionBar(true, "");
 		}
 	}
 }

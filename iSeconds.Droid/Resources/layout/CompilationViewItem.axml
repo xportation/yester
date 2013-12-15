@@ -22,18 +22,27 @@
             android:layout_height="match_parent"
             android:id="@+id/linearLayout1">
             <TextView
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewTimelineName"
+                android:textColor="@color/first_item_color" />
+            <TextView
                 android:text="Date begin:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewDateBegin" />
+                android:id="@+id/textViewDateBegin"
+                android:textColor="@color/first_item_color" />
             <TextView
                 android:text="Date end:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewDateEnd"
-                android:layout_marginTop="6dp" />
+                android:layout_marginTop="6dp"
+                android:textColor="@color/first_item_color" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
