@@ -184,6 +184,7 @@
     <AndroidResource Include="Resources\layout\CompileView.axml" />
     <AndroidResource Include="Resources\drawable\fling.png" />
     <AndroidResource Include="Resources\drawable\hold.png" />
+    <AndroidResource Include="Resources\values-pt\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
