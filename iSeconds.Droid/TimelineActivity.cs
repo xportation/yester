@@ -47,7 +47,6 @@ namespace iSeconds.Droid
 		private FileObservadoro fileObservadoro;
 
 		private const int TutorialDialogId = 15;
-		private TimelineViewModel.TutorialShowModel tutorialShowModel= null;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -59,7 +58,7 @@ namespace iSeconds.Droid
 
 			ISecondsApplication application = (ISecondsApplication) this.Application;
 			viewModel = new TimelineViewModel(application.GetUserService().CurrentUser, application.GetRepository(), 
-			                                  application.GetMediaService(), application.GetNavigator());
+				application.GetMediaService(), application.GetNavigator(), application.GetOptionsDialogService());
 
 			IPathService pathService = application.GetPathService();
 			fileObservadoro = new FileObservadoro(pathService.GetMediaPath(), this);
@@ -70,11 +69,6 @@ namespace iSeconds.Droid
 			configureActionBar(false, "");
 			addActionBarItems(false);
 			setupCalendar();
-
-			viewModel.TutorialShowRequest.Raised += (sender, args) =>{
-				tutorialShowModel = args.Value;
-				ShowDialog(TutorialDialogId);
-			};
 
 			viewModel.ShowTutorialCommand.Execute(null);
 		}
@@ -240,20 +234,6 @@ namespace iSeconds.Droid
 		private void showPopup()
 		{
 			TimelineOptionsPopup.Show(this, viewModel);
-		}
-
-		protected override Dialog OnCreateDialog(int dialogId)
-		{
-			if (dialogId == TutorialDialogId)
-				return TutorialDialogFactory.CreateDialog(this, () => tutorialShowModel.Finished());
-
-			return base.OnCreateDialog(dialogId);
-		}
-
-		protected override void OnPrepareDialog(int dialogId, Dialog dialog)
-		{
-			if (dialogId == TutorialDialogId)
-				TutorialDialogFactory.ChangeFonts(dialog, this);
 		}
 	}
 }

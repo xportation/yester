@@ -15,13 +15,16 @@ namespace iSeconds.Domain
 		private IRepository repository = null;
 		private IMediaService mediaService = null;
 		private INavigator navigator = null;
+		private IOptionsDialogService dialogService = null;
 
-		public TimelineViewModel(User user, IRepository repository, IMediaService mediaService, INavigator navigator)
+		public TimelineViewModel(User user, IRepository repository, IMediaService mediaService, 
+			INavigator navigator, IOptionsDialogService dialogService)
 		{
 			this.user = user;
 			this.repository = repository;
 			this.mediaService = mediaService;
 			this.navigator = navigator;
+			this.dialogService = dialogService;
 
 			setTimeline(user.CurrentTimeline);
 			CalendarMode = VisualizationMode.MONTH;
@@ -297,38 +300,12 @@ namespace iSeconds.Domain
 			get { return new Command((object arg) => { navigator.NavigateTo("compilations_view", new Args()); }); }
 		}
 
-		#region Show Tutorial
-
 		public ICommand ShowTutorialCommand {
 			get { return new Command((object arg) => { 
 				if (!user.TutorialShown)
-					tutorialShowRequest.Raise(new TutorialShowModel(user));
+					dialogService.ShowTutorial( () => user.SetTutorialShown(true));
 				}); 
 			}
 		}
-
-		private InteractionRequest<TutorialShowModel> tutorialShowRequest = new InteractionRequest<TutorialShowModel>();
-
-		public InteractionRequest<TutorialShowModel> TutorialShowRequest
-		{
-			get { return tutorialShowRequest; }
-		}
-
-		public class TutorialShowModel
-		{
-			private User user = null;
-
-			public TutorialShowModel(User user)
-			{
-				this.user = user;
-			}
-
-			public void Finished()
-			{
-				user.SetTutorialShown(true);
-			}
-		}
-
-		#endregion
 	}
 }

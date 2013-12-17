@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using iSeconds.Domain;
 
 namespace iSeconds.Droid
 {
@@ -15,6 +16,7 @@ namespace iSeconds.Droid
 	public class AboutActivity : ISecondsActivity
 	{
 		private const int TutorialDialogId = 20;
+		private IOptionsDialogService dialogService = null;
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -22,6 +24,9 @@ namespace iSeconds.Droid
 
 			this.RequestWindowFeature(WindowFeatures.NoTitle);
 			this.SetContentView(Resource.Layout.AboutView);
+
+			ISecondsApplication application = (ISecondsApplication)this.Application;
+			dialogService = application.GetOptionsDialogService();
 
 			configureActionBar(true, "");
 			configureFonts();
@@ -60,22 +65,8 @@ namespace iSeconds.Droid
 		{
 			Button buttonTutorial = FindViewById<Button>(Resource.Id.buttonTutorial);
 			buttonTutorial.Click+= (sender, e) => {
-				this.ShowDialog(TutorialDialogId);
+				dialogService.ShowTutorial(null);
 			};
-		}
-
-		protected override Dialog OnCreateDialog(int dialogId)
-		{
-			if (dialogId == TutorialDialogId)
-				return TutorialDialogFactory.CreateDialog(this, () => {});
-
-			return base.OnCreateDialog(dialogId);
-		}
-
-		protected override void OnPrepareDialog(int dialogId, Dialog dialog)
-		{
-			if (dialogId == TutorialDialogId)
-				TutorialDialogFactory.ChangeFonts(dialog, this);
 		}
 	}
 }

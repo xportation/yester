@@ -7,6 +7,8 @@ namespace iSeconds.Domain
 		void ShowModal(OptionsList options);
 
 		void AskForConfirmation(string msg, Action userConfirmedCallback, Action userCanceledCallback);
+
+		void ShowTutorial(Action doneAction);
 	}
 }
 

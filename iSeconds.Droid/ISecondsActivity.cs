@@ -20,6 +20,7 @@ namespace iSeconds.Droid
 			ISecondsApplication application = (ISecondsApplication) this.Application;
 			activityTracker = application.GetActivityTracker();
 			navigator = application.GetNavigator();
+			activityTracker.SetCurrentActivity(this);
 		}
 
 		protected override void OnResume()
