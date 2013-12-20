@@ -81,6 +81,7 @@
     <Compile Include="TimelineOptionsPopup.cs" />
     <Compile Include="CompileActivity.cs" />
     <Compile Include="I18nServiceAndroid.cs" />
+    <Compile Include="SingleShotVideoPlayerActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

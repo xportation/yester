@@ -3,6 +3,7 @@ using iSeconds.Domain;
 using Android.App;
 using Android.Content;
 using Android.Widget;
+using Android.Views;
 
 namespace iSeconds.Droid
 {

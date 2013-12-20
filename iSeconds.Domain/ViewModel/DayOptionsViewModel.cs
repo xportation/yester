@@ -147,7 +147,9 @@ namespace iSeconds.Domain
 			get {
 				return new Command ((object arg) => {
 					int selectedVideo = (int)arg;
-					mediaService.PlayVideo(this.videos[selectedVideo].Model.Path);
+					Args args = new Args();
+					args.Put("FileName", this.videos[selectedVideo].Model.Path);
+					navigator.NavigateTo("single_shot_video_player", args);
 				});
 			}
 		}

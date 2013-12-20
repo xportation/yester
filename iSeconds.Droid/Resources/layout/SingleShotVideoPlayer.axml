@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
+    android:background="@color/secondary_activities_background">
+    <legacybar.library.bar.LegacyBar
+        android:id="@+id/actionbar"
+        style="@style/actionbar"
+        ab:title="@string/video_player"
+        ab:separator="@color/actionbar_background"
+        ab:background="@color/actionbar_background"
+        ab:background_item="@drawable/actionbar_button" />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,11 +28,5 @@
             android:layout_height="wrap_content"
             android:id="@+id/singleShotImagePausePlay"
             android:layout_gravity="center" />
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/singleShotButtonClose"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_close" />
     </FrameLayout>
 </LinearLayout>
