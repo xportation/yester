@@ -12,16 +12,23 @@
         ab:separator="@color/actionbar_background"
         ab:background="@color/actionbar_background"
         ab:background_item="@drawable/actionbar_button" />
-    <ListView
+    <LinearLayout
+        android:orientation="vertical"
         android:minWidth="25px"
-        android:minHeight="100px"
+        android:minHeight="25px"
         android:layout_width="fill_parent"
-        android:id="@+id/videosList"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:background="@color/activity_background"
-        android:divider="@color/list_divider_color"
-        android:dividerHeight="1sp"
-        android:choiceMode="singleChoice"
-        android:cacheColorHint="@android:color/transparent" />
+        android:id="@+id/linearLayout1">
+        <ListView
+            android:minWidth="25px"
+            android:minHeight="100px"
+            android:layout_width="fill_parent"
+            android:id="@+id/videosList"
+            android:layout_height="wrap_content"
+            android:background="@color/activity_background"
+            android:divider="@color/list_divider_color"
+            android:dividerHeight="1sp"
+            android:choiceMode="singleChoice"
+            android:cacheColorHint="@android:color/transparent" />
+    </LinearLayout>
 </LinearLayout>
