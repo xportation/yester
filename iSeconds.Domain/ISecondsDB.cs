@@ -17,10 +17,12 @@ namespace iSeconds.Domain
 			Console.WriteLine (path);
 			Console.WriteLine ("------------------------");
 
+			#if DEBUG
 			CreateTable<Timeline> ();
 			CreateTable<User> ();
 			CreateTable<DayInfo> ();
 			CreateTable<MediaInfo> ();
+			#endif
 		}
 
 		public event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;

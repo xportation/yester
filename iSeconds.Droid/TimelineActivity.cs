@@ -56,7 +56,7 @@ namespace iSeconds.Droid
 			this.RequestWindowFeature(WindowFeatures.NoTitle);
 			this.SetContentView(Resource.Layout.TimelineView);
 
-			ISecondsApplication application = (ISecondsApplication) this.Application;
+			ISecondsApplication application = this.Application as ISecondsApplication;
 			viewModel = new TimelineViewModel(application.GetUserService().CurrentUser, application.GetRepository(), 
 				application.GetMediaService(), application.GetNavigator(), application.GetOptionsDialogService());
 
@@ -132,7 +132,7 @@ namespace iSeconds.Droid
 			}
 
 			actionBar.AddAction(createAction(Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_camera, Resource.String.takeVideo));
-			actionBar.AddAction(createAction(Resource.Id.actionbar_menu, Resource.Drawable.ic_action_overflow_dark, Resource.String.menu));
+			actionBar.AddAction(createAction(Resource.Id.actionbar_menu, Resource.Drawable.ic_menu, Resource.String.menu));
 		}
 
 		private LegacyBar.Library.Bar.LegacyBarAction createAction(int menuId, int drawable, int popupId)

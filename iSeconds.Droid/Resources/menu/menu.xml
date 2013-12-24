@@ -9,8 +9,7 @@
 	<item	android:id="@+id/actionbar_takeVideo"
 		 android:icon="@drawable/ic_camera"/>
 		
-	<item	android:id="@+id/actionbar_menu"
-		 android:icon="@drawable/ic_menu"/>
+	<item	android:id="@+id/actionbar_menu"/>
 		  
 	<item	android:id="@+id/actionbar_playVideo"
 		 android:icon="@drawable/ic_play"/> 	 

@@ -4,14 +4,15 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/secondary_activities_background">
+    android:background="@color/activity_background">
     <legacybar.library.bar.LegacyBar
         android:id="@+id/actionbar"
         style="@style/actionbar"
-        ab:title="@string/about"
-        ab:separator="@color/actionbar_background"
-        ab:background="@color/actionbar_background"
-        ab:background_item="@drawable/actionbar_button" />
+        ab:title="@string/about" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/actionbar_bottom_line_color" />
     <ScrollView
         android:minWidth="25px"
         android:minHeight="25px"

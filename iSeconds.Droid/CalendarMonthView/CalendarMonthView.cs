@@ -264,7 +264,7 @@ namespace iSeconds.Droid
 	      textPaint.AntiAlias = true;
 	      textPaint.StrokeWidth = theme.TextStrokeWidth;
 	      textPaint.TextSize = theme.TextSize * Resources.DisplayMetrics.Density;
-			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/123Marker.ttf"));
+//			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/123Marker.ttf"));
 
 	      todayPaint = new Paint();
 	      todayPaint.Color = theme.TodayColor;

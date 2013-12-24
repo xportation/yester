@@ -59,6 +59,24 @@ namespace iSeconds.Droid
 		 	weekendTextColor = Color.Rgb(59,79,152);
          backgroundColor = Color.Rgb(233,235,247);
       }
+
+		public void SetFlatTheme()
+		{
+			textAlign = Paint.Align.Center;
+			textSize = 15f;
+			weekTextColor = Color.Rgb(255,255,255);
+			weekendTextColor = Color.Rgb(246,107,78);
+			backgroundColor = Color.Rgb(62,62,96);
+		}
+
+		public void SetIOS7Theme()
+		{
+			textAlign = Paint.Align.Center;
+			textSize = 15f;
+			weekTextColor = Color.Rgb(255,255,255);
+			weekendTextColor = Color.Rgb(226,7,1);
+			backgroundColor = Color.Rgb(160,160,160);
+		}
    }
 
    public class CalendarMonthViewWeekNames : View
@@ -88,13 +106,13 @@ namespace iSeconds.Droid
       private void init()
       {
          theme= new CalendarMonthViewWeekNamesTheme();
-         theme.SetDefault();
+			theme.SetFlatTheme();
 
          textPaint= new Paint();
          textPaint.AntiAlias = true;
          textPaint.TextSize = theme.TextSize * Resources.DisplayMetrics.Density;
          textPaint.TextAlign = theme.TextAlign;
-			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/123Marker.ttf"));
+//			textPaint.SetTypeface(Typeface.CreateFromAsset(this.Context.Assets, "fonts/123Marker.ttf"));
 
          this.SetBackgroundColor(theme.BackgroundColor);
       }

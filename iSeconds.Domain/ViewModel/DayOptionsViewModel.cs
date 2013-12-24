@@ -42,7 +42,7 @@ namespace iSeconds.Domain
 			{
 				MediaInfo media = videos[i];
 
-				this.videos.Add(new VideoItem(media));				
+				this.videos.Add(new VideoItem(model.Date, media));				
 
 				if (this.model.DefaultVideoId == media.Id)
 					this.CheckedVideo = i;
@@ -53,10 +53,13 @@ namespace iSeconds.Domain
 
 		public class VideoItem
 		{
-			public VideoItem(MediaInfo model)
+			public VideoItem(DateTime date, MediaInfo model)
 			{
 				this.Model = model;
-				this.Label = Path.GetFileNameWithoutExtension(model.Path);
+
+				DateTime dateTime = date + model.TimeOfDay;
+				this.Label = String.Format("{0:g}", dateTime);
+//				this.Label = Path.GetFileNameWithoutExtension(model.Path);
 			}
 
 			public MediaInfo Model { get; set; }

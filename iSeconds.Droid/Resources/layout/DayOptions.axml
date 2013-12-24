@@ -4,14 +4,15 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/secondary_activities_background">
+    android:background="@color/activity_background">
     <legacybar.library.bar.LegacyBar
         android:id="@+id/actionbar"
         style="@style/actionbar"
-        ab:title="date"
-        ab:separator="@color/actionbar_background"
-        ab:background="@color/actionbar_background"
-        ab:background_item="@drawable/actionbar_button" />
+        ab:title="date" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/actionbar_bottom_line_color" />
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
@@ -25,10 +26,11 @@
             android:layout_width="fill_parent"
             android:id="@+id/videosList"
             android:layout_height="wrap_content"
-            android:background="@color/activity_background"
-            android:divider="@color/list_divider_color"
-            android:dividerHeight="1sp"
             android:choiceMode="singleChoice"
+            android:padding="5dp"
+            android:dividerHeight="5dp"
+            android:divider="@android:color/transparent"
+            android:background="@android:color/transparent"
             android:cacheColorHint="@android:color/transparent" />
     </LinearLayout>
 </LinearLayout>

@@ -15,10 +15,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   inkscape:export-filename="C:\Users\leonardo\Dropbox\Projetos\iSecondsTwo\iSeconds.Droid\Resources\drawable\ic_play.png"
-   inkscape:export-xdpi="76.800003"
-   inkscape:export-ydpi="76.800003"
-   sodipodi:docname="play_video_icon.svg">
+   inkscape:export-filename="C:\Users\leonardo\Dropbox\Projetos\iSecondsTwo\iSeconds.Droid\Resources\drawable-xhdpi\ic_play.png"
+   inkscape:export-xdpi="57.599998"
+   inkscape:export-ydpi="57.599998"
+   sodipodi:docname="play_icon.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -44,30 +44,8 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       id="linearGradient3180-7">
-      <stop
-         style="stop-color:#d1dce2;stop-opacity:1"
-         offset="0"
-         id="stop3182-4" />
-      <stop
-         style="stop-color:#ffffff;stop-opacity:1"
-         offset="1"
-         id="stop3184-0" />
-    </linearGradient>
-    <linearGradient
-       gradientTransform="matrix(0,0.69731559,-0.69731559,0,770.3537,925.534)"
-       y2="1086.4548"
-       x2="22.475895"
-       y1="918.76953"
-       x1="107.07617"
-       gradientUnits="userSpaceOnUse"
-       id="linearGradient3019"
-       xlink:href="#linearGradient3180-7"
-       inkscape:collect="always" />
-    <linearGradient
-       inkscape:collect="always"
        xlink:href="#linearGradient3180"
-       id="linearGradient3006"
+       id="linearGradient3005"
        gradientUnits="userSpaceOnUse"
        x1="107.07617"
        y1="918.76953"
@@ -82,8 +60,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="21.556709"
-     inkscape:cy="67.087818"
+     inkscape:cx="-52.038083"
+     inkscape:cy="98.59047"
      inkscape:document-units="px"
      inkscape:current-layer="g3175"
      showgrid="false"
@@ -113,21 +91,11 @@
        id="g3175"
        style="fill-opacity:1;fill:url(#linearGradient3186)">
       <path
-         transform="matrix(1.0272628,0,0,1.0272628,536.79879,-20.682722)"
-         d="m -385.5,970.86218 c 0,34.79392 -28.20606,63.00002 -63,63.00002 -34.79394,0 -63,-28.2061 -63,-63.00002 0,-34.79394 28.20606,-63 63,-63 34.79394,0 63,28.20606 63,63 z"
-         sodipodi:ry="63"
-         sodipodi:rx="63"
-         sodipodi:cy="970.86218"
-         sodipodi:cx="-448.5"
-         id="path3052"
-         style="fill:#ffffff;stroke:#07afdf;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:0.627451"
-         sodipodi:type="arc" />
-      <path
-         style="fill:#07afdf;stroke:none"
-         d="m 58.10878,934.66154 57.94559,42.99657 -57.94558,42.99649 z"
-         id="rect3008"
+         style="fill:none;fill-opacity:1;stroke:#3486d2;stroke-opacity:1;stroke-width:6.054;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 59.234811,927.47749 58.940439,43.42667 c 4.10174,3.02211 4.10174,7.88804 0,10.91015 L 59.234811,1025.241 c -4.101732,3.0221 -8.237898,3.2759 -8.237898,-6.5698 0,-28.48172 0,-56.96342 0,-85.44512 6e-6,-8.48767 4.136166,-8.77069 8.237898,-5.74859 z"
+         id="rect3770"
          inkscape:connector-curvature="0"
-         sodipodi:nodetypes="cccc" />
+         sodipodi:nodetypes="sssssss" />
     </g>
   </g>
 </svg>

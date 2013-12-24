@@ -17,7 +17,7 @@ namespace iSeconds.Droid
 			base.OnCreate(savedInstanceState);
 
 			this.DisableBackButtonNavigation = false;
-			ISecondsApplication application = (ISecondsApplication) this.Application;
+			ISecondsApplication application = this.Application as ISecondsApplication;
 			activityTracker = application.GetActivityTracker();
 			navigator = application.GetNavigator();
 			activityTracker.SetCurrentActivity(this);
@@ -58,9 +58,7 @@ namespace iSeconds.Droid
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
 
-			actionBar.SeparatorColorRaw = Resource.Color.actionbar_background;
-
-			TextView titleView = actionBar.FindViewById<TextView>(Resource.Id.actionbar_title);
+			ScrollingTextView titleView = actionBar.FindViewById<ScrollingTextView>(Resource.Id.actionbar_title);
 			TextViewUtil.ChangeFontForActionBarTitle(titleView, this, 26f);
 			if (title.Length != 0)
 				titleView.Text = title;

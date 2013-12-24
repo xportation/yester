@@ -1,13 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-	<color name="actionbar_background">#FF265cce</color>
-	<color name="actionbar_pressedcolor">#FF88a7e9</color>
-	<color name="calendar_title_background">#FFc3d4ef</color>
-	<color name="calendar_title_color">#FF33415a</color>
-	
-	<color name="secondary_activities_background">#FFc3d4ef</color>
-	<color name="activity_background">#FFc3d4ef</color>	
-	<color name="list_divider_color">#FF7f93b6</color>
-	<color name="first_item_color">#FF33415a</color>
-	<color name="second_item_color">#FF5a73a0</color>
+	<!-- actionbar custom colors -->
+	<color name="actionbar_separator">#00FFFFFF</color>
+	<color name="actionbar_title">#FFFFFF</color>
+	<color name="actionbar_background_start">#3E3E60</color>
+	<color name="actionbar_background_end">#3E3E60</color>
+	<color name="actionbar_background_item_pressed_start">#90bde6</color>
+	<color name="actionbar_background_item_pressed_end">#90bde6</color>
+
+	<!-- iseconds colors -->
+	<color name="actionbar_bottom_line_color">#3486d2</color>
+	<color name="roundrect_item_line_color">#00FFFFFF</color>
+	<color name="roundrect_item_background_color">#FFFFFF</color>
+	<color name="roundrect_calendar_line_color">#3486d2</color>
+	<color name="roundrect_calendar_background_color">#00FFFFFF</color>
+	<color name="popup_menu_item_text_color">#000000</color>
+	<color name="popup_menu_item_background_color">#FFFFFF</color>
+	<color name="calendar_title_background">#07AFDE</color>
+	<color name="calendar_title_color">#FFFFFF</color>
+
+	<color name="activity_background">#DCE0E9</color>	
+	<color name="list_divider_color">#7f93b6</color>
+	<color name="first_item_color">#33415a</color>
+	<color name="second_item_color">#5a73a0</color>
 </resources>
