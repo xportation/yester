@@ -190,10 +190,6 @@
       <Project>{371657B5-2C38-4D23-B7C1-6C053EB55FB8}</Project>
       <Name>LegacyBar.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Third_Party\RestSharp\RestSharp.MonoDroid\RestSharp.MonoDroid.csproj">
-      <Project>{1B662C38-984F-4B6A-89B5-AFF7FCBE43A2}</Project>
-      <Name>RestSharp.MonoDroid</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable-hdpi\Icon.png" />

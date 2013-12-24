@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSeconds.Droid", "iSeconds.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyBar.Library", "LegacyBar.Library\LegacyBar.Library.csproj", "{371657B5-2C38-4D23-B7C1-6C053EB55FB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharp.MonoDroid", "Third_Party\RestSharp\RestSharp.MonoDroid\RestSharp.MonoDroid.csproj", "{1B662C38-984F-4B6A-89B5-AFF7FCBE43A2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,12 +22,6 @@ Global
 		{1971851B-A591-4E36-8705-90C074C86FDC}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1971851B-A591-4E36-8705-90C074C86FDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B662C38-984F-4B6A-89B5-AFF7FCBE43A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B662C38-984F-4B6A-89B5-AFF7FCBE43A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B662C38-984F-4B6A-89B5-AFF7FCBE43A2}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B662C38-984F-4B6A-89B5-AFF7FCBE43A2}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{1B662C38-984F-4B6A-89B5-AFF7FCBE43A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B662C38-984F-4B6A-89B5-AFF7FCBE43A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{371657B5-2C38-4D23-B7C1-6C053EB55FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{371657B5-2C38-4D23-B7C1-6C053EB55FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{371657B5-2C38-4D23-B7C1-6C053EB55FB8}.Default|Any CPU.ActiveCfg = Debug|Any CPU
