@@ -2,9 +2,7 @@
  * Copyright (C) 2010 Johan Nilsson <http://markupartist.com>
  *
  * Original (https://github.com/johannilsson/android-actionbar) Ported to Mono for Android
- * Copyright (C) 2012 Tomasz Cielecki <tomasz@ostebaronen.dk>
- * 
- * Modified by James Montemagno Copyright 2012 http://www.montemagno.com
+ * Copyright (C) 2013 LegacyBar - @Cheesebaron & @JamesMontemagno
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +18,9 @@
  * 
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -30,6 +28,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using Android.Util;
+using LegacyBar.Library.BarActions;
 
 namespace LegacyBar.Library.Bar
 {
@@ -47,8 +46,8 @@ namespace LegacyBar.Library.Bar
         private RelativeLayout _homeLayout;
         private ProgressBar _progress;
         private RelativeLayout _titleLayout;
-        private Context _context;
         private OverflowLegacyBarAction _overflowLegacyBarAction;
+        private Spinner _titleDropdown;
 
         //Used to track what we need to hide in the pop up menu.
         public List<int> MenuItemsToHide = new List<int>();
@@ -64,17 +63,19 @@ namespace LegacyBar.Library.Bar
         {
             get
             {
+                if ((int) Build.VERSION.SdkInt >= 14)
+                {
 #if __ANDROID_14__
-                return ViewConfiguration.Get(Context).HasPermanentMenuKey;
-#elif __ANDROID_11__
-                return false;
-#else
-                return true;
+                    return ViewConfiguration.Get(Context).HasPermanentMenuKey;
 #endif
+                }
+                return (int) Build.VERSION.SdkInt != 11;
             }
         }
 
-        public Activity CurrentActivity { get; set; }
+        public LegacyBarTheme Theme { get; set; }
+        public bool LightIcons { get; set; }
+        public bool IsBottom { get; set; }
 
         /// <summary>
         /// Set the color of the seperators between Action Items
@@ -109,12 +110,35 @@ namespace LegacyBar.Library.Bar
             }
         }
 
+
         public int SeparatorDrawableRaw
         {
             set
             {
                 _actionsView.SetBackgroundResource(value);
                 _homeLayout.SetBackgroundResource(value);
+            }
+        }
+
+        /// <summary>
+        /// Set the drawable of the dropdown
+        /// </summary>
+        public Drawable DropdownDrawable
+        {
+            set
+            {
+                _titleDropdown.SetBackgroundDrawable(value);
+            }
+        }
+
+        /// <summary>
+        /// Sets the raw background of the dropdown
+        /// </summary>
+        public int DropdownDrawableRaw
+        {
+            set
+            {
+                _titleDropdown.SetBackgroundResource(value);
             }
         }
 
@@ -200,14 +224,18 @@ namespace LegacyBar.Library.Bar
         }
 
         #endregion
-		
+
+        #region Events
+        public EventHandler TitleClick;
+        public EventHandler TitleLongClick;
+        #endregion
+
         public LegacyBar(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            _context = context;
 			ResourceIdManager.UpdateIdValues();
 
-            _inflater = LayoutInflater.From(context);
+            _inflater = LayoutInflater.From(Context);
             //_inflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
 
             _barView = (RelativeLayout)_inflater.Inflate(Resource.Layout.actionbar, null);
@@ -223,12 +251,26 @@ namespace LegacyBar.Library.Bar
 
             _progress = _barView.FindViewById<ProgressBar>(Resource.Id.actionbar_progress);
             _titleLayout = _barView.FindViewById<RelativeLayout>(Resource.Id.actionbar_title_layout);
+            _titleDropdown = _barView.FindViewById<Spinner>(Resource.Id.actionbar_spinner);
 
-            _overflowLegacyBarAction = new OverflowLegacyBarAction(context);
+            _overflowLegacyBarAction = new OverflowLegacyBarAction(Context);
 
             //Custom Attributes (defined in Attrs.xml)
-            var a = context.ObtainStyledAttributes(attrs,
+            var a = Context.ObtainStyledAttributes(attrs,
                     Resource.Styleable.actionbar);
+
+            //grab theme attributes
+            Theme = (LegacyBarTheme)a.GetInt(Resource.Styleable.actionbar_theme, 0);
+            IsBottom = a.GetBoolean(Resource.Styleable.actionbar_is_bottom, false);
+            LightIcons = a.GetBoolean(Resource.Styleable.actionbar_light_icons, false);
+
+            //if we are not custom don't let them set it.
+            if (Theme != LegacyBarTheme.Custom)
+            {
+                LightIcons = Theme == LegacyBarTheme.HoloLight;
+            }
+
+            _overflowLegacyBarAction.SetIconColor(LightIcons);
 
             var title = a.GetString(Resource.Styleable.actionbar_title);
             if (null != title)
@@ -239,6 +281,7 @@ namespace LegacyBar.Library.Bar
 
             var separatorColor = a.GetColor(Resource.Styleable.actionbar_separator, Resources.GetColor(Resource.Color.actionbar_separator));
             _actionsView.SetBackgroundColor(separatorColor);
+            _homeLayout.SetBackgroundColor(separatorColor);
 
             using (var background = a.GetDrawable(Resource.Styleable.actionbar_background)) //recycling the drawable immediately
             {
@@ -250,7 +293,19 @@ namespace LegacyBar.Library.Bar
             if (null != backgroundItem)
                 ItemBackgroundDrawable = backgroundItem;
 
+            if (IsBottom)
+            {
+                LegacyBarUtils.SetBottomLegacyBarTheme(this, Theme);
+            }
+            else
+            {
+                LegacyBarUtils.SetLegacyBarTheme(this, Theme);
+            }
+
             a.Recycle();
+
+            _titleView.Click += (s, e) => { if (null != TitleClick) TitleClick(s, e); };
+            _titleView.LongClick += (s, e) => { if (null != TitleLongClick) TitleLongClick(s, e); };
         }
 
         public void SetHomeAction(LegacyBarAction legacyBarAction)
@@ -259,6 +314,8 @@ namespace LegacyBar.Library.Bar
             _homeBtn.Tag = legacyBarAction;
             _homeBtn.SetImageResource(legacyBarAction.GetDrawable());
             _homeLayout.Visibility = ViewStates.Visible;
+            _backIndicator.SetBackgroundResource(LightIcons ? Resource.Drawable.actionbar_back_indicator : Resource.Drawable.actionbar_back_indicator_dark);
+            
 
             if (null != ItemBackgroundDrawable)
             {
@@ -272,6 +329,76 @@ namespace LegacyBar.Library.Bar
 
             ((LayoutParams)_titleLayout.LayoutParameters).AddRule(LayoutRules.RightOf, Resource.Id.actionbar_home_bg);
         }
+
+ 		 public int DropDownSelectedItemPosition
+        {
+            get { return _titleDropdown.SelectedItemPosition; }
+            set
+            {
+                try
+                {
+                    _titleDropdown.SetSelection(value);
+                }
+                catch (Exception)
+                {
+                }
+                
+            }
+        }
+
+
+        /// <summary>
+        /// Sets teh drop down list with a customer adapter and callback when items change
+        /// if adapter.Count == 0 then the spinner will NOT be shown and you will have to call this method again.
+        /// </summary>
+        /// <param name="adapter">Adapter to display</param>
+        /// <param name="eventHandler">Event handler to callback. (can be null)</param>
+         public void SetDropDown(BaseAdapter adapter, EventHandler<AdapterView.ItemSelectedEventArgs> eventHandler)
+         {
+             if (adapter == null)
+                 return;
+
+             
+
+             if (adapter.Count == 0)
+             {
+                 _titleView.Visibility = ViewStates.Visible;
+                 _titleDropdown.Visibility = ViewStates.Gone;
+             }
+             else
+             {
+                 var previousSelected = _titleDropdown.SelectedItemPosition;
+                 _titleView.Visibility = ViewStates.Gone;
+
+                 _titleDropdown.Visibility = ViewStates.Visible;
+                 _titleDropdown.Adapter = adapter;
+                 if (eventHandler != null)
+                     _titleDropdown.ItemSelected += eventHandler;
+
+                 if (previousSelected >= 0 && previousSelected < adapter.Count)
+                     _titleDropdown.SetSelection(previousSelected);
+             }
+        }
+        
+        /// <summary>
+        /// Sets the drop down items with a SimpleDropDownItem1Line Array Adapter
+         /// if items.Length == 0 then the spinner will NOT be shown and you will have to call this method again.
+        /// </summary>
+        /// <param name="context">context to create under for adapter</param>
+        /// <param name="items"> items to set</param>
+         /// <param name="eventHandler">event handler for item selected change (can be null)</param>
+       public void SetDropDown(Context context, string[] items, EventHandler<AdapterView.ItemSelectedEventArgs> eventHandler)
+        {
+            if (items == null)
+                return;
+
+            var adapter = new ArrayAdapter(context, Android.Resource.Layout.SimpleSpinnerItem, items);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleDropDownItem1Line);
+
+           SetDropDown(adapter, eventHandler);
+        }
+
+
 
         public void ClearHomeAction()
         {
@@ -357,7 +484,8 @@ namespace LegacyBar.Library.Bar
             var addActionBar = false;
 
             var hideAction = false;
-            if (!LegacyBarUtils.ActionFits(CurrentActivity, index, HasMenuButton, legacyBarAction.ActionType))
+
+            if (!LegacyBarUtils.ActionFits(Context.Resources.DisplayMetrics.WidthPixels, Context.Resources.DisplayMetrics.Density, index, HasMenuButton, legacyBarAction.ActionType))
             {
                 if (!HasMenuButton)
                 {
@@ -517,20 +645,10 @@ namespace LegacyBar.Library.Bar
             labelView.SetOnClickListener(this);
             //view.SetOnLongClickListener(this);
 
-            _overflowLegacyBarAction.Activity = CurrentActivity;
             return view;
         }
 
         #region Android OnClick Listeners and Event handlers
-        /// <summary>
-        /// Function to set a click listener for Title TextView
-        /// </summary>
-        /// <param name="listener"></param>
-        public void SetOnTitleClickListener(IOnClickListener listener)
-        {
-            _titleView.SetOnClickListener(listener);
-        }
-
         public void OnClick(View v)
         {
             var tag = v.Tag;
@@ -550,10 +668,7 @@ namespace LegacyBar.Library.Bar
                 if (action.PopUpMessage == 0)
                     return true;
 
-                if (CurrentActivity == null)
-                    return false;
-
-                Toast.MakeText(_context, action.PopUpMessage, ToastLength.Short).Show();
+                Toast.MakeText(Context, action.PopUpMessage, ToastLength.Short).Show();
 
                 return false;
             }
@@ -583,7 +698,6 @@ namespace LegacyBar.Library.Bar
                 _homeLayout = null;
                 _progress = null;
                 _titleLayout = null;
-                _context = null;
                 _overflowLegacyBarAction = null;
             }
 

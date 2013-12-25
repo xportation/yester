@@ -8,6 +8,7 @@ using LegacyBar.Library.Bar;
 using iSeconds.Domain;
 using System.ComponentModel;
 using Android.Graphics.Drawables;
+using LegacyBar.Library.BarActions;
 
 namespace iSeconds.Droid
 {
@@ -127,23 +128,16 @@ namespace iSeconds.Droid
 			actionBar.RemoveAllActions();
 
 			if (isPlayModeEnabled) {
-				actionBar.AddAction(createAction(Resource.Id.actionbar_playVideo, Resource.Drawable.ic_play, Resource.String.play_video));
-				actionBar.AddAction(createAction(Resource.Id.actionbar_compile, Resource.Drawable.ic_compile, Resource.String.compile));
+				var playAction = new ActionLegacyBarAction(this, () => viewModel.PlaySelectionCommand.Execute(null), Resource.Drawable.ic_play);
+				actionBar.AddAction(playAction);
+				var compileAction = new ActionLegacyBarAction(this, () => viewModel.CompileCommand.Execute(null), Resource.Drawable.ic_compile);
+				actionBar.AddAction(compileAction);
 			}
 
-			actionBar.AddAction(createAction(Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_camera, Resource.String.takeVideo));
-			actionBar.AddAction(createAction(Resource.Id.actionbar_menu, Resource.Drawable.ic_menu, Resource.String.menu));
-		}
-
-		private LegacyBar.Library.Bar.LegacyBarAction createAction(int menuId, int drawable, int popupId)
-		{
-			var action = new MenuItemLegacyBarAction(
-				this, this, menuId, drawable, popupId)
-			{
-				ActionType = ActionType.Always
-			};
-
-			return action;
+			var takeVideoAction = new ActionLegacyBarAction(this, () => viewModel.TakeVideoCommand.Execute(null), Resource.Drawable.ic_camera);
+			actionBar.AddAction(takeVideoAction);
+			var menuAction = new ActionLegacyBarAction(this, () => showPopup(), Resource.Drawable.ic_menu);
+			actionBar.AddAction(menuAction);
 		}
 
 		private void setProgressVisibility(bool isVisible)
@@ -204,31 +198,6 @@ namespace iSeconds.Droid
 		{
 			showPopup();
 			return false;
-		}
-
-		public override bool OnOptionsItemSelected(IMenuItem item)
-		{
-			switch (item.ItemId)
-			{			
-			case Resource.Id.actionbar_takeVideo:
-				OnSearchRequested();
-				viewModel.TakeVideoCommand.Execute(null);				
-				return true;
-			case Resource.Id.actionbar_menu:
-				OnSearchRequested();
-				showPopup ();
-				return true;
-			case Resource.Id.actionbar_playVideo:
-				OnSearchRequested();
-				viewModel.PlaySelectionCommand.Execute(null);
-				return true;
-			case Resource.Id.actionbar_compile:
-				OnSearchRequested();
-				viewModel.CompileCommand.Execute(null);
-				return true;
-			}
-
-			return base.OnOptionsItemSelected(item);
 		}
 
 		private void showPopup()

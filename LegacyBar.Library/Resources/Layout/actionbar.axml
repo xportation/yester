@@ -27,11 +27,8 @@
     android:visibility="visible">
     <ImageView 
       android:id="@+id/actionbar_home_logo" 
-      android:scaleType="center" 
-      android:layout_width="wrap_content" 
-      android:layout_height="@dimen/actionbar_item_height" 
+      android:scaleType="centerCrop" 
       android:background="@drawable/actionbar_btn" 
-      android:layout_marginLeft="6dp" 
       style="@style/actionbarhomelogo" 
       android:visibility="gone"/>
     <RelativeLayout 
@@ -45,9 +42,8 @@
       <!-- TODO: Make configurable. -->
       <ImageButton 
         android:id="@+id/actionbar_home_btn" 
-        android:scaleType="center" 
+        android:scaleType="centerCrop" 
         style="@style/actionbarhomeitem" 
-        android:paddingRight="0dp" 
         android:background="@drawable/actionbar_btn"/>
     </RelativeLayout>
     <ImageView 
@@ -96,6 +92,21 @@
         android:lines="1" 
         android:scrollHorizontally="true" 
         android:ellipsize="marquee" 
+        android:marqueeRepeatLimit="marquee_forever"/>
+      <Spinner
+        android:id="@+id/actionbar_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:minWidth="100dp"
+        android:visibility="gone"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/actionbar_progress"
+        android:paddingLeft="3dp"
+        android:paddingRight="2dp"
+        android:background="@drawable/dropdown_btn_holo_light"
+        android:textColor="@color/actionbar_title"
+        android:lines="1"
+        android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"/>
     </RelativeLayout>
   </RelativeLayout>

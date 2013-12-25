@@ -1,9 +1,10 @@
 using Android.App;
 using Android.OS;
+using Android.Text;
 using Android.Widget;
 using LegacyBar.Library.Bar;
 using iSeconds.Domain.Framework;
-using Android.Text;
+using LegacyBar.Library.BarActions;
 
 namespace iSeconds.Droid
 {
@@ -69,27 +70,9 @@ namespace iSeconds.Droid
 
 			if (addHomeAction)
 			{
-				var itemActionBarAction = new MenuItemLegacyBarAction(this, this, Resource.Id.actionbar_back_to_home,
-				                                                      Resource.Drawable.ic_home, Resource.String.settings)
-					{
-						ActionType = ActionType.Always
-					};
-
-				actionBar.SetHomeAction(itemActionBarAction);
+				var homeAction = new ActionLegacyBarAction(this, () => navigator.NavigateBack(), Resource.Drawable.ic_home);
+				actionBar.SetHomeAction(homeAction);
 			}
-		}
-
-		public override bool OnOptionsItemSelected(Android.Views.IMenuItem item)
-		{
-			switch (item.ItemId)
-			{
-			case Resource.Id.actionbar_back_to_home:
-				OnSearchRequested();
-				navigator.NavigateBack();
-				return true;         
-			}
-
-			return base.OnOptionsItemSelected(item);
 		}
 
 		public override void OnBackPressed()

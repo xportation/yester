@@ -4,6 +4,7 @@ using Android.Views;
 using Android.Widget;
 using LegacyBar.Library.Bar;
 using iSeconds.Domain;
+using LegacyBar.Library.BarActions;
 using Object = Java.Lang.Object;
 
 namespace iSeconds.Droid
@@ -136,30 +137,9 @@ namespace iSeconds.Droid
       {
          var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
          
-			var addTimelineItemAction = new MenuItemLegacyBarAction(
-				this, this, Resource.Id.actionbar_timeline_add, Resource.Drawable.ic_add,
-				Resource.String.timeline_options_dialog_add_timeline)
-			{
-				ActionType = ActionType.IfRoom
-			};
+			var addTimelineItemAction = new ActionLegacyBarAction(this, 
+				() => viewModel.AddTimelineCommand.Execute(null), Resource.Drawable.ic_add);
 			actionBar.AddAction(addTimelineItemAction);
-      }
-
-      public override bool OnOptionsItemSelected(IMenuItem item)
-      {
-         switch (item.ItemId)
-         {
-            case Resource.Id.actionbar_back_to_home:
-               OnSearchRequested();
-               viewModel.BackToHomeCommand.Execute(null);
-               return true;
-				case Resource.Id.actionbar_timeline_add:
-					OnSearchRequested();
-					viewModel.AddTimelineCommand.Execute(null);
-					return true;
-         }
-
-         return base.OnOptionsItemSelected(item);
       }
 
       #region Dialog Modal

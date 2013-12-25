@@ -10,6 +10,7 @@ using System.Globalization;
 using iSeconds.Domain.Framework;
 using Android.Graphics;
 using System;
+using LegacyBar.Library.BarActions;
 
 namespace iSeconds.Droid
 {
@@ -125,13 +126,7 @@ namespace iSeconds.Droid
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
 
-			var takeVideoAction = new MenuItemLegacyBarAction(
-				this, this, Resource.Id.actionbar_takeVideo, Resource.Drawable.ic_camera,
-				Resource.String.takeVideo)
-			{
-				ActionType = ActionType.IfRoom
-			};
-
+			var takeVideoAction =new ActionLegacyBarAction(this, () => viewModel.TakeVideoCommand.Execute(null), Resource.Drawable.ic_camera);
 			actionBar.AddAction (takeVideoAction);
 		}
 
@@ -140,24 +135,6 @@ namespace iSeconds.Droid
 			DateTimeFormatInfo format = CultureInfo.CurrentCulture.DateTimeFormat;
 			return viewModel.Model.Date.ToString(format.ShortDatePattern);
 		}
-
-      public override bool OnOptionsItemSelected(IMenuItem item)
-      {
-         switch (item.ItemId)
-         {
-			case Resource.Id.actionbar_back_to_home :
-            OnSearchRequested();
-            viewModel.BackToHomeCommand.Execute(null);
-            return true;         
-			case Resource.Id.actionbar_takeVideo:
-				OnSearchRequested();
-				viewModel.TakeVideoCommand.Execute(null);
-				return true;
-         }
-
-         
-         return base.OnOptionsItemSelected(item);
-      }
 
    }
 }

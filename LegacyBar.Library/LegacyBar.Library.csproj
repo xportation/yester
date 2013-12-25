@@ -14,6 +14,7 @@
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AssemblyName>LegacyBar.Library</AssemblyName>
+    <TargetFrameworkVersion>v2.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -43,15 +44,19 @@
     <Reference Include="Mono.Android.Support.v4" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarActions\ActionLegacyBarAction.cs" />
+    <Compile Include="BarActions\LegacyBarMenuItem.cs" />
+    <Compile Include="BarBase\LegacyBarExpandableListActivity.cs" />
+    <Compile Include="BarBase\LegacyBarTabActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Bar\LegacyBar.cs" />
-    <Compile Include="Bar\LegacyBarAction.cs" />
+    <Compile Include="BarActions\LegacyBarAction.cs" />
     <Compile Include="Bar\LegacyBarUtils.cs" />
-    <Compile Include="Bar\IActionBarAction.cs" />
-    <Compile Include="Bar\MyLegacyBarAction.cs" />
-    <Compile Include="Bar\OverflowLegacyBarAction.cs" />
+    <Compile Include="BarActions\ILegacyBarAction.cs" />
+    <Compile Include="BarActions\DefaultLegacyBarAction.cs" />
+    <Compile Include="BarActions\OverflowLegacyBarAction.cs" />
     <Compile Include="Bar\ScrollingTextView.cs" />
-    <Compile Include="Bar\MenuItemLegacyBarAction.cs" />
+    <Compile Include="BarActions\MenuItemLegacyBarAction.cs" />
     <Compile Include="BarBase\LegacyBarActivity.cs" />
     <Compile Include="BarBase\LegacyBarFragmentActivity.cs" />
     <Compile Include="BarBase\LegacyBarListActivity.cs" />
@@ -61,7 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\actionbar_back_indicator.png" />
@@ -78,26 +82,8 @@
     <AndroidResource Include="Resources\Drawable\actionbar_btn_normal_alt.xml" />
     <AndroidResource Include="Resources\Drawable\actionbar_btn_pressed_alt.xml" />
     <AndroidResource Include="Resources\Drawable-hdpi\actionbar_back_indicator.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_title_export_default.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_title_share_default.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_action_refresh_dark.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_action_search_dark.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_refresh.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_search.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_action_down.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_action_left.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_action_right.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_action_up.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_down.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_left.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_right.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_menu_up.png" />
     <AndroidResource Include="Resources\Drawable-hdpi\ic_action_overflow_dark.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\Drawable-ldpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\Drawable-mdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\Drawable-mdpi\ic_action_overflow_dark.png" />
-    <AndroidResource Include="Resources\Drawable-xhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\Drawable-xhdpi\ic_action_overflow_dark.png" />
     <AndroidResource Include="Resources\Layout\actionbar.axml">
       <SubType>Designer</SubType>
@@ -125,9 +111,8 @@
     </AndroidResource>
     <AndroidResource Include="Resources\Values\strings.xml" />
     <AndroidResource Include="Resources\Values\styles.xml">
-      <SubType>AndroidResource</SubType>
+      <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Values\themes.xml" />
     <AndroidResource Include="Resources\Values-land\dimens.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -143,5 +128,177 @@
     <AndroidResource Include="Resources\Values-xlarge\dimens.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\actionbar_back_indicator_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\ic_action_overflow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\ic_action_overflow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\ic_action_overflow_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\ic_action_overflow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-xhdpi\ic_action_overflow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\actionbar_back_indicator_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\actionbar_background_black.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\actionbar_background_blue.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\actionbar_background_lightgray.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\actionbar_btn_black.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\actionbar_btn_blue.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\actionbar_btn_lightgray.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\bottomactionbar_background_black.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\bottomactionbar_background_blue.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\bottomactionbar_background_lightgray.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\bottomactionbar_btn_black.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\bottomactionbar_btn_blue.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\bottomactionbar_btn_lightgray.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\actionbar_background_darkgray.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\actionbar_btn_darkgray.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\bottomactionbar_background_darkgray.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\bottomactionbar_btn_darkgray.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\dropdown_btn_holo_dark.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\dropdown_btn_holo_light.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\dropdown_pressed_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\dropdown_normal_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\dropdown_normal_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\dropdown_disabled_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\dropdown_disabled_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\dropdown_focused_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\dropdown_focused_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-hdpi\dropdown_pressed_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\dropdown_pressed_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\dropdown_normal_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\dropdown_normal_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\dropdown_disabled_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\dropdown_disabled_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\dropdown_focused_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\dropdown_focused_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\dropdown_pressed_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-xhdpi\dropdown_pressed_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-xhdpi\dropdown_normal_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-xhdpi\dropdown_normal_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-xhdpi\dropdown_disabled_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-xhdpi\dropdown_disabled_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-xhdpi\dropdown_focused_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-xhdpi\dropdown_focused_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-xhdpi\dropdown_pressed_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\dropdown_disabled_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\dropdown_disabled_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\dropdown_focused_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\dropdown_focused_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\dropdown_normal_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\dropdown_normal_holo_light.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\dropdown_pressed_holo_dark.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\dropdown_pressed_holo_light.9.png" />
+  </ItemGroup>
 </Project>

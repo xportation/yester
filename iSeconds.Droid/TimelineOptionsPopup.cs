@@ -76,9 +76,9 @@ namespace iSeconds.Droid
 			if (viewModel.Range.Count >= 1) {
 				DateTime[] dateTime = new DateTime[viewModel.Range.Count];
 				viewModel.Range.CopyTo(dateTime);
-				start.DateTime = dateTime[0];
+				start.SetDateTime(dateTime[0]);
 				if (viewModel.Range.Count == 2)
-					end.DateTime = dateTime[1];
+					end.SetDateTime(dateTime[1]);
 			}
 
 			Button selectButton = dialog.FindViewById<Button> (Resource.Id.selectButton);
