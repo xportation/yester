@@ -9,7 +9,7 @@ Array MySvgFiles 'camera_icon.svg':'compile_icon.svg':'home_icon.svg':'play_icon
 Array MyExportFiles 'ic_camera':'ic_compile':'ic_home':ic_'play':'ic_check':'ic_add':'ic_menu'
 
 // Conversion 1
-PathExport '..\iSeconds.Droid\Resources\'PathsToExport:1
+PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:1
 
 ExportWidth ExportSizes:1
 ExportHeight ExportSizes:1
@@ -20,7 +20,7 @@ Loop MySvgFiles 3
     Convert
 
 // Conversion 2
-PathExport '..\iSeconds.Droid\Resources\'PathsToExport:2
+PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:2
 
 ExportWidth ExportSizes:2
 ExportHeight ExportSizes:2
@@ -31,7 +31,7 @@ Loop MySvgFiles 3
     Convert
 
 // Conversion 1
-PathExport '..\iSeconds.Droid\Resources\'PathsToExport:3
+PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:3
 
 ExportWidth ExportSizes:3
 ExportHeight ExportSizes:3
@@ -42,7 +42,7 @@ Loop MySvgFiles 3
     Convert
 
 // Conversion 1
-PathExport '..\iSeconds.Droid\Resources\'PathsToExport:4
+PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:4
 
 ExportWidth ExportSizes:4
 ExportHeight ExportSizes:4
@@ -53,7 +53,7 @@ Loop MySvgFiles 3
     Convert
 
 // Conversion 5
-PathExport '..\iSeconds.Droid\Resources\'PathsToExport:5
+PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:5
 
 ExportWidth ExportSizes:5
 ExportHeight ExportSizes:5
@@ -64,7 +64,7 @@ Loop MySvgFiles 3
     Convert
 
 // Play video player
-PathExport '..\iSeconds.Droid\Resources\drawable'
+PathExport '..\..\iSeconds.Droid\Resources\drawable'
 ExportWidth 96
 ExportHeight 96
 

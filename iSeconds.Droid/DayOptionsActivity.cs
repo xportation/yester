@@ -126,7 +126,8 @@ namespace iSeconds.Droid
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
 
-			var takeVideoAction =new ActionLegacyBarAction(this, () => viewModel.TakeVideoCommand.Execute(null), Resource.Drawable.ic_camera);
+			var takeVideoAction = new ActionLegacyBarAction(this, () => viewModel.TakeVideoCommand.Execute(null), Resource.Drawable.ic_camera);
+			takeVideoAction.ActionType = ActionType.Always;
 			actionBar.AddAction (takeVideoAction);
 		}
 

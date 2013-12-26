@@ -129,14 +129,18 @@ namespace iSeconds.Droid
 
 			if (isPlayModeEnabled) {
 				var playAction = new ActionLegacyBarAction(this, () => viewModel.PlaySelectionCommand.Execute(null), Resource.Drawable.ic_play);
+				playAction.ActionType = ActionType.Always;
 				actionBar.AddAction(playAction);
 				var compileAction = new ActionLegacyBarAction(this, () => viewModel.CompileCommand.Execute(null), Resource.Drawable.ic_compile);
+				compileAction.ActionType = ActionType.Always;
 				actionBar.AddAction(compileAction);
 			}
 
 			var takeVideoAction = new ActionLegacyBarAction(this, () => viewModel.TakeVideoCommand.Execute(null), Resource.Drawable.ic_camera);
-			actionBar.AddAction(takeVideoAction);
+			takeVideoAction.ActionType = ActionType.Always;
+			actionBar.AddAction(takeVideoAction);			
 			var menuAction = new ActionLegacyBarAction(this, () => showPopup(), Resource.Drawable.ic_menu);
+			menuAction.ActionType = ActionType.Always;
 			actionBar.AddAction(menuAction);
 		}
 

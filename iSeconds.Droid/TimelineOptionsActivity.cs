@@ -139,6 +139,7 @@ namespace iSeconds.Droid
          
 			var addTimelineItemAction = new ActionLegacyBarAction(this, 
 				() => viewModel.AddTimelineCommand.Execute(null), Resource.Drawable.ic_add);
+			addTimelineItemAction.ActionType = ActionType.Always;
 			actionBar.AddAction(addTimelineItemAction);
       }
 

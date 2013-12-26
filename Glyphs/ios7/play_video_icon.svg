@@ -132,11 +132,11 @@
          style="fill:#ffffff;stroke:#3486d2;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:0.62745099999999998"
          sodipodi:type="arc" />
       <path
-         style="fill:#3486d2;stroke:none;fill-opacity:1"
-         d="m 58.10878,934.66154 57.94559,42.99657 -57.94558,42.99649 z"
-         id="rect3008"
+         style="fill:none;stroke:#3486d2;stroke-width:5.41287041;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="M 64.346561,933.86285 117.0451,972.6905 c 3.66736,2.70205 3.66736,7.05273 0,9.75479 l -52.698539,38.82761 c -3.667352,2.7021 -7.365491,2.929 -7.365491,-5.8739 0,-25.46555 0,-50.93095 0,-76.39635 6e-6,-7.58881 3.698139,-7.84186 7.365491,-5.1398 z"
+         id="rect3770"
          inkscape:connector-curvature="0"
-         sodipodi:nodetypes="cccc" />
+         sodipodi:nodetypes="sssssss" />
     </g>
   </g>
 </svg>
