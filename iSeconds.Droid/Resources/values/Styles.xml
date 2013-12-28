@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+
 	<style name="Theme.Splash" parent="android:Theme">
     	<item name="android:windowBackground">@drawable/splash_title</item>
     	<item name="android:windowNoTitle">true</item>
@@ -10,5 +11,47 @@
 		<item name="android:background">@color/popup_menu_item_background_color</item>
 		<item name="android:padding">16dp</item>
 		<item name="android:gravity">left</item>
+    </style>
+
+    <!-- +++++++++++++++++++++ Theme Styles +++++++++++++++++++++ -->
+    <style name="CustomButton" parent="@android:style/Widget.Button">
+        <item name="android:textSize">@dimen/tex_size_large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@drawable/ui_text_selector</item>
+    </style>
+
+    <style name="CustomEditText" parent="@android:style/Widget.EditText">
+        <item name="android:background">@color/white</item>
+        <item name="android:textSize">@dimen/tex_size_xlarge</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/dim_10</item>
+    </style>
+   
+    <style name="CustomCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:textSize">@dimen/tex_size_large</item>
+        <item name="android:textColor">@color/gray_35</item>
+    </style>
+
+    <style name="CustomRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textSize">@dimen/tex_size_large</item>
+        <item name="android:textColor">@color/gray_35</item>
+    </style>
+
+
+    <style name="Button" parent="CustomButton">
+        <item name="android:background">@drawable/ui_button</item>
+    </style>
+
+    <style name="EditText" parent="CustomEditText">
+        <item name="android:background">@drawable/ui_border</item>
+        <item name="android:textColor">@drawable/ui_text_selector</item>
+    </style>
+
+    <style name="CheckBox" parent="CustomCheckBox">
+        <item name="android:button">@drawable/ui_checkbox</item>
+    </style>
+
+   <style name="RadioButton" parent="CustomRadioButton">
+        <item name="android:button">@drawable/ui_radio</item>
     </style>
 </resources>

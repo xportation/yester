@@ -55,6 +55,8 @@ namespace iSeconds.Droid
 		public Color MoreVideosColor { get; set; }
 
 		public Color MoreVideosStrokeColor { get; set; }
+
+		public float MoreVideosStrokeWidth { get; set; }
 		
 		public void SetDefault()
 		{
@@ -74,8 +76,9 @@ namespace iSeconds.Droid
 			InactiveCellForegroundColor = Color.Argb(127,237,239,244);
 			TextStrokeColor = Color.Argb(200,255,255,255);
 			TextStrokeWidth = 2.5f;
+			MoreVideosStrokeWidth = 1.5f;
 			MoreVideosColor = Color.Rgb(0, 175, 232);
-			MoreVideosStrokeColor = Color.Rgb(0, 93, 148);
+			MoreVideosStrokeColor = Color.White;
 		}
 	}
 
@@ -211,6 +214,7 @@ namespace iSeconds.Droid
 			rangeDelimiterPaint.SetStyle(Paint.Style.Fill);
 
 			moreThanOneVideoPaint = new Paint();
+			moreThanOneVideoPaint.StrokeWidth = theme.MoreVideosStrokeWidth;
 
 	      gestureDetector = new GestureDetector(this);
 
@@ -597,7 +601,6 @@ namespace iSeconds.Droid
 		void drawMoreMoviesIndicator(Canvas canvas, List<DayViewModel> days)
 		{
 			float indicadorSizeDp = 18 * Resources.DisplayMetrics.Density;
-			moreThanOneVideoPaint.StrokeWidth = 2 * Resources.DisplayMetrics.Density;
 
 			for (int dayIndex = 0; dayIndex < days.Count; dayIndex++)
 			{

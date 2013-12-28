@@ -18,6 +18,7 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:id="@+id/scrollView1">
         <LinearLayout
             android:orientation="vertical"
@@ -26,81 +27,79 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/linearLayout1">
-            <ImageView
-                android:src="@drawable/broditech_power"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBroditech"
-                android:layout_marginTop="10.0dp"
-                android:layout_marginBottom="10.0dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp" />
-            <TextView
-                android:text="@string/about_us"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textAbout"
-                android:layout_marginTop="10.0dp"
-                android:textColor="@color/second_item_color" />
-            <TextView
-                android:text="@string/about_stay_in_touch"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textStayInTouch"
-                android:layout_marginTop="15.0dp"
-                android:textColor="@color/second_item_color" />
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:minWidth="25px"
                 android:minHeight="25px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/linearLayout3"
-                android:layout_marginTop="10.0dp"
-                android:layout_marginBottom="10.0dp"
-                android:layout_gravity="center_horizontal">
-                <TextView
-                    android:text="www.broditech.com"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/textSite"
-                    android:autoLink="web"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:textColor="@color/first_item_color" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/linearLayout2"
-                android:layout_gravity="center_horizontal">
-                <ImageView
-                    android:src="@drawable/facebook"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/imageFacebook"
-                    android:layout_marginLeft="10.0dp"
-                    android:layout_marginRight="10.0dp" />
-                <ImageView
-                    android:src="@drawable/twitter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/imageTwitter"
-                    android:layout_marginLeft="10.0dp"
-                    android:layout_marginRight="10.0dp" />
-            </LinearLayout>
-            <Button
-                android:text="@string/about_tutorial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/roundrect_item_background"
+                android:padding="5dp"
+                android:id="@+id/linearLayout4">
+                <TextView
+                    android:text="@string/about_iseconds"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textAbout"
+                    android:layout_marginTop="10.0dp"
+                    android:textColor="@color/second_item_color" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundrect_item_background"
+                android:padding="5dp"
+                android:id="@+id/linearLayout5"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:text="@string/about_stay_in_touch"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textStayInTouch"
+                    android:layout_marginTop="15.0dp"
+                    android:textColor="@color/second_item_color"
+                    android:layout_marginBottom="10dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout2"
+                    android:layout_gravity="center_horizontal">
+                    <ImageView
+                        android:src="@drawable/facebook"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/imageFacebook" />
+                    <ImageView
+                        android:src="@drawable/twitter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/imageTwitter"
+                        android:layout_marginLeft="10.0dp"
+                        android:layout_marginRight="10.0dp" />
+                    <ImageView
+                        android:src="@drawable/broditech_power"
+                        android:id="@+id/imageBroditech"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <Button
+                style="@style/Button"
+                android:text="@string/about_tutorial"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
                 android:id="@+id/buttonTutorial"
                 android:layout_marginTop="30dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp" />
+                android:layout_gravity="center"
+                android:textColor="@color/actionbar_title" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

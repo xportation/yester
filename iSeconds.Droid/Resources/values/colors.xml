@@ -23,4 +23,17 @@
 	<color name="list_divider_color">#7f93b6</color>
 	<color name="first_item_color">#33415a</color>
 	<color name="second_item_color">#5a73a0</color>
+
+	<color name="transparent">#00000000</color>    
+	<color name="white">#ffffff</color>
+	<color name="offwhite">#ece8e1</color>
+	<color name="black">#000000</color>
+	<color name="gray_215">#d7d4cc</color>   
+	<color name="gray_189">#bdbdbd</color>
+	<color name="gray_167">#a7a7a7</color>
+	<color name="gray_79">#4f4f4f</color>
+	<color name="gray_46">#2e2e2e</color>
+	<color name="gray_35">#232323</color>
+	<color name="purple">#554870</color>
+	<color name="dark_purple">#3E3E60</color>
 </resources>

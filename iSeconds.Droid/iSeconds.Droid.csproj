@@ -175,6 +175,18 @@
     <AndroidResource Include="Resources\drawable\roundrect_item_background.xml" />
     <AndroidResource Include="Resources\drawable\ic_menu.png" />
     <AndroidResource Include="Resources\drawable\roundrect_calendar_background.xml" />
+    <AndroidResource Include="Resources\values\dimensions.xml" />
+    <AndroidResource Include="Resources\drawable\ui_border.xml" />
+    <AndroidResource Include="Resources\drawable\ui_button.xml" />
+    <AndroidResource Include="Resources\drawable\ui_checkbox.xml" />
+    <AndroidResource Include="Resources\drawable\ui_radio.xml" />
+    <AndroidResource Include="Resources\drawable\ui_text_selector.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\cb_checked.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\cb_hover.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\cb_normal.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\rb_checked.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\rb_hover.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\rb_normal.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

@@ -38,11 +38,9 @@ namespace iSeconds.Droid
 		{
 			TextView aboutTextView= FindViewById<TextView>(Resource.Id.textAbout);
 			TextView stayInTouchTextView= FindViewById<TextView>(Resource.Id.textStayInTouch);
-			TextView siteTextView= FindViewById<TextView>(Resource.Id.textSite);
 			Button buttonTutorial= FindViewById<Button>(Resource.Id.buttonTutorial);
 			TextViewUtil.ChangeForDefaultFont(aboutTextView,this,18f);
 			TextViewUtil.ChangeForDefaultFont(stayInTouchTextView,this,18f);
-			TextViewUtil.ChangeForDefaultFont(siteTextView,this,18f);
 			TextViewUtil.ChangeForDefaultFont(buttonTutorial,this,18f);
 		}
 
@@ -57,6 +55,12 @@ namespace iSeconds.Droid
 			ImageView twitterImageView = FindViewById<ImageView>(Resource.Id.imageTwitter);
 			twitterImageView.Click+= (sender, e) => {
 				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://www.twitter.com/broditech"));
+				StartActivity(intent);
+			};
+
+			ImageView broditechImageView = FindViewById<ImageView>(Resource.Id.imageBroditech);
+			broditechImageView.Click+= (sender, e) => {
+				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://www.broditech.com"));
 				StartActivity(intent);
 			};
 		}
