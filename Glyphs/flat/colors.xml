@@ -1,5 +1,5 @@
 ﻿﻿<?xml version="1.0" encoding="utf-8" ?>
-<resources>
+<resources> 
 	<!-- actionbar custom colors -->
 	<color name="actionbar_separator">#00FFFFFF</color>
 	<color name="actionbar_title">#FFFFFF</color>
@@ -34,6 +34,6 @@
 	<color name="gray_79">#4f4f4f</color>
 	<color name="gray_46">#2e2e2e</color>
 	<color name="gray_35">#232323</color>
-	<color name="purple">#554870</color>
-	<color name="dark_purple">#3E3E60</color>
+	<color name="item_color">#554870</color>
+	<color name="item_color_dark">#3E3E60</color>
 </resources>

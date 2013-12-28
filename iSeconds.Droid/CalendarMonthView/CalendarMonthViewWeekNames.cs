@@ -10,70 +10,44 @@ namespace iSeconds.Droid
 {
    class CalendarMonthViewWeekNamesTheme
    {
-      private Paint.Align textAlign;
-      private float textSize;
-      private Color weekTextColor;
-      private Color weekendTextColor;
-      private Color backgroundColor;
-
       public CalendarMonthViewWeekNamesTheme()
       {
          this.SetDefault();
       }
 
-      public Paint.Align TextAlign
-      {
-         get { return textAlign; }
-         set { textAlign = value; }
-      }
+		public Paint.Align TextAlign { get; set; }
 
-      public float TextSize
-      {
-         get { return textSize; }
-         set { textSize = value; }
-      }
+		public float TextSize  { get; set; }
 
-      public Color WeekTextColor
-      {
-         get { return weekTextColor; }
-         set { weekTextColor = value; }
-      }
+		public Color WeekTextColor  { get; set; }
 
-      public Color BackgroundColor
-      {
-         get { return backgroundColor; }
-         set { backgroundColor = value; }
-      }
+		public Color BackgroundColor  { get; set; }
 
-      public Color WeekendTextColor
-      {
-         get { return weekendTextColor; }
-         set { weekendTextColor = value; }
-      }
+		public Color WeekendTextColor  { get; set; }
 
       public void SetDefault()
       {
-         textAlign = Paint.Align.Center;
-         textSize = 15f;
-         weekTextColor = Color.Rgb(55,69,93);
-		 	weekendTextColor = Color.Rgb(59,79,152);
-         backgroundColor = Color.Rgb(233,235,247);
+			TextAlign = Paint.Align.Center;
+			TextSize = 15f;
+			WeekTextColor = Color.Rgb(55,69,93);
+			WeekendTextColor = Color.Rgb(59,79,152);
+			BackgroundColor = Color.Rgb(233,235,247);
       }
 
 		public void SetFlatTheme()
 		{
          SetDefault();
-			weekTextColor = Color.Rgb(255,255,255);
-			weekendTextColor = Color.Rgb(246,107,78);
-			backgroundColor = Color.Rgb(62,62,96);
+			WeekTextColor = Color.Rgb(255,255,255);
+			WeekendTextColor = Color.Rgb(246,107,78);
+			BackgroundColor = Color.Rgb(62,62,96);
 		}
 
 		public void SetIOS7Theme()
 		{
          SetDefault();
-			weekTextColor = Color.Rgb(255,255,255);
-			weekendTextColor = Color.Rgb(226,7,1);
-			backgroundColor = Color.Rgb(160,160,160);
+			WeekTextColor = Color.Rgb(255,255,255);
+			WeekendTextColor = Color.Rgb(226,7,1);
+			BackgroundColor = Color.Rgb(160,160,160);
 		}
    }
 
