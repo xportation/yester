@@ -18,6 +18,7 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <MandroidI18n />
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -28,7 +29,6 @@
     <ConsolePause>False</ConsolePause>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
     <DebugSymbols>true</DebugSymbols>
     <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
@@ -124,7 +124,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\splash_title.png" />
     <AndroidResource Include="Resources\layout\TimelineView.axml" />
-    <AndroidResource Include="Resources\drawable\ic_day_videos.png" />
     <AndroidResource Include="Resources\values-land\Styles.xml" />
     <AndroidResource Include="Resources\drawable\splash_title_land.png" />
     <AndroidResource Include="Resources\drawable-hdpi\splash_title_land.png" />

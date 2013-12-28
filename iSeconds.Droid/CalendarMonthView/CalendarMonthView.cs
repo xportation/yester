@@ -14,143 +14,68 @@ using Android.OS;
 namespace iSeconds.Droid
 {
 	internal class CalendarMonthViewTheme
-	{
-		private Color cellForegroundColor;
-		private Color gridLineColor;
-		private Color inactiveCellForegroundColor;
-		private Color inactiveTextColor;
-		private bool isTextShadow;
-		private Color selectionColor;
-		private Color rangeDelimiterColor;
-		private Color todayColor;
-		private float textStrokeWidth;
-		private Paint.Align textAlign;
-		private Color textColor;
-		private Color textShadowColor;
-		private float textSize;
-		private Color textStrokeColor;
-		private Color selectionShadowColor;
-		private float todayStrokeWidth;
-		
+	{		
 		public CalendarMonthViewTheme()
 		{
 			SetDefault();
 		}
 		
-		public Color GridLineColor
-		{
-			get { return gridLineColor; }
-			set { gridLineColor = value; }
-		}
+		public Color GridLineColor { get; set; }
 		
-		public bool IsTextShadow
-		{
-			get { return isTextShadow; }
-			set { isTextShadow = value; }
-		}
+		public bool IsTextShadow { get; set; }
 		
-		public Color TextShadowColor
-		{
-			get { return textShadowColor; }
-			set { textShadowColor = value; }
-		}
+		public Color TextShadowColor { get; set; }
 		
-		public Paint.Align TextAlign
-		{
-			get { return textAlign; }
-			set { textAlign = value; }
-		}
+		public Paint.Align TextAlign { get; set;}
 		
-		public float TextSize
-		{
-			get { return textSize; }
-			set { textSize = value; }
-		}
+		public float TextSize { get; set; }
 		
-		public Color TodayColor
-		{
-			get { return todayColor; }
-			set { todayColor = value; }
-		}
+		public Color TodayColor { get; set; }
 		
-		public Color SelectionColor
-		{
-			get { return selectionColor; }
-			set { selectionColor = value; }
-		}
+		public Color SelectionColor { get; set; }
 
-		public Color RangeDelimiterColor
-		{
-			get { return rangeDelimiterColor; }
-			set { rangeDelimiterColor = value; }
-		}
+		public Color RangeDelimiterColor { get; set; }
 		
-		public Color TextColor
-		{
-			get { return textColor; }
-			set { textColor = value; }
-		}
+		public Color TextColor { get; set; }
 		
-		public Color InactiveTextColor
-		{
-			get { return inactiveTextColor; }
-			set { inactiveTextColor = value; }
-		}
+		public Color InactiveTextColor { get; set; }
 		
-		public Color CellForegroundColor
-		{
-			get { return cellForegroundColor; }
-			set { cellForegroundColor = value; }
-		}
+		public Color CellForegroundColor { get; set; }
 		
-		public Color InactiveCellForegroundColor
-		{
-			get { return inactiveCellForegroundColor; }
-			set { inactiveCellForegroundColor = value; }
-		}
+		public Color InactiveCellForegroundColor { get; set; }
 		
-		public Color TextStrokeColor
-		{
-			get { return textStrokeColor; }
-			set { textStrokeColor = value; }
-		}
+		public Color TextStrokeColor { get; set; }
 		
-		public float TextStrokeWidth
-		{
-			get { return textStrokeWidth; }
-			set { textStrokeWidth = value; }
-		}
+		public float TextStrokeWidth { get; set; }
 		
-		public Color SelectionShadowColor
-		{
-			get { return selectionShadowColor; }
-			set { selectionShadowColor = value; }
-		}
+		public Color SelectionShadowColor { get; set; }
 
-		public float TodayStrokeWidth 
-		{
-			get { return todayStrokeWidth; }
-			set { todayStrokeWidth = value; }
-		}
+		public float TodayStrokeWidth { get; set; }
+
+		public Color MoreVideosColor { get; set; }
+
+		public Color MoreVideosStrokeColor { get; set; }
 		
 		public void SetDefault()
 		{
-			gridLineColor = Color.Rgb(216,223,234);
-			isTextShadow = false;
-			textShadowColor = Color.Rgb(240, 240, 240);
-			textAlign = Paint.Align.Center;
-			textSize = 21f;
-			todayColor = Color.Argb(255, 0, 180, 255);
-			todayStrokeWidth = 6f;
-			selectionColor = Color.Argb(100, 0, 180, 255);
-			rangeDelimiterColor = Color.Argb(100, 0, 255, 0);
-			selectionShadowColor = Color.Rgb(200, 220, 255);
-			textColor = Color.Rgb(51,65,90);
-			inactiveTextColor = Color.Rgb(127,147,182);
-			cellForegroundColor = Color.Transparent;
-			inactiveCellForegroundColor = Color.Argb(127,237,239,244);
-			textStrokeColor = Color.Argb(170,255,255,255);
-			textStrokeWidth = 2.5f;
+			GridLineColor = Color.Rgb(216,223,234);
+			IsTextShadow = false;
+			TextShadowColor = Color.Rgb(240, 240, 240);
+			TextAlign = Paint.Align.Center;
+			TextSize = 21f;
+			TodayColor = Color.Argb(255, 0, 180, 255);
+			TodayStrokeWidth = 6f;
+			SelectionColor = Color.Argb(100, 0, 180, 255);
+			RangeDelimiterColor = Color.Argb(100, 0, 255, 0);
+			SelectionShadowColor = Color.Rgb(200, 220, 255);
+			TextColor = Color.Rgb(51,65,90);
+			InactiveTextColor = Color.Rgb(127,147,182);
+			CellForegroundColor = Color.Transparent;
+			InactiveCellForegroundColor = Color.Argb(127,237,239,244);
+			TextStrokeColor = Color.Argb(200,255,255,255);
+			TextStrokeWidth = 2.5f;
+			MoreVideosColor = Color.Rgb(0, 175, 232);
+			MoreVideosStrokeColor = Color.Rgb(0, 93, 148);
 		}
 	}
 
@@ -208,7 +133,6 @@ namespace iSeconds.Droid
 		private Paint backgroundPaint;
 		private Paint cacheDisplayPaint;
 
-		private Bitmap dayMoreMoviesIndicator;
 		private Bitmap calendarMonthCache;
 		private Bitmap calendarNextMonthCache;
 		private Paint cellForegroundPaint;
@@ -226,6 +150,7 @@ namespace iSeconds.Droid
 
 		private Paint pressedPaint;
 		private Paint rangeDelimiterPaint;
+		private Paint moreThanOneVideoPaint;
 
 		private bool shouldAnimate = false;
 		private bool isPressed = false;
@@ -285,9 +210,10 @@ namespace iSeconds.Droid
 			rangeDelimiterPaint.Color = theme.SelectionColor;
 			rangeDelimiterPaint.SetStyle(Paint.Style.Fill);
 
+			moreThanOneVideoPaint = new Paint();
+
 	      gestureDetector = new GestureDetector(this);
 
-			dayMoreMoviesIndicator = BitmapFactory.DecodeResource (this.Context.Resources, Resource.Drawable.ic_day_videos);
 	      cacheDisplayPaint = new Paint();
 	      initBitmapCache();
 
@@ -558,7 +484,7 @@ namespace iSeconds.Droid
 			drawBackgroundImage(canvas, days);
 			drawCellsForeground(canvas, days);
 			drawDaysText(canvas, days);
-			drawMoreMoviesByIcon(canvas, days);
+			drawMoreMoviesIndicator(canvas, days);
 			drawToday(canvas, days);
 			drawGridLines(canvas);
 		}
@@ -668,15 +594,34 @@ namespace iSeconds.Droid
 			}
 		}
 
-		void drawMoreMoviesByIcon (Canvas canvas, List<DayViewModel> days)
+		void drawMoreMoviesIndicator(Canvas canvas, List<DayViewModel> days)
 		{
+			float indicadorSizeDp = 18 * Resources.DisplayMetrics.Density;
+			moreThanOneVideoPaint.StrokeWidth = 2 * Resources.DisplayMetrics.Density;
+
 			for (int dayIndex = 0; dayIndex < days.Count; dayIndex++)
 			{
 				DayViewModel dayViewModel = days[dayIndex];
 				if (dayViewModel.Model.GetVideoCount() > 1) {
+					canvas.Save();
 					RectangleF rect = getCellRectByIndex(dayIndex, 0, 0);
-					canvas.DrawBitmap (dayMoreMoviesIndicator, rect.Right - dayMoreMoviesIndicator.Width - 1,
-					                   rect.Bottom - dayMoreMoviesIndicator.Height - 1, backgroundPaint);
+					canvas.ClipRect(rect.Left, rect.Top, rect.Right, rect.Bottom);
+
+					Path path = new Path();
+					path.MoveTo(rect.Right, rect.Bottom);
+					path.LineTo(rect.Right, rect.Bottom - indicadorSizeDp);
+					path.LineTo(rect.Right - indicadorSizeDp, rect.Bottom);
+					path.MoveTo(rect.Right, rect.Bottom);
+
+					moreThanOneVideoPaint.Color = theme.MoreVideosColor;
+					moreThanOneVideoPaint.SetStyle(Paint.Style.Fill);
+					canvas.DrawPath(path, moreThanOneVideoPaint);
+					
+					moreThanOneVideoPaint.Color = theme.MoreVideosStrokeColor;
+					moreThanOneVideoPaint.SetStyle(Paint.Style.Stroke);
+					canvas.DrawPath(path, moreThanOneVideoPaint);
+
+					canvas.Restore();
 				}
 			}
 		}

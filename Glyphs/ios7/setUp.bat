@@ -1,0 +1,1 @@
+xcopy /y "colors.xml" "../../iSeconds.Droid/Resources/values"

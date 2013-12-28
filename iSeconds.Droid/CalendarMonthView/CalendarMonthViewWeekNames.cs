@@ -62,8 +62,7 @@ namespace iSeconds.Droid
 
 		public void SetFlatTheme()
 		{
-			textAlign = Paint.Align.Center;
-			textSize = 15f;
+         SetDefault();
 			weekTextColor = Color.Rgb(255,255,255);
 			weekendTextColor = Color.Rgb(246,107,78);
 			backgroundColor = Color.Rgb(62,62,96);
@@ -71,8 +70,7 @@ namespace iSeconds.Droid
 
 		public void SetIOS7Theme()
 		{
-			textAlign = Paint.Align.Center;
-			textSize = 15f;
+         SetDefault();
 			weekTextColor = Color.Rgb(255,255,255);
 			weekendTextColor = Color.Rgb(226,7,1);
 			backgroundColor = Color.Rgb(160,160,160);
