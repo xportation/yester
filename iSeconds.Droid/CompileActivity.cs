@@ -10,6 +10,8 @@ using Android.Views;
 using Android.Widget;
 using iSeconds.Domain;
 using System.IO;
+using System.Threading;
+using System.Globalization;
 
 namespace iSeconds.Droid
 {
@@ -28,9 +30,12 @@ namespace iSeconds.Droid
 		private string compilationPath;
 		private string thumbnailPath;
 
+		private string timelineName;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+			this.RequestWindowFeature(WindowFeatures.NoTitle);
 			this.SetContentView (Resource.Layout.CompileView);
 
 			Button okButton = this.FindViewById<Button> (Resource.Id.okButton);
@@ -78,11 +83,30 @@ namespace iSeconds.Droid
 			compilationPath = thumbnailPath = basePath;
 			compilationPath += ".mp4";
 			thumbnailPath += ".png";
+
+			timelineName = user.GetTimelineById (this.timelineId).Name;
+
+			setDefaultTimelineName ();
+			setDefaultTimelineDescription ();
 		}
 
-		protected override void OnStart ()
+		string dateToString(DateTime date)
 		{
-			base.OnStart ();
+			return date.ToString ("d", CultureInfo.CurrentCulture);
+		}
+
+		void setDefaultTimelineName ()
+		{
+			string defaultName = "Compilation from " + timelineName + " (" + dateToString(startDate) + " - " + dateToString(endDate) + ")";
+			EditText name = this.FindViewById<EditText>(Resource.Id.compilationNameEdit);
+			name.Text = defaultName;
+		}
+
+		void setDefaultTimelineDescription ()
+		{
+			string defaultDescription = "A compilation for timeline " + timelineName + " from " + dateToString(startDate) + " to " + dateToString(endDate);
+			EditText description = this.FindViewById<EditText>(Resource.Id.compilationDescriptionEdit);
+			description.Text = defaultDescription;
 		}
 
 		public void Concat ()
@@ -108,8 +132,10 @@ namespace iSeconds.Droid
 			b.PutStringArrayList ("ffmpeg.concat.filelist", filesToConcat);
 			message.Data = b;
 
+
 			// Send the message to our service and let it do it's job :)
 			serviceMessenger.Send (message);
+
 
 			//Toast.MakeText (this, "when the compilation was finished you will be notified", ToastLength.Long).Show ();
 			this.Finish ();
