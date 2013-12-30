@@ -84,4 +84,7 @@
    <string name="tutorial_msg4">We hope this tutorial was helpful to you. Thanks for watching it!! Don\'t hesitate in contacting us :)</string>
    <string name="tutorial_done">Done</string>
    <string name="tutorial_access_about">This tutorial is available on the \"About\" option on the app\'s menu.</string>
+
+   <string name="compilation_name_label">Compilation Name</string>
+   <string name="compilation_description_label">Compilation Description</string>
 </resources>

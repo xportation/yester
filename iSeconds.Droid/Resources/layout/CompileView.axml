@@ -2,12 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:padding="7dip">
     <TextView
-        android:text="Compiling..."
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/compiling"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:textColor="@color/first_item_color" />
+        android:text="@string/compilation_name_label"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/compilationNameLabel" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/compilationNameEdit" />
+    <TextView
+        android:text="@string/compilation_description_label"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/compilationDescriptionLabel" />
+    <EditText
+        android:inputType="textMultiLine"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/compilationDescriptionEdit" />
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ok" />
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel" />
 </LinearLayout>

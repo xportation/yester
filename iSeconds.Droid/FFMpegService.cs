@@ -13,6 +13,7 @@ using Java.Lang;
 using Java.IO;
 using Android.Util;
 using Android.Content.Res;
+using iSeconds.Domain; // tive que adicionar essa dependencia por causa de um util para criar o thumbnail.. se for necessário podemos remover
 
 namespace iSeconds.Droid
 {
@@ -27,8 +28,21 @@ namespace iSeconds.Droid
 	{
 		private Messenger messenger;
 
+		public const string ConcatFinishedIntent = "ConcatFinishedIntent";
+
 		public FFMpegService ()
 		{
+		}
+
+		void notifyEnd(string filename) 
+		{
+			var stocksIntent = new Intent (ConcatFinishedIntent); 
+
+			Bundle bundle = new Bundle ();	
+			bundle.PutString ("ffmpeg.concat.result", filename);
+
+			stocksIntent.PutExtras(bundle);
+			SendOrderedBroadcast (stocksIntent, null);
 		}
 
 		public override IBinder OnBind (Intent intent)
@@ -40,10 +54,10 @@ namespace iSeconds.Droid
 			string basePathAbsolute = "/data/data/" + 
 			                          this.BaseContext.PackageName + "/shared_prefs";
 		
-			messenger = new Messenger (new FFMpegServiceHandler (this.Assets, basePathAbsolute));
+			messenger = new Messenger (new FFMpegServiceHandler (this.Assets, basePathAbsolute, this));
 
 			return messenger.Binder;
-		}
+		}	
 
 
 		class FFMpegServiceHandler : Handler
@@ -56,7 +70,7 @@ namespace iSeconds.Droid
 			/// </summary>
 			private readonly string[] FFMPEG_BINARIES = { 
 				"ffmpeg", 
-				"libavcodec-55.so", 
+				"libavcodec-55.mp3",  // TODO: ver como tratar esse bug do android...
 				"libavfilter-3.so", 
 				"libavformat-55.so",
 				"libavutil-52.so",
@@ -66,13 +80,14 @@ namespace iSeconds.Droid
 
 			private AssetManager assets;
 			private string basePathAbsolute;
+			private FFMpegService service;
 
-			public FFMpegServiceHandler (AssetManager assets, string basePathAbsolute)
+			public FFMpegServiceHandler (AssetManager assets, string basePathAbsolute, FFMpegService service)
 			{
 				this.assets = assets;
 				this.basePathAbsolute = basePathAbsolute;
+				this.service = service;
 			}
-
 
 			public override void HandleMessage (Message msg)
 			{
@@ -119,7 +134,20 @@ namespace iSeconds.Droid
 
 				// we don't need it anymore.
 				System.IO.File.Delete (fileListPath);
+
+				saveThumbnail (outputFilePath);
+
+				service.notifyEnd (outputFilePath);
 			}
+
+			void saveThumbnail (string outputFilePath)
+			{
+				string thumbnailPath = outputFilePath;
+				thumbnailPath = thumbnailPath.Remove (thumbnailPath.Length - 3);
+				thumbnailPath += "png";
+				AndroidMediaUtils.SaveVideoThumbnail (thumbnailPath, outputFilePath);
+			}
+
 
 			/// <summary>
 			/// ffmpeg binaries are copies from the assets to a folder in the OS where it lets us execute it.
@@ -141,8 +169,22 @@ namespace iSeconds.Droid
 
 			void LoadBinaryAndChangePermissions (string basePath, string file)
 			{
+				var list = assets.List ("");
+
 				var stream = assets.Open (file);
+
+				// ver como tratar melhor esse bug do android
+				// o problema é que versões antigas do android
+				// o mesmo se perde ao tratar assets maiores que 1mb
+				// parece que ele tenta fazer uma compressão mas fica errado
+				// ao descomprimir.. 
+				// WORKAROUND: se colocamos como .mp3/.png/.zip ele
+				// pensa que já está comprimido e não vai mexer no asset...
 				string filename = Path.Combine (basePath, file);
+				if (filename.EndsWith(".mp3")) {
+					filename = filename.Remove (filename.Length - 3);
+					filename += "so";
+				}
 
 				using (var streamWriter = new StreamWriter (filename, false)) {
 					ReadWriteStream (stream, streamWriter.BaseStream);

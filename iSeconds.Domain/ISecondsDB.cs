@@ -22,6 +22,7 @@ namespace iSeconds.Domain
 			CreateTable<User> ();
 			CreateTable<DayInfo> ();
 			CreateTable<MediaInfo> ();
+			CreateTable<Compilation> ();
 			#endif
 		}
 
@@ -189,6 +190,11 @@ namespace iSeconds.Domain
 
 			return medias;
 		}	
+
+		public IList<Compilation> GetUserCompilations (int userId)
+		{
+			return (from i in Table<Compilation> () where i.UserId == userId select i).ToList ();
+		}
 
 		public IList<T> GetItems<T> () where T : IModel, new()
 		{

@@ -14,50 +14,62 @@ namespace iSeconds.Droid
 {
 	class ISecondsListViewAdapter : BaseAdapter
 	{
-		private Activity context;
-		private List<ListItemViewModel> viewModel;
+		private Activity context = null;
+		private List<ListItemViewModel> viewModel = null;
+		public delegate View OnGetItemDelegate (int position, ListItemViewModel model, View view);
 
-		public ISecondsListViewAdapter(Activity context, List<ListItemViewModel> viewModel)
+		public OnGetItemDelegate OnGetItem;
+
+		public ISecondsListViewAdapter (Activity context, List<ListItemViewModel> viewModel)
 		{
 			this.context = context;
 			this.viewModel = viewModel;
 		}
 
-		public override Java.Lang.Object GetItem(int position)
+		public override Java.Lang.Object GetItem (int position)
 		{
 			return null;
 		}
 
-		public override long GetItemId(int position)
+		public override long GetItemId (int position)
 		{
 			return position;
 		}
 
-		public override View GetView(int position, View convertView, ViewGroup parent)
+		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
-			View view = convertView;
-			if (view == null) 
-			{
-				view = context.LayoutInflater.Inflate(Resource.Layout.TextViewItem, null);
-				TextView textView = view.FindViewById<TextView>(Resource.Id.textItem);
-				TextViewUtil.ChangeForDefaultFont(textView, context, 24f);
-				textView.Text = viewModel [position].ToString();
+			View view = null;
+			//if (view == null) { 			// TODO: tratar o cache 
 
-				textView.Touch += (object sender, View.TouchEventArgs e) => {
-					this.viewModel[position].Callback.Invoke();
-				};
-			}
+				ListItemViewModel model = this.viewModel [position];
+
+				if (OnGetItem != null) {
+
+					view = OnGetItem.Invoke (position, model, view);
+
+				} else {
+
+					view = context.LayoutInflater.Inflate (Resource.Layout.TextViewItem, null);
+					TextView textView = view.FindViewById<TextView> (Resource.Id.textItem);
+					TextViewUtil.ChangeForDefaultFont (textView, context, 24f);
+					textView.Text = viewModel [position].ToString ();
+
+
+					textView.Touch += (object sender, View.TouchEventArgs e) => {
+						if (model.Callback != null)
+							model.Callback.Invoke ();
+					};
+				}
+
+			//}
 
 
 			return view;
 		}
 
-		public override int Count
-		{
+		public override int Count {
 			get { return viewModel.Count; }
 		}
 	}
-
-
 }
 

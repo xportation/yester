@@ -66,7 +66,7 @@ namespace iSeconds.Droid
 
 		public string GetCompilationPath()
 		{
-			throw new NotImplementedException();
+			return compilationPath;
 		}
 
       void createPath (string path)

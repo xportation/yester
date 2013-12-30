@@ -55,8 +55,8 @@ namespace iSeconds.Droid
 					return;
 
 				picker.TakeVideoAsync(new StoreVideoOptions
-                    {
-                        Name = this.generateName("movie", date),
+                    {											
+								Name = ISecondsUtils.StringifyDate("movie", date),
                         DesiredLength = System.TimeSpan.FromMilliseconds(user.RecordDuration*1000 + 1000/cameraFPS),
                         //Directory = this.getMediaDirectory()
                     })
@@ -97,25 +97,9 @@ namespace iSeconds.Droid
 
 		public void SaveVideoThumbnail(string thumbnailPath, string videoPath)
 		{
-			try {
-				Stream fileOutput = File.Create(thumbnailPath);
-				Bitmap bitmap = ThumbnailUtils.CreateVideoThumbnail(videoPath, ThumbnailKind.MicroKind);
-				bitmap.Compress(Bitmap.CompressFormat.Png, 100, fileOutput);
-				fileOutput.Flush();
-				fileOutput.Close();
-			} catch(Exception) {
-			}
+			AndroidMediaUtils.SaveVideoThumbnail (thumbnailPath, videoPath);
 		}
 
-		private string generateName(string prefix, System.DateTime dateTime)
-		{
-			dateTime = dateTime.Date + DateTime.Now.TimeOfDay; // setting the hour
 
-			string movieName = prefix + "_" + dateTime.ToString();
-			movieName = movieName.Replace("/", "_");
-			movieName = movieName.Replace(" ", "_");
-			movieName = movieName.Replace(":", "_");
-			return movieName;
-		}
 	}
 }

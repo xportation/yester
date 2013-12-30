@@ -141,6 +141,17 @@ namespace iSeconds.Domain
 			repository.SaveUser(this);
 		}
 
+		public IList<Compilation> GetCompilations ()
+		{
+			return repository.GetUserCompilations (this.Id);
+		}
+
+		public void AddCompilation (Compilation compilation)
+		{
+			compilation.UserId = this.Id;
+			repository.SaveItem (compilation);
+		}
+
 	   #region db
 
 	   public string Name { get; set; }

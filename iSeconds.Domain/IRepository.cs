@@ -33,5 +33,7 @@ namespace iSeconds.Domain
 
       IList<string> GetVideosFromRange(DateTime start, DateTime end, int timelineId);
 		IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId);
+
+		IList<Compilation> GetUserCompilations (int userId);
 	}
 }
