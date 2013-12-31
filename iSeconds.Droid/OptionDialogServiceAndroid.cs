@@ -24,6 +24,15 @@ namespace iSeconds.Droid
 			builder.Create().Show();
 		}
 
+		public void ShowMessage(string msg, Action callback)
+		{
+			new AlertDialog.Builder(tracker.GetCurrentActivity())
+				.SetTitle (string.Empty)
+				.SetMessage (msg)
+				.SetPositiveButton(Resource.String.ok, delegate { callback.Invoke(); })
+				.Show ();
+		}
+
 		public void AskForConfirmation(string msg, Action userConfirmedCallback, Action userCanceledCallback )
 		{
 			new AlertDialog.Builder(tracker.GetCurrentActivity())

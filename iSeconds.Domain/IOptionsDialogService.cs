@@ -6,6 +6,8 @@ namespace iSeconds.Domain
 	{
 		void ShowModal(OptionsList options);
 
+		/*Shows a message with only an ok button*/
+		void ShowMessage(string msg, Action callback);
 		void AskForConfirmation(string msg, Action userConfirmedCallback, Action userCanceledCallback);
 
 		void ShowTutorial(Action doneAction);

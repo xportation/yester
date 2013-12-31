@@ -20,6 +20,7 @@ namespace iSeconds.Droid
 	{
 		private IRepository repository = null;
 		private IPathService pathService = null;
+		private IOptionsDialogService optionsDialogService = null;
 		private User user = null;
 
 		private DateTime startDate;
@@ -41,9 +42,7 @@ namespace iSeconds.Droid
 
 				addCompilation ();
 
-				concat ();
-
-				askToWait ();
+				askToWait (concat);
 			};
 
 			Button cancelButton = this.FindViewById<Button> (Resource.Id.cancelButton);
@@ -54,6 +53,7 @@ namespace iSeconds.Droid
 			ISecondsApplication application = (ISecondsApplication)this.Application;
 			repository = application.GetRepository ();
 			pathService = application.GetPathService ();
+			optionsDialogService = application.GetOptionsDialogService ();
 			user = application.GetUserService ().CurrentUser;
 
 			startDate = DateTime.FromBinary (Convert.ToInt64 (this.Intent.Extras.GetString ("ShareDate_Start")));
@@ -109,10 +109,10 @@ namespace iSeconds.Droid
 			user.AddCompilation (compilation);
 		}
 
-		void askToWait ()
+		void askToWait (Action concat)
 		{
 			string msg = Resources.GetString (Resource.String.compilation_processing_message);
-			Toast.MakeText (this, msg, ToastLength.Short).Show ();
+			optionsDialogService.ShowMessage (msg, concat);
 		}
 
 		void concat ()
