@@ -18,8 +18,6 @@ namespace iSeconds.Droid
 	{
 		private CompilationViewModel viewModel = null; 
 
-		private IMediaService mediaService = null;
-
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);

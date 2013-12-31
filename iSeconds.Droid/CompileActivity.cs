@@ -16,10 +16,8 @@ using System.Globalization;
 namespace iSeconds.Droid
 {
 	[Activity (Label = "CompileActivity", Theme = "@android:style/Theme.Dialog")]			
-	public class CompileActivity : Activity
+	public class CompileActivity : ISecondsActivity
 	{
-		private Messenger serviceMessenger = null;
-		private IServiceConnection serviceConnection = null;
 		private IRepository repository = null;
 		private IPathService pathService = null;
 		private User user = null;
@@ -40,27 +38,12 @@ namespace iSeconds.Droid
 
 			Button okButton = this.FindViewById<Button> (Resource.Id.okButton);
 			okButton.Click += (object sender, EventArgs e) => {
-				EditText name = this.FindViewById<EditText>(Resource.Id.compilationNameEdit);
-				EditText description = this.FindViewById<EditText>(Resource.Id.compilationDescriptionEdit);
 
-				Toast.MakeText(this, "right", ToastLength.Short).Show();
+				addCompilation ();
 
-				// TODO: fazer o bind logo no inicio da aplicaçao
+				concat ();
 
-				Compilation compilation = new Compilation();
-				compilation.Name = name.Text;
-				compilation.Description = description.Text;
-				compilation.Begin = startDate;
-				compilation.End = endDate;
-				compilation.TimelineName = user.GetTimelineById(timelineId).Name;
-				compilation.Path = compilationPath;
-				compilation.ThumbnailPath = thumbnailPath;
-
-				user.AddCompilation(compilation);
-
-				bindService ();
-
-				//this.Finish();
+				askToWait ();
 			};
 
 			Button cancelButton = this.FindViewById<Button> (Resource.Id.cancelButton);
@@ -97,77 +80,68 @@ namespace iSeconds.Droid
 
 		void setDefaultTimelineName ()
 		{
-			string defaultName = "Compilation from " + timelineName + " (" + dateToString(startDate) + " - " + dateToString(endDate) + ")";
+			string defaultName = timelineName + " (" + dateToString(startDate) + " - " + dateToString(endDate) + ")";
 			EditText name = this.FindViewById<EditText>(Resource.Id.compilationNameEdit);
 			name.Text = defaultName;
 		}
 
 		void setDefaultTimelineDescription ()
 		{
-			string defaultDescription = "A compilation for timeline " + timelineName + " from " + dateToString(startDate) + " to " + dateToString(endDate);
+			string defaultDescription = this.GetString(
+				Resource.String.compilation_default_description, timelineName, dateToString(startDate), dateToString(endDate));
 			EditText description = this.FindViewById<EditText>(Resource.Id.compilationDescriptionEdit);
 			description.Text = defaultDescription;
 		}
 
-		public void Concat ()
+		void addCompilation ()
 		{
-			// To use the ffmpeg service we simply create a Message object
-			// and populate it's Data field with some properties (parameters).
-			Message message = Message.Obtain ();
+			EditText name = this.FindViewById<EditText>(Resource.Id.compilationNameEdit);
+			EditText description = this.FindViewById<EditText>(Resource.Id.compilationDescriptionEdit);
+
+			Compilation compilation = new Compilation ();
+			compilation.Name = name.Text;
+			compilation.Description = description.Text;
+			compilation.Begin = startDate;
+			compilation.End = endDate;
+			compilation.TimelineName = user.GetTimelineById (timelineId).Name;
+			compilation.Path = compilationPath;
+			compilation.ThumbnailPath = thumbnailPath;
+			user.AddCompilation (compilation);
+		}
+
+		void askToWait ()
+		{
+			string msg = Resources.GetString (Resource.String.compilation_processing_message);
+			Toast.MakeText (this, msg, ToastLength.Short).Show ();
+		}
+
+		void concat ()
+		{
+			Intent mServiceIntent = new Intent(this, typeof(FFMpegService));
+
+			// To use the ffmpeg service we simply create a intent object
+			// and populate it's Extra`s with some properties (parameters).
 			Bundle b = new Bundle ();
 			// Our message contains the following properties.
 			// The ffmpeg command, here we will use the concat command (our service only implements this for now).
 			b.PutString ("ffmpeg.command", "concat");
-			// The output file.
 
+			// The output file.
 			b.PutString ("ffmpeg.concat.output", compilationPath);
 
-			IList<MediaInfo> videos = repository.GetMediaInfoByPeriod (startDate, endDate, timelineId);
-
 			// A list with the file paths (absolute) of each video to be concatenated.
+			IList<MediaInfo> videos = repository.GetMediaInfoByPeriod (startDate, endDate, timelineId);
 			IList<string> filesToConcat = new List<string> ();
 			foreach (MediaInfo mediaInfo in videos) {
 				filesToConcat.Add (mediaInfo.Path);
 			}
 			b.PutStringArrayList ("ffmpeg.concat.filelist", filesToConcat);
-			message.Data = b;
 
+			mServiceIntent.PutExtras(b);
 
-			// Send the message to our service and let it do it's job :)
-			serviceMessenger.Send (message);
-
-
-			//Toast.MakeText (this, "when the compilation was finished you will be notified", ToastLength.Long).Show ();
+			StartService(mServiceIntent);
 			this.Finish ();
 		}
-
-		void bindService ()
-		{
-			// We just need this string at our Intent, except for that, no direct dependency on the service.
-			var ffmpegServiceIntent = new Intent ("com.broditech.iseconds.FFMpegService");
-			serviceConnection = new FFMpegServiceConnection (this);
-			BindService (ffmpegServiceIntent, serviceConnection, Bind.AutoCreate);
-		}
-
-		class FFMpegServiceConnection : Java.Lang.Object, IServiceConnection
-		{
-			CompileActivity activity;
-
-			public FFMpegServiceConnection (CompileActivity activity) {
-				this.activity = activity;
-			}
-
-			public void OnServiceConnected (ComponentName name, IBinder service) {
-				activity.serviceMessenger = new Messenger (service);		
-				activity.Concat ();
-			}
-
-			public void OnServiceDisconnected (ComponentName name) {
-				activity.serviceMessenger.Dispose();
-				activity.serviceMessenger = null;
-			}
-		}
-
 	}
 }
 
