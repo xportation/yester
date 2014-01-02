@@ -16,9 +16,12 @@ namespace iSeconds.Domain
 			return movieName;
 		}
 
-		public static string DateToString(DateTime date)
+		public static string DateToString(DateTime date, bool withTimeSpan)
 		{
-			return String.Format("{0:g}", date);
+			if (withTimeSpan)
+				return String.Format("{0:g}", date);
+
+			return String.Format("{0:d}", date);
 		}
 	}
 }

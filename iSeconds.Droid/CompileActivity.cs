@@ -77,7 +77,7 @@ namespace iSeconds.Droid
 
 		void setDefaultTimelineName ()
 		{
-			string defaultName = timelineName + " (" + ISecondsUtils.DateToString(startDate) + " - " + ISecondsUtils.DateToString(endDate) + ")";
+			string defaultName = timelineName + " (" + ISecondsUtils.DateToString(startDate, false) + " - " + ISecondsUtils.DateToString(endDate, false) + ")";
 			EditText name = this.FindViewById<EditText>(Resource.Id.compilationNameEdit);
 			name.Text = defaultName;
 		}
@@ -85,7 +85,7 @@ namespace iSeconds.Droid
 		void setDefaultTimelineDescription ()
 		{
 			string defaultDescription = this.GetString(
-				Resource.String.compilation_default_description, timelineName, ISecondsUtils.DateToString(startDate), ISecondsUtils.DateToString(endDate));
+				Resource.String.compilation_default_description, timelineName, ISecondsUtils.DateToString(startDate, false), ISecondsUtils.DateToString(endDate, false));
 			EditText description = this.FindViewById<EditText>(Resource.Id.compilationDescriptionEdit);
 			description.Text = defaultDescription;
 		}

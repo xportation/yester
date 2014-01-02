@@ -77,8 +77,8 @@ namespace iSeconds.Domain
 			for (int i = savedCompilations.Count - 1; i >= 0; i--) {
 				Compilation c = savedCompilations [i];
 
-				string begin = ISecondsUtils.DateToString(c.Begin);
-				string end = ISecondsUtils.DateToString(c.End);
+				string begin = ISecondsUtils.DateToString(c.Begin, false);
+				string end = ISecondsUtils.DateToString(c.End, false);
 
 				compilations.Add (new CompilationItemViewModel(c.Name, c.Description, c.Path, begin, end, c.ThumbnailPath));
 			}
