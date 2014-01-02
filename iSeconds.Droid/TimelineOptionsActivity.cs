@@ -149,7 +149,7 @@ namespace iSeconds.Droid
 		{
 			base.OnPrepareDialog(dialogType, dialog);
 
-			if (dialogType == ShowEditTimeline || dialogType == ShowAddTimeline)
+			if ((dialogType == ShowEditTimeline || dialogType == ShowAddTimeline) && editionModel != null)
 			{
 				if (editionModel.TimelineName.Length > 0)
 					dialog.SetTitle(Resource.String.timeline_options_dialog_edit_timeline);

@@ -18,7 +18,7 @@ namespace iSeconds.Domain
 
 		public static string DateToString(DateTime date)
 		{
-			return date.ToString ("d", CultureInfo.CurrentCulture);
+			return String.Format("{0:g}", date);
 		}
 	}
 }

@@ -15,13 +15,14 @@
         <ImageView
             android:id="@+id/compilationThumbnail"
             android:layout_width="96px"
-            android:layout_height="96px" />
+            android:layout_height="96px"
+            android:layout_marginRight="10dp" />
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/linearLayout1">
             <TextView
                 android:text="Medium Text"
@@ -29,8 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewTimelineName"
-                android:paddingLeft="8dip"
-                android:gravity="center_vertical"
                 android:textColor="@color/first_item_color" />
             <TextView
                 android:text="Date begin:"
@@ -38,8 +37,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewDateBegin"
-                android:paddingLeft="8dip"
-                android:gravity="center_vertical"
                 android:textColor="@color/first_item_color" />
             <TextView
                 android:text="Date end:"
@@ -47,8 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewDateEnd"
-                android:paddingLeft="8dip"
-                android:gravity="center_vertical"
                 android:textColor="@color/first_item_color" />
         </LinearLayout>
     </LinearLayout>

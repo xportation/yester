@@ -45,11 +45,11 @@ namespace iSeconds.Droid
 				TextView begin = view.FindViewById<TextView>(Resource.Id.textViewDateBegin);
 				TextViewUtil.ChangeForDefaultFont(begin, this, 14f);
 
-				begin.Text = GetString(Resource.String.compilation_item_date_begin) + compilationModel.BeginDate;
+				begin.Text = GetString(Resource.String.compilation_item_date_begin) + " " + compilationModel.BeginDate;
 
 				TextView end = view.FindViewById<TextView>(Resource.Id.textViewDateEnd);
 				TextViewUtil.ChangeForDefaultFont(end, this, 14f);
-				end.Text = GetString(Resource.String.compilation_item_date_begin) + compilationModel.EndDate;
+				end.Text = GetString(Resource.String.compilation_item_date_end) + " " + compilationModel.EndDate;
 
 				ImageView imageView = view.FindViewById<ImageView>(Resource.Id.compilationThumbnail);
 				if (compilationModel.ThumbnailPath != null && compilationModel.ThumbnailPath.Length > 0) {

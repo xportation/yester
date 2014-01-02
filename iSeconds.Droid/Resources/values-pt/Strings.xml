@@ -84,4 +84,7 @@
    <string name="tutorial_msg4">Gostariamos que este tutorial tenha sido útil, obrigado!! Por favor, sinta-se a vontade em contatar-nos :)</string>
    <string name="tutorial_done">Feito</string>
    <string name="tutorial_access_about">Este tutorial está disponível em \"Sobre\".</string>
+
+   <string name="compilation_item_date_begin">Início: </string>
+   <string name="compilation_item_date_end">Fim: </string>
 </resources>
