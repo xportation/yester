@@ -126,6 +126,7 @@ namespace iSeconds.Droid
 			AndroidMediaUtils.SaveVideoThumbnail (thumbnailPath, outputFilePath);
 		}
 
+
 		/// <summary>
 		/// ffmpeg binaries are copies from the assets to a folder in the OS where it lets us execute it.
 		/// This functions does all the tricks.
@@ -146,10 +147,6 @@ namespace iSeconds.Droid
 
 		void LoadBinaryAndChangePermissions (string basePath, string file)
 		{
-			var list = Assets.List ("");
-
-			var stream = Assets.Open (file);
-
 			// ver como tratar melhor esse bug do android
 			// o problema é que em versões antigas do android
 			// o mesmo se perde ao tratar assets maiores que 1mb
@@ -162,6 +159,14 @@ namespace iSeconds.Droid
 				filename = filename.Remove (filename.Length - 3);
 				filename += "so";
 			}
+
+			// otimizaçao... nao precisamos fazer todo o processo se o arquivo ja foi extraido
+			if (new Java.IO.File (filename).Exists ())
+				return;
+
+			var list = Assets.List ("");
+
+			var stream = Assets.Open (file);
 
 			using (var streamWriter = new StreamWriter (filename, false)) {
 				ReadWriteStream (stream, streamWriter.BaseStream);
