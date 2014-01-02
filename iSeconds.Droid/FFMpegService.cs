@@ -164,8 +164,6 @@ namespace iSeconds.Droid
 			if (new Java.IO.File (filename).Exists ())
 				return;
 
-			var list = Assets.List ("");
-
 			var stream = Assets.Open (file);
 
 			using (var streamWriter = new StreamWriter (filename, false)) {
