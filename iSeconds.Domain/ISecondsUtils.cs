@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace iSeconds.Domain
 {
@@ -13,6 +14,11 @@ namespace iSeconds.Domain
 			movieName = movieName.Replace(" ", "_");
 			movieName = movieName.Replace(":", "_");
 			return movieName;
+		}
+
+		public static string DateToString(DateTime date)
+		{
+			return date.ToString ("d", CultureInfo.CurrentCulture);
 		}
 	}
 }

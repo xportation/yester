@@ -92,6 +92,9 @@
    <string name="compilation_processing_message">Your compilation is now being processed. You will be notified when it has finished!</string>
    <string name="compilation_default_description">A compilation for timeline %1$s from %2$s to %3$s</string>
 
+   <string name="compilation_item_date_begin">Begin: </string>
+   <string name="compilation_item_date_end">End: </string>
+
    
 
 </resources>

@@ -72,10 +72,13 @@ namespace iSeconds.Domain
 		private void loadCompilations() 
 		{
 			IList<Compilation> savedCompilations = user.GetCompilations ();
-			foreach (Compilation c in savedCompilations) {
 
-				string begin = c.Begin.ToString ();
-				string end = c.End.ToString ();
+			// reverse iterating to show the last compilations first
+			for (int i = savedCompilations.Count - 1; i >= 0; i--) {
+				Compilation c = savedCompilations [i];
+
+				string begin = ISecondsUtils.DateToString(c.Begin);
+				string end = ISecondsUtils.DateToString(c.End);
 
 				compilations.Add (new CompilationItemViewModel(c.Name, c.Description, c.Path, begin, end, c.ThumbnailPath));
 			}

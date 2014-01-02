@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@drawable/roundrect_item_background"
+    android:padding="5dp">
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
@@ -27,6 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewTimelineName"
+                android:paddingLeft="8dip"
+                android:gravity="center_vertical"
                 android:textColor="@color/first_item_color" />
             <TextView
                 android:text="Date begin:"
@@ -34,6 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewDateBegin"
+                android:paddingLeft="8dip"
+                android:gravity="center_vertical"
                 android:textColor="@color/first_item_color" />
             <TextView
                 android:text="Date end:"
@@ -41,7 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewDateEnd"
-                android:layout_marginTop="6dp"
+                android:paddingLeft="8dip"
+                android:gravity="center_vertical"
                 android:textColor="@color/first_item_color" />
         </LinearLayout>
     </LinearLayout>
