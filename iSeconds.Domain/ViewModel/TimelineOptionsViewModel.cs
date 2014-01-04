@@ -96,15 +96,6 @@ namespace iSeconds.Domain
 				AddEntry(new OptionsEntry(i18n.Msg("Delete"), () => viewModel.TimelineDeleteRequest.Raise(new TimelineDeleteModel(viewModel, this.currentTimeline))));
 				AddEntry(new OptionsEntry(i18n.Msg("Cancel"), () => { /*nothing to do*/ }));
 			}
-
-			public string[] ListNames()
-			{
-				string[] names= new string[OptionsEntries.Count];
-				for (int i = 0; i < OptionsEntries.Count; i++)
-					names[i] = OptionsEntries[i].Name;
-
-				return names;
-			}
 		}
 
 		private InteractionRequest<TimelineOptionsList> timelineOptionsRequest = new InteractionRequest<TimelineOptionsList>();

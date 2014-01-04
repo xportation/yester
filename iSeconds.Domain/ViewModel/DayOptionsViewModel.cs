@@ -177,8 +177,6 @@ namespace iSeconds.Domain
 			}
 		}
 
-
-
 		public class VideoOptionsList : OptionsList
 		{
 			public VideoOptionsList(DayOptionsViewModel viewModel, int selectedVideo, I18nService i18n)

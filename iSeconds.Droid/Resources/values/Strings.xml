@@ -33,10 +33,6 @@
    <string name="settings_movies_size_medium">Medium (3 seconds)</string>
    <string name="settings_movies_size_large">Large (5 seconds)</string>
    <string name="settings_only_default_video_of_the_day">Use only the default video of the day on compilations</string>
-   <string name="share">Sharing</string>
-   <string name="share_start_period">Choose the begin:</string>
-   <string name="share_end_period">Choose the end:</string>
-   <string name="share_button">Share</string>
    <string name="takeVideo">Record today\'s video</string>
    <string name="video_upload_progress">Upload Progress</string>
    <string name="video_upload_total_progress">Total Progress:</string>
@@ -64,6 +60,7 @@
    <string name="raw_are_you_sure_this_operation_cannot_be_undone">Are you sure? This operation cannot be undone.</string>
    <string name="raw_set_as_default">Set as default</string>
    <string name="raw_delete_video">Delete video</string>
+   <string name="raw_share">Sharing</string>
 
    <string name="about_us">Broditech is a company devoted to the development of casual games and mobile apps. </string>
    <string name="about_iseconds">iSeconds is the best way to record your memories! You can do it in series of short movies.</string>
@@ -89,8 +86,10 @@
    <string name="compilation_description_label">Compilation Description</string>
    <string name="compilation_notification_title">Compilation is finished</string>
    <string name="compilation_notification_description">Your compilation is now available</string>
-   <string name="compilation_processing_message">Your compilation is now being processed. You will be notified when it has finished!</string>
+   <string name="raw_compilation_processing_message">Your compilation is now being processed. You will be notified when it has finished!</string>
    <string name="raw_compilation_default_description">A compilation for timeline {0} from {1} to {2}</string>
+   <string name="raw_delete_compilation">Delete compilation</string>
+   <string name="raw_edit_compilation">Edit compilation</string>
 
    <string name="compilation_item_date_begin">Begin: </string>
    <string name="compilation_item_date_end">End: </string>

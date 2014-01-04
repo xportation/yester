@@ -8,38 +8,22 @@ namespace iSeconds.Domain
 	{
 		private IMediaService mediaService = null;
 		private User user = null;
+		private IOptionsDialogService dialogService = null;
+		private I18nService i18n = null;
 
 		public class CompilationItemViewModel : ListItemViewModel
 		{
-			public string Name {
-				get;
-				set;
-			}
+			public string Name { get; set; }
 
-			public string Description {
-				get;
-				set;
-			}
+			public string Description { get; set; }
 
-			public string Path {
-				get;
-				set;
-			}
+			public string Path { get; set; }
 
-			public string BeginDate {
-				get;
-				set;
-			}
+			public string BeginDate { get; set; }
 
-			public string EndDate {
-				get;
-				set;
-			}
+			public string EndDate { get; set; }
 
-			public string ThumbnailPath {
-				get;
-				set;
-			}
+			public string ThumbnailPath { get; set; }
 
 			public CompilationItemViewModel(string name, string description, string path
 				, string beginDate, string endDate, string thumbnail)
@@ -62,10 +46,13 @@ namespace iSeconds.Domain
 			}
 		}
 
-		public CompilationViewModel(User user, IMediaService mediaService) 
+		public CompilationViewModel(User user, IMediaService mediaService, IOptionsDialogService dialogService, I18nService i18n) 
 		{
 			this.user = user;
 			this.mediaService = mediaService;
+			this.dialogService = dialogService;
+			this.i18n = i18n;
+
 			loadCompilations ();
 		}
 
@@ -97,26 +84,34 @@ namespace iSeconds.Domain
 			}
 		}
 
-		public ICommand ShowVideoOptionsCommand {
+		public class CompilationOptionsList : OptionsList
+		{
+			public CompilationOptionsList(CompilationViewModel viewModel, int selectedVideo, I18nService i18n)
+			{
+				AddEntry(new OptionsEntry(i18n.Msg("Share"), () => {}));
+				AddEntry(new OptionsEntry(i18n.Msg("Edit compilation"), () => {}));
+				AddEntry(new OptionsEntry(i18n.Msg("Delete compilation"), () => {
+					viewModel.DeleteCompilationCommand.Execute(selectedVideo);
+				}));
+
+				AddEntry(new OptionsEntry(i18n.Msg("Cancel"), () => {}));
+			}
+		}
+
+		public ICommand ShowCompilationOptionsCommand {
 			get {
 				return new Command ((object arg) => {
-					int pos = (int)arg;
-					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[pos];
-					// TODO: fazer as opçoes...
-					//					mediaService.PlayVideo(compilation.Path);
+					int selectedCompilation = (int)arg;
+					dialogService.ShowModal(new CompilationOptionsList(this, selectedCompilation, i18n));
 				});
 			}
 		}
 
-		public ICommand AddCompilationCommand {
+		public ICommand DeleteCompilationCommand {
 			get {
 				return new Command ((object arg) => {
-					string path = (string)arg;
-					Compilation compilation = new Compilation();
-					compilation.Path = path;
-					//compilation.Name = 
-					user.AddCompilation(compilation);
-					loadCompilations();
+					int selectedCompilation = (int)arg;
+					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[selectedCompilation];
 				});
 			}
 		}

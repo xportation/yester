@@ -33,10 +33,6 @@
    <string name="settings_movies_size_medium">Médio (3 segundos)</string>
    <string name="settings_movies_size_large">Grande (5 segundos)</string>
    <string name="settings_only_default_video_of_the_day">Usar apenas o vídeo default do dia ao criar uma compilação</string>
-   <string name="share">Compartilhar</string>
-   <string name="share_start_period">Escolha o começo:</string>
-   <string name="share_end_period">Escolha o fim:</string>
-   <string name="share_button">Compartilhar</string>
    <string name="takeVideo">Gravar no dia atual</string>
    <string name="video_upload_progress">Progresso do upload</string>
    <string name="video_upload_total_progress">Progresso Total:</string>
@@ -64,6 +60,7 @@
    <string name="raw_are_you_sure_this_operation_cannot_be_undone">Você tem certeza? Esta opção não pode ser desfeita.</string>
    <string name="raw_set_as_default">Definir como default</string>
    <string name="raw_delete_video">Deletar vídeo</string>
+   <string name="raw_share">Compartilhar</string>
 
    <string name="about_us">Broditech é uma empresa focada no desenvolvimento de jogos casuais e aplicações móveis.</string>
    <string name="about_iseconds">iSeconds é a melhor maneira de gravar suas memórias. Você pode fazer isso através de pequenos vídeos.</string>
@@ -89,8 +86,10 @@
 	<string name="compilation_description_label">Descrição da Compilação</string>
 	<string name="compilation_notification_title">Compilação finalizada</string>
 	<string name="compilation_notification_description">Sua compilação está disponível</string>
-	<string name="compilation_processing_message">Sua compilação está sendo processada, você será avisado quando ela estiver pronta.</string>
+	<string name="raw_compilation_processing_message">Sua compilação está sendo processada, você será avisado quando ela estiver pronta.</string>
 	<string name="raw_compilation_default_description">Compilação para a timeline {0} de {1} até {2}</string>
+	<string name="raw_delete_compilation">Deletar compilação</string>
+	<string name="raw_edit_compilation">Editar compilação</string>
 
    <string name="compilation_item_date_begin">Início: </string>
    <string name="compilation_item_date_end">Fim: </string>

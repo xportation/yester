@@ -38,7 +38,13 @@ namespace iSeconds.Droid
 			else if (identifier == "A compilation for timeline {0} from {1} to {2}")
 				return context.Resources.GetString(Resource.String.raw_compilation_default_description);
 			else if (identifier == "Your compilation is now being processed...")
-				return context.Resources.GetString(Resource.String.compilation_processing_message);
+				return context.Resources.GetString(Resource.String.raw_compilation_processing_message);
+			else if (identifier == "Delete compilation")
+				return context.Resources.GetString(Resource.String.raw_delete_compilation);
+			else if (identifier == "Share")
+				return context.Resources.GetString(Resource.String.raw_share);
+			else if (identifier == "Edit compilation")
+				return context.Resources.GetString(Resource.String.raw_edit_compilation);
 
 			return "*"+identifier+"*";
 		}

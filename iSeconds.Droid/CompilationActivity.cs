@@ -27,7 +27,8 @@ namespace iSeconds.Droid
 			configureActionBar(true, "");
 
 			ISecondsApplication app = (ISecondsApplication)this.Application;
-			viewModel = new CompilationViewModel (app.GetUserService ().CurrentUser, app.GetMediaService());
+			viewModel = new CompilationViewModel (app.GetUserService ().CurrentUser, app.GetMediaService(),
+				app.GetOptionsDialogService(), app.GetI18nService());
 
 			ListView list = this.FindViewById<ListView>(Resource.Id.compilationsList);
 			ISecondsListViewAdapter adapter = new ISecondsListViewAdapter (this, viewModel.Compilations);
@@ -60,10 +61,8 @@ namespace iSeconds.Droid
 			};
 
 			list.ItemClick += (sender, e) => viewModel.PlayVideoCommand.Execute(e.Position);
-			list.ItemLongClick += (sender, e) => viewModel.ShowVideoOptionsCommand.Execute (e.Position);
+			list.ItemLongClick += (sender, e) => viewModel.ShowCompilationOptionsCommand.Execute (e.Position);
 		}
-
-
 	}
 }
 
