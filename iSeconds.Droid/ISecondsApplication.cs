@@ -34,7 +34,7 @@ namespace iSeconds.Droid
 				userService.CreateUser ("user");
          
 			activityTracker = new ActivityTracker ();
-         mediaService = new MediaServiceAndroid (this.activityTracker, pathService.GetMediaPath(), userService.CurrentUser);         
+			mediaService = new MediaServiceAndroid (this.activityTracker, repository, pathService.GetMediaPath(), userService.CurrentUser);         
 
 			navigator = new INavigator ();
          navigator.RegisterNavigation ("day_options", new AndroidPresenter (this.activityTracker, typeof(DayOptionsActivity)));            
@@ -44,7 +44,6 @@ namespace iSeconds.Droid
 			navigator.RegisterNavigation ("about_view", new AndroidPresenter(this.activityTracker, typeof(AboutActivity)));
 			navigator.RegisterNavigation ("video_player", new AndroidPresenter(this.activityTracker, typeof(VideoPlayerActivity)));
 			navigator.RegisterNavigation ("compilations_view", new AndroidPresenter(this.activityTracker, typeof(CompilationActivity)));
-			navigator.RegisterNavigation ("compile_range_selector", new AndroidPresenter(this.activityTracker, typeof(CompileActivity)));
 			navigator.RegisterNavigation ("single_shot_video_player", new AndroidPresenter(this.activityTracker, typeof(SingleShotVideoPlayerActivity)));
 
 			optionsDialogService = new OptionDialogServiceAndroid (activityTracker);

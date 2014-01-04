@@ -76,7 +76,6 @@
     <Compile Include="FFMpegService.cs" />
     <Compile Include="CompilationActivity.cs" />
     <Compile Include="TimelineOptionsPopup.cs" />
-    <Compile Include="CompileActivity.cs" />
     <Compile Include="I18nServiceAndroid.cs" />
     <Compile Include="CompileFinishedNotificationReceiver.cs" />
     <Compile Include="AndroidMediaUtils.cs" />
@@ -169,7 +168,6 @@
     <AndroidResource Include="Resources\drawable\tutorial1.png" />
     <AndroidResource Include="Resources\drawable\tutorial2.png" />
     <AndroidResource Include="Resources\layout\TutorialView.axml" />
-    <AndroidResource Include="Resources\layout\CompileView.axml" />
     <AndroidResource Include="Resources\drawable\fling.png" />
     <AndroidResource Include="Resources\drawable\hold.png" />
     <AndroidResource Include="Resources\values-pt\Strings.xml" />
@@ -189,6 +187,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\rb_checked.png" />
     <AndroidResource Include="Resources\drawable-hdpi\rb_hover.png" />
     <AndroidResource Include="Resources\drawable-hdpi\rb_normal.png" />
+    <AndroidResource Include="Resources\layout\CompilationViewDescription.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

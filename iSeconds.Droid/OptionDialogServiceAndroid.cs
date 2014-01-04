@@ -77,6 +77,38 @@ namespace iSeconds.Droid
 
 			dialog.Show();
 		}
+
+		public void AskForCompilationNameAndDescription(string defaultName, string defaultDescription, 
+			Action<string, string> userConfirmedCallback, Action userCanceledCallback)
+		{
+			Activity activity = tracker.GetCurrentActivity();
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			View layout = activity.LayoutInflater.Inflate(Resource.Layout.CompilationViewDescription, null);
+			builder.SetView(layout);
+			builder.SetPositiveButton(Resource.String.ok, (sender, args) => {
+				if (userConfirmedCallback != null) {
+					EditText editName = layout.FindViewById<EditText>(Resource.Id.compilationNameEdit);
+					EditText editDescription = layout.FindViewById<EditText>(Resource.Id.compilationDescriptionEdit);
+					userConfirmedCallback.Invoke(editName.Text, editDescription.Text);
+				}
+			});
+
+			builder.SetNegativeButton(Resource.String.cancel, (sender, args) => {
+				if (userCanceledCallback != null)
+					userCanceledCallback.Invoke();
+			});
+
+			Dialog dialog = builder.Create();
+			dialog.ShowEvent += (sender, e) => {
+				EditText editName = dialog.FindViewById<EditText>(Resource.Id.compilationNameEdit);
+				editName.Text = defaultName;
+
+				EditText editDescription = dialog.FindViewById<EditText>(Resource.Id.compilationDescriptionEdit);
+				editDescription.Text = defaultDescription;
+			};
+
+			dialog.Show();
+		}
 	}
 }
 

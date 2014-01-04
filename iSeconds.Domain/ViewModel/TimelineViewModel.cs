@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Windows.Input;
 using System.Diagnostics;
 using System.Collections;
+using System.IO;
 
 namespace iSeconds.Domain
 {
@@ -16,15 +17,19 @@ namespace iSeconds.Domain
 		private IMediaService mediaService = null;
 		private INavigator navigator = null;
 		private IOptionsDialogService dialogService = null;
+		private I18nService i18n = null;
+		private IPathService pathService = null;
 
 		public TimelineViewModel(User user, IRepository repository, IMediaService mediaService, 
-			INavigator navigator, IOptionsDialogService dialogService)
+			INavigator navigator, IOptionsDialogService dialogService, I18nService i18n, IPathService pathService)
 		{
 			this.user = user;
 			this.repository = repository;
 			this.mediaService = mediaService;
 			this.navigator = navigator;
 			this.dialogService = dialogService;
+			this.i18n = i18n;
+			this.pathService = pathService;
 
 			setTimeline(user.CurrentTimeline);
 			CalendarMode = VisualizationMode.MONTH;
@@ -287,13 +292,39 @@ namespace iSeconds.Domain
 			get { return new Command((object arg) => { 
 					Tuple<DateTime, DateTime> rangeDelimiters = getRangeDelimiters();
 
-					Args args = new Args();
-					args.Put("ShareDate_Start", rangeDelimiters.Item1.ToBinary().ToString());
-					args.Put("ShareDate_End", rangeDelimiters.Item2.ToBinary().ToString());
-					args.Put("ShareDate_TimelineId", this.timeline.Id.ToString());
+					string defaultName = timeline.Name + " (" + ISecondsUtils.DateToString(rangeDelimiters.Item1, false) + 
+					                     " - " + ISecondsUtils.DateToString(rangeDelimiters.Item2, false) + ")";
+					string defaultDescription = string.Format(i18n.Msg("A compilation for timeline {0} from {1} to {2}"), timelineName, 
+						ISecondsUtils.DateToString(rangeDelimiters.Item1, false), ISecondsUtils.DateToString(rangeDelimiters.Item2, false));
 
-					navigator.NavigateTo("compile_range_selector", args); }); 
+					dialogService.AskForCompilationNameAndDescription(defaultName, defaultDescription, 
+						(string name, string description) => {
+							this.startCompilation(name, description, rangeDelimiters.Item1, rangeDelimiters.Item2);
+						}, null);
+				});
 			}
+		}
+
+		private void startCompilation(string name, string description, DateTime startDate, DateTime endDate)
+		{
+			string basePath = Path.Combine(pathService.GetCompilationPath (), ISecondsUtils.StringifyDate("compilation", DateTime.Now));
+			string compilationPath = basePath + ".mp4";
+			string thumbnailPath = basePath + ".png";
+
+			Compilation compilation = new Compilation ();
+			compilation.Name = name;
+			compilation.Description = description;
+			compilation.Begin = startDate;
+			compilation.End = endDate;
+			compilation.TimelineName = timeline.Name;
+			compilation.Path = compilationPath;
+			compilation.ThumbnailPath = thumbnailPath;
+			user.AddCompilation (compilation);
+
+			dialogService.ShowMessage(
+				i18n.Msg("Your compilation is now being processed..."), 
+				() => mediaService.ConcatMovies(compilationPath, startDate, endDate, timeline.Id, user.UsesOnlyDefaultVideo)
+			);
 		}
 
 		public ICommand CompilationsCommand {

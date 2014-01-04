@@ -59,7 +59,8 @@ namespace iSeconds.Droid
 
 			ISecondsApplication application = this.Application as ISecondsApplication;
 			viewModel = new TimelineViewModel(application.GetUserService().CurrentUser, application.GetRepository(), 
-				application.GetMediaService(), application.GetNavigator(), application.GetOptionsDialogService());
+				application.GetMediaService(), application.GetNavigator(), application.GetOptionsDialogService(),
+				application.GetI18nService(), application.GetPathService());
 
 			IPathService pathService = application.GetPathService();
 			fileObservadoro = new FileObservadoro(pathService.GetMediaPath(), this);

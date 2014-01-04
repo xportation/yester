@@ -10,6 +10,8 @@ using Android.Media;
 using Android.Provider;
 using File = System.IO.File;
 using Stream = System.IO.Stream;
+using Android.OS;
+using System.Collections.Generic;
 
 namespace iSeconds.Droid
 {
@@ -17,13 +19,15 @@ namespace iSeconds.Droid
 	{
 		private static readonly System.Object obj = new System.Object();
 		private ActivityTracker activityTracker = null;
+		private IRepository repository = null;
 		private string mediaPath;
 		private User user;
 		private int cameraFPS= 15;
 
-		public MediaServiceAndroid(ActivityTracker activityTracker, string mediaPath, User user)
+		public MediaServiceAndroid(ActivityTracker activityTracker, IRepository repository, string mediaPath, User user)
 		{
 			this.activityTracker = activityTracker;
+			this.repository = repository;
 			this.mediaPath = mediaPath;
 			this.user = user;
 
@@ -100,6 +104,32 @@ namespace iSeconds.Droid
 			AndroidMediaUtils.SaveVideoThumbnail (thumbnailPath, videoPath);
 		}
 
+		public void ConcatMovies(string compilationPath, DateTime startDate, DateTime endDate, int timelineId, bool onlyDefaultMovies)
+		{
+			Activity currentActivity = this.activityTracker.GetCurrentActivity();
+			Intent mServiceIntent = new Intent(currentActivity, typeof(FFMpegService));
 
+			// To use the ffmpeg service we simply create a intent object
+			// and populate it's Extra`s with some properties (parameters).
+			Bundle b = new Bundle();
+			// Our message contains the following properties.
+			// The ffmpeg command, here we will use the concat command (our service only implements this for now).
+			b.PutString ("ffmpeg.command", "concat");
+
+			// The output file.
+			b.PutString ("ffmpeg.concat.output", compilationPath);
+
+			// A list with the file paths (absolute) of each video to be concatenated.
+			IList<iSeconds.Domain.MediaInfo> videos = repository.GetMediaInfoByPeriod (startDate, endDate, timelineId);
+			IList<string> filesToConcat = new List<string> ();
+			foreach (iSeconds.Domain.MediaInfo mediaInfo in videos) {
+				filesToConcat.Add (mediaInfo.Path);
+			}
+			b.PutStringArrayList ("ffmpeg.concat.filelist", filesToConcat);
+
+			mServiceIntent.PutExtras(b);
+
+			currentActivity.StartService(mServiceIntent);
+		}
 	}
 }

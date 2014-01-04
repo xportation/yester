@@ -11,6 +11,9 @@ namespace iSeconds.Domain
 		void AskForConfirmation(string msg, Action userConfirmedCallback, Action userCanceledCallback);
 
 		void ShowTutorial(Action doneAction);
+
+		void AskForCompilationNameAndDescription(string defaultName, string defaultDescription, 
+			Action<string, string> userConfirmedCallback, Action userCanceledCallback);
 	}
 }
 

@@ -85,6 +85,13 @@
    <string name="tutorial_done">Feito</string>
    <string name="tutorial_access_about">Este tutorial está disponível em \"Sobre\".</string>
 
+	<string name="compilation_name_label">Nome da Compilação</string>
+	<string name="compilation_description_label">Descrição da Compilação</string>
+	<string name="compilation_notification_title">Compilação finalizada</string>
+	<string name="compilation_notification_description">Sua compilação está disponível</string>
+	<string name="compilation_processing_message">Sua compilação está sendo processada, você será avisado quando ela estiver pronta.</string>
+	<string name="raw_compilation_default_description">Compilação para a timeline {0} de {1} até {2}</string>
+
    <string name="compilation_item_date_begin">Início: </string>
    <string name="compilation_item_date_end">Fim: </string>
 </resources>

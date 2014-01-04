@@ -35,6 +35,10 @@ namespace iSeconds.Droid
 				return context.Resources.GetString(Resource.String.raw_set_as_default);
 			else if (identifier == "Delete video")
 				return context.Resources.GetString(Resource.String.raw_delete_video);
+			else if (identifier == "A compilation for timeline {0} from {1} to {2}")
+				return context.Resources.GetString(Resource.String.raw_compilation_default_description);
+			else if (identifier == "Your compilation is now being processed...")
+				return context.Resources.GetString(Resource.String.compilation_processing_message);
 
 			return "*"+identifier+"*";
 		}
