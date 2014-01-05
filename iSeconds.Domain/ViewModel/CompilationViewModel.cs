@@ -13,6 +13,8 @@ namespace iSeconds.Domain
 
 		public class CompilationItemViewModel : ListItemViewModel
 		{
+			public int Id { get; set; }
+
 			public string Name { get; set; }
 
 			public string Description { get; set; }
@@ -25,10 +27,11 @@ namespace iSeconds.Domain
 
 			public string ThumbnailPath { get; set; }
 
-			public CompilationItemViewModel(string name, string description, string path
+			public CompilationItemViewModel(int id, string name, string description, string path
 				, string beginDate, string endDate, string thumbnail)
 				: base("", null)
 			{
+				this.Id = id;
 				this.Name = name;
 				this.Description = description;
 				this.Path = path;
@@ -53,7 +56,7 @@ namespace iSeconds.Domain
 			this.dialogService = dialogService;
 			this.i18n = i18n;
 
-			loadCompilations ();
+			loadCompilations();
 		}
 
 		private void loadCompilations() 
@@ -61,16 +64,23 @@ namespace iSeconds.Domain
 			IList<Compilation> savedCompilations = user.GetCompilations ();
 
 			// reverse iterating to show the last compilations first
+			compilations.Clear();
 			for (int i = savedCompilations.Count - 1; i >= 0; i--) {
 				Compilation c = savedCompilations [i];
 
 				string begin = ISecondsUtils.DateToString(c.Begin, false);
 				string end = ISecondsUtils.DateToString(c.End, false);
 
-				compilations.Add (new CompilationItemViewModel(c.Name, c.Description, c.Path, begin, end, c.ThumbnailPath));
+				compilations.Add (new CompilationItemViewModel(c.Id, c.Name, c.Description, c.Path, begin, end, c.ThumbnailPath));
 			}
+		}
 
-			//OnInvalidate(this, null);
+		public event EventHandler<GenericEventArgs<CompilationViewModel>> OnCompilationViewModelChanged;
+
+		private void notifyChanges()
+		{
+			if (OnCompilationViewModelChanged != null)
+				OnCompilationViewModelChanged(this, new GenericEventArgs<CompilationViewModel>(this));
 		}
 
 		public ICommand PlayVideoCommand {
@@ -89,7 +99,9 @@ namespace iSeconds.Domain
 			public CompilationOptionsList(CompilationViewModel viewModel, int selectedVideo, I18nService i18n)
 			{
 				AddEntry(new OptionsEntry(i18n.Msg("Share"), () => {}));
-				AddEntry(new OptionsEntry(i18n.Msg("Edit compilation"), () => {}));
+				AddEntry(new OptionsEntry(i18n.Msg("Edit compilation"), () => {
+					viewModel.EditCompilationCommand.Execute(selectedVideo);
+				}));
 				AddEntry(new OptionsEntry(i18n.Msg("Delete compilation"), () => {
 					viewModel.DeleteCompilationCommand.Execute(selectedVideo);
 				}));
@@ -112,6 +124,30 @@ namespace iSeconds.Domain
 				return new Command ((object arg) => {
 					int selectedCompilation = (int)arg;
 					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[selectedCompilation];
+				});
+			}
+		}
+
+		public ICommand EditCompilationCommand {
+			get {
+				return new Command ((object arg) => {
+					int selectedCompilation = (int)arg;
+					CompilationItemViewModel compilationModel = (CompilationItemViewModel)compilations[selectedCompilation];
+					dialogService.AskForCompilationNameAndDescription(compilationModel.Name, compilationModel.Description,
+						(string name, string description) => {
+							Compilation compilation = user.GetCompilationById(compilationModel.Id);
+							compilation.Name = name;
+							compilation.Description = description;
+
+							//Updating cache
+							compilationModel.Name = name;
+							compilationModel.Description = description;
+
+							user.UpdateCompilation(compilation);
+
+							notifyChanges();
+						}, 
+						null);
 				});
 			}
 		}

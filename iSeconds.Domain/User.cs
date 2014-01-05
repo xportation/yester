@@ -143,13 +143,26 @@ namespace iSeconds.Domain
 
 		public IList<Compilation> GetCompilations ()
 		{
-			return repository.GetUserCompilations (this.Id);
+			return repository.GetUserCompilations(this.Id);
 		}
 
 		public void AddCompilation (Compilation compilation)
 		{
 			compilation.UserId = this.Id;
 			repository.SaveItem (compilation);
+		}
+
+		public void UpdateCompilation(Compilation compilation)
+		{
+			if (compilation.UserId != this.Id)
+				return;
+
+			repository.SaveItem(compilation);
+		}
+
+		public Compilation GetCompilationById(int id)
+		{
+			return repository.GetUserCompilation(this.Id, id);
 		}
 
 	   #region db

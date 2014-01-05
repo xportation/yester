@@ -70,6 +70,11 @@ namespace iSeconds.Droid
 		public override int Count {
 			get { return viewModel.Count; }
 		}
+
+		public void Invalidate()
+		{
+			NotifyDataSetChanged();
+		}
 	}
 }
 

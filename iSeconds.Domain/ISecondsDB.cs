@@ -33,7 +33,6 @@ namespace iSeconds.Domain
 		{
 			this.SaveItem (timeline);
 
-			// TODO: ver se isso ainda eh usado
 			if (OnSaveTimeline != null)
 				OnSaveTimeline (this, new GenericEventArgs<Timeline> (timeline));
 		}
@@ -42,7 +41,6 @@ namespace iSeconds.Domain
 		{
 			this.DeleteItem (timeline);
 
-			// TODO: ver se isso ainda eh usado
 			if (OnDeleteTimeline != null)
 				OnDeleteTimeline (this, new GenericEventArgs<Timeline> (timeline));
 		}
@@ -194,6 +192,15 @@ namespace iSeconds.Domain
 		public IList<Compilation> GetUserCompilations (int userId)
 		{
 			return (from i in Table<Compilation> () where i.UserId == userId select i).ToList ();
+		}
+
+		public Compilation GetUserCompilation(int userId, int compilationId)
+		{
+			lock (locker) {
+				Compilation compilation =
+					(from i in Table<Compilation> () where i.UserId == userId && i.Id == compilationId select i).FirstOrDefault();
+				return compilation;
+			}
 		}
 
 		public IList<T> GetItems<T> () where T : IModel, new()
