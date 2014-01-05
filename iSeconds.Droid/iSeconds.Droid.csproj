@@ -188,6 +188,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\rb_hover.png" />
     <AndroidResource Include="Resources\drawable-hdpi\rb_normal.png" />
     <AndroidResource Include="Resources\layout\CompilationViewDescription.axml" />
+    <AndroidResource Include="Resources\drawable\list_selector.xml" />
+    <AndroidResource Include="Resources\drawable\list_item_pressed.xml" />
+    <AndroidResource Include="Resources\drawable\list_item_selected.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

@@ -23,6 +23,8 @@
 	<color name="list_divider_color">#7f93b6</color>
 	<color name="first_item_color">#33415a</color>
 	<color name="second_item_color">#5a73a0</color>
+	<color name="list_item_selected_color">#883E3E60</color>
+	<color name="list_item_pressed_color">#883E3E60</color>
 
 	<color name="transparent">#00000000</color>    
 	<color name="white">#ffffff</color>
