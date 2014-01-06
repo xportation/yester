@@ -57,6 +57,11 @@ namespace iSeconds.Droid
 					Bitmap thumbnail = BitmapFactory.DecodeFile(compilationModel.ThumbnailPath);
 					imageView.SetImageBitmap(thumbnail);
 				}
+
+				TextView fileSize = view.FindViewById<TextView>(Resource.Id.textViewCompilationSize);
+				TextViewUtil.ChangeForDefaultFont(fileSize, this, 14f);
+				fileSize.Text= compilationModel.CompilationSize;
+
 				return view;
 			};
 

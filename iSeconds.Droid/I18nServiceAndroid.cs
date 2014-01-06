@@ -45,6 +45,8 @@ namespace iSeconds.Droid
 				return context.Resources.GetString(Resource.String.raw_share);
 			else if (identifier == "Edit compilation")
 				return context.Resources.GetString(Resource.String.raw_edit_compilation);
+			else if (identifier == "Share via:")
+				return context.Resources.GetString(Resource.String.raw_share_via);
 
 			return "*"+identifier+"*";
 		}

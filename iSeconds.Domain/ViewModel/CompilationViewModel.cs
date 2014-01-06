@@ -27,6 +27,12 @@ namespace iSeconds.Domain
 
 			public string ThumbnailPath { get; set; }
 
+			public string CompilationSize { 
+				get {
+					return ISecondsUtils.FileSizeFormated(this.Path);
+				} 
+			}
+
 			public CompilationItemViewModel(int id, string name, string description, string path
 				, string beginDate, string endDate, string thumbnail)
 				: base("", null)
@@ -98,7 +104,9 @@ namespace iSeconds.Domain
 		{
 			public CompilationOptionsList(CompilationViewModel viewModel, int selectedVideo, I18nService i18n)
 			{
-				AddEntry(new OptionsEntry(i18n.Msg("Share"), () => {}));
+				AddEntry(new OptionsEntry(i18n.Msg("Share"), () => {
+					viewModel.ShareCompilationCommand.Execute(selectedVideo);
+				}));
 				AddEntry(new OptionsEntry(i18n.Msg("Edit compilation"), () => {
 					viewModel.EditCompilationCommand.Execute(selectedVideo);
 				}));
@@ -148,6 +156,16 @@ namespace iSeconds.Domain
 							notifyChanges();
 						}, 
 						null);
+				});
+			}
+		}
+
+		public ICommand ShareCompilationCommand {
+			get {
+				return new Command ((object arg) => {
+					int selectedCompilation = (int)arg;
+					CompilationItemViewModel compilationModel = (CompilationItemViewModel)compilations[selectedCompilation];
+					mediaService.ShareVideo(compilationModel.Path, i18n.Msg("Share via:"));
 				});
 			}
 		}

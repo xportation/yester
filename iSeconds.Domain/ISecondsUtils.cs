@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.IO;
 
 namespace iSeconds.Domain
 {
@@ -22,6 +23,28 @@ namespace iSeconds.Domain
 				return String.Format("{0:g}", date);
 
 			return String.Format("{0:d}", date);
+		}
+
+		public static string FileSizeFormated(string filename)
+		{
+			long bytes = 0;
+			FileInfo fileInfo = new FileInfo(filename);
+			if (fileInfo.Exists)
+				bytes= fileInfo.Length;
+
+			const int scale = 1024;
+			string[] orders = new string[] {"GB", "MB", "KB", "Bytes"};
+			long max = (long)Math.Pow(scale, orders.Length-1);
+
+			foreach(string order in orders)
+			{
+				if( bytes > max )
+					return string.Format("{0:##.##} {1}", decimal.Divide( bytes, max ), order);
+
+				max /= scale;
+			}
+
+			return "0 Bytes";
 		}
 	}
 }

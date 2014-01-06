@@ -16,16 +16,32 @@
             android:id="@+id/videoThumbnail"
             android:layout_width="96px"
             android:layout_height="96px" />
-        <CheckedTextView
-            android:text="Video"
-            android:id="@+id/videoItem"
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:checkMark="@drawable/indicator_check_mark"
-            android:paddingLeft="6dip"
-            android:paddingRight="6dip"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center_vertical"
-            android:textColor="@color/first_item_color" />
+            android:id="@+id/linearLayout2">
+            <CheckedTextView
+                android:text="Video"
+                android:id="@+id/videoItem"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checkMark="@drawable/indicator_check_mark"
+                android:paddingLeft="6dip"
+                android:paddingRight="6dip"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_vertical"
+                android:textColor="@color/first_item_color" />
+            <TextView
+                android:text="File Size"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dip"
+                android:paddingRight="6dip"
+                android:id="@+id/textViewDayOptionItemSize" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

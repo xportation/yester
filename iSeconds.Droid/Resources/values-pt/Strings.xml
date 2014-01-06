@@ -90,6 +90,7 @@
 	<string name="raw_compilation_default_description">Compilação para a timeline {0} de {1} até {2}</string>
 	<string name="raw_delete_compilation">Deletar compilação</string>
 	<string name="raw_edit_compilation">Editar compilação</string>
+	<string name="raw_share_via">Compartilhar via:</string>
 
    <string name="compilation_item_date_begin">Início: </string>
    <string name="compilation_item_date_end">Fim: </string>

@@ -14,5 +14,7 @@ namespace iSeconds.Domain
 		void SaveVideoThumbnail(string thumbnailPath, string videoPath);
 
 		void ConcatMovies(string compilationPath, DateTime startDate, DateTime endDate, int timelineId, bool onlyDefaultMovies);
+
+		void ShareVideo(string filename, string dialogTitle);
 	}
 }

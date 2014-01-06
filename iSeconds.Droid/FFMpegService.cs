@@ -120,10 +120,10 @@ namespace iSeconds.Droid
 
 		void saveThumbnail (string outputFilePath)
 		{
-			string thumbnailPath = outputFilePath;
-			thumbnailPath = thumbnailPath.Remove (thumbnailPath.Length - 3);
-			thumbnailPath += "png";
-			AndroidMediaUtils.SaveVideoThumbnail (thumbnailPath, outputFilePath);
+			string extension = ".png";
+			string directory = Path.GetDirectoryName(outputFilePath);
+			string thumbnailPath = Path.GetFileNameWithoutExtension(outputFilePath);
+			AndroidMediaUtils.SaveVideoThumbnail(Path.Combine(directory, thumbnailPath + extension), outputFilePath);
 		}
 
 

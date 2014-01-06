@@ -12,6 +12,7 @@ using File = System.IO.File;
 using Stream = System.IO.Stream;
 using Android.OS;
 using System.Collections.Generic;
+using Android.Content.PM;
 
 namespace iSeconds.Droid
 {
@@ -30,23 +31,6 @@ namespace iSeconds.Droid
 			this.repository = repository;
 			this.mediaPath = mediaPath;
 			this.user = user;
-
-			//defineFPS();
-		}
-
-		public void defineFPS()
-		{
-			try
-			{
-				Android.Hardware.Camera camera = Android.Hardware.Camera.Open();
-				var parameters = camera.GetParameters();
-				cameraFPS = parameters.PreviewFrameRate;
-				camera.Release();
-			}
-			catch (Exception)
-			{
-				cameraFPS = 15;
-			}
 		}
 
 		public void TakeVideo(DateTime date, Action<string> resultAction)
@@ -130,6 +114,17 @@ namespace iSeconds.Droid
 			mServiceIntent.PutExtras(b);
 
 			currentActivity.StartService(mServiceIntent);
+		}
+
+		public void ShareVideo(string filename, string dialogTitle)
+		{
+			Activity currentActivity = this.activityTracker.GetCurrentActivity();
+
+			Intent intent = new Intent (Intent.ActionSend);
+			Java.IO.File filePath= new Java.IO.File(filename);
+			intent.SetType ("video/mp4");
+			intent.PutExtra(Intent.ExtraStream, Android.Net.Uri.FromFile(filePath));
+			currentActivity.StartActivity(Intent.CreateChooser(intent, dialogTitle));
 		}
 	}
 }

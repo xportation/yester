@@ -53,7 +53,7 @@ namespace iSeconds.Droid
             MediaInfo media = videos[position];
             view = activity.LayoutInflater.Inflate(Resource.Layout.VideoThumbnail, null);
             ImageView imageView = view.FindViewById<ImageView>(Resource.Id.videoPlayerThumbnail);
-            Bitmap thumbnail = BitmapFactory.DecodeFile(media.GetThumbnailPath());
+				Bitmap thumbnail = BitmapFactory.DecodeFile(media.GetThumbnailPath());
             imageView.SetImageBitmap(thumbnail);
 				setBackgroundColor(position, view);
             viewItems[position]= view;

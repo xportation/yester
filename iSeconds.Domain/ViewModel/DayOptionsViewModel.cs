@@ -140,7 +140,6 @@ namespace iSeconds.Domain
 						Init();
 						//OnPropertyChanged("VideoListChanged");
 					});
-
 				});
 			}
 		}

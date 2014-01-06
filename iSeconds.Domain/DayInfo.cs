@@ -51,6 +51,7 @@ namespace iSeconds.Domain
 
 			try {
 				File.Delete(url);
+				File.Delete(media.GetThumbnailPath());
 			} catch (Exception) {
 			}
 

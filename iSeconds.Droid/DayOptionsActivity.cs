@@ -51,6 +51,7 @@ namespace iSeconds.Droid
       public override View GetView (int position, View convertView, ViewGroup parent)
       {
          View view = convertView;
+			TextView fileSize = null;
 			CheckedTextView checkBox = null;
 			DayOptionsViewModel.VideoItem model = viewModel.Videos[position];
 
@@ -60,6 +61,9 @@ namespace iSeconds.Droid
 
 				checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
             TextViewUtil.ChangeForDefaultFont(checkBox, context, 20f);
+
+				fileSize = view.FindViewById<TextView>(Resource.Id.textViewDayOptionItemSize);
+				TextViewUtil.ChangeForDefaultFont(fileSize, context, 14f);
          }
 
 			checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
@@ -70,6 +74,9 @@ namespace iSeconds.Droid
 			ImageView imageView = view.FindViewById<ImageView> (Resource.Id.videoThumbnail);
 			Bitmap thumbnail = BitmapFactory.DecodeFile(model.Model.GetThumbnailPath());
 			imageView.SetImageBitmap(thumbnail);
+
+			fileSize = view.FindViewById<TextView>(Resource.Id.textViewDayOptionItemSize);
+			fileSize.Text = ISecondsUtils.FileSizeFormated(model.Model.Path);
 
          return view;
       }
