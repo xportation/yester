@@ -4,10 +4,11 @@ using System.Windows.Input;
 
 namespace iSeconds.Domain
 {
-	public class CompilationViewModel 
+	public class CompilationViewModel
 	{
 		private IMediaService mediaService = null;
 		private User user = null;
+
 		private IOptionsDialogService dialogService = null;
 		private I18nService i18n = null;
 
@@ -33,8 +34,13 @@ namespace iSeconds.Domain
 				} 
 			}
 
+			public Compilation Model {
+				get;
+				set;
+			}
+
 			public CompilationItemViewModel(int id, string name, string description, string path
-				, string beginDate, string endDate, string thumbnail)
+				, string beginDate, string endDate, string thumbnail, Compilation model)
 				: base("", null)
 			{
 				this.Id = id;
@@ -44,6 +50,7 @@ namespace iSeconds.Domain
 				this.BeginDate = beginDate;
 				this.EndDate = endDate;
 				this.ThumbnailPath = thumbnail;
+				this.Model = model;
 			}
 		}
 
@@ -77,9 +84,11 @@ namespace iSeconds.Domain
 				string begin = ISecondsUtils.DateToString(c.Begin, false);
 				string end = ISecondsUtils.DateToString(c.End, false);
 
-				compilations.Add (new CompilationItemViewModel(c.Id, c.Name, c.Description, c.Path, begin, end, c.ThumbnailPath));
+				compilations.Add (new CompilationItemViewModel(c.Id, c.Name, c.Description, c.Path, begin, end, c.ThumbnailPath, c));
 			}
+			notifyChanges();
 		}
+
 
 		public event EventHandler<GenericEventArgs<CompilationViewModel>> OnCompilationViewModelChanged;
 
@@ -100,38 +109,45 @@ namespace iSeconds.Domain
 			}
 		}
 
-		public class CompilationOptionsList : OptionsList
-		{
-			public CompilationOptionsList(CompilationViewModel viewModel, int selectedVideo, I18nService i18n)
-			{
-				AddEntry(new OptionsEntry(i18n.Msg("Share"), () => {
-					viewModel.ShareCompilationCommand.Execute(selectedVideo);
-				}));
-				AddEntry(new OptionsEntry(i18n.Msg("Edit compilation"), () => {
-					viewModel.EditCompilationCommand.Execute(selectedVideo);
-				}));
-				AddEntry(new OptionsEntry(i18n.Msg("Delete compilation"), () => {
-					viewModel.DeleteCompilationCommand.Execute(selectedVideo);
-				}));
 
-				AddEntry(new OptionsEntry(i18n.Msg("Cancel"), () => {}));
+		public ICommand DeleteVideoCommand {
+			get {
+				return new Command ((object arg) => {
+					int pos = (int)arg;
+					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[pos];
+
+					string msg = i18n.Msg("Are you sure? This operation cannot be undone.");
+					dialogService.AskForConfirmation(msg, () => {
+						user.DeleteCompilation(compilation.Model);
+						loadCompilations();
+
+					}
+						, () => {} // cancel callback
+					);
+
+				});
+
 			}
 		}
 
 		public ICommand ShowCompilationOptionsCommand {
 			get {
 				return new Command ((object arg) => {
-					int selectedCompilation = (int)arg;
-					dialogService.ShowModal(new CompilationOptionsList(this, selectedCompilation, i18n));
-				});
-			}
-		}
+					int pos = (int)arg;
+					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[pos];
 
-		public ICommand DeleteCompilationCommand {
-			get {
-				return new Command ((object arg) => {
-					int selectedCompilation = (int)arg;
-					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[selectedCompilation];
+					OptionsList options = new OptionsList();
+					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Delete"), () => {
+						DeleteVideoCommand.Execute(arg);
+					}));
+					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Share"), () => {
+						ShareCompilationCommand.Execute(arg);
+					}));
+					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Edit compilation"), () => {
+						EditCompilationCommand.Execute(arg);
+					}));
+					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Cancel"), () => {}));
+					dialogService.ShowModal(options);
 				});
 			}
 		}
