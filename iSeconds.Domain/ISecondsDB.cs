@@ -194,6 +194,11 @@ namespace iSeconds.Domain
 			return (from i in Table<Compilation> () where i.UserId == userId select i).ToList ();
 		}
 
+		public void DeleteCompilation (Compilation compilation)
+		{
+			this.DeleteItem (compilation);
+		}
+
 		public Compilation GetUserCompilation(int userId, int compilationId)
 		{
 			lock (locker) {
@@ -229,7 +234,7 @@ namespace iSeconds.Domain
 				}
 			}
 		}
-
+		
 		public int DeleteItem<T> (T item) where T : IModel
 		{
 			lock (locker) {
@@ -245,6 +250,7 @@ namespace iSeconds.Domain
 			this.DeleteAll<Timeline> ();
 			this.DeleteAll<DayInfo> ();
 			this.DeleteAll<MediaInfo> ();
+			this.DeleteAll<Compilation> ();
 
 #endif
 		}

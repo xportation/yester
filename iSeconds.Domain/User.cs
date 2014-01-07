@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using SQLite;
+using System.IO;
+using System.Diagnostics;
 
 namespace iSeconds.Domain
 {
@@ -150,6 +152,19 @@ namespace iSeconds.Domain
 		{
 			compilation.UserId = this.Id;
 			repository.SaveItem (compilation);
+		}
+
+		public void DeleteCompilation (Compilation compilation)
+		{
+			Debug.Assert (File.Exists(compilation.Path));
+			File.Delete(compilation.Path);
+			Debug.Assert (!File.Exists(compilation.Path));
+
+			Debug.Assert (File.Exists(compilation.ThumbnailPath));
+			File.Delete(compilation.ThumbnailPath);
+			Debug.Assert (!File.Exists(compilation.ThumbnailPath));
+
+			repository.DeleteCompilation (compilation);
 		}
 
 		public void UpdateCompilation(Compilation compilation)

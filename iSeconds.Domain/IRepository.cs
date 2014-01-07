@@ -35,6 +35,10 @@ namespace iSeconds.Domain
 		IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId);
 
 		IList<Compilation> GetUserCompilations (int userId);
+
+		void DeleteCompilation (Compilation compilation);
+
 		Compilation GetUserCompilation(int userId, int compilationId);
+
 	}
 }
