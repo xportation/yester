@@ -94,4 +94,26 @@
 
    <string name="compilation_item_date_begin">Início: </string>
    <string name="compilation_item_date_end">Fim: </string>
+
+   <string name="raw_january">janeiro</string>
+   <string name="raw_february">fevereiro</string>
+   <string name="raw_marc">março</string>
+   <string name="raw_april">abril</string>
+   <string name="raw_may">maio</string>
+   <string name="raw_june">junho</string>
+   <string name="raw_july">julho</string>
+   <string name="raw_august">agosto</string>
+   <string name="raw_september">setembro</string>
+   <string name="raw_october">outubro</string>
+   <string name="raw_november">novembro</string>
+   <string name="raw_december">dezembro</string>
+
+   <string name="raw_sunday">domingo</string>
+   <string name="raw_monday">segunda</string>
+   <string name="raw_tuesday">terça</string>
+   <string name="raw_wednesday">quarta</string>
+   <string name="raw_thursday">quinta</string>
+   <string name="raw_friday">sexta</string>
+   <string name="raw_saturday">sábado</string>
+
 </resources>
