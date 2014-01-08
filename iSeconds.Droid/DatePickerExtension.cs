@@ -7,7 +7,7 @@ namespace iSeconds.Droid
    {
       public static DatePicker SetDateTime(this DatePicker value, DateTime dateTime)
       {
-         value.UpdateDate(dateTime.Year, dateTime.Month, dateTime.Day);
+			value.UpdateDate(dateTime.Year, dateTime.Month-1, dateTime.Day);
          return value;
       }
    }

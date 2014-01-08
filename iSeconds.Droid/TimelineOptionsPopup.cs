@@ -16,7 +16,7 @@ namespace iSeconds.Droid
 			moreContentView.Measure(Android.Views.View.MeasureSpec.MakeMeasureSpec (0, MeasureSpecMode.Unspecified), 
 				Android.Views.View.MeasureSpec.MakeMeasureSpec (0, MeasureSpecMode.Unspecified));
 			PopupWindow popupWindow = new PopupWindow(activity);
-			popupWindow.SetBackgroundDrawable(new ColorDrawable(activity.Resources.GetColor(Resource.Color.white))); // acaba sendo a cor que da a impressao de bordas
+			popupWindow.SetBackgroundDrawable(new ColorDrawable(activity.Resources.GetColor(Resource.Color.activity_background)));
 			popupWindow.ContentView = moreContentView;
 			// xunxo para pegar o ImageView do overflow adicionado como action pelo LegacyBar
 			var actionBar = activity.FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);

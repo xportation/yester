@@ -8,33 +8,45 @@
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:text="@string/overflow_menu_range_selector" />
+        android:background="@drawable/roundrect_item_background"
+        android:text="@string/overflow_menu_range_selector"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp" />
     <Button
         android:id="@+id/main_more_content_timeline_options"
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
+        android:background="@drawable/roundrect_item_background"
+        android:layout_margin="1dp"
         android:text="@string/overflow_menu_timelines" />
     <Button
         android:id="@+id/main_more_content_compilations"
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
+        android:background="@drawable/roundrect_item_background"
+        android:layout_margin="1dp"
         android:text="@string/overflow_menu_compilations" />
     <Button
         android:id="@+id/main_more_content_settings"
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
+        android:background="@drawable/roundrect_item_background"
+        android:layout_margin="1dp"
         android:text="@string/overflow_menu_settings" />
     <Button
         android:id="@+id/main_more_content_about"
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/overflow_menu_about" />
+        android:background="@drawable/roundrect_item_background"
+        android:text="@string/overflow_menu_about"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="2dp" />
 </LinearLayout>

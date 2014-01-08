@@ -47,6 +47,44 @@ namespace iSeconds.Droid
 				return context.Resources.GetString(Resource.String.raw_edit_compilation);
 			else if (identifier == "Share via:")
 				return context.Resources.GetString(Resource.String.raw_share_via);
+			else if (identifier == "Sunday")
+				return context.Resources.GetString(Resource.String.raw_sunday);
+			else if (identifier == "Monday")
+				return context.Resources.GetString(Resource.String.raw_monday);
+			else if (identifier == "Tuesday")
+				return context.Resources.GetString(Resource.String.raw_tuesday);
+			else if (identifier == "Wednesday")
+				return context.Resources.GetString(Resource.String.raw_wednesday);
+			else if (identifier == "Thursday")
+				return context.Resources.GetString(Resource.String.raw_thursday);
+			else if (identifier == "Friday")
+				return context.Resources.GetString(Resource.String.raw_friday);
+			else if (identifier == "Saturday")
+				return context.Resources.GetString(Resource.String.raw_saturday);
+			else if (identifier == "January")
+				return context.Resources.GetString(Resource.String.raw_january);
+			else if (identifier == "February")
+				return context.Resources.GetString(Resource.String.raw_february);
+			else if (identifier == "March")
+				return context.Resources.GetString(Resource.String.raw_march);
+			else if (identifier == "April")
+				return context.Resources.GetString(Resource.String.raw_april);
+			else if (identifier == "May")
+				return context.Resources.GetString(Resource.String.raw_may);
+			else if (identifier == "June")
+				return context.Resources.GetString(Resource.String.raw_june);
+			else if (identifier == "July")
+				return context.Resources.GetString(Resource.String.raw_july);
+			else if (identifier == "August")
+				return context.Resources.GetString(Resource.String.raw_august);
+			else if (identifier == "September")
+				return context.Resources.GetString(Resource.String.raw_september);
+			else if (identifier == "October")
+				return context.Resources.GetString(Resource.String.raw_october);
+			else if (identifier == "November")
+				return context.Resources.GetString(Resource.String.raw_november);
+			else if (identifier == "December")
+				return context.Resources.GetString(Resource.String.raw_december);
 
 			return "*"+identifier+"*";
 		}

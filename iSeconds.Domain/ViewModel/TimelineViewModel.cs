@@ -66,7 +66,7 @@ namespace iSeconds.Domain
 					CurrentMonthTitle = this.prepareCurrentMonthTitle(value.Month, value.Year);
 				}
 
-				CalendarMonth calendarMonth = new CalendarMonth(true, value);
+				CalendarMonth calendarMonth = new CalendarMonth(true, value, i18n);
 
 				List<DayViewModel> viewModels = new List<DayViewModel>();
 
@@ -97,7 +97,32 @@ namespace iSeconds.Domain
 
 		private string prepareCurrentMonthTitle(int month, int year)
 		{
-			string strMonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month);
+			string strMonthName = string.Empty;
+			if (month == 1)
+				strMonthName = i18n.Msg("January");
+			else if (month == 2)
+				strMonthName = i18n.Msg("February");
+			else if (month == 3)
+				strMonthName = i18n.Msg("March");
+			else if (month == 4)
+				strMonthName = i18n.Msg("April");
+			else if (month == 5)
+				strMonthName = i18n.Msg("May");
+			else if (month == 6)
+				strMonthName = i18n.Msg("June");
+			else if (month == 7)
+				strMonthName = i18n.Msg("July");
+			else if (month == 8)
+				strMonthName = i18n.Msg("August");
+			else if (month == 9)
+				strMonthName = i18n.Msg("September");
+			else if (month == 10)
+				strMonthName = i18n.Msg("October");
+			else if (month == 11)
+				strMonthName = i18n.Msg("November");
+			else if (month == 12)
+				strMonthName = i18n.Msg("December");
+
 			return strMonthName + ", " + year.ToString();
 		}
 

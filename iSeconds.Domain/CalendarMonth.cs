@@ -26,10 +26,23 @@ namespace iSeconds.Domain
 
       private List<Day> currentDays= new List<Day>();
 
-      public CalendarMonth(bool usingFixedRows, DateTime currentDate)
+		private I18nService i18n = null;
+		private Dictionary<DayOfWeek, string> dayOfWeekNames = null;
+
+		public CalendarMonth(bool usingFixedRows, DateTime currentDate, I18nService i18n)
       {
          this.currentDate = currentDate;
          this.usingFixedRows = usingFixedRows;
+			this.i18n = i18n;
+
+			dayOfWeekNames = new Dictionary<DayOfWeek, string>();
+			dayOfWeekNames.Add(DayOfWeek.Sunday, i18n.Msg("Sunday"));
+			dayOfWeekNames.Add(DayOfWeek.Monday, i18n.Msg("Monday"));
+			dayOfWeekNames.Add(DayOfWeek.Tuesday, i18n.Msg("Tuesday"));
+			dayOfWeekNames.Add(DayOfWeek.Wednesday, i18n.Msg("Wednesday"));
+			dayOfWeekNames.Add(DayOfWeek.Thursday, i18n.Msg("Thursday"));
+			dayOfWeekNames.Add(DayOfWeek.Friday, i18n.Msg("Friday"));
+			dayOfWeekNames.Add(DayOfWeek.Saturday, i18n.Msg("Saturday"));
       }
 
       public DateTime CurrentDate
@@ -41,6 +54,16 @@ namespace iSeconds.Domain
          }
       }
       
+		private string getDayName(DayOfWeek dayOfWeek)
+		{
+			return dayOfWeekNames[dayOfWeek];
+		}
+
+		private string getShortestDayName(DayOfWeek dayOfWeek)
+		{
+			return dayOfWeekNames[dayOfWeek].Substring(0,1).ToUpper();
+		}
+
       public List<Day> GetViewedDays()
       {
          if (currentDays.Count > 0)
@@ -70,8 +93,8 @@ namespace iSeconds.Domain
                {
                   number = startDate.Day, 
                   inCurrentMonth= startDate.Month == currentDate.Month,
-                  dayName = DateTimeFormatInfo.CurrentInfo.GetDayName(startDate.DayOfWeek),
-                  shortestDayName = DateTimeFormatInfo.CurrentInfo.GetShortestDayName(startDate.DayOfWeek),
+						dayName = getDayName(startDate.DayOfWeek),
+						shortestDayName = getShortestDayName(startDate.DayOfWeek),
                   isWeekend = startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday,
                   isToday = startDate.Date == DateTime.Now.Date,
                   day = startDate
