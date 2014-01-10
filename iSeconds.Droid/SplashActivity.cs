@@ -58,6 +58,16 @@ namespace iSeconds.Droid
 				return true;
 			else if (name.Contains("ronald.paloschi@gmail.com"))
 				return true;
+			else if (name.Contains("84040101"))
+				return true;
+			else if (name.Contains("99232872"))
+				return true;
+			else if (name.Contains("99117797"))
+				return true;
+			else if (name.Contains("96362222"))
+				return true;
+			else if (name.Contains("88421366"))
+				return true;
 
 			return false;
 		}
