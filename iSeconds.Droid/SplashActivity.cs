@@ -58,19 +58,31 @@ namespace iSeconds.Droid
 				return true;
 			else if (name.Contains("ronald.paloschi@gmail.com"))
 				return true;
-			else if (name.Contains("84040101"))
+			else if (name.Contains("84090101"))
 				return true;
-			else if (name.Contains("99232872"))
+			else if (name.Contains("aline@alinefranca.com.br"))
 				return true;
-			else if (name.Contains("99117797"))
+			else if (name.Contains("leo.nardi.borba@gmail.com"))
 				return true;
 			else if (name.Contains("96362222"))
 				return true;
-			else if (name.Contains("88421366"))
+			else if (name.Contains("maigsilva@hotmail.com"))
 				return true;
 			else if (name.Contains("luciana.oan@gmail.com"))
 				return true;
 			else if (name.Contains("gabidepaula1@gmail.com"))
+				return true;
+			else if (name.Contains("yoshidanielcwb@gmail.com"))
+				return true;
+			else if (name.Contains("c.felipe.araujo@gmail.com"))
+				return true;
+			else if (name.Contains("cris.siegel@hotmail.com"))
+				return true;
+			else if (name.Contains("turatti23@gmail.com"))
+				return true;
+			else if (name.Contains("rgoulart@live.com"))
+				return true;
+			else if (name.Contains("99738925"))
 				return true;
 
 			return false;
