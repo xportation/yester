@@ -20,6 +20,7 @@
     <MandroidI18n />
     <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AndroidStoreUncompressedFileExtensions>.so</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -245,6 +246,6 @@
     <AndroidAsset Include="Assets\libavutil-52.so" />
     <AndroidAsset Include="Assets\libswresample-0.so" />
     <AndroidAsset Include="Assets\libswscale-2.so" />
-    <AndroidAsset Include="Assets\libavcodec-55.mp3" />
+    <AndroidAsset Include="Assets\libavcodec-55.so" />
   </ItemGroup>
 </Project>

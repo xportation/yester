@@ -63,6 +63,9 @@ namespace iSeconds.Domain
 
 		   if (user.GetTimelineCount() == 0)
 				user.CreateTimeline(i18n.Msg("Default Timeline"), i18n.Msg("Default Timeline"));
+
+			var newCurrentTimeline= this.TimelineAt(0);
+			this.SetCurrentTimeline(newCurrentTimeline);
 	   }
 
 		public void SetCurrentTimeline(Timeline timeline)

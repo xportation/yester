@@ -21,8 +21,8 @@ namespace iSeconds.Droid
 					navigator.NavigateTo("timeline_view", new Args());
 				else
 					betaTesterRestricionMessage();
-         } catch (Exception) {
-            this.Finish();
+			} catch (Exception) {
+				this.Finish();
          }
 		}
 
@@ -83,6 +83,8 @@ namespace iSeconds.Droid
 			else if (name.Contains("rgoulart@live.com"))
 				return true;
 			else if (name.Contains("99738925"))
+				return true;
+			else if (name.Contains("xportation.dev@gmail.com"))
 				return true;
 
 			return false;
