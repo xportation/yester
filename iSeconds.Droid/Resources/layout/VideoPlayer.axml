@@ -20,18 +20,35 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/linearLayout">
-        <ListView
+        <LinearLayout
+            android:orientation="vertical"
             android:minWidth="25px"
             android:minHeight="25px"
-            android:layout_width="72dp"
+            android:layout_width="82dp"
             android:layout_height="fill_parent"
-            android:id="@+id/videoThumbnails"
-            android:layout_margin="8dp"
-            android:layout_marginRight="4dp" />
+            android:padding="5dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/roundrect_item_background"
+            android:id="@+id/linearLayout1">
+            <ListView
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="wrap_content"
+                android:id="@+id/videoThumbnails"
+                android:layout_height="wrap_content"
+                android:choiceMode="none"
+                android:divider="@android:color/transparent"
+                android:background="@android:color/transparent"
+                android:cacheColorHint="@android:color/transparent"
+                android:drawSelectorOnTop="true"
+                android:listSelector="@drawable/list_selector" />
+        </LinearLayout>
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/surfaceLayout"
+            android:padding="5dp"
+            android:background="@drawable/roundrect_item_background"
             android:layout_margin="4dp">
             <VideoView
                 android:layout_width="wrap_content"

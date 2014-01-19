@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using iSeconds.Domain.Framework;
 
 namespace iSeconds.Domain
 {
@@ -11,6 +12,8 @@ namespace iSeconds.Domain
 
 		private IOptionsDialogService dialogService = null;
 		private I18nService i18n = null;
+
+		private INavigator navigator = null;
 
 		public class CompilationItemViewModel : ListItemViewModel
 		{
@@ -62,12 +65,14 @@ namespace iSeconds.Domain
 			}
 		}
 
-		public CompilationViewModel(User user, IMediaService mediaService, IOptionsDialogService dialogService, I18nService i18n) 
+		public CompilationViewModel(User user, IMediaService mediaService, IOptionsDialogService dialogService, 
+			INavigator navigator, I18nService i18n) 
 		{
 			this.user = user;
 			this.mediaService = mediaService;
 			this.dialogService = dialogService;
 			this.i18n = i18n;
+			this.navigator = navigator;
 
 			loadCompilations();
 		}
@@ -103,7 +108,11 @@ namespace iSeconds.Domain
 				return new Command ((object arg) => {
 					int pos = (int)arg;
 					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[pos];
-					mediaService.PlayVideo(compilation.Path);
+
+					Args args = new Args();
+					args.Put("FileName", compilation.Path);
+					args.Put("UsesController", "true");
+					navigator.NavigateTo("single_shot_video_player", args);
 				});
 
 			}

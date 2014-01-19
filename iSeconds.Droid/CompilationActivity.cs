@@ -28,7 +28,7 @@ namespace iSeconds.Droid
 
 			ISecondsApplication app = (ISecondsApplication)this.Application;
 			viewModel = new CompilationViewModel (app.GetUserService ().CurrentUser, app.GetMediaService(),
-				app.GetOptionsDialogService(), app.GetI18nService());
+				app.GetOptionsDialogService(), app.GetNavigator(), app.GetI18nService());
 
 			ListView list = this.FindViewById<ListView>(Resource.Id.compilationsList);
 			ISecondsListViewAdapter adapter = new ISecondsListViewAdapter (this, viewModel.Compilations);

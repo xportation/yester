@@ -15,7 +15,9 @@
         android:background="@color/actionbar_bottom_line_color" />
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@drawable/roundrect_item_background"
         android:id="@+id/surfaceLayout"
         android:layout_margin="4dp">
         <VideoView
