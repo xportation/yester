@@ -1,0 +1,61 @@
+/*
+Syntax error: Undefined mixin 'font-size'.
+        on line 3 of _home.sass, in `font-size'
+        from line 3 of _home.sass
+
+1: 
+2: .subsec
+3:     +font-size(35)
+4: 
+5: h1
+6:     margin-top: 40px
+7:     margin-bottom: 40px
+8:     text-align: center
+
+Backtrace:
+_home.sass:3:in `font-size'
+_home.sass:3
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:253:in `visit_mixin'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:37:in `visit'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:100:in `visit'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:53:in `map'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:320:in `visit_rule'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:37:in `visit'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:100:in `visit'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:53:in `map'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:128:in `visit_root'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:37:in `visit'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:100:in `visit'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:7:in `visit'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/root_node.rb:20:in `render'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/engine.rb:315:in `_render'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/engine.rb:262:in `render'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin/compiler.rb:362:in `update_stylesheet'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin/compiler.rb:201:in `each'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin.rb:81:in `update_stylesheets'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/exec.rb:443:in `watch_or_update'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/exec.rb:326:in `process_result'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/exec.rb:41:in `parse'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/exec.rb:21:in `parse!'
+C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/bin/sass:13:in `<top (required)>'
+C:/Program Files (x86)/ruby-1.9.2/bin/sass:19:in `load'
+C:/Program Files (x86)/ruby-1.9.2/bin/sass:19:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'font-size'.\A         on line 3 of _home.sass, in `font-size'\A         from line 3 of _home.sass\A \A 1: \A 2: .subsec\A 3:     +font-size(35)\A 4: \A 5: h1\A 6:     margin-top: 40px\A 7:     margin-bottom: 40px\A 8:     text-align: center"; }
