@@ -18,7 +18,7 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <MandroidI18n />
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AndroidStoreUncompressedFileExtensions>.so</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
@@ -83,6 +83,8 @@
     <Compile Include="AndroidMediaUtils.cs" />
     <Compile Include="SingleShotVideoPlayerActivity.cs" />
     <Compile Include="DatePickerExtension.cs" />
+    <Compile Include="RangeSelectionActivity.cs" />
+    <Compile Include="BaseTimelineActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

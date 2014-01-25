@@ -9,6 +9,7 @@ using iSeconds.Domain;
 using System.ComponentModel;
 using Android.Graphics.Drawables;
 using LegacyBar.Library.BarActions;
+using iSeconds.Domain.Framework;
 
 namespace iSeconds.Droid
 {
@@ -35,10 +36,9 @@ namespace iSeconds.Droid
 	}
 
    [Activity (Label = "TimelineActivity")]
-	public class TimelineActivity : ISecondsActivity, FileObserverNotify
+	public class TimelineActivity : BaseTimelineActivity, FileObserverNotify
 	{
 		private CalendarMonthView monthView;
-		private TimelineViewModel viewModel;
 
 		private const string CurrentDateState= "currenteDateState";
 		private const string FirstDateSelected= "firstDateSelected";
@@ -54,23 +54,12 @@ namespace iSeconds.Droid
 			base.OnCreate (bundle);
 			this.DisableBackButtonNavigation= true;
 
-			this.RequestWindowFeature(WindowFeatures.NoTitle);
-			this.SetContentView(Resource.Layout.TimelineView);
-
 			ISecondsApplication application = this.Application as ISecondsApplication;
-			viewModel = new TimelineViewModel(application.GetUserService().CurrentUser, application.GetRepository(), 
-				application.GetMediaService(), application.GetNavigator(), application.GetOptionsDialogService(),
-				application.GetI18nService(), application.GetPathService());
-
 			IPathService pathService = application.GetPathService();
 			fileObservadoro = new FileObservadoro(pathService.GetMediaPath(), this);
 			fileObservadoro.StartWatching();
 
 			loadSavedState(bundle);
-
-			configureActionBar(false, "");
-			addActionBarItems(false);
-			setupCalendar();
 
 			viewModel.ShowTutorialCommand.Execute(null);
 		}
@@ -123,26 +112,26 @@ namespace iSeconds.Droid
 			}
 		}
 
-		private void addActionBarItems(bool isPlayModeEnabled)
+		protected override bool showHomeButton ()
+		{
+			return false;
+		}
+
+		protected override string getActivityTitle ()
+		{
+			return this.viewModel.TimelineName;
+		}
+
+		protected override void addActionBarItems()
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			actionBar.RemoveAllActions();
 
-			if (isPlayModeEnabled) {
-				var playAction = new ActionLegacyBarAction(this, () => viewModel.PlaySelectionCommand.Execute(null), Resource.Drawable.ic_play);
-				playAction.ActionType = ActionType.Always;
-				actionBar.AddAction(playAction);
-				var compileAction = new ActionLegacyBarAction(this, () => viewModel.CompileCommand.Execute(null), Resource.Drawable.ic_compile);
-				compileAction.ActionType = ActionType.Always;
-				actionBar.AddAction(compileAction);
-			}
-
-			var takeVideoAction = new ActionLegacyBarAction(this, () => viewModel.TakeVideoCommand.Execute(null), Resource.Drawable.ic_camera);
+			var takeVideoAction = new ActionLegacyBarAction (this, () => viewModel.TakeVideoCommand.Execute (null), Resource.Drawable.ic_camera);
 			takeVideoAction.ActionType = ActionType.Always;
-			actionBar.AddAction(takeVideoAction);			
-			var menuAction = new ActionLegacyBarAction(this, () => showPopup(), Resource.Drawable.ic_menu);
+			actionBar.AddAction (takeVideoAction);			
+			var menuAction = new ActionLegacyBarAction (this, () => showPopup (), Resource.Drawable.ic_menu);
 			menuAction.ActionType = ActionType.Always;
-			actionBar.AddAction(menuAction);
+			actionBar.AddAction (menuAction);
 		}
 
 		private void setProgressVisibility(bool isVisible)
@@ -153,50 +142,6 @@ namespace iSeconds.Droid
 				actionBar.ProgressBarVisibility = ViewStates.Visible;
 			else
 				actionBar.ProgressBarVisibility = ViewStates.Gone;
-		}
-
-		private void setupCalendar()
-		{
-			setActionBarTitle();
-
-			TextView monthLabel = this.FindViewById<TextView> (Resource.Id.calendarMonthName);
-			TextViewUtil.ChangeForDefaultFont(monthLabel, this, 18f);
-			monthLabel.Text = this.viewModel.CurrentMonthTitle;
-
-			CalendarMonthViewWeekNames monthWeekNames =
-				FindViewById<CalendarMonthViewWeekNames> (Resource.Id.calendarWeekDays);
-			List<DayViewModel> weekDays = new List<DayViewModel> (viewModel.VisibleDays.GetRange (0, 7));
-			monthWeekNames.WeekDays = weekDays;
-
-			monthView = FindViewById<CalendarMonthView> (Resource.Id.calendarView);
-			monthView.ViewedDays = viewModel.VisibleDays;
-			monthView.ViewModel = viewModel;
-
-			monthView.RangeSelectionMode = true;
-
-			this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) => {
-				if (e.PropertyName == "CurrentMonthTitle") {
-					monthLabel.Text = this.viewModel.CurrentMonthTitle;
-				}
-
-				if (e.PropertyName == "VisibleDays") {
-					monthView.ViewedDays = viewModel.VisibleDays;
-				}
-
-				if (e.PropertyName == "TimelineName") {
-					setActionBarTitle();
-				}
-
-				if (e.PropertyName == "RangeSelection") {
-					addActionBarItems(viewModel.Range.Count == 2);
-				}
-			};
-		}
-
-		private void setActionBarTitle()
-		{
-			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			actionBar.Title = this.viewModel.TimelineName;
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)

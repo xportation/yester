@@ -237,8 +237,6 @@ namespace iSeconds.Droid
 	   }
       #endregion
 
-		public bool RangeSelectionMode { get; set; }
-
 		private List<DayViewModel> viewedDays;
       public List<DayViewModel> ViewedDays
 		{
@@ -319,13 +317,14 @@ namespace iSeconds.Droid
 
 	   public void OnLongPress(MotionEvent e)
 	   {
-	      if (animation.IsAnimating() || !RangeSelectionMode)
+			if (animation.IsAnimating())
 	         return;
 
-			if (vibe != null)
-				vibe.Vibrate(30);
+			var dayRegion = this.findDayOnXY (e.GetX(), e.GetY());
+			if (dayRegion != null) {
+				ViewModel.LongPressCommand.Execute (dayRegion.Item2.Model.Date);
+			}
 
-			findAndSelectDay(e.GetX(), e.GetY(), true);
 		}
 
 	   public bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
@@ -342,7 +341,7 @@ namespace iSeconds.Droid
 			var dayRegion = this.findDayOnXY (x, y);
 			if (dayRegion != null) 
 			{
-				if (RangeSelectionMode && !isLongPress) {
+				if (ViewModel.OnRangeSelectionMode) {
 					ViewModel.RangeSelectionCommand.Execute (dayRegion.Item2.Model.Date);
 				}
 				else {
@@ -451,7 +450,7 @@ namespace iSeconds.Droid
 			// se tiver range selecionado nao desenhamos a seleçao solitaria
 			if (!animation.IsAnimating()) 
 			{
-				if (RangeSelectionMode) {
+				if (ViewModel.OnRangeSelectionMode) {
 					foreach (Tuple<RectangleF, DayViewModel> day in daysRegions) {
 
 						if (ViewModel.Range.Contains (day.Item2.Model.Date)) {

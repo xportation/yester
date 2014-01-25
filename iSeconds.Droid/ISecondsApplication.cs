@@ -45,6 +45,7 @@ namespace iSeconds.Droid
 			navigator.RegisterNavigation ("video_player", new AndroidPresenter(this.activityTracker, typeof(VideoPlayerActivity)));
 			navigator.RegisterNavigation ("compilations_view", new AndroidPresenter(this.activityTracker, typeof(CompilationActivity)));
 			navigator.RegisterNavigation ("single_shot_video_player", new AndroidPresenter(this.activityTracker, typeof(SingleShotVideoPlayerActivity)));
+			navigator.RegisterNavigation ("range_selection", new AndroidPresenter(this.activityTracker, typeof(RangeSelectionActivity)));
 
 			optionsDialogService = new OptionDialogServiceAndroid (activityTracker);
       }

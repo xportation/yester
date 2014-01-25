@@ -48,7 +48,7 @@ namespace iSeconds.Droid
 			Button compileButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_range_selector);
 			compileButton.Click += (object sender, EventArgs e) => {
 				popupWindow.Dismiss();
-				OpenRangeSelector(activity, viewModel);
+				viewModel.LongPressCommand.Execute(null);
 			};
 
 			Button aboutButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_about);

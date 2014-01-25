@@ -43,6 +43,8 @@ namespace iSeconds.Domain
 				};
 
 			this.user.OnTimelineUpdated += (sender, e) => this.TimelineName= e.Value.Name;
+
+			this.onRangeSelectionMode = false;
 		}
 
 		private void setTimeline(Timeline timeline)
@@ -301,7 +303,6 @@ namespace iSeconds.Domain
 							DateTime second = days[0] > days[1] ? days[0] : days[1];
 							selectRangeBetween(first, second);
 						}
-						OnPropertyChanged("RangeSelection");
 					}
 				);
 			}
@@ -311,7 +312,45 @@ namespace iSeconds.Domain
 		public HashSet<DateTime> SelectedDays 
 		{
 			get { return selectedDays; }
-		}		
+		}
+
+
+
+		private bool onRangeSelectionMode;
+		public bool OnRangeSelectionMode {
+			get { return onRangeSelectionMode; }
+			set {
+				onRangeSelectionMode = value;
+				OnPropertyChanged("RangeSelection");
+			}
+		}
+		
+		public ICommand LongPressCommand {
+			get { 
+				return new Command((object arg) => { 
+
+					// se já estiver no modo de range selection apenas volta para a activity anterior
+					if (OnRangeSelectionMode) {
+						navigator.NavigateBack();
+					}
+					else { // senão vai iniciar a activity de range selection
+
+						Args args = new Args();
+
+						if (arg != null) {
+							// se a data for passada já iniciamos a seleção de range com 1 dia
+							DateTime selectedDate = (DateTime)arg;
+							args.Put("SelectedDay", selectedDate.Day.ToString());
+							args.Put("SelectedMonth", selectedDate.Month.ToString());
+							args.Put("SelectedYear", selectedDate.Year.ToString());
+						}
+
+						navigator.NavigateTo("range_selection", args);
+					}
+				});
+			}
+		}
+
 
 		public ICommand CompileCommand {
 			get { return new Command((object arg) => { 
