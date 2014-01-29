@@ -23,8 +23,9 @@ namespace iSeconds.Droid
 
 		static public void ChangeFontForActionBarTitle(TextView textView, Context context, float fontSize)
 		{
-//			ChangeFont(textView,context,"fonts/augie.ttf",fontSize);
-			ChangeFont(textView,context,"fonts/123Marker.ttf",fontSize);
+			ChangeFont(textView,context,"fonts/augie.ttf",fontSize);
+//			ChangeFont(textView,context,"fonts/Pacifico.ttf",fontSize);
+//			ChangeFont(textView,context,"fonts/123Marker.ttf",fontSize);
 		}
 		
 		public static void ChangeForDefaultFont(TextView textView, Context context, float fontSize)

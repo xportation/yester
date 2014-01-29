@@ -78,7 +78,7 @@ namespace iSeconds.Droid
       private void init()
       {
          theme= new CalendarMonthViewWeekNamesTheme();
-			theme.SetFlatTheme();
+			theme.SetIOS7Theme();
 
          textPaint= new Paint();
          textPaint.AntiAlias = true;

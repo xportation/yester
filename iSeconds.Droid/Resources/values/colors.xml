@@ -1,30 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <resources> 
 	<!-- actionbar custom colors -->
 	<color name="actionbar_separator">#00FFFFFF</color>
-	<color name="actionbar_title">#FFFFFF</color>
-	<color name="actionbar_background_start">#3E3E60</color>
-	<color name="actionbar_background_end">#3E3E60</color>
-	<color name="actionbar_background_item_pressed_start">#90bde6</color>
-	<color name="actionbar_background_item_pressed_end">#90bde6</color>
+	<color name="actionbar_title">#000000</color>
+	<color name="actionbar_background_start">#FFFFFF</color>
+	<color name="actionbar_background_end">#FFFFFF</color>
+	<color name="actionbar_background_item_pressed_start">#A8D1F7</color>
+	<color name="actionbar_background_item_pressed_end">#A8D1F7</color>
 
 	<!-- iseconds colors -->
-	<color name="actionbar_bottom_line_color">#3486d2</color>
-	<color name="roundrect_item_line_color">#00FFFFFF</color>
+	<color name="actionbar_bottom_line_color">#AAAAAA</color>
+	<color name="roundrect_item_line_color">#CCCCCC</color>
 	<color name="roundrect_item_background_color">#FFFFFF</color>
-	<color name="roundrect_calendar_line_color">#3486d2</color>
+	<color name="roundrect_calendar_line_color">#AAAAAA</color>
 	<color name="roundrect_calendar_background_color">#00FFFFFF</color>
 	<color name="popup_menu_item_text_color">#000000</color>
 	<color name="popup_menu_item_background_color">#FFFFFF</color>
-	<color name="calendar_title_background">#07AFDE</color>
-	<color name="calendar_title_color">#FFFFFF</color>
+	<color name="calendar_title_background">#FFFFFF</color>
+	<color name="calendar_title_color">#000000</color>
 
-	<color name="activity_background">#DCE0E9</color>	
-	<color name="list_divider_color">#7f93b6</color>
-	<color name="first_item_color">#33415a</color>
-	<color name="second_item_color">#5a73a0</color>
-	<color name="list_item_selected_color">#883E3E60</color>
-	<color name="list_item_pressed_color">#883E3E60</color>
+	<color name="activity_background">#F2F2F2</color>	
+	<color name="list_divider_color">#007f93b6</color>
+	<color name="first_item_color">#000000</color>
+	<color name="second_item_color">#777777</color>
+	<color name="list_item_selected_color">#88AAAAAA</color>
+	<color name="list_item_pressed_color">#88AAAAAA</color>
 
 	<color name="transparent">#00000000</color>    
 	<color name="white">#ffffff</color>
@@ -36,6 +36,6 @@
 	<color name="gray_79">#4f4f4f</color>
 	<color name="gray_46">#2e2e2e</color>
 	<color name="gray_35">#232323</color>
-	<color name="item_color">#554870</color>
-	<color name="item_color_dark">#3E3E60</color>
+	<color name="item_color">#8EB1D1</color>
+	<color name="item_color_dark">#3486d2</color>
 </resources>
