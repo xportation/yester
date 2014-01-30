@@ -112,8 +112,7 @@ namespace iSeconds.Droid
 			adapter = new VideoListAdapter (this, viewModel);
 			listView = this.FindViewById<ListView> (Resource.Id.videosList);
          listView.Adapter = adapter;
-			listView.ItemClick += (sender, e) => viewModel.PlayVideoCommand.Execute(e.Position);
-			listView.ItemLongClick += (sender, e) => viewModel.ShowVideoOptionsCommand.Execute (e.Position);
+			listView.ItemClick += (sender, e) => viewModel.ShowVideoOptionsCommand.Execute(e.Position);
 
 			configureActionBar(true, getTitle());
 			addActionBarItems ();

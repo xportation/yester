@@ -85,6 +85,8 @@ namespace iSeconds.Droid
 				return context.Resources.GetString(Resource.String.raw_november);
 			else if (identifier == "December")
 				return context.Resources.GetString(Resource.String.raw_december);
+			else if (identifier == "Play")
+				return context.Resources.GetString(Resource.String.raw_play);
 
 			return "*"+identifier+"*";
 		}

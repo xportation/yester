@@ -60,8 +60,7 @@ namespace iSeconds.Droid
 				return view;
 			};
 
-			list.ItemClick += (sender, e) => viewModel.PlayVideoCommand.Execute(e.Position);
-			list.ItemLongClick += (sender, e) => viewModel.ShowCompilationOptionsCommand.Execute (e.Position);
+			list.ItemClick += (sender, e) => viewModel.ShowCompilationOptionsCommand.Execute(e.Position);
 
 			viewModel.OnCompilationViewModelChanged += (sender, args) => adapter.Invalidate();
 		}

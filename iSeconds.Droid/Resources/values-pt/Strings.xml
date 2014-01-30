@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <string name="app_name">hapsnap</string>
+   <string name="app_name">Yester</string>
    <string name="app_description">Registre seus momentos criando incríveis timelines.</string>
-   <string name="library_name">iSeconds.Droid</string>
+   <string name="library_name">Yester.Droid</string>
    <string name="add_timeline">Adicionar</string>
    <string name="actionbar_timelines_text">Timelines</string>
    <string name="actionbar_dayoptions_text">DAta</string>
@@ -61,6 +61,7 @@
    <string name="raw_set_as_default">Definir como default</string>
    <string name="raw_delete_video">Deletar vídeo</string>
    <string name="raw_share">Compartilhar</string>
+   <string name="raw_play">Tocar</string>
 
    <string name="about_us">Broditech é uma empresa focada no desenvolvimento de jogos casuais e aplicações móveis.</string>
    <string name="about_iseconds">iSeconds é a melhor maneira de gravar suas memórias. Você pode fazer isso através de pequenos vídeos.</string>

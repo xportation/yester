@@ -58,10 +58,6 @@ namespace iSeconds.Droid
 			fileObservadoro.StartWatching();
 
 			loadSavedState(bundle);
-
-			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
-			actionBar.SetHomeLogo(Resource.Drawable.ic_yester);
-
 			viewModel.ShowTutorialCommand.Execute(null);
 		}
 

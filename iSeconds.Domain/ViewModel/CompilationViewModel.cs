@@ -146,6 +146,9 @@ namespace iSeconds.Domain
 					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[pos];
 
 					OptionsList options = new OptionsList();
+					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Play"), () => {
+						PlayVideoCommand.Execute(arg);
+					}));
 					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Delete"), () => {
 						DeleteVideoCommand.Execute(arg);
 					}));

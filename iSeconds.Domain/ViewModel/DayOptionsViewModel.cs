@@ -180,6 +180,8 @@ namespace iSeconds.Domain
 		{
 			public VideoOptionsList(DayOptionsViewModel viewModel, int selectedVideo, I18nService i18n)
 			{
+				AddEntry(new OptionsEntry(i18n.Msg("Play"), () => { viewModel.PlayVideoCommand.Execute(selectedVideo); }));
+
 				AddEntry(new OptionsEntry(i18n.Msg("Set as default"), () => { viewModel.CheckVideoCommand.Execute(selectedVideo); }));
 
 				AddEntry(new OptionsEntry(i18n.Msg("Delete video"), () => {
