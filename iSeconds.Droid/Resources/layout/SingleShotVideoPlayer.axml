@@ -16,7 +16,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:padding="@dimen/activity_padding"
         android:background="@drawable/roundrect_item_background"
         android:id="@+id/surfaceLayout"
         android:layout_margin="4dp">

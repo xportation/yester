@@ -18,7 +18,7 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:padding="5dp"
+        android:padding="@dimen/activity_padding"
         android:id="@+id/scrollView1">
         <LinearLayout
             android:orientation="vertical"
@@ -42,15 +42,17 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/settingsTitle"
                     android:textColor="@color/first_item_color"
-                    android:padding="5px" />
+                    android:padding="5px"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
                 <TextView
                     android:text="@string/settings_movies_size_description"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/settingsDescription"
-                    android:textColor="@color/second_item_color"
                     android:layout_marginBottom="10px"
-                    android:padding="5px" />
+                    android:padding="5px"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/second_item_color" />
                 <RadioGroup
                     android:minWidth="25px"
                     android:minHeight="25px"
@@ -67,7 +69,8 @@
                         android:text="@string/settings_movies_size_small"
                         android:id="@+id/settingsVideoSizeSmall"
                         android:layout_marginBottom="@dimen/dim_10"
-                        android:textColor="@color/first_item_color" />
+                        android:textColor="@color/first_item_color"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
                     <RadioButton
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
@@ -76,7 +79,8 @@
                         android:id="@+id/settingsVideoSizeMedium"
                         android:layout_marginBottom="@dimen/dim_10"
                         android:textColor="@color/first_item_color"
-                        android:checked="true" />
+                        android:checked="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
                     <RadioButton
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
@@ -84,7 +88,8 @@
                         android:text="@string/settings_movies_size_large"
                         android:id="@+id/settingsVideoSizeLarge"
                         android:layout_marginBottom="@dimen/dim_10"
-                        android:textColor="@color/first_item_color" />
+                        android:textColor="@color/first_item_color"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
                 </RadioGroup>
             </LinearLayout>
             <LinearLayout
@@ -103,7 +108,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/settingsOnlyDefaultVideos"
-                    android:textColor="@color/first_item_color" />
+                    android:textColor="@color/first_item_color"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

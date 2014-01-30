@@ -149,7 +149,6 @@ namespace iSeconds.Droid
 			videoView = FindViewById<VideoView>(Resource.Id.videoView);
          playOverImage= FindViewById<ImageView>(Resource.Id.imagePausePlay);
 			date = FindViewById<TextView>(Resource.Id.textViewDate);
-			TextViewUtil.ChangeForDefaultFont(date, this, 22f);
 
 			configureActionBar(true, "");
 

@@ -45,7 +45,6 @@ namespace iSeconds.Droid
 			setActionBarTitle();
 
 			TextView monthLabel = this.FindViewById<TextView> (Resource.Id.calendarMonthName);
-			TextViewUtil.ChangeForDefaultFont(monthLabel, this, 18f);
 			monthLabel.Text = this.viewModel.CurrentMonthTitle;
 
 			CalendarMonthViewWeekNames monthWeekNames =

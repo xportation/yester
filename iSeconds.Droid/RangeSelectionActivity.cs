@@ -45,7 +45,7 @@ namespace iSeconds.Droid
 			var compileAction = new ActionLegacyBarAction (this, () => viewModel.CompileCommand.Execute (null), Resource.Drawable.ic_compile);
 			compileAction.ActionType = ActionType.Always;
 			actionBar.AddAction (compileAction);
-			var rangeSelector = new ActionLegacyBarAction (this, () => TimelineOptionsPopup.OpenRangeSelector (this, viewModel), Resource.Drawable.ic_compile);
+			var rangeSelector = new ActionLegacyBarAction (this, () => TimelineOptionsPopup.OpenRangeSelector (this, viewModel), Resource.Drawable.ic_calendar);
 			rangeSelector.ActionType = ActionType.Always;
 			actionBar.AddAction (rangeSelector);
 		}

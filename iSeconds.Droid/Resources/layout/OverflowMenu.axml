@@ -2,51 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="1dp">
     <Button
         android:id="@+id/main_more_content_range_selector"
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundrect_item_background"
-        android:text="@string/overflow_menu_range_selector"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="1dp" />
+        android:text="@string/overflow_menu_range_selector" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp" />
     <Button
         android:id="@+id/main_more_content_timeline_options"
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundrect_item_background"
-        android:layout_margin="1dp"
         android:text="@string/overflow_menu_timelines" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp" />
     <Button
         android:id="@+id/main_more_content_compilations"
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundrect_item_background"
-        android:layout_margin="1dp"
         android:text="@string/overflow_menu_compilations" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp" />
     <Button
         android:id="@+id/main_more_content_settings"
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundrect_item_background"
-        android:layout_margin="1dp"
         android:text="@string/overflow_menu_settings" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp" />
     <Button
         android:id="@+id/main_more_content_about"
         style="@style/ActionBarDropdownItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundrect_item_background"
-        android:text="@string/overflow_menu_about"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="2dp" />
+        android:text="@string/overflow_menu_about" />
 </LinearLayout>

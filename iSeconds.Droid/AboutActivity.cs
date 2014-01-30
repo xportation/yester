@@ -29,19 +29,8 @@ namespace iSeconds.Droid
 			dialogService = application.GetOptionsDialogService();
 
 			configureActionBar(true, "");
-			configureFonts();
 			configureHyperlinks();
 			configureButtonTutorial();
-		}
-
-		void configureFonts()
-		{
-			TextView aboutTextView= FindViewById<TextView>(Resource.Id.textAbout);
-			TextView stayInTouchTextView= FindViewById<TextView>(Resource.Id.textStayInTouch);
-			Button buttonTutorial= FindViewById<Button>(Resource.Id.buttonTutorial);
-			TextViewUtil.ChangeForDefaultFont(aboutTextView,this,18f);
-			TextViewUtil.ChangeForDefaultFont(stayInTouchTextView,this,18f);
-			TextViewUtil.ChangeForDefaultFont(buttonTutorial,this,18f);
 		}
 
 		void configureHyperlinks()

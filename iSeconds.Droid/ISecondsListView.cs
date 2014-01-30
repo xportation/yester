@@ -51,9 +51,7 @@ namespace iSeconds.Droid
 
 					view = context.LayoutInflater.Inflate (Resource.Layout.TextViewItem, null);
 					TextView textView = view.FindViewById<TextView> (Resource.Id.textItem);
-					TextViewUtil.ChangeForDefaultFont (textView, context, 24f);
 					textView.Text = viewModel [position].ToString ();
-
 
 					textView.Touch += (object sender, View.TouchEventArgs e) => {
 						if (model.Callback != null)

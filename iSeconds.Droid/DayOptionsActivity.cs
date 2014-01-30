@@ -55,16 +55,8 @@ namespace iSeconds.Droid
 			CheckedTextView checkBox = null;
 			DayOptionsViewModel.VideoItem model = viewModel.Videos[position];
 
-         if (view == null) 
-         {
+         if (view == null)
             view = context.LayoutInflater.Inflate(Resource.Layout.DayOptionsItem, null);
-
-				checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
-            TextViewUtil.ChangeForDefaultFont(checkBox, context, 20f);
-
-				fileSize = view.FindViewById<TextView>(Resource.Id.textViewDayOptionItemSize);
-				TextViewUtil.ChangeForDefaultFont(fileSize, context, 14f);
-         }
 
 			checkBox = view.FindViewById<CheckedTextView>(Resource.Id.videoItem);
 

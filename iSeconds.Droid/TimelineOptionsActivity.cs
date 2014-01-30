@@ -33,15 +33,8 @@ namespace iSeconds.Droid
       public override View GetView(int position, View convertView, ViewGroup parent)
       {
          View view = convertView;
-         if (view == null) 
-			{
+         if (view == null)
 				view = context.LayoutInflater.Inflate(Resource.Layout.TimelineOptionsItem, null);
-				TextView textView = view.FindViewById<CheckedTextView>(Resource.Id.timelineName);
-				TextViewUtil.ChangeForDefaultFont(textView, context, 24f);
-
-				textView = view.FindViewById<TextView>(Resource.Id.timelineDescription);
-				TextViewUtil.ChangeForDefaultFont(textView, context, 18f);
-			}
 
          Timeline timeline = viewModel.TimelineAt(position);
          CheckedTextView checkedText = view.FindViewById<CheckedTextView>(Resource.Id.timelineName);

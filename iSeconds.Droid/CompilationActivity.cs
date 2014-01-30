@@ -40,16 +40,12 @@ namespace iSeconds.Droid
 				view = this.LayoutInflater.Inflate (Resource.Layout.CompilationViewItem, null);
 
 				TextView name = view.FindViewById<TextView>(Resource.Id.textViewTimelineName);
-				TextViewUtil.ChangeForDefaultFont(name, this, 18f);
 				name.Text = compilationModel.Name;
 
 				TextView begin = view.FindViewById<TextView>(Resource.Id.textViewDateBegin);
-				TextViewUtil.ChangeForDefaultFont(begin, this, 14f);
-
 				begin.Text = GetString(Resource.String.compilation_item_date_begin) + " " + compilationModel.BeginDate;
 
 				TextView end = view.FindViewById<TextView>(Resource.Id.textViewDateEnd);
-				TextViewUtil.ChangeForDefaultFont(end, this, 14f);
 				end.Text = GetString(Resource.String.compilation_item_date_end) + " " + compilationModel.EndDate;
 
 				ImageView imageView = view.FindViewById<ImageView>(Resource.Id.compilationThumbnail);
@@ -59,7 +55,6 @@ namespace iSeconds.Droid
 				}
 
 				TextView fileSize = view.FindViewById<TextView>(Resource.Id.textViewCompilationSize);
-				TextViewUtil.ChangeForDefaultFont(fileSize, this, 14f);
 				fileSize.Text= compilationModel.CompilationSize;
 
 				return view;

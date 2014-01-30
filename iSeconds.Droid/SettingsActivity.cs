@@ -25,26 +25,8 @@ namespace iSeconds.Droid
 			viewModel = new SettingsViewModel(application.GetUserService().CurrentUser);
 
 			configureActionBar(true, "");
-			configureFonts();
 			configureRadioButton();
 			configureCheckBox();
-		}
-		
-		void configureFonts()
-		{
-			TextView titleView= FindViewById<TextView>(Resource.Id.settingsTitle);
-			TextView descriptionView= FindViewById<TextView>(Resource.Id.settingsDescription);
-			RadioButton smallView= FindViewById<RadioButton>(Resource.Id.settingsVideoSizeSmall);
-			RadioButton mediumView= FindViewById<RadioButton>(Resource.Id.settingsVideoSizeMedium);
-			RadioButton largeView= FindViewById<RadioButton>(Resource.Id.settingsVideoSizeLarge);
-			CheckBox checkOnlyDefaultVideo = FindViewById<CheckBox>(Resource.Id.settingsOnlyDefaultVideos);
-
-			TextViewUtil.ChangeForDefaultFont(titleView,this,22f);
-			TextViewUtil.ChangeForDefaultFont(descriptionView,this,18f);
-			TextViewUtil.ChangeForDefaultFont(smallView,this,18f);
-			TextViewUtil.ChangeForDefaultFont(mediumView,this,18f);
-			TextViewUtil.ChangeForDefaultFont(largeView,this,18f);
-			TextViewUtil.ChangeForDefaultFont(checkOnlyDefaultVideo,this,18f);
 		}
 
 		void configureRadioButton()

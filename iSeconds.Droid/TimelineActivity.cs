@@ -38,8 +38,6 @@ namespace iSeconds.Droid
    [Activity (Label = "TimelineActivity")]
 	public class TimelineActivity : BaseTimelineActivity, FileObserverNotify
 	{
-		private CalendarMonthView monthView;
-
 		private const string CurrentDateState= "currenteDateState";
 		private const string FirstDateSelected= "firstDateSelected";
 		private const string SecondDateSelected= "secondDateSelected";
@@ -60,6 +58,9 @@ namespace iSeconds.Droid
 			fileObservadoro.StartWatching();
 
 			loadSavedState(bundle);
+
+			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+			actionBar.SetHomeLogo(Resource.Drawable.ic_yester);
 
 			viewModel.ShowTutorialCommand.Execute(null);
 		}

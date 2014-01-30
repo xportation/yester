@@ -60,7 +60,7 @@ namespace iSeconds.Droid
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
 
 			ScrollingTextView titleView = actionBar.FindViewById<ScrollingTextView>(Resource.Id.actionbar_title);
-			TextViewUtil.ChangeFontForActionBarTitle(titleView, this, 26f);
+			titleView.TextSize = 26f;
 			if (title.Length != 0)
 				titleView.Text = title;
 

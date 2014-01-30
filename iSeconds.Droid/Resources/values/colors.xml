@@ -19,7 +19,7 @@
 	<color name="calendar_title_background">#FFFFFF</color>
 	<color name="calendar_title_color">#000000</color>
 
-	<color name="activity_background">#F2F2F2</color>	
+	<color name="activity_background">#FFFFFF</color>	
 	<color name="list_divider_color">#007f93b6</color>
 	<color name="first_item_color">#000000</color>
 	<color name="second_item_color">#777777</color>

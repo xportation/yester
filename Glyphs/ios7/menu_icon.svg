@@ -51,7 +51,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.959798"
-     inkscape:cx="62.473253"
+     inkscape:cx="44.907876"
      inkscape:cy="66.355317"
      inkscape:document-units="px"
      inkscape:current-layer="g4540"
@@ -90,27 +90,27 @@
            transform="matrix(0.02092816,0,0,-0.02092816,-6.8459291,-1.5900514)">
           <rect
              style="fill:#3486d2;fill-opacity:1;stroke:none"
-             id="rect2996"
-             width="7.0893073"
-             height="7.0893073"
-             x="162.47295"
-             y="153.32785"
+             id="rect2992"
+             width="46.45454"
+             height="3.5836883"
+             x="142.02515"
+             y="170.40193"
              ry="0" />
           <rect
              ry="0"
-             y="185.00348"
-             x="162.47295"
-             height="7.0893073"
-             width="7.0893073"
-             id="rect2993"
+             y="153.67804"
+             x="142.02515"
+             height="3.5836883"
+             width="46.45454"
+             id="rect3764"
              style="fill:#3486d2;fill-opacity:1;stroke:none" />
           <rect
              ry="0"
-             y="169.16566"
-             x="162.47295"
-             height="7.0893073"
-             width="7.0893073"
-             id="rect2995"
+             y="187.12582"
+             x="142.02515"
+             height="3.5836883"
+             width="46.45454"
+             id="rect3766"
              style="fill:#3486d2;fill-opacity:1;stroke:none" />
         </g>
       </g>

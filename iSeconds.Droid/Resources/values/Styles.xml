@@ -5,7 +5,7 @@
     	<item name="android:windowBackground">@drawable/splash_title</item>
     	<item name="android:windowNoTitle">true</item>
   	</style>  
-    <style name="ActionBarDropdownItem">
+   <style name="ActionBarDropdownItem">
 		<item name="android:textColor">@color/popup_menu_item_text_color</item>
 		<item name="android:textSize">18sp</item>
 		<item name="android:background">@color/popup_menu_item_background_color</item>

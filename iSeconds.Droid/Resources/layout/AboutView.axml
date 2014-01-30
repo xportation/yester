@@ -18,7 +18,7 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:padding="@dimen/activity_padding"
         android:id="@+id/scrollView1">
         <LinearLayout
             android:orientation="vertical"
@@ -42,7 +42,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textAbout"
-                    android:layout_marginTop="10.0dp"
                     android:textColor="@color/second_item_color" />
             </LinearLayout>
             <LinearLayout
@@ -61,7 +60,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textStayInTouch"
-                    android:layout_marginTop="15.0dp"
                     android:textColor="@color/second_item_color"
                     android:layout_marginBottom="10dp" />
                 <LinearLayout
