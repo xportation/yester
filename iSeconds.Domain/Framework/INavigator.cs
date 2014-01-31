@@ -30,6 +30,8 @@ namespace iSeconds.Domain.Framework
       void Show (Args args);
 
       void Close ();
+
+		void DisableAnimation();
    }
 
    public class INavigator

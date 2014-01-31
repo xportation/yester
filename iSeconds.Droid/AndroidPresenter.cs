@@ -18,6 +18,7 @@ namespace iSeconds.Droid
    {
       private ActivityTracker tracker = null;
       private Type activityType = null;
+		private bool animating = true;
 
       public AndroidPresenter (ActivityTracker tracker, Type activityType)
       {
@@ -25,7 +26,7 @@ namespace iSeconds.Droid
          this.activityType = activityType;
       }
 
-      public void Show (Args args)
+		public void Show (Args args)
       {
          Activity actual = this.tracker.GetCurrentActivity ();
 
@@ -33,15 +34,23 @@ namespace iSeconds.Droid
          foreach (var arg in args.GetArgs()) {
             intent.PutExtra (arg.Key, arg.Value);
          }
+
+			if (!animating)
+				intent.AddFlags(ActivityFlags.NoAnimation);
             
          actual.StartActivity (intent);
       }
 
-      public void Close ()
+		public void Close ()
       {
          Activity actual = this.tracker.GetCurrentActivity ();
          actual.Finish();
-
+			actual.OverridePendingTransition(0, 0);
       }
+
+		public void DisableAnimation()
+		{
+			animating = false;
+		}
    }
 }
