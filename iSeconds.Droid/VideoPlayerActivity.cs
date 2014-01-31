@@ -156,7 +156,8 @@ namespace iSeconds.Droid
 			endDate= DateTime.FromBinary(Convert.ToInt64(this.Intent.Extras.GetString("ShareDate_End")));
 			timelineId= Convert.ToInt32(this.Intent.Extras.GetString("ShareDate_TimelineId"));
 
-         videos = repository.GetMediaInfoByPeriod(startDate, endDate, timelineId);
+			User user = application.GetUserService().CurrentUser;
+			videos = repository.GetMediaInfoByPeriod(startDate, endDate, timelineId, user.UsesOnlyDefaultVideo);
 			viewAdapter = new VideoThumbnailsViewAdapter(this, videos);
 
          thumbnails = FindViewById<ListView>(Resource.Id.videoThumbnails);

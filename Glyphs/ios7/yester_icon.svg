@@ -22,6 +22,22 @@
   <defs
      id="defs4">
     <linearGradient
+       id="linearGradient3784"
+       inkscape:collect="always">
+      <stop
+         id="stop3786"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1" />
+      <stop
+         style="stop-color:#e0e7ed;stop-opacity:1"
+         offset="0.45064113"
+         id="stop3790" />
+      <stop
+         id="stop3788"
+         offset="1"
+         style="stop-color:#ffffff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
        inkscape:collect="always"
        id="linearGradient3180">
       <stop
@@ -96,6 +112,15 @@
        y1="918.76953"
        x2="22.475895"
        y2="1086.4548" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3784"
+       id="linearGradient3782"
+       x1="-98.46759"
+       y1="939.6723"
+       x2="-49.463688"
+       y2="992.8963"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -105,8 +130,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="44.037184"
-     inkscape:cy="50.037766"
+     inkscape:cx="50.093554"
+     inkscape:cy="51.434917"
      inkscape:document-units="px"
      inkscape:current-layer="g3784"
      showgrid="false"
@@ -142,32 +167,38 @@
          id="g3784"
          style="fill:url(#linearGradient3792)"
          transform="translate(153.87063,7.7498926)">
-        <g
-           id="g3779"
-           style="fill:url(#linearGradient3787)"
-           transform="matrix(1.18909,0,0,1.18909,-2.9115274,-184.59344)">
-          <text
-             sodipodi:linespacing="125%"
-             id="text3767"
-             y="998.00989"
-             x="-101.34724"
-             style="font-size:81.51900482px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#3486d2;fill-opacity:1;stroke:none;font-family:Pacifico;-inkscape-font-specification:Pacifico"
-             xml:space="preserve"><tspan
-               y="998.00989"
-               x="-101.34724"
-               id="tspan3769"
-               sodipodi:role="line">Y</tspan></text>
-        </g>
-        <path
-           transform="matrix(2.51754,0,0,2.5170074,-127.9522,528.89514)"
-           d="m 41.964285,172.98718 c 0,12.57434 -10.193517,22.76786 -22.767857,22.76786 -12.5743397,0 -22.7678563,-10.19352 -22.7678563,-22.76786 0,-12.57434 10.1935166,-22.76785 22.7678563,-22.76785 12.57434,0 22.767857,10.19351 22.767857,22.76785 z"
-           sodipodi:ry="22.767857"
-           sodipodi:rx="22.767857"
-           sodipodi:cy="172.98718"
-           sodipodi:cx="19.196428"
-           id="path3019"
-           style="fill:none;stroke:#3486d2;stroke-width:1.9484679;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-           sodipodi:type="arc" />
+        <rect
+           style="fill:url(#linearGradient3782);fill-opacity:1;stroke:#000000;stroke-width:0.97324120999999997;stroke-miterlimit:4;stroke-dasharray:none"
+           id="rect3006"
+           width="122.69406"
+           height="122.56277"
+           x="-140.74593"
+           y="902.90198"
+           ry="14.006291" />
+        <text
+           xml:space="preserve"
+           style="font-size:43.64729691px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Pacifico;-inkscape-font-specification:Pacifico"
+           x="-135.65132"
+           y="973.89471"
+           id="text2998"
+           sodipodi:linespacing="125%"
+           transform="scale(1.0005355,0.99946479)"><tspan
+             sodipodi:role="line"
+             id="tspan3000"
+             x="-135.65132"
+             y="973.89471">yester</tspan></text>
+        <text
+           transform="scale(1.0005355,0.99946479)"
+           sodipodi:linespacing="125%"
+           id="text3002"
+           y="992.01373"
+           x="-108.26521"
+           style="font-size:43.64729691px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Pacifico;-inkscape-font-specification:Pacifico"
+           xml:space="preserve"><tspan
+             y="992.01373"
+             x="-108.26521"
+             id="tspan3004"
+             sodipodi:role="line">...</tspan></text>
       </g>
     </g>
   </g>

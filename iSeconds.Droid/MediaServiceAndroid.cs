@@ -104,7 +104,7 @@ namespace iSeconds.Droid
 			b.PutString ("ffmpeg.concat.output", compilationPath);
 
 			// A list with the file paths (absolute) of each video to be concatenated.
-			IList<iSeconds.Domain.MediaInfo> videos = repository.GetMediaInfoByPeriod (startDate, endDate, timelineId);
+			IList<iSeconds.Domain.MediaInfo> videos = repository.GetMediaInfoByPeriod (startDate, endDate, timelineId, onlyDefaultMovies);
 			IList<string> filesToConcat = new List<string> ();
 			foreach (iSeconds.Domain.MediaInfo mediaInfo in videos) {
 				filesToConcat.Add (mediaInfo.Path);

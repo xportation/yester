@@ -195,15 +195,10 @@
     <AndroidResource Include="Resources\drawable\list_item_pressed.xml" />
     <AndroidResource Include="Resources\drawable\list_item_selected.xml" />
     <AndroidResource Include="Resources\drawable\ic_calendar.png" />
-    <AndroidResource Include="Resources\drawable\ic_yester.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_calendar.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\ic_yester.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_calendar.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\ic_yester.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_calendar.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_yester.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_calendar.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_yester.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

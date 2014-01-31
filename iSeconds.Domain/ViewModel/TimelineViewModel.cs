@@ -242,16 +242,18 @@ namespace iSeconds.Domain
 
 		private Tuple<DateTime, DateTime> getRangeDelimiters()
 		{
-			Debug.Assert (range.Count == 2);
-			DateTime[] dates = new DateTime[2];
+			if (range.Count == 0)
+				return null;
+
+			DateTime[] dates = new DateTime[range.Count];
 			range.CopyTo (dates);
 
-			Tuple<DateTime, DateTime> result = new Tuple<DateTime, DateTime> (
-				dates [0] < dates [1] ? dates [0] : dates [1],
-				dates [0] > dates [1] ? dates [0] : dates [1]
-				);
+			if (dates.Length == 1)
+				return new Tuple<DateTime, DateTime>(dates[0], dates[0]);
 
-			return result;
+			return new Tuple<DateTime, DateTime> (
+					dates [0] < dates [1] ? dates [0] : dates [1],
+					dates [0] > dates [1] ? dates [0] : dates [1]);
 		}
 
 		private SortedSet<DateTime> range = new SortedSet<DateTime>();

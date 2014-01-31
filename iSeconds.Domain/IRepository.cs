@@ -31,8 +31,7 @@ namespace iSeconds.Domain
       IList<MediaInfo> GetMediasForDay(DayInfo day);
       void DeleteMedia (MediaInfo media);
 
-      IList<string> GetVideosFromRange(DateTime start, DateTime end, int timelineId);
-		IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId);
+		IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId, bool onlyMediaDefaultOfTheDay);
 
 		IList<Compilation> GetUserCompilations (int userId);
 

@@ -6,7 +6,7 @@ FileFormat png
 FilePrefix ''
 
 Array MySvgFiles 'camera_icon.svg':'compile_icon.svg':'home_icon.svg':'play_icon.svg':'check_icon.svg':'add_icon.svg':'menu_icon.svg':'calendar_icon.svg':'yester_icon.svg'
-Array MyExportFiles 'ic_camera':'ic_compile':'ic_home':ic_'play':'ic_check':'ic_add':'ic_menu':'ic_calendar':'ic_yester'
+Array MyExportFiles 'ic_camera':'ic_compile':'ic_home':ic_'play':'ic_check':'ic_add':'ic_menu':'ic_calendar':'Icon'
 
 // Conversion 1
 PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:1

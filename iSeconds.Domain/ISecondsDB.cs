@@ -153,37 +153,17 @@ namespace iSeconds.Domain
 			return w;
 		}
 
-		public IList<string> GetVideosFromRange (DateTime start, DateTime end, int timelineId)
-		{
-			lock (locker) {
-
-				string sttm = "select M.* from MediaInfo M inner join DayInfo D on M.DayId = D.Id " +
-				//		'2013-08-14'
-					"where D.Date between '" + formatToSqliteDate (start) + "' and '" + formatToSqliteDate (end.AddDays (1)) + "'";
-
-				//Console.WriteLine (sttm);
-
-				var q = this.Query<MediaInfo> (sttm).ToList ();
-//				
-				// tive que fazer isso pois o Query retorna uma lista de MediaInfo.. Nao consegui
-				// fazer retornar uma lista de strings
-				List<string> result = new List<string> ();
-				foreach (MediaInfo m in q) {
-					result.Add (m.Path);
-				}
-
-				return result;
-			}
-		}
-
-		public IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId)
+		public IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId, bool onlyMediaDefaultOfTheDay)
 		{
 			IList<DayInfo> days= (from i in Table<DayInfo>() where i.Date >= first && i.Date <= last && i.TimelineId == timelineId select i).ToList();
 
 			List<MediaInfo> medias = new List<MediaInfo>();
 			foreach (DayInfo day in days) {
 				day.SetRepository(this);
-				medias.AddRange(day.GetVideos());
+				if (onlyMediaDefaultOfTheDay)
+					medias.Add(day.GetDefaultVideo());
+				else
+					medias.AddRange(day.GetVideos());
 			}
 
 			return medias;

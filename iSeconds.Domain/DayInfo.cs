@@ -101,6 +101,11 @@ namespace iSeconds.Domain
 			return DefaultVideoId == -1 ? "" : this.repository.GetMediaById(this.DefaultVideoId).Path;
 		}
 
+		public MediaInfo GetDefaultVideo()
+		{
+			return DefaultVideoId == -1 ? null : this.repository.GetMediaById(this.DefaultVideoId);
+		}
+
       public void SetRepository(IRepository repository)
       {
       	this.repository = repository;
