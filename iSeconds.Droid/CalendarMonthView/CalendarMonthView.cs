@@ -322,6 +322,9 @@ namespace iSeconds.Droid
 
 			var dayRegion = this.findDayOnXY (e.GetX(), e.GetY());
 			if (dayRegion != null) {
+				if (vibe != null)
+					vibe.Vibrate(30);
+
 				ViewModel.LongPressCommand.Execute (dayRegion.Item2.Model.Date);
 			}
 

@@ -212,14 +212,14 @@ namespace iSeconds.Domain
 				return new Command ((object arg) => { 
 
 					Tuple<DateTime, DateTime> rangeDelimiters = getRangeDelimiters();
+					if (rangeDelimiters != null) {
+						Args args = new Args();
+						args.Put("ShareDate_Start", rangeDelimiters.Item1.ToBinary().ToString());
+						args.Put("ShareDate_End", rangeDelimiters.Item2.ToBinary().ToString());
+						args.Put("ShareDate_TimelineId", this.timeline.Id.ToString());
 
-					Args args = new Args();
-					args.Put("ShareDate_Start", rangeDelimiters.Item1.ToBinary().ToString());
-					args.Put("ShareDate_End", rangeDelimiters.Item2.ToBinary().ToString());
-					args.Put("ShareDate_TimelineId", this.timeline.Id.ToString());
-
-					this.navigator.NavigateTo("video_player", args);
-				
+						this.navigator.NavigateTo("video_player", args);
+					}
 				});
 			}
 		}
@@ -355,18 +355,20 @@ namespace iSeconds.Domain
 
 
 		public ICommand CompileCommand {
-			get { return new Command((object arg) => { 
+			get { 
+				return new Command((object arg) => {
 					Tuple<DateTime, DateTime> rangeDelimiters = getRangeDelimiters();
+					if (rangeDelimiters != null) {
+						string defaultName = timeline.Name + " (" + ISecondsUtils.DateToString(rangeDelimiters.Item1, false) + 
+						                     " - " + ISecondsUtils.DateToString(rangeDelimiters.Item2, false) + ")";
+						string defaultDescription = string.Format(i18n.Msg("A compilation for timeline {0} from {1} to {2}"), timelineName, 
+							ISecondsUtils.DateToString(rangeDelimiters.Item1, false), ISecondsUtils.DateToString(rangeDelimiters.Item2, false));
 
-					string defaultName = timeline.Name + " (" + ISecondsUtils.DateToString(rangeDelimiters.Item1, false) + 
-					                     " - " + ISecondsUtils.DateToString(rangeDelimiters.Item2, false) + ")";
-					string defaultDescription = string.Format(i18n.Msg("A compilation for timeline {0} from {1} to {2}"), timelineName, 
-						ISecondsUtils.DateToString(rangeDelimiters.Item1, false), ISecondsUtils.DateToString(rangeDelimiters.Item2, false));
-
-					dialogService.AskForCompilationNameAndDescription(defaultName, defaultDescription, 
-						(string name, string description) => {
-							this.startCompilation(name, description, rangeDelimiters.Item1, rangeDelimiters.Item2);
-						}, null);
+						dialogService.AskForCompilationNameAndDescription(defaultName, defaultDescription, 
+							(string name, string description) => {
+								this.startCompilation(name, description, rangeDelimiters.Item1, rangeDelimiters.Item2);
+							}, null);
+					}
 				});
 			}
 		}

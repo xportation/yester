@@ -21,8 +21,10 @@ namespace iSeconds.Droid
 			base.OnCreate (bundle);
 
 			viewModel.OnRangeSelectionMode = true;
-
 			configureSelectedDay ();
+
+			View actionbarBottomLine = this.FindViewById<View>(Resource.Id.actionbar_bottom_line);
+			actionbarBottomLine.SetBackgroundColor(Resources.GetColor(Resource.Color.actionbar_bottom_line_color_alt));
 		}
 
 		protected override bool showHomeButton()

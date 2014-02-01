@@ -12,6 +12,7 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
+        android:id="@+id/actionbar_bottom_line"
         android:background="@color/actionbar_bottom_line_color" />
     <include
         layout="@layout/CalendarMonthViewLayout" />

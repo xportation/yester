@@ -10,6 +10,7 @@
 
 	<!-- iseconds colors -->
 	<color name="actionbar_bottom_line_color">#AAAAAA</color>
+	<color name="actionbar_bottom_line_color_alt">#E20701</color>
 	<color name="roundrect_item_line_color">#CCCCCC</color>
 	<color name="roundrect_item_background_color">#FFFFFF</color>
 	<color name="roundrect_calendar_line_color">#AAAAAA</color>
