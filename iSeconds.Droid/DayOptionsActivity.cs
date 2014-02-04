@@ -116,8 +116,6 @@ namespace iSeconds.Droid
 
 			configureActionBar(true, getTitle());
 			addActionBarItems ();
-
-			Toast.MakeText(this, Resource.String.item_options_message, ToastLength.Long).Show();
       }
 
 		private void addActionBarItems ()

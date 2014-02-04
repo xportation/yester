@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 
 namespace iSeconds.Domain
 {
@@ -20,9 +21,9 @@ namespace iSeconds.Domain
 		public static string DateToString(DateTime date, bool withTimeSpan)
 		{
 			if (withTimeSpan)
-				return String.Format("{0:g}", date);
+				return date.ToString("g", Thread.CurrentThread.CurrentCulture);
 
-			return String.Format("{0:d}", date);
+			return date.ToString("d", Thread.CurrentThread.CurrentCulture);
 		}
 
 		public static string FileSizeFormated(string filename)

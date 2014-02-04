@@ -93,8 +93,6 @@ namespace iSeconds.Droid
 
 			configureActionBar(true, "");
 			configureActionBarActions();
-
-			Toast.MakeText(this, Resource.String.timeline_options_message, ToastLength.Long).Show();
       }
 
 	   private void viewModelRequests()
