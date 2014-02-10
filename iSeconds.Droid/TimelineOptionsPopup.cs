@@ -90,6 +90,8 @@ namespace iSeconds.Droid
 				viewModel.RangeSelectionCommand.Execute(startDate);
 				viewModel.RangeSelectionCommand.Execute(endDate);
 
+				viewModel.Invalidate();
+
 				dialog.Dismiss();
 			};
 

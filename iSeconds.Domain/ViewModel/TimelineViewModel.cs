@@ -345,6 +345,10 @@ namespace iSeconds.Domain
 							args.Put("SelectedDay", selectedDate.Day.ToString());
 							args.Put("SelectedMonth", selectedDate.Month.ToString());
 							args.Put("SelectedYear", selectedDate.Year.ToString());
+
+							// isso eh para conseguirmos lançar o range selector mode no mes certo
+							args.Put("CurrentMonth", this.currentDate.Month.ToString());
+							args.Put("CurrentYear", this.currentDate.Year.ToString());
 						}
 
 						navigator.NavigateTo("range_selection", args);

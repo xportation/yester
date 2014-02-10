@@ -47,7 +47,10 @@ namespace iSeconds.Droid
 			var compileAction = new ActionLegacyBarAction (this, () => viewModel.CompileCommand.Execute (null), Resource.Drawable.ic_compile);
 			compileAction.ActionType = ActionType.Always;
 			actionBar.AddAction (compileAction);
-			var rangeSelector = new ActionLegacyBarAction (this, () => TimelineOptionsPopup.OpenRangeSelector (this, viewModel), Resource.Drawable.ic_calendar);
+			var rangeSelector = new ActionLegacyBarAction (this, () => { 
+				TimelineOptionsPopup.OpenRangeSelector (this, viewModel);
+
+			}, Resource.Drawable.ic_calendar);
 			rangeSelector.ActionType = ActionType.Always;
 			actionBar.AddAction (rangeSelector);
 		}
@@ -61,7 +64,10 @@ namespace iSeconds.Droid
 				int year = Convert.ToInt32(this.Intent.Extras.GetString ("SelectedYear"));
 				DateTime selectedDay = new DateTime (year, month, day);
 				this.viewModel.RangeSelectionCommand.Execute (selectedDay);
-				this.viewModel.CurrentDate = selectedDay;
+
+				int currentMonth = Convert.ToInt32(this.Intent.Extras.GetString ("CurrentMonth"));
+				int currentYear = Convert.ToInt32(this.Intent.Extras.GetString ("CurrentYear"));
+				this.viewModel.CurrentDate = new DateTime(currentYear, currentMonth, 1);
 			}
 		}
 	}
