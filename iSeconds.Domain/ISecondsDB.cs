@@ -155,7 +155,7 @@ namespace iSeconds.Domain
 
 		public IList<MediaInfo> GetMediaInfoByPeriod(DateTime first, DateTime last, int timelineId, bool onlyMediaDefaultOfTheDay)
 		{
-			IList<DayInfo> days= (from i in Table<DayInfo>() where i.Date >= first && i.Date <= last && i.TimelineId == timelineId select i).ToList();
+			IList<DayInfo> days= (from i in Table<DayInfo>() where i.Date >= first && i.Date <= last && i.TimelineId == timelineId orderby i.Date ascending select i).ToList();
 
 			List<MediaInfo> medias = new List<MediaInfo>();
 			foreach (DayInfo day in days) {

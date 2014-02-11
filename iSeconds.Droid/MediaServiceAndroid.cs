@@ -103,17 +103,33 @@ namespace iSeconds.Droid
 			// The output file.
 			b.PutString ("ffmpeg.concat.output", compilationPath);
 
+			IList<iSeconds.Domain.MediaInfo> videos = 
+				repository.GetMediaInfoByPeriod (startDate, endDate, timelineId, onlyDefaultMovies);
+
 			// A list with the file paths (absolute) of each video to be concatenated.
-			IList<iSeconds.Domain.MediaInfo> videos = repository.GetMediaInfoByPeriod (startDate, endDate, timelineId, onlyDefaultMovies);
-			IList<string> filesToConcat = new List<string> ();
+			IList<string> filesToConcat = new List<string>();
+
+			// A list with a subtitle for each video.
+			IList<string> subtitles = new List<string>();
+
 			foreach (iSeconds.Domain.MediaInfo mediaInfo in videos) {
-				filesToConcat.Add (mediaInfo.Path);
+				filesToConcat.Add(mediaInfo.Path);
+
+				subtitles.Add(generateSubtitleForMediaInfo(mediaInfo));
 			}
-			b.PutStringArrayList ("ffmpeg.concat.filelist", filesToConcat);
+			b.PutStringArrayList("ffmpeg.concat.filelist", filesToConcat);
+			b.PutStringArrayList("ffmpeg.concat.subtitles", subtitles);
 
 			mServiceIntent.PutExtras(b);
 
 			currentActivity.StartService(mServiceIntent);
+		}
+
+		private string generateSubtitleForMediaInfo(iSeconds.Domain.MediaInfo mediaInfo)
+		{
+			DayInfo day = repository.GetDayInfo(mediaInfo.DayId);
+
+			return String.Format("{0:d}", day.Date);
 		}
 
 		public void ShareVideo(string filename, string dialogTitle)

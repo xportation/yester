@@ -1,27 +1,24 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="iSeconds.iOS.Application/TimelineView.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="iSeconds.iOS.Application\TimelineView.cs">
     <Files>
-      <File FileName="iSeconds.iOS.Application/Main.cs" Line="12" Column="34" />
-      <File FileName="iSeconds.iOS.Application/CalendarMonthView.cs" Line="261" Column="29" />
-      <File FileName="iSeconds.iOS.Application/CalendarMonth.cs" Line="32" Column="8" />
-      <File FileName="iSeconds.iOS.Application/TimelineView.cs" Line="24" Column="4" />
-      <File FileName="iSeconds.iOS.Application/AppDelegate.cs" Line="46" Column="34" />
-      <File FileName="iSeconds.iOS.Application/UserTimelinesView.cs" Line="7" Column="1" />
+      <File FileName="iSeconds.iOS.Application\Main.cs" Line="1" Column="1" />
+      <File FileName="iSeconds.iOS.Application\CalendarMonthView.cs" Line="1" Column="1" />
+      <File FileName="iSeconds.iOS.Application\CalendarMonth.cs" Line="1" Column="1" />
+      <File FileName="iSeconds.iOS.Application\TimelineView.cs" Line="24" Column="1" />
+      <File FileName="iSeconds.iOS.Application\AppDelegate.cs" Line="1" Column="1" />
+      <File FileName="iSeconds.iOS.Application\UserTimelinesView.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="iSeconds.iOS.Application" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="TimelineView.cs" selected="True" />
-          </Node>
+        <State expanded="True" selected="True">
+          <Node name="iSeconds.iOS.Application" expanded="True" />
           <Node name="iSeconds.iOS.Domain" expanded="True" />
           <Node name="MonoTouch.Dialog" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
-        <State expanded="True" selected="True" />
+        <State selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State>
@@ -33,9 +30,6 @@
           <Value>TableView</Value>
           <Value>NavigationController</Value>
         </State>
-      </Pad>
-      <Pad Id="ConnectionManagerPad">
-        <State selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
