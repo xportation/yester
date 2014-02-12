@@ -14,10 +14,10 @@ using Java.IO;
 using Android.Util;
 using Android.Content.Res;
 using System.Threading;
+using System.Text.RegularExpressions;
 
  // tive que adicionar essa dependencia por causa de um util para criar o thumbnail.. se for necessário podemos remover
 using iSeconds.Domain;
-using System.Text.RegularExpressions;
 
 
 namespace iSeconds.Droid
@@ -126,6 +126,8 @@ namespace iSeconds.Droid
 			// we'll accumulate the names here in order to remove them at the end of the process.
 			IList<string> temporaryFiles = new List<string> ();
 
+			bool errors = false;
+
 			using (StreamWriter fileListWriter = new StreamWriter(fileListPath, false),
 			                    subtitleWriter = new StreamWriter(subtitlePath, false)) {
 
@@ -144,6 +146,7 @@ namespace iSeconds.Droid
 						NativeCommandResult result = executeNativeCommand(cmd, envp);
 						if (result.exitValue != 0) {
 							//TODO: [ronald] what to do with errors?... eg.: out of memory
+							errors = true;
 							break;
 						}
 
@@ -153,48 +156,32 @@ namespace iSeconds.Droid
 					// each file's line should have the form "file 'file_path'"
 					fileListWriter.WriteLine("file '" + filePath + "'");
 
-
-					// TODO: [ronald]: refactor out this boilerplate for subtitle entry generation.
-					subtitleWriter.WriteLine(subtitleIndex++);
-
 					accumulatedTimeMs += (long)file.Duration.TotalMilliseconds;
-
 					var newTimeLabel = timeInMsToSrtTimeFormat(accumulatedTimeMs);
-
-					System.Console.WriteLine(newTimeLabel);
-
-					subtitleWriter.WriteLine(previousTimeLabel + " --> " + newTimeLabel);
+					writeSubtitleEntry (subtitleWriter, subtitleIndex, previousTimeLabel, subtitle, newTimeLabel);
 					previousTimeLabel = newTimeLabel;
-
-					subtitleWriter.WriteLine(subtitle);
-					subtitleWriter.WriteLine();
+					subtitleIndex++;
 				}
 			}
 
+			if (!errors) {
+				// -loglevel debug
+				var command = string.Format (".{0} -y -f concat -i {1} -vf subtitles='{2}' -strict -2 -c:v mpeg4 " +
+				              				 "-b {3}k -r {4} -c:a copy -sn {5}",
+				                             Path.Combine (basePathAbsolute, "ffmpeg"),
+				                             fileListPath,
+				                             subtitlePath,
+				                             (int)videoAttributes.maxBitrate,
+				                             videoAttributes.maxFps,
+				                             outputFilePath);
 
-			// here we create the command line... quite self explanatory
-			// TODO: [ronald] concatenating this way is innefficient and ugly, use {} notation...
-			var command = "." +
-				Path.Combine (basePathAbsolute, "ffmpeg") +
-					" -y -f concat -i " +    // -loglevel debug
-					fileListPath +
-					" -vf subtitles='" + 
-					subtitlePath +
-					"' " +
-					" -strict -2 -c:v mpeg4 -b " +
-					(int)videoAttributes.maxBitrate +
-					"k -r " +
-					videoAttributes.maxFps + 
-					" -c:a copy -sn " +
-					outputFilePath;
-
-			NativeCommandResult res = executeNativeCommand(command, envp);
-			if (res.exitValue != 0) {
-				//TODO: [ronald] what to do with errors?... eg.: out of memory
-				// or unable to generate output... we have to report than fallback to 
-				// the lines below for cleaning up used resources
+				NativeCommandResult res = executeNativeCommand (command, envp);
+				if (res.exitValue != 0) {
+					//TODO: [ronald] what to do with errors?... eg.: out of memory
+					// or unable to generate output... we have to report than fallback to 
+					// the lines below for cleaning up used resources
+				}
 			}
-
 
 			// we don't need any of this anymore.
 			System.IO.File.Delete(fileListPath);
@@ -202,39 +189,48 @@ namespace iSeconds.Droid
 			foreach (var file in temporaryFiles) 
 				System.IO.File.Delete(file);
 
-
 			saveThumbnail(outputFilePath);
 			notifyEnd(outputFilePath);
 		}
 
-		string GenerateCommandVideoMaximumSizeWithBlackPaddings (VideoAttributes videoAttributes, VideoFileInformation file, string filePath)
+		void writeSubtitleEntry (
+			StreamWriter subtitleWriter, 
+			int subtitleIndex, 
+			string previousTimeLabel, 
+			string subtitle, 
+			string newTimeLabel
+		)
 		{
-			// TODO: [ronald] concatenating this way is innefficient and ugly, use {} notation...
-			return "." + 
-					Path.Combine (basePathAbsolute, "ffmpeg") + 
-					" -y -i " + 				//-loglevel debug 
-					file.Path + " -vf scale=iw*min(" + 
-					videoAttributes.maxWidth + 
-					"/iw\\," + 
-					videoAttributes.maxHeight + 
-					"/ih):ih*min(" + 
-					videoAttributes.maxWidth + 
-					"/iw\\," + 
-					videoAttributes.maxHeight + 
-					"/ih),pad=" + 
-					videoAttributes.maxWidth + 
-					":" + 
-					videoAttributes.maxHeight + 
-					":(" + 
-					videoAttributes.maxWidth + 
-					"-iw)/2:(" + 
-					videoAttributes.maxHeight + 
-					"-ih)/2:black" + 
-					" -strict -2 -c:v mpeg4 -b " + 
-					(int)videoAttributes.maxBitrate + 
-					"k -r " + videoAttributes.maxFps + 
-					" -c:a copy -sn " + 
-					filePath;
+			subtitleWriter.WriteLine (subtitleIndex);
+			subtitleWriter.WriteLine (previousTimeLabel + " --> " + newTimeLabel);
+			subtitleWriter.WriteLine (subtitle);
+			subtitleWriter.WriteLine ();
+		}
+
+		string GenerateCommandVideoMaximumSizeWithBlackPaddings (
+			VideoAttributes videoAttributes, 
+			VideoFileInformation file, 
+			string filePath
+		)
+		{
+			//-loglevel debug 
+			return string.Format (".{0} -y -i {1} -vf " +
+				"scale=iw*min({2}/iw\\,{3}/ih):ih*min({4}/iw\\,{5}/ih)," +
+				"pad={6}:{7}:({8}-iw)/2:({9}-ih)/2:black " +
+			    "-strict -2 -c:v mpeg4 -b {10}k -r {11} -c:a copy -sn {12}",
+			                     Path.Combine (basePathAbsolute, "ffmpeg"),
+			                     file.Path, 
+			                     videoAttributes.maxWidth,
+			                     videoAttributes.maxHeight,
+			                     videoAttributes.maxWidth, 
+			                     videoAttributes.maxHeight,
+			                     videoAttributes.maxWidth, 
+			                     videoAttributes.maxHeight,
+			                     videoAttributes.maxWidth, 
+			                     videoAttributes.maxHeight,
+			                     (int)videoAttributes.maxBitrate,
+			                     videoAttributes.maxFps,
+			                     filePath);
 		}
 
 		VideoAttributes GetMaxVideoAttributes (IList<VideoFileInformation> videoFiles)
@@ -338,6 +334,7 @@ namespace iSeconds.Droid
 		struct NativeCommandResult
 		{
 			public int exitValue;
+			public string stderr;
 			public string stdout;
 		}
 
@@ -353,38 +350,21 @@ namespace iSeconds.Droid
 				// Executes the command.
 				Java.Lang.Process process = Runtime.GetRuntime ().Exec (command, envp);
 
-				// Reads stdout.
-				// NOTE: You can write to stdin of the command using
-				//       process.getOutputStream().
-				BufferedReader reader = new BufferedReader(new InputStreamReader(process.ErrorStream));//InputStream
-
 				NativeCommandResult result = new NativeCommandResult();
 
+				result.stderr = "";
 				result.stdout = "";
 
-				int bytesRead;
-				char[] buffer = new char[4096];
-				while ((bytesRead = reader.Read (buffer)) > 0) {
-					string line = new string (buffer, 0, bytesRead);
-					System.Console.WriteLine(line);
-					result.stdout += line;
-					Log.Debug ("cmd line input stream: ", line);
-				}
-				reader.Close ();
+				// Reads stderr.
+				BufferedReader reader = new BufferedReader(new InputStreamReader(process.ErrorStream));
+				result.stderr = readOutputStream(reader);
 
-
-				/*reader = new BufferedReader(new InputStreamReader(process.ErrorStream));
-
-				while ((bytesRead = reader.Read (buffer)) > 0) {
-					string line = new string (buffer, 0, bytesRead);
-					System.Console.WriteLine(line);
-					Log.Debug ("cmd line input stream: ", line);
-				}
-				reader.Close ();*/
+				// Reads stdout.
+				reader = new BufferedReader(new InputStreamReader(process.InputStream));
+				result.stdout = readOutputStream(reader);
 
 				// Waits for the command to finish.
 				process.WaitFor ();
-
 				result.exitValue = process.ExitValue ();
 				Log.Debug ("exitvalue", result.exitValue.ToString ());
 
@@ -394,6 +374,23 @@ namespace iSeconds.Droid
 			} catch (InterruptedException e) {
 				throw new RuntimeException (e);
 			}
+		}
+
+		static string readOutputStream(BufferedReader reader)
+		{
+			int bytesRead;
+			string output = "";
+
+			char[] buffer = new char[4096];
+
+			while ((bytesRead = reader.Read (buffer)) > 0) {
+				string line = new string (buffer, 0, bytesRead);
+				System.Console.WriteLine (line);
+				output += line;
+			}
+			reader.Close ();
+
+			return output;
 		}
 
 		List<VideoFileInformation> getVideoFileInformationForListOfPaths (IList<string> files)
@@ -426,7 +423,7 @@ namespace iSeconds.Droid
 
 			//get duration
 			Regex re = new Regex("[D|d]uration:.((\\d|:|\\.)*)");
-			Match m = re.Match(result.stdout);
+			Match m = re.Match(result.stderr);
 			if (m.Success)
 			{
 				System.Console.WriteLine(m.Groups [1].Value);
@@ -443,7 +440,7 @@ namespace iSeconds.Droid
 
 			//get audio bit rate
 			re = new Regex("[B|b]itrate:.((\\d|:)*)");
-			m = re.Match(result.stdout);
+			m = re.Match(result.stderr);
 			double kb = 0.0;
 			if (m.Success) {
 				System.Console.WriteLine (m.Groups [1].Value);
@@ -453,19 +450,19 @@ namespace iSeconds.Droid
 
 			//get the audio format
 			re = new Regex("[A|a]udio:.*");
-			m = re.Match(result.stdout);
+			m = re.Match(result.stderr);
 			if (m.Success)
 				videoInfo.AudioFormat = m.Value;
 
 			//get the video format
 			re = new Regex("[V|v]ideo:.*");
-			m = re.Match(result.stdout);
+			m = re.Match(result.stderr);
 			if (m.Success)
 				videoInfo.VideoFormat = m.Value;
 
 			//get the video format
 			re = new Regex("(\\d{2,3})x(\\d{2,3})");
-			m = re.Match(result.stdout);
+			m = re.Match(result.stderr);
 			if (m.Success)
 			{
 				int width = 0; int height = 0;
@@ -477,7 +474,7 @@ namespace iSeconds.Droid
 
 			//get the fps
 			re = new Regex(",.([0-9]{0,2}\\.[0-9]{0,2}).fps,");
-			m = re.Match(result.stdout);
+			m = re.Match(result.stderr);
 			double fps = 0.0;
 			if (m.Success) {
 				System.Console.WriteLine(m.Groups [1].Value);
@@ -490,4 +487,3 @@ namespace iSeconds.Droid
 
 	}
 }
-
