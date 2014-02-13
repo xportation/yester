@@ -17,6 +17,7 @@ namespace iSeconds.Domain
 			this.navigator = navigador;
 			
 	      this.user.OnCurrentTimelineChanged += (sender, args) => notifyChanges();
+			this.user.OnTimelineUpdated += (sender, e) => notifyChanges();
 	      repository.OnSaveTimeline += (sender, args) => notifyChanges();
 	      repository.OnDeleteTimeline += (sender, args) => notifyChanges();
 		}

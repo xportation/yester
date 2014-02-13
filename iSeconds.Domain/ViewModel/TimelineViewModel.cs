@@ -36,13 +36,15 @@ namespace iSeconds.Domain
 
 			this.CurrentDate = DateTime.Today;
 
-			this.user.OnCurrentTimelineChanged += (sender, e) => 
-				{
-					setTimeline(e.Value);
-					this.Invalidate();
-				};
+			this.user.OnCurrentTimelineChanged += (sender, e) => {
+				setTimeline(e.Value);
+				this.Invalidate();
+			};
 
-			this.user.OnTimelineUpdated += (sender, e) => this.TimelineName= e.Value.Name;
+			this.user.OnTimelineUpdated += (sender, e) => {
+				if (e.Value.Id == this.timeline.Id)
+					setTimeline(e.Value);
+			};
 
 			this.onRangeSelectionMode = false;
 		}

@@ -58,8 +58,7 @@ namespace iSeconds.Domain
 				this.Model = model;
 
 				DateTime dateTime = date + model.TimeOfDay;
-				this.Label = String.Format("{0:g}", dateTime);
-//				this.Label = Path.GetFileNameWithoutExtension(model.Path);
+				this.Label = ISecondsUtils.DateToString(dateTime, true);
 			}
 
 			public MediaInfo Model { get; set; }
@@ -165,8 +164,12 @@ namespace iSeconds.Domain
 					optionsDialogService.AskForConfirmation(
 						i18n.Msg("Are you sure? This operation cannot be undone."),
 						() => {
+							bool wasChecked= this.CheckedVideo == selectedVideo;
 							this.timeline.DeleteVideoAt(model.Date, this.videos[selectedVideo].Model.Path);
 							this.Init();
+
+							if (this.Videos.Count > 0 && wasChecked)
+								this.CheckVideoCommand.Execute(this.Videos.Count-1);
 						}, // confirmcallback
 
 						() => {} //cancelcallback
