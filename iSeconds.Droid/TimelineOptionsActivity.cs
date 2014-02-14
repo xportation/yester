@@ -62,22 +62,13 @@ namespace iSeconds.Droid
 		private TimelinesViewAdapter listViewAdapter;
       private TimelineOptionsViewModel viewModel = null;
 
-      private const int ShowOptionsMenu = -101;
-      private const int ShowEditTimeline = -102;
-      private const int ShowAddTimeline = -103;
-      private const int ShowDeleteConfirmation = -104;
-
-	   private TimelineOptionsViewModel.TimelineOptionsList optionsList= null;
-	   private TimelineOptionsViewModel.TimelineEditionModel editionModel = null;
-	   private TimelineOptionsViewModel.TimelineDeleteModel deleteModel = null;
-
 	   protected override void OnCreate(Bundle bundle)
       {
          base.OnCreate(bundle);
 
          ISecondsApplication application = (ISecondsApplication) this.Application;
          viewModel = new TimelineOptionsViewModel(application.GetNavigator(), application.GetUserService().CurrentUser, 
-				application.GetRepository(), application.GetI18nService());
+				application.GetRepository(), application.GetI18nService(), application.GetOptionsDialogService());
 			
 			this.RequestWindowFeature(WindowFeatures.NoTitle);
          this.SetContentView(Resource.Layout.TimelineOptions);
@@ -88,40 +79,10 @@ namespace iSeconds.Droid
 			listView.ItemClick += (sender, e) => viewModel.TimelineOptionsCommand.Execute(e.Position);
 
 			viewModel.OnTimelineOptionsViewModelChanged += (sender, args) => listViewAdapter.Invalidate();
-			
-			viewModelRequests();
 
 			configureActionBar(true, "");
 			configureActionBarActions();
       }
-
-	   private void viewModelRequests()
-	   {
-		   viewModel.TimelineOptionsRequest.Raised += (sender, args) =>
-			   {
-				   optionsList = args.Value;
-				   ShowDialog(ShowOptionsMenu);
-			   };
-
-			viewModel.TimelineEditionRequest.Raised += (sender, args) =>
-				{
-					editionModel = args.Value;
-					ShowDialog(ShowEditTimeline);
-				};
-			
-			viewModel.TimelineAdditionRequest.Raised += (sender, args) =>
-				{
-					editionModel = args.Value;
-					ShowDialog(ShowAddTimeline);
-				};
-
-		   viewModel.TimelineDeleteRequest.Raised += (sender, args) =>
-			   {
-				   deleteModel = args.Value;
-				   ShowDialog(ShowDeleteConfirmation);
-			   };
-	   }
-
 
 	   private void configureActionBarActions()
       {
@@ -132,85 +93,5 @@ namespace iSeconds.Droid
 			addTimelineItemAction.ActionType = ActionType.Always;
 			actionBar.AddAction(addTimelineItemAction);
       }
-
-      #region Dialog Modal
-
-		protected override void OnPrepareDialog(int dialogType, Dialog dialog)
-		{
-			base.OnPrepareDialog(dialogType, dialog);
-
-			if ((dialogType == ShowEditTimeline || dialogType == ShowAddTimeline) && editionModel != null)
-			{
-				if (editionModel.TimelineName.Length > 0)
-					dialog.SetTitle(Resource.String.timeline_options_dialog_edit_timeline);
-				else
-					dialog.SetTitle(Resource.String.timeline_options_dialog_new_timeline);
-
-				dialog.FindViewById<TextView>(Resource.Id.timelineName).Text = editionModel.TimelineName;
-				dialog.FindViewById<TextView>(Resource.Id.timelineDescription).Text = editionModel.TimelineDescription;
-			}
-		}
-
-      protected override Dialog OnCreateDialog(int dialogType)
-      {
-         switch (dialogType)
-         {
-            case ShowOptionsMenu:
-               return createDialogOptionsMenu();
-            case ShowEditTimeline:
-            case ShowAddTimeline:
-               return createDialogAddEditTimeline();
-            case ShowDeleteConfirmation:
-               return createDialogDeleteConfirmation();
-         }
-
-         return null;
-      }
-
-      private Dialog createDialogDeleteConfirmation()
-      {
-         var builder = new AlertDialog.Builder(this);
-         builder.SetTitle(Resource.String.timeline_options_dialog_delete_ask);
-			builder.SetMessage(Resource.String.timeline_options_dialog_delete_alert);
-
-         builder.SetPositiveButton(Resource.String.ok, (sender, args) => deleteModel.DeletingFinished());
-
-         builder.SetNegativeButton(Resource.String.cancel, (sender, args) => { /*nothing to do*/ });
-         return builder.Create();
-      }
-
-      private Dialog createDialogAddEditTimeline()
-      {
-         var builder = new AlertDialog.Builder(this);
-         View view = LayoutInflater.Inflate(Resource.Layout.TimelineOptionsEditTimeline, null);
-         builder.SetView(view);
-
-	      builder.SetPositiveButton(Resource.String.ok,
-            (sender, args) =>
-            {
-               editionModel.TimelineName = view.FindViewById<TextView>(Resource.Id.timelineName).Text;
-	            editionModel.TimelineDescription = view.FindViewById<TextView>(Resource.Id.timelineDescription).Text;
-
-					editionModel.EditingFinished();
-            }
-         );
-         
-         builder.SetNegativeButton(Resource.String.cancel, (sender, args) => { /*nothing to do*/ });
-         return builder.Create();
-      }
-
-      private Dialog createDialogOptionsMenu()
-      {
-	      if (optionsList == null)
-		      return null;
-			
-         var builder = new AlertDialog.Builder(this);
-			builder.SetTitle(string.Empty);
-         builder.SetItems(optionsList.ListNames(), (sender, eventArgs) => optionsList.EntryClicked.Execute(eventArgs.Which));
-
-         return builder.Create();
-      }
-
-      #endregion
    }
 }

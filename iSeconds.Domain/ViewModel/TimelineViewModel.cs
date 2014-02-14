@@ -365,8 +365,7 @@ namespace iSeconds.Domain
 				return new Command((object arg) => {
 					Tuple<DateTime, DateTime> rangeDelimiters = getRangeDelimiters();
 					if (rangeDelimiters != null) {
-						string defaultName = timeline.Name + " (" + ISecondsUtils.DateToString(rangeDelimiters.Item1, false) + 
-						                     " - " + ISecondsUtils.DateToString(rangeDelimiters.Item2, false) + ")";
+						string defaultName = timeline.Name;
 						string defaultDescription = string.Format(i18n.Msg("A compilation for timeline {0} from {1} to {2}"), timelineName, 
 							ISecondsUtils.DateToString(rangeDelimiters.Item1, false), ISecondsUtils.DateToString(rangeDelimiters.Item2, false));
 

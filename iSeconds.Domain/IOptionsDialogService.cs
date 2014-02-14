@@ -14,6 +14,9 @@ namespace iSeconds.Domain
 
 		void AskForCompilationNameAndDescription(string defaultName, string defaultDescription, 
 			Action<string, string> userConfirmedCallback, Action userCanceledCallback);
+
+		void AskForTimelineNameAndDescription(string defaultName, string defaultDescription, 
+			Action<string, string> userConfirmedCallback, Action userCanceledCallback);
 	}
 }
 

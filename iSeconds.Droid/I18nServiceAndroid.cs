@@ -87,6 +87,8 @@ namespace iSeconds.Droid
 				return context.Resources.GetString(Resource.String.raw_december);
 			else if (identifier == "Play")
 				return context.Resources.GetString(Resource.String.raw_play);
+			else if (identifier == "Are you sure to delete timeline?")
+				return context.Resources.GetString(Resource.String.raw_timeline_options_dialog_delete_alert);
 
 			return "*"+identifier+"*";
 		}

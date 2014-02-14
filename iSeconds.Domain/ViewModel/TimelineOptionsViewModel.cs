@@ -9,12 +9,15 @@ namespace iSeconds.Domain
 		private User user = null;
 		private I18nService i18n = null;
 		private INavigator navigator = null;
+		private IOptionsDialogService optionsDialog = null;
 		
-		public TimelineOptionsViewModel(INavigator navigador, User user, IRepository repository, I18nService i18n)
+		public TimelineOptionsViewModel(INavigator navigador, User user, IRepository repository, 
+			I18nService i18n, IOptionsDialogService optionsDialog)
 		{
 			this.user = user;
 			this.i18n = i18n;
 			this.navigator = navigador;
+			this.optionsDialog = optionsDialog;
 			
 	      this.user.OnCurrentTimelineChanged += (sender, args) => notifyChanges();
 			this.user.OnTimelineUpdated += (sender, e) => notifyChanges();
@@ -91,22 +94,11 @@ namespace iSeconds.Domain
 				this.i18n = i18n;
 				this.currentTimeline = currentTimeline;
 
-				AddEntry(new OptionsEntry(i18n.Msg("Edit Timeline"), 
-					() => 
-						viewModel.TimelineEditionRequest.Raise(new TimelineEditionModel(viewModel,this.currentTimeline))
-				));
-
+				AddEntry(new OptionsEntry(i18n.Msg("Edit Timeline"), () => viewModel.EditTimelineCommand.Execute(this.currentTimeline)));
 				AddEntry(new OptionsEntry(i18n.Msg("Set as current"), () => viewModel.SetCurrentTimeline(this.currentTimeline)));
-				AddEntry(new OptionsEntry(i18n.Msg("Delete"), () => viewModel.TimelineDeleteRequest.Raise(new TimelineDeleteModel(viewModel, this.currentTimeline))));
+				AddEntry(new OptionsEntry(i18n.Msg("Delete"), () => viewModel.DeleteTimelineCommand.Execute(this.currentTimeline)));
 				AddEntry(new OptionsEntry(i18n.Msg("Cancel"), () => { /*nothing to do*/ }));
 			}
-		}
-
-		private InteractionRequest<TimelineOptionsList> timelineOptionsRequest = new InteractionRequest<TimelineOptionsList>();
-
-		public InteractionRequest<TimelineOptionsList> TimelineOptionsRequest
-		{
-			get { return timelineOptionsRequest; }
 		}
 
 		public ICommand TimelineOptionsCommand
@@ -116,113 +108,49 @@ namespace iSeconds.Domain
 				return new Command((object arg) =>
 					{
 						var currentTimelineInEdition = this.TimelineAt((int) arg);
-						TimelineOptionsRequest.Raise(new TimelineOptionsList(this, currentTimelineInEdition, i18n));
+						optionsDialog.ShowModal(new TimelineOptionsList(this, currentTimelineInEdition, i18n));
 					}); 
 			}
 		}
 
-		public ICommand SetDefaultCommand
+		#endregion
+
+		public ICommand AddTimelineCommand
+		{
+			get { return new Command((object arg) => { 
+				optionsDialog.AskForTimelineNameAndDescription("","",	(string name, string description) => 
+					this.AddTimeline(name, description),
+					null);
+			}); 
+			}
+		}
+
+		public ICommand EditTimelineCommand
+		{
+			get { return new Command((object arg) => {
+				Timeline currentTimeline = (Timeline) arg;
+				optionsDialog.AskForTimelineNameAndDescription(currentTimeline.Name,currentTimeline.Description,
+					(string name, string description) => {
+						currentTimeline.Name = name;
+						currentTimeline.Description = description;
+						this.UpdateTimeline(currentTimeline);
+					},
+					null);
+			}); 
+			}
+		} 
+		
+		public ICommand DeleteTimelineCommand
 		{
 			get 
 			{ 
 				return new Command((object arg) =>
-				                   {
-					var currentTimelineInEdition = this.TimelineAt((int) arg);
-					this.SetCurrentTimeline(currentTimelineInEdition);
-				}); 
+					{
+						Timeline currentTimeline = (Timeline) arg;
+						optionsDialog.AskForConfirmation(i18n.Msg("Are you sure to delete timeline?"), () => this.DeleteTimeline(currentTimeline), () => {});
+					}); 
 			}
 		}
 
-		#endregion
-
-		#region Timeline Edition
-		
-		public class TimelineEditionModel
-		{
-			private Timeline currentTimeline = null;
-			private TimelineOptionsViewModel viewModel;
-
-			public TimelineEditionModel(TimelineOptionsViewModel viewModel, Timeline currentTimeline)
-			{
-				this.viewModel = viewModel;
-				this.currentTimeline = currentTimeline;
-
-				if (currentTimeline != null)
-				{
-					TimelineName = currentTimeline.Name;
-					TimelineDescription = currentTimeline.Description;
-				}
-				else
-				{
-					TimelineName = string.Empty;
-					TimelineDescription = string.Empty;
-				}
-			}
-
-			public string TimelineName { get; set; }
-
-			public string TimelineDescription { get; set; }
-
-			public void EditingFinished()
-			{
-				if (currentTimeline == null)
-					viewModel.AddTimeline(TimelineName, TimelineDescription);
-				else
-				{
-					currentTimeline.Name = TimelineName;
-					currentTimeline.Description = TimelineDescription;
-					viewModel.UpdateTimeline(currentTimeline);
-				}
-			}
-		}
-
-		private InteractionRequest<TimelineEditionModel> timelineEditionRequest = new InteractionRequest<TimelineEditionModel>();
-		
-		public InteractionRequest<TimelineEditionModel> TimelineEditionRequest
-		{
-			get { return timelineEditionRequest; }
-		}
-
-		private InteractionRequest<TimelineEditionModel> timelineAdditionRequest = new InteractionRequest<TimelineEditionModel>();
-
-		public InteractionRequest<TimelineEditionModel> TimelineAdditionRequest
-		{
-			get { return timelineAdditionRequest; }
-		}
-
-		public ICommand AddTimelineCommand
-		{
-			get { return new Command((object arg) => { TimelineAdditionRequest.Raise(new TimelineEditionModel(this,null)); }); }
-		}
-
-		#endregion 
-
-		#region Timeline Delete
-
-		public class TimelineDeleteModel
-		{
-			private Timeline currentTimeline = null;
-			private TimelineOptionsViewModel viewModel;
-
-			public TimelineDeleteModel(TimelineOptionsViewModel viewModel, Timeline currentTimeline)
-			{
-				this.viewModel = viewModel;
-				this.currentTimeline = currentTimeline;
-			}
-			
-			public void DeletingFinished()
-			{
-				viewModel.DeleteTimeline(currentTimeline);
-			}
-		}
-
-		private InteractionRequest<TimelineDeleteModel> timelineDeleteRequest = new InteractionRequest<TimelineDeleteModel>();
-
-		public InteractionRequest<TimelineDeleteModel> TimelineDeleteRequest
-		{
-			get { return timelineDeleteRequest; }
-		}
-		
-		#endregion
 	}
 }

@@ -93,6 +93,42 @@ namespace iSeconds.Droid
 
 			dialog.Show();
 		}
+
+		public void AskForTimelineNameAndDescription(string defaultName, string defaultDescription, 
+			Action<string, string> userConfirmedCallback, Action userCanceledCallback)
+		{
+			Activity activity = tracker.GetCurrentActivity();
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			View layout = activity.LayoutInflater.Inflate(Resource.Layout.TimelineOptionsEditTimeline, null);
+			builder.SetView(layout);
+
+			builder.SetPositiveButton(Resource.String.ok,
+				(sender, args) =>
+				{
+					if (userConfirmedCallback != null) {
+						EditText editName = layout.FindViewById<EditText>(Resource.Id.timelineName);
+						EditText editDescription = layout.FindViewById<EditText>(Resource.Id.timelineDescription);
+						userConfirmedCallback.Invoke(editName.Text, editDescription.Text);
+					}
+				}
+			);
+
+			builder.SetNegativeButton(Resource.String.cancel, (sender, args) => {
+				if (userCanceledCallback != null)
+					userCanceledCallback.Invoke();
+			});
+
+			Dialog dialog = builder.Create();
+			dialog.ShowEvent += (sender, e) => {
+				EditText editName = dialog.FindViewById<EditText>(Resource.Id.timelineName);
+				editName.Text = defaultName;
+
+				EditText editDescription = dialog.FindViewById<EditText>(Resource.Id.timelineDescription);
+				editDescription.Text = defaultDescription;
+			};
+
+			dialog.Show();
+		}
 	}
 }
 

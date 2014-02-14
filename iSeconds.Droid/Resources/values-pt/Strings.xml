@@ -20,8 +20,6 @@
    <string name="yes">Sim</string>
    <string name="no">Não</string>
    <string name="select">Selecionar</string>
-   <string name="timeline_options_dialog_delete_ask">Deletar timeline?</string>
-   <string name="timeline_options_dialog_delete_alert">Você tem certeza que deseja deletar esta timeline? \nEsta operação não pode ser desfeita.</string>   
    <string name="day_options_title">Dia</string>
    <string name="day_options_video_description">Descrição do vídeo:</string>
    <string name="item_options_message">Segure em um item para o menu de opções\nToque para mostrar o vídeo</string>
@@ -62,6 +60,7 @@
    <string name="raw_delete_video">Deletar vídeo</string>
    <string name="raw_share">Compartilhar</string>
    <string name="raw_play">Tocar</string>
+   <string name="raw_timeline_options_dialog_delete_alert">Você tem certeza que deseja deletar esta timeline? \nEsta operação não pode ser desfeita.</string>   
 
    <string name="about_us">Broditech é uma empresa focada no desenvolvimento de jogos casuais e aplicações móveis.</string>
    <string name="about_iseconds">iSeconds é a melhor maneira de gravar suas memórias. Você pode fazer isso através de pequenos vídeos.</string>
@@ -88,7 +87,7 @@
 	<string name="compilation_notification_title">Compilação finalizada</string>
 	<string name="compilation_notification_description">Sua compilação está disponível</string>
 	<string name="raw_compilation_processing_message">Sua compilação está sendo processada, você será avisado quando ela estiver pronta.</string>
-	<string name="raw_compilation_default_description">Compilação para a timeline {0} de {1} até {2}</string>
+	<string name="raw_compilation_default_description">Timeline {0} de {1} até {2}</string>
 	<string name="raw_delete_compilation">Deletar compilação</string>
 	<string name="raw_edit_compilation">Editar compilação</string>
 	<string name="raw_share_via">Compartilhar via:</string>
