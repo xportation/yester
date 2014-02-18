@@ -67,7 +67,7 @@ namespace iSeconds.Droid
 			TextSize = 21f;
 			TodayColor = Color.Argb(255, 0, 180, 255);
 			TodayStrokeWidth = 6f;
-			SelectionColor = Color.Argb(100, 0, 180, 255);
+			SelectionColor = Color.Argb(100, 0, 155, 169);
 			RangeDelimiterColor = Color.Argb(100, 0, 255, 0);
 			SelectionShadowColor = Color.Rgb(200, 220, 255);
 			TextColor = Color.Rgb(51,65,90);
@@ -77,7 +77,7 @@ namespace iSeconds.Droid
 			TextStrokeColor = Color.Argb(200,255,255,255);
 			TextStrokeWidth = 2.5f;
 			MoreVideosStrokeWidth = 1.5f;
-			MoreVideosColor = Color.Rgb(0, 175, 232);
+			MoreVideosColor = Color.Rgb(0, 155, 169);
 			MoreVideosStrokeColor = Color.White;
 		}
 	}
