@@ -89,6 +89,10 @@ namespace iSeconds.Droid
 				return context.Resources.GetString(Resource.String.raw_play);
 			else if (identifier == "Are you sure to delete timeline?")
 				return context.Resources.GetString(Resource.String.raw_timeline_options_dialog_delete_alert);
+			else if (identifier == "Do you want to delete the videos linked to this timeline?")
+				return context.Resources.GetString(Resource.String.raw_timeline_options_dialog_also_delete_videos_alert);
+			else if (identifier == "Please wait...")
+				return context.Resources.GetString(Resource.String.raw_please_wait);
 
 			return "*"+identifier+"*";
 		}

@@ -5,7 +5,7 @@
    <string name="library_name">Yester.Droid</string>
    <string name="add_timeline">Adicionar</string>
    <string name="actionbar_timelines_text">Timelines</string>
-   <string name="actionbar_dayoptions_text">DAta</string>
+   <string name="actionbar_dayoptions_text">Data</string>
    <string name="timeline_default">Minha vida</string>
    <string name="timeline_options_title">Timelines</string>
    <string name="timeline_menu_options">Configurações das timelines</string>
@@ -60,7 +60,9 @@
    <string name="raw_delete_video">Deletar vídeo</string>
    <string name="raw_share">Compartilhar</string>
    <string name="raw_play">Tocar</string>
-   <string name="raw_timeline_options_dialog_delete_alert">Você tem certeza que deseja deletar esta timeline? \nEsta operação não pode ser desfeita.</string>   
+   <string name="raw_timeline_options_dialog_delete_alert">Você tem certeza que deseja deletar esta timeline? \nEsta operação não pode ser desfeita.</string>
+   <string name="raw_timeline_options_dialog_also_delete_videos_alert">Você deseja apagar todos os vídeos vinculados a esta timeline?</string>
+   <string name="raw_please_wait">Por favor aguarde...</string>
 
    <string name="about_us">Broditech é uma empresa focada no desenvolvimento de jogos casuais e aplicações móveis.</string>
    <string name="about_iseconds">iSeconds é a melhor maneira de gravar suas memórias. Você pode fazer isso através de pequenos vídeos.</string>

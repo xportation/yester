@@ -61,15 +61,17 @@ namespace iSeconds.Domain
          user.CreateTimeline(name, description);
       }
 
-	   public void DeleteTimeline(Timeline timeline)
+		public void DeleteTimeline(Timeline timeline, bool deleteVideosLinked)
 	   {
-         user.DeleteTimeline(timeline);
+			optionsDialog.ShowProgressDialog(() => {
+				user.DeleteTimeline(timeline, deleteVideosLinked);
 
-		   if (user.GetTimelineCount() == 0)
-				user.CreateTimeline(i18n.Msg("Default Timeline"), i18n.Msg("Default Timeline"));
+			   if (user.GetTimelineCount() == 0)
+					user.CreateTimeline(i18n.Msg("Default Timeline"), i18n.Msg("Default Timeline"));
 
-			var newCurrentTimeline= this.TimelineAt(0);
-			this.SetCurrentTimeline(newCurrentTimeline);
+				var newCurrentTimeline= this.TimelineAt(0);
+				this.SetCurrentTimeline(newCurrentTimeline);
+			}, i18n.Msg("Please wait..."));
 	   }
 
 		public void SetCurrentTimeline(Timeline timeline)
@@ -147,7 +149,13 @@ namespace iSeconds.Domain
 				return new Command((object arg) =>
 					{
 						Timeline currentTimeline = (Timeline) arg;
-						optionsDialog.AskForConfirmation(i18n.Msg("Are you sure to delete timeline?"), () => this.DeleteTimeline(currentTimeline), () => {});
+						optionsDialog.AskForConfirmation(i18n.Msg("Are you sure to delete timeline?"), 
+							() => {
+								optionsDialog.AskForConfirmation(i18n.Msg("Do you want to delete the videos linked to this timeline?"), 
+									() => this.DeleteTimeline(currentTimeline, true), () => this.DeleteTimeline(currentTimeline, false));
+							}, 
+							() => {}
+						);
 					}); 
 			}
 		}

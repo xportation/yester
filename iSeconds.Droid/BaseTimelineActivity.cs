@@ -60,15 +60,15 @@ namespace iSeconds.Droid
 
 			this.viewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) => {
 				if (e.PropertyName == "CurrentMonthTitle") {
-					monthLabel.Text = this.viewModel.CurrentMonthTitle;
+					RunOnUiThread(() => monthLabel.Text = this.viewModel.CurrentMonthTitle);
 				}
 
 				if (e.PropertyName == "VisibleDays") {
-					monthView.ViewedDays = viewModel.VisibleDays;
+					RunOnUiThread(() => monthView.ViewedDays = viewModel.VisibleDays);
 				}
 
 				if (e.PropertyName == "TimelineName") {
-					setActionBarTitle();
+					RunOnUiThread(() => setActionBarTitle());
 				}
 
 				/*if (e.PropertyName == "RangeSelection") {

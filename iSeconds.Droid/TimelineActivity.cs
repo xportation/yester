@@ -10,40 +10,20 @@ using System.ComponentModel;
 using Android.Graphics.Drawables;
 using LegacyBar.Library.BarActions;
 using iSeconds.Domain.Framework;
+using System.Timers;
 
 namespace iSeconds.Droid
 {
-	interface FileObserverNotify
-	{
-		void OnFileCreated();
-	}
-
-	class FileObservadoro : FileObserver
-	{
-		private FileObserverNotify notifier;
-
-		public FileObservadoro(string path, FileObserverNotify notifier)
-			:	base(path, FileObserverEvents.Create)
-		{
-			this.notifier = notifier;
-		}
-
-		public override void OnEvent(FileObserverEvents e, string path)
-		{
-			if (e == FileObserverEvents.Create)
-				notifier.OnFileCreated();
-		}
-	}
 
    [Activity (Label = "TimelineActivity")]
-	public class TimelineActivity : BaseTimelineActivity, FileObserverNotify
+	public class TimelineActivity : BaseTimelineActivity
 	{
 		private const string CurrentDateState= "currenteDateState";
 		private const string FirstDateSelected= "firstDateSelected";
 		private const string SecondDateSelected= "secondDateSelected";
 		private const int ShowOptionsMenu= 101;
 
-		private FileObservadoro fileObservadoro;
+		private Timer singleshotUpdateView = null;
 
 		private const int TutorialDialogId = 15;
 
@@ -54,29 +34,30 @@ namespace iSeconds.Droid
 
 			ISecondsApplication application = this.Application as ISecondsApplication;
 			IPathService pathService = application.GetPathService();
-			fileObservadoro = new FileObservadoro(pathService.GetMediaPath(), this);
-			fileObservadoro.StartWatching();
 
 			loadSavedState(bundle);
-			viewModel.ShowTutorialCommand.Execute(null);
-		}
 
-		#region FileObserverNotify implementation
+			singleshotUpdateView = new Timer(3000);
+			singleshotUpdateView.Elapsed += (sender, e) => {
+				singleshotUpdateView.Stop();
+				viewModel.Invalidate();
+				setProgressVisibility(false);
+			};
 
-		public void OnFileCreated()
-		{
-			RunOnUiThread(
-				() => {
-					viewModel.Invalidate();
+			viewModel.PropertyChanged += (sender, e) => {
+				if (e.PropertyName == "NewVideoAvailable") {
+					setProgressVisibility(true);
+					singleshotUpdateView.Start();
 				}
-			);
-		}
 
-		#endregion
+				if (e.PropertyName == "CurrentDate")
+					setProgressVisibility(false);
+			};
+		}
 
 		protected override void OnResume()
 		{
-			base.OnResume();
+			base.OnResume(); 
 			viewModel.Invalidate();
 		}
 
@@ -135,10 +116,13 @@ namespace iSeconds.Droid
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
 
-			if (isVisible)
-				actionBar.ProgressBarVisibility = ViewStates.Visible;
-			else
-				actionBar.ProgressBarVisibility = ViewStates.Gone;
+			if (isVisible) {
+				if (actionBar.ProgressBarVisibility == ViewStates.Gone)
+					actionBar.ProgressBarVisibility = ViewStates.Visible;
+			} else {
+				if (actionBar.ProgressBarVisibility == ViewStates.Visible)
+					actionBar.ProgressBarVisibility = ViewStates.Gone;
+			}
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)

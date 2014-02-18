@@ -40,6 +40,15 @@ namespace iSeconds.Domain
 			day.DeleteVideo (url);
 		}
 
+		public void DeleteAllVideos()
+		{
+			Debug.Assert (repository != null);
+
+			var days= repository.GetAllDays(this.Id);
+			foreach (DayInfo day in days)
+				day.DeleteVideos();
+		}
+
 		public IList<MediaInfo> GetVideosAt(DateTime date)
 		{
 			Debug.Assert(repository != null);

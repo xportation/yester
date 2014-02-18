@@ -57,14 +57,15 @@ namespace iSeconds.Droid
 
 		void configureSelectedDay ()
 		{
-			if (this.Intent.HasExtra ("SelectedDay")) {
+			if (this.Intent.HasExtra("SelectedDay")) {
+				int day = Convert.ToInt32(this.Intent.Extras.GetString("SelectedDay"));
+				int month = Convert.ToInt32(this.Intent.Extras.GetString("SelectedMonth"));
+				int year = Convert.ToInt32(this.Intent.Extras.GetString("SelectedYear"));
+				DateTime selectedDay = new DateTime(year, month, day);
+				this.viewModel.RangeSelectionCommand.Execute(selectedDay);
+			}
 
-				int day = Convert.ToInt32(this.Intent.Extras.GetString ("SelectedDay"));
-				int month = Convert.ToInt32(this.Intent.Extras.GetString ("SelectedMonth"));
-				int year = Convert.ToInt32(this.Intent.Extras.GetString ("SelectedYear"));
-				DateTime selectedDay = new DateTime (year, month, day);
-				this.viewModel.RangeSelectionCommand.Execute (selectedDay);
-
+			if (this.Intent.HasExtra("CurrentMonth")) {
 				int currentMonth = Convert.ToInt32(this.Intent.Extras.GetString ("CurrentMonth"));
 				int currentYear = Convert.ToInt32(this.Intent.Extras.GetString ("CurrentYear"));
 				this.viewModel.CurrentDate = new DateTime(currentYear, currentMonth, 1);

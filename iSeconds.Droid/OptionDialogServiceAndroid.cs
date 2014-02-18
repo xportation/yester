@@ -4,6 +4,8 @@ using Android.App;
 using Android.Content;
 using Android.Widget;
 using Android.Views;
+using System.Threading;
+using System.Diagnostics;
 
 namespace iSeconds.Droid
 {
@@ -128,6 +130,22 @@ namespace iSeconds.Droid
 			};
 
 			dialog.Show();
+		}
+
+		public void ShowProgressDialog(Action actionToPerform, string message)
+		{
+			Debug.Assert(actionToPerform != null);
+
+			Activity activity = tracker.GetCurrentActivity();
+			var progressDialog = new ProgressDialog(activity);
+			progressDialog.Indeterminate = true;
+			progressDialog.SetMessage(message);
+			progressDialog.Show();
+
+			ThreadPool.QueueUserWorkItem(d => {
+				actionToPerform.Invoke();
+				activity.RunOnUiThread(() => progressDialog.Dismiss());
+			});
 		}
 	}
 }

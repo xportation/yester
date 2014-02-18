@@ -83,8 +83,8 @@ namespace iSeconds.Domain
 
 					viewModel.PresentationInfo = date;
 					viewModel.PropertyChanged+= (sender, e) => {
-						if (e.PropertyName == "VideoRecorded" || e.PropertyName == "VideoAdded") 
-							this.Invalidate();
+						if (e.PropertyName == "VideoRecorded" || e.PropertyName == "VideoAdded")
+							OnPropertyChanged("NewVideoAvailable");
 					};
 
 					viewModels.Add(viewModel);
@@ -338,20 +338,18 @@ namespace iSeconds.Domain
 						navigator.NavigateBack();
 					}
 					else { // senão vai iniciar a activity de range selection
-
 						Args args = new Args();
-
 						if (arg != null) {
 							// se a data for passada já iniciamos a seleção de range com 1 dia
 							DateTime selectedDate = (DateTime)arg;
 							args.Put("SelectedDay", selectedDate.Day.ToString());
 							args.Put("SelectedMonth", selectedDate.Month.ToString());
 							args.Put("SelectedYear", selectedDate.Year.ToString());
-
-							// isso eh para conseguirmos lançar o range selector mode no mes certo
-							args.Put("CurrentMonth", this.currentDate.Month.ToString());
-							args.Put("CurrentYear", this.currentDate.Year.ToString());
 						}
+
+						// isso eh para conseguirmos lançar o range selector mode no mes certo
+						args.Put("CurrentMonth", this.currentDate.Month.ToString());
+						args.Put("CurrentYear", this.currentDate.Year.ToString());
 
 						navigator.NavigateTo("range_selection", args);
 					}

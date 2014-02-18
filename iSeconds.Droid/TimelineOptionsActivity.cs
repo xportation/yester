@@ -78,7 +78,9 @@ namespace iSeconds.Droid
          listView.Adapter = listViewAdapter;
 			listView.ItemClick += (sender, e) => viewModel.TimelineOptionsCommand.Execute(e.Position);
 
-			viewModel.OnTimelineOptionsViewModelChanged += (sender, args) => listViewAdapter.Invalidate();
+			viewModel.OnTimelineOptionsViewModelChanged += (sender, args) => {
+				RunOnUiThread(() => listViewAdapter.Invalidate());
+			};
 
 			configureActionBar(true, "");
 			configureActionBarActions();

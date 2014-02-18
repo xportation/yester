@@ -45,8 +45,8 @@ namespace iSeconds.Droid
 				viewModel.OptionsCommand.Execute(null);
 			};
 
-			Button compileButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_range_selector);
-			compileButton.Click += (object sender, EventArgs e) => {
+			Button rangeSelectorButton = moreContentView.FindViewById<Button>(Resource.Id.main_more_content_range_selector);
+			rangeSelectorButton.Click += (object sender, EventArgs e) => {
 				popupWindow.Dismiss();
 				viewModel.LongPressCommand.Execute(null);
 			};

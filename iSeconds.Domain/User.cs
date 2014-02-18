@@ -107,10 +107,14 @@ namespace iSeconds.Domain
 			}
 	   }
       
-      public void DeleteTimeline(Timeline timeline)
+		public void DeleteTimeline(Timeline timeline, bool deleteVideosLinked)
       {
-         if (this.Id == timeline.UserId)
-            repository.DeleteTimeline(timeline);
+			if (this.Id == timeline.UserId) {
+				if (deleteVideosLinked)
+					timeline.DeleteAllVideos();
+
+				repository.DeleteTimeline(timeline);
+			}
       }
 
 		/// <summary>

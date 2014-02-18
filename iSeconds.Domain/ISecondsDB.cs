@@ -64,7 +64,20 @@ namespace iSeconds.Domain
 
 		public DayInfo GetDayInfo(int dayId)
 		{
-			return (from i in Table<DayInfo> () where i.Id == dayId select i).FirstOrDefault ();
+			DayInfo dayInfo= (from i in Table<DayInfo> () where i.Id == dayId select i).FirstOrDefault ();
+			if (dayInfo != null)
+				dayInfo.SetRepository(this);
+
+			return dayInfo;
+		}
+
+		public IList<DayInfo> GetAllDays(int timelineId)
+		{
+			var days = (from day in Table<DayInfo> () where day.TimelineId == timelineId select day).ToList();
+			foreach (DayInfo day in days)
+				day.SetRepository(this);
+
+			return days;
 		}
 
 		public MediaInfo GetMediaById (int id)

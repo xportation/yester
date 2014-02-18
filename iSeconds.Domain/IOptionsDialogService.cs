@@ -17,6 +17,14 @@ namespace iSeconds.Domain
 
 		void AskForTimelineNameAndDescription(string defaultName, string defaultDescription, 
 			Action<string, string> userConfirmedCallback, Action userCanceledCallback);
+
+		/// <summary>
+		/// Shows the progress dialog.
+		/// </summary>
+		/// <param name="actionToPerforme">Action to performe. Be carefull if you need to update your GUI, 
+		/// this is executed in separeted thread.</param>
+		/// <param name="message">Message.</param>
+		void ShowProgressDialog(Action actionToPerform, string message);
 	}
 }
 

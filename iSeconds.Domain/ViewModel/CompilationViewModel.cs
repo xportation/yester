@@ -129,7 +129,6 @@ namespace iSeconds.Domain
 					dialogService.AskForConfirmation(msg, () => {
 						user.DeleteCompilation(compilation.Model);
 						loadCompilations();
-
 					}
 						, () => {} // cancel callback
 					);

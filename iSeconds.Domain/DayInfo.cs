@@ -46,17 +46,31 @@ namespace iSeconds.Domain
 			MediaInfo media = this.repository.GetMediaByPath (url);
 
 			int deleteMediaId = media.Id;
-
-			this.repository.DeleteMedia (media);
-
-			try {
-				File.Delete(url);
-				File.Delete(media.GetThumbnailPath());
-			} catch (Exception) {
-			}
+			deleteMedia(media);
 
 			if (deleteMediaId == this.DefaultVideoId)
 				chooseNewDefaultVideo ();
+		}
+
+		public void DeleteVideos()
+		{
+			Debug.Assert(repository != null);
+			foreach (MediaInfo media in this.GetVideos())
+				deleteMedia(media);
+
+			chooseNewDefaultVideo();
+		}
+
+		private void deleteMedia(MediaInfo media)
+		{
+			this.repository.DeleteMedia(media);
+
+			try {
+				File.Delete(media.Path);
+				File.Delete(media.GetThumbnailPath());
+			}
+			catch (Exception) {
+			}
 		}
 
 		private void chooseNewDefaultVideo()
@@ -65,7 +79,7 @@ namespace iSeconds.Domain
 
 			// se ainda houver videos no dia, o default video sera o primeiro retornado
 			if (medias.Count != 0)
-				SetDefaultVideo (medias [0].Id);
+				SetDefaultVideo (medias[0].Id);
 			else // nao havendo videos obviamente nao havera default
 				SetDefaultVideo (-1);
 		}

@@ -21,6 +21,8 @@ namespace iSeconds.Domain
 
 		DayInfo GetDayInfo(int dayId);
 
+		IList<DayInfo> GetAllDays(int timelineId);
+
 		User GetUser(string userName);
 		void SaveUser(User user);
 
