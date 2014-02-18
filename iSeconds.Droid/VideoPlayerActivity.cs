@@ -107,7 +107,7 @@ namespace iSeconds.Droid
 		}
 	}
 
-	[Activity (Label = "VideoPlayerActivity", ConfigurationChanges = ConfigChanges.KeyboardHidden|ConfigChanges.Orientation)]
+	[Activity (Label = "VideoPlayerActivity", ConfigurationChanges = ConfigChanges.KeyboardHidden|ConfigChanges.Orientation|ConfigChanges.Keyboard)]
 	public class VideoPlayerActivity : ISecondsActivity, VideoViewPreparer
 	{
 		private IPathService pathService = null;

@@ -36,7 +36,7 @@ namespace iSeconds.Droid
 		{
 			ImageView facebookImageView = FindViewById<ImageView>(Resource.Id.imageFacebook);
 			facebookImageView.Click+= (sender, e) => {
-				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://www.facebook.com/yester-mobile"));
+				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://www.facebook.com/yester.mobile"));
 				StartActivity(intent);
 			};
 

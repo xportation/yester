@@ -49,8 +49,8 @@
    <string name="overflow_menu_settings">Configurações</string>
    <string name="overflow_menu_about">Sobre</string>
 
-   <string name="raw_default_timeline">Timeline Default</string>
-   <string name="raw_this_is_a_default_timeline">Esta é uma timeline default</string>
+   <string name="raw_default_timeline">Minha vida</string>
+   <string name="raw_this_is_a_default_timeline">Timeline da minha vida</string>
    <string name="raw_edit_timeline">Editar Timeline</string>
    <string name="raw_set_as_current">Definir como atual</string>
    <string name="raw_delete">Deletar</string>

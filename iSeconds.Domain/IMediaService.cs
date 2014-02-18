@@ -7,6 +7,9 @@ namespace iSeconds.Domain
 {
 	public interface IMediaService
 	{
+		event EventHandler OnVideoRecorded;
+		event EventHandler OnThumbnailSaved;
+
 		void TakeVideo(DateTime date, Action<string> resultAction);
 
 		void PlayVideo(string videoPath);

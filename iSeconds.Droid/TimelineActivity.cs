@@ -15,7 +15,7 @@ using System.Timers;
 namespace iSeconds.Droid
 {
 
-   [Activity (Label = "TimelineActivity")]
+	[Activity (Label = "TimelineActivity")]
 	public class TimelineActivity : BaseTimelineActivity
 	{
 		private const string CurrentDateState= "currenteDateState";
@@ -37,21 +37,21 @@ namespace iSeconds.Droid
 
 			loadSavedState(bundle);
 
-			singleshotUpdateView = new Timer(3000);
+			singleshotUpdateView = new Timer(5000);
 			singleshotUpdateView.Elapsed += (sender, e) => {
 				singleshotUpdateView.Stop();
-				viewModel.Invalidate();
 				setProgressVisibility(false);
 			};
 
-			viewModel.PropertyChanged += (sender, e) => {
-				if (e.PropertyName == "NewVideoAvailable") {
-					setProgressVisibility(true);
-					singleshotUpdateView.Start();
-				}
+			IMediaService mediaService = application.GetMediaService();
+			mediaService.OnVideoRecorded += (sender, e) => {
+				setProgressVisibility(true);
+				singleshotUpdateView.Start();
+			};
 
-				if (e.PropertyName == "CurrentDate")
-					setProgressVisibility(false);
+			mediaService.OnThumbnailSaved += (sender, e) => {
+				viewModel.Invalidate();
+				setProgressVisibility(false);
 			};
 		}
 

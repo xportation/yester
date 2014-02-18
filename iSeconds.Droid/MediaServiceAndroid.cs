@@ -25,6 +25,9 @@ namespace iSeconds.Droid
 		private User user;
 		private int cameraFPS= 15;
 
+		public event EventHandler OnVideoRecorded;
+		public event EventHandler OnThumbnailSaved;
+
 		public MediaServiceAndroid(ActivityTracker activityTracker, IRepository repository, string mediaPath, User user)
 		{
 			this.activityTracker = activityTracker;
@@ -42,36 +45,28 @@ namespace iSeconds.Droid
 				if(!picker.IsCameraAvailable || !picker.VideosSupported)
 					return;
 
-				picker.TakeVideoAsync(new StoreVideoOptions
-                    {											
-								Name = ISecondsUtils.StringifyDate("movie", date),
-                        DesiredLength = System.TimeSpan.FromMilliseconds(user.RecordDuration*1000 + 1000/cameraFPS),
-                        //Directory = this.getMediaDirectory()
-                    })
-                    .ContinueWith(t =>
-                {
+				picker.TakeVideoAsync(new StoreVideoOptions {											
+					Name = ISecondsUtils.StringifyDate("movie", date),
+	            DesiredLength = System.TimeSpan.FromMilliseconds(user.RecordDuration*1000 + 1000/cameraFPS)
+				}).ContinueWith(t => {
+					if (t.IsCanceled)
+                  return;
 
-                    if (t.IsCanceled)
-                        return;
+					currentActivity.RunOnUiThread(() => {
+						string path = t.Result.Path;
+						string filename = System.IO.Path.GetFileName(path);
 
-                    currentActivity.RunOnUiThread(() =>
-                    {
-                        string path = t.Result.Path;
-                        string filename = System.IO.Path.GetFileName(path);
+						string newPath = System.IO.Path.Combine(mediaPath, filename);
 
-                        string newPath = System.IO.Path.Combine(mediaPath, filename);
+						System.IO.File.Copy(t.Result.Path, newPath, true);
+						System.IO.File.Delete(t.Result.Path);
 
-                        System.IO.File.Copy(t.Result.Path, newPath, true);
-                        System.IO.File.Delete(t.Result.Path);
+						resultAction.Invoke(newPath);
 
-                        resultAction.Invoke(newPath);
-                    });
-
-                    //             t.Result.Dispose();
-                    //             t.Dispose();
-
-                });
-
+						if (OnVideoRecorded != null)
+							OnVideoRecorded(this, EventArgs.Empty);
+					});
+				});
 			}
 		}
 
@@ -86,6 +81,9 @@ namespace iSeconds.Droid
 		public void SaveVideoThumbnail(string thumbnailPath, string videoPath)
 		{
 			AndroidMediaUtils.SaveVideoThumbnail (thumbnailPath, videoPath);
+
+			if (OnThumbnailSaved != null)
+				OnThumbnailSaved(this, EventArgs.Empty);
 		}
 
 		public void ConcatMovies(string compilationPath, DateTime startDate, DateTime endDate, int timelineId, bool onlyDefaultMovies)

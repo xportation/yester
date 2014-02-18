@@ -148,14 +148,14 @@ namespace iSeconds.Domain
 					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Play"), () => {
 						PlayVideoCommand.Execute(arg);
 					}));
-					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Delete"), () => {
-						DeleteVideoCommand.Execute(arg);
+					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Edit compilation"), () => {
+						EditCompilationCommand.Execute(arg);
 					}));
 					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Share"), () => {
 						ShareCompilationCommand.Execute(arg);
 					}));
-					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Edit compilation"), () => {
-						EditCompilationCommand.Execute(arg);
+					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Delete"), () => {
+						DeleteVideoCommand.Execute(arg);
 					}));
 					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Cancel"), () => {}));
 					dialogService.ShowModal(options);

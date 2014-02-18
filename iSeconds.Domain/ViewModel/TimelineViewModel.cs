@@ -82,11 +82,6 @@ namespace iSeconds.Domain
 						);
 
 					viewModel.PresentationInfo = date;
-					viewModel.PropertyChanged+= (sender, e) => {
-						if (e.PropertyName == "VideoRecorded" || e.PropertyName == "VideoAdded")
-							OnPropertyChanged("NewVideoAvailable");
-					};
-
 					viewModels.Add(viewModel);
 
 					if (currentDate == date.day)
