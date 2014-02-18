@@ -401,13 +401,5 @@ namespace iSeconds.Domain
 		public ICommand CompilationsCommand {
 			get { return new Command((object arg) => { navigator.NavigateTo("compilations_view", new Args()); }); }
 		}
-
-		public ICommand ShowTutorialCommand {
-			get { return new Command((object arg) => { 
-				if (!user.TutorialShown)
-					dialogService.ShowTutorial( () => user.SetTutorialShown(true));
-				}); 
-			}
-		}
 	}
 }

@@ -49,21 +49,6 @@ namespace iSeconds.Droid
 					.Show();
 		}
 
-		public void ShowTutorial(Action doneAction)
-		{
-			Activity activity = tracker.GetCurrentActivity();
-			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-			builder.SetTitle(Resource.String.tutorial_welcome);
-			builder.SetView(activity.LayoutInflater.Inflate(Resource.Layout.TutorialView, null));
-			builder.SetPositiveButton(Resource.String.tutorial_done, (sender, args) => {
-				if (doneAction != null)
-					doneAction.Invoke();
-			});
-
-			Dialog dialog = builder.Create();
-			dialog.Show();
-		}
-
 		public void AskForCompilationNameAndDescription(string defaultName, string defaultDescription, 
 			Action<string, string> userConfirmedCallback, Action userCanceledCallback)
 		{

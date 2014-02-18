@@ -30,14 +30,13 @@ namespace iSeconds.Droid
 
 			configureActionBar(true, "");
 			configureHyperlinks();
-			configureButtonTutorial();
 		}
 
 		void configureHyperlinks()
 		{
 			ImageView facebookImageView = FindViewById<ImageView>(Resource.Id.imageFacebook);
 			facebookImageView.Click+= (sender, e) => {
-				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://www.facebook.com/broditech"));
+				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://www.facebook.com/yester-mobile"));
 				StartActivity(intent);
 			};
 
@@ -51,14 +50,6 @@ namespace iSeconds.Droid
 			broditechImageView.Click+= (sender, e) => {
 				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://www.broditech.com"));
 				StartActivity(intent);
-			};
-		}
-
-		void configureButtonTutorial()
-		{
-			Button buttonTutorial = FindViewById<Button>(Resource.Id.buttonTutorial);
-			buttonTutorial.Click+= (sender, e) => {
-				dialogService.ShowTutorial(null);
 			};
 		}
 	}

@@ -5,8 +5,8 @@
 	<color name="actionbar_title">#000000</color>
 	<color name="actionbar_background_start">#FFFFFF</color>
 	<color name="actionbar_background_end">#FFFFFF</color>
-	<color name="actionbar_background_item_pressed_start">#A8D1F7</color>
-	<color name="actionbar_background_item_pressed_end">#A8D1F7</color>
+	<color name="actionbar_background_item_pressed_start">#6ed3db</color>
+	<color name="actionbar_background_item_pressed_end">#6ed3db</color>
 
 	<!-- iseconds colors -->
 	<color name="actionbar_bottom_line_color">#AAAAAA</color>
@@ -37,6 +37,6 @@
 	<color name="gray_79">#4f4f4f</color>
 	<color name="gray_46">#2e2e2e</color>
 	<color name="gray_35">#232323</color>
-	<color name="item_color">#8EB1D1</color>
-	<color name="item_color_dark">#3486d2</color>
+	<color name="item_color">#6ed3db</color>
+	<color name="item_color_dark">#009ba9</color>
 </resources>

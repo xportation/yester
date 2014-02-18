@@ -56,8 +56,8 @@
      inkscape:document-units="px"
      inkscape:current-layer="g4540"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="715"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
@@ -96,7 +96,7 @@
                inkscape:connector-curvature="0"
                id="path3795"
                d="m 139.46429,246.82647 0,-9.10715 22.85714,0 0,9.10715 16.96428,0 0,40.53571 -56.07142,0 0,-40.53571 z"
-               style="fill:none;stroke:#3486d2;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+               style="fill:none;stroke:#009ba9;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
             <path
                transform="matrix(2.8549521,0,0,2.8549521,-193.57605,-504.46047)"
                d="m 126.39534,270.25159 c 0,2.99867 -2.4309,5.42957 -5.42957,5.42957 -2.99867,0 -5.42957,-2.4309 -5.42957,-5.42957 0,-2.99867 2.4309,-5.42957 5.42957,-5.42957 2.99867,0 5.42957,2.4309 5.42957,5.42957 z"
@@ -105,11 +105,11 @@
                sodipodi:cy="270.25159"
                sodipodi:cx="120.96577"
                id="path3797"
-               style="fill:none;stroke:#3486d2;stroke-width:1.05080569;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+               style="fill:none;stroke:#009ba9;stroke-width:1.05080569000000000;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
                sodipodi:type="arc" />
             <path
                sodipodi:type="arc"
-               style="fill:none;stroke:#3486d2;stroke-width:2.49783039;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+               style="fill:none;stroke:#009ba9;stroke-width:2.49783038999999980;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
                id="path3801"
                sodipodi:cx="120.96577"
                sodipodi:cy="270.25159"
@@ -125,7 +125,7 @@
                sodipodi:cy="254.59421"
                sodipodi:cx="171.34712"
                id="path3803"
-               style="fill:#3486d2;fill-opacity:1;stroke:none"
+               style="fill:#009ba9;fill-opacity:1;stroke:none;stroke-opacity:1"
                sodipodi:type="arc" />
           </g>
         </g>

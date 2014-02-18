@@ -14,7 +14,7 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
-    <AssemblyName>iSeconds.Droid</AssemblyName>
+    <AssemblyName>Yester.Droid</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <MandroidI18n />
@@ -32,7 +32,7 @@
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <DebugSymbols>true</DebugSymbols>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <AndroidSupportedAbis>armeabi,armeabi-v7a</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions>.so; .so.*</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -172,9 +172,6 @@
     <AndroidResource Include="Resources\drawable-ldpi\ic_compile.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_compile.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_compile.png" />
-    <AndroidResource Include="Resources\drawable\tutorial1.png" />
-    <AndroidResource Include="Resources\drawable\tutorial2.png" />
-    <AndroidResource Include="Resources\layout\TutorialView.axml" />
     <AndroidResource Include="Resources\drawable\fling.png" />
     <AndroidResource Include="Resources\drawable\hold.png" />
     <AndroidResource Include="Resources\values-pt\Strings.xml" />

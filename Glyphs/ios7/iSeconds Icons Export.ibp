@@ -71,3 +71,38 @@ ExportHeight 96
 FileSvg  'play_video_icon.svg'
 FileName 'ic_play_video'
 Convert
+
+// Splash Screen
+Array ExportSplashWidth 320:480:240:320:640
+Array ExportSplashHeight 480:800:320:480:960
+
+// Portrait
+Loop PathsToExport 6
+    PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:Index
+    FileSvg 'splash_screen.svg'
+    FileName 'splash_title'
+    ExportWidth ExportSplashWidth:Index
+    ExportHeight ExportSplashHeight:Index
+    Convert
+
+// Landscape
+Loop PathsToExport 6
+    PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:Index
+    FileSvg 'splash_screen_land.svg'
+    FileName 'splash_title_land'
+    ExportWidth ExportSplashHeight:Index
+    ExportHeight ExportSplashWidth:Index
+    Convert
+
+// custom ui items
+PathExport 'drawable-hdpi'
+ExportWidth 50
+ExportHeight 50
+
+Array UiSvgFiles 'cb_checked.svg':'cb_normal.svg':'cb_hover.svg':'rb_checked.svg':'rb_normal.svg':'rb_hover.svg'
+Array UiExportFiles 'cb_checked':'cb_normal':'cb_hover':'rb_checked':'rb_normal':'rb_hover'
+
+Loop UiSvgFiles 3
+    FileSvg 'custom_ui\'UiSvgFiles:Index
+    FileName UiExportFiles:Index
+    Convert

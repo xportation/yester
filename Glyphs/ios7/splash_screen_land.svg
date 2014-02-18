@@ -10,15 +10,15 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="640"
-   height="960"
+   width="960"
+   height="640"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
    inkscape:export-filename="C:\Users\Leonardo\Dropbox\Projetos\Yester\iSeconds.Droid\Resources\drawable\splash_title.png"
    inkscape:export-xdpi="120"
    inkscape:export-ydpi="120"
-   sodipodi:docname="splash_screen.svg">
+   sodipodi:docname="splash_screen_land.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -123,21 +123,21 @@
        x2="22.475895"
        y2="1086.4548" />
     <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3180"
-       id="linearGradient3064"
-       gradientUnits="userSpaceOnUse"
-       x1="107.07617"
-       y1="918.76953"
-       x2="22.475895"
-       y2="1086.4548" />
-    <linearGradient
        y2="1086.4548"
        x2="22.475895"
        y1="918.76953"
        x1="107.07617"
        gradientUnits="userSpaceOnUse"
        id="linearGradient3072"
+       xlink:href="#linearGradient3180"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="1086.4548"
+       x2="22.475895"
+       y1="918.76953"
+       x1="107.07617"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3128"
        xlink:href="#linearGradient3180"
        inkscape:collect="always" />
   </defs>
@@ -149,8 +149,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24748737"
-     inkscape:cx="896.24726"
-     inkscape:cy="173.92837"
+     inkscape:cx="920.49092"
+     inkscape:cy="28.466399"
      inkscape:document-units="px"
      inkscape:current-layer="g2993"
      showgrid="false"
@@ -175,61 +175,61 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-92.36218)">
+     transform="translate(0,-412.36218)">
     <g
        transform="matrix(1.25,0,0,-1.25,335,572.36218)"
        inkscape:label="childish_cross"
        id="g2993">
       <g
-         id="g3291"
-         inkscape:export-filename="C:\Users\Leonardo\Dropbox\Projetos\Yester\iSeconds.Droid\Resources\drawable-xhdpi\splash_title.png"
+         id="g3301"
+         inkscape:export-filename="C:\Users\Leonardo\Dropbox\Projetos\Yester\iSeconds.Droid\Resources\drawable-xhdpi\splash_title_land.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90"
-         transform="translate(-763.19208,575.69958)">
+         transform="translate(-1378.9893,421.98993)">
         <rect
            style="fill:#ffffff;fill-opacity:1;stroke:none"
-           id="rect3199"
+           id="rect3215"
            width="512"
            height="768"
-           x="495.19208"
-           y="191.69958"
-           transform="scale(1,-1)" />
+           x="-805.98993"
+           y="1110.9893"
+           transform="matrix(0,1,1,0,0,0)" />
         <g
-           id="g3201"
-           transform="matrix(2,0,0,2,936.80019,-511.08251)"
+           id="g3217"
+           transform="matrix(2,0,0,2,815.57368,-553.62869)"
            style="fill:#004f58;fill-opacity:1">
           <g
              style="fill:#004f58;fill-opacity:1"
-             id="g3203"
-             transform="matrix(96,0,0,96,159.6972,351.6915)">
+             id="g3219"
+             transform="matrix(96,0,0,96,592.20902,374.9727)">
             <g
                style="fill:#004f58;fill-opacity:1"
                transform="matrix(0.03912844,0,0,-0.03912844,-9.2983604,-0.2109118)"
-               id="g3205">
+               id="g3221">
               <text
                  sodipodi:linespacing="125%"
-                 id="text3207"
+                 id="text3223"
                  y="96.803627"
                  x="152.92839"
                  style="font-size:13.56154251000000100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#004f58;fill-opacity:1;stroke:none;font-family:Pacifico;-inkscape-font-specification:Pacifico"
                  xml:space="preserve"><tspan
                    y="96.803627"
                    x="152.92839"
-                   id="tspan3209"
+                   id="tspan3225"
                    sodipodi:role="line">yester</tspan></text>
             </g>
           </g>
           <text
              transform="scale(1,-1)"
              sodipodi:linespacing="125%"
-             id="text3211"
-             y="55.159161"
-             x="-117.95119"
-             style="font-size:37.98036574999999700px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#004f58;fill-opacity:1;stroke:none;font-family:Pacifico;-inkscape-font-specification:Pacifico"
+             id="text3227"
+             y="31.877979"
+             x="314.56064"
+             style="font-size:37.98036194000000200px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#004f58;fill-opacity:1;stroke:none;font-family:Pacifico;-inkscape-font-specification:Pacifico"
              xml:space="preserve"><tspan
-               y="55.159161"
-               x="-117.95119"
-               id="tspan3213"
+               y="31.877979"
+               x="314.56064"
+               id="tspan3229"
                sodipodi:role="line">...</tspan></text>
         </g>
       </g>

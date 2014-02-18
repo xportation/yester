@@ -69,6 +69,15 @@
        y1="918.76953"
        x2="22.475895"
        y2="1086.4548" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3180"
+       id="linearGradient3000"
+       gradientUnits="userSpaceOnUse"
+       x1="107.07617"
+       y1="918.76953"
+       x2="22.475895"
+       y2="1086.4548" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -83,8 +92,8 @@
      inkscape:document-units="px"
      inkscape:current-layer="g3175"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="715"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
@@ -110,7 +119,7 @@
        style="fill-opacity:1;fill:url(#linearGradient3186)">
       <path
          sodipodi:type="star"
-         style="fill:#ffffff;fill-opacity:1;stroke:#3486d2;stroke-width:5.31012678;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         style="fill:#ffffff;fill-opacity:1;stroke:#009ba9;stroke-width:5.31012678000000000;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          id="path2989"
          sodipodi:sides="3"
          sodipodi:cx="70.710678"
