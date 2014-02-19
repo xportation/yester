@@ -1,11 +1,11 @@
 /*
 Syntax error: Undefined mixin 'font-size'.
-        on line 8 of C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_contact.sass, in `font-size'
-        from line 8 of C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_contact.sass
+        on line 8 of C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_contact.sass, in `font-size'
+        from line 8 of C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_contact.sass
 
 Backtrace:
-C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_contact.sass:8:in `font-size'
-C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_contact.sass:8
+C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_contact.sass:8:in `font-size'
+C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_contact.sass:8
 C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:253:in `visit_mixin'
 C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:37:in `visit'
 C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:100:in `visit'
@@ -68,4 +68,4 @@ C:/Program Files (x86)/ruby-1.9.2/bin/compass:19:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'font-size'.\A         on line 8 of C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_contact.sass, in `font-size'\A         from line 8 of C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_contact.sass"; }
+  content: "Syntax error: Undefined mixin 'font-size'.\A         on line 8 of C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_contact.sass, in `font-size'\A         from line 8 of C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_contact.sass"; }

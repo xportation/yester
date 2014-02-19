@@ -1,6 +1,6 @@
 /*
 Syntax error: File to import not found or unreadable: compass/css3.
-              Load path: C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass
+              Load path: C:/Users/Aniceto/workspace/iseconds3/Site/sass
         on line 1 of main.sass
 
 1: @import "compass/css3"
@@ -49,4 +49,4 @@ C:/Program Files (x86)/ruby-1.9.2/bin/sass:19:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: File to import not found or unreadable: compass/css3.\A               Load path: C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass\A         on line 1 of main.sass\A \A 1: @import \"compass/css3\"\A 2: @import \"compass/utilities/general/clearfix\"\A 3: \A 4: @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800,900|Pacifico)\A 5: @import url(http://weloveiconfonts.com/api/?family=entypo)\A 6: "; }
+  content: "Syntax error: File to import not found or unreadable: compass/css3.\A               Load path: C:/Users/Aniceto/workspace/iseconds3/Site/sass\A         on line 1 of main.sass\A \A 1: @import \"compass/css3\"\A 2: @import \"compass/utilities/general/clearfix\"\A 3: \A 4: @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800,900|Pacifico)\A 5: @import url(http://weloveiconfonts.com/api/?family=entypo)\A 6: "; }

@@ -1,11 +1,11 @@
 /*
 Syntax error: Undefined variable: "$salmon".
-        on line 2 of C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_slides.sass
+        on line 2 of C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_slides.sass
 
-1: C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_slides.sass
+1: C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_slides.sass
 
 Backtrace:
-C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_slides.sass:2
+C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_slides.sass:2
 C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/script/variable.rb:49:in `_perform'
 C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/script/node.rb:40:in `perform'
 C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:298:in `visit_prop'
@@ -60,4 +60,4 @@ C:/Program Files (x86)/ruby-1.9.2/bin/compass:19:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$salmon\".\A         on line 2 of C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_slides.sass\A \A 1: C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/sass/partials/_slides.sass"; }
+  content: "Syntax error: Undefined variable: \"$salmon\".\A         on line 2 of C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_slides.sass\A \A 1: C:/Users/Aniceto/workspace/iseconds3/Site/sass/partials/_slides.sass"; }

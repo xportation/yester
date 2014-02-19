@@ -21,7 +21,7 @@ h1
 
     +breakpoint(md)
         margin-top: 200px
-        margin-bottom: 80px
+        margin-bottom: 60px
         +font-size(65)
 
 p
@@ -52,11 +52,30 @@ p
 p span
     color: #555
 
+.demo
+    cursor: pointer
+    display: inline
+    width: 100px
+    margin-left: 20px
+    padding: 8px 16px
+    border: solid 2px #fff
+    text-align: center
+    color: #fff
+    text-transform: uppercase
+    font-family: $sans
+    font-weight: 900 !important
+    letter-spacing: 0.1em
+    +transition(all, 400ms)
+
+    &:hover
+        background-color: rgba(255,255,255,0.25)
+
+
 .take-a-look
     cursor: pointer
-    display: block
+    display: inline-block
     width: 160px
-    margin: 0 auto
+    margin-left: 230px
     padding: 8px 16px
     border: solid 2px #fff
     text-align: center

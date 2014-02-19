@@ -4,7 +4,7 @@ Syntax error: Undefined variable: "$salmon".
 
 1: .home
 2:     background-color: $salmon
-3:     background-color: rgba(231, 116, 69, 0.70)
+3:     background-color: rgba(241, 196, 15, 0.69)
 4: 
 5:     &.full-color
 6:         background-color: $salmon
@@ -57,4 +57,4 @@ C:/Program Files (x86)/ruby-1.9.2/bin/sass:19:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$salmon\".\A         on line 2 of _slides.sass\A \A 1: .home\A 2:     background-color: $salmon\A 3:     background-color: rgba(231, 116, 69, 0.70)\A 4: \A 5:     &.full-color\A 6:         background-color: $salmon\A 7: "; }
+  content: "Syntax error: Undefined variable: \"$salmon\".\A         on line 2 of _slides.sass\A \A 1: .home\A 2:     background-color: $salmon\A 3:     background-color: rgba(241, 196, 15, 0.69)\A 4: \A 5:     &.full-color\A 6:         background-color: $salmon\A 7: "; }
