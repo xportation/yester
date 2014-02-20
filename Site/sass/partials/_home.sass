@@ -6,7 +6,7 @@ h1
     margin-top: 40px
     margin-bottom: 40px
     text-align: center
-    color: #fff
+    color: $home-font-color
     font-family: $sans
     font-weight: 700
     text-transform: uppercase
@@ -28,7 +28,7 @@ p
     margin-bottom: 60px
     padding: 0 15px
     text-align: center
-    color: #fff
+    color: $home-font-color
     font-family: $sans
     font-weight: 600
     text-transform: uppercase
@@ -50,17 +50,17 @@ p
 
 
 p span
-    color: #555
+    color: $home-font-color
 
 .demo
     cursor: pointer
-    display: inline
+    display: inline-block
     width: 100px
     margin-left: 20px
     padding: 8px 16px
-    border: solid 2px #fff
+    border: solid 2px $home-font-color
     text-align: center
-    color: #fff
+    color: $home-font-color
     text-transform: uppercase
     font-family: $sans
     font-weight: 900 !important
@@ -68,8 +68,10 @@ p span
     +transition(all, 400ms)
 
     &:hover
-        background-color: rgba(255,255,255,0.25)
+        background-color: $home-hover-color
 
+    i
+        margin-right: 5px
 
 .take-a-look
     cursor: pointer
@@ -77,9 +79,9 @@ p span
     width: 160px
     margin-left: 230px
     padding: 8px 16px
-    border: solid 2px #fff
+    border: solid 2px $home-font-color
     text-align: center
-    color: #fff
+    color: $home-font-color
     text-transform: uppercase
     font-family: $sans
     font-weight: 900 !important
@@ -87,7 +89,7 @@ p span
     +transition(all, 400ms)
 
     &:hover
-        background-color: rgba(255,255,255,0.25)
+        background-color: $home-hover-color
 
     i
         margin-right: 5px

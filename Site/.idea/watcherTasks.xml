@@ -2,23 +2,23 @@
 <project version="4">
   <component name="ProjectTasksOptions">
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="compile C:/Users/Aniceto/Dropbox/workspace/products-WB078J269/Showcase/ $UnixSeparators($FilePath$)$" />
+      <option name="arguments" value="compile" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" value="Compiles .sass files into .css files using compass" />
       <option name="exitCodeBehavior" value="ERROR" />
       <option name="fileExtension" value="sass" />
       <option name="immediateSync" value="true" />
       <option name="name" value="compass sass" />
-      <option name="output" value="$PROJECT_DIR$/" />
+      <option name="output" value="$ProjectFileDir$" />
       <option name="outputFilters">
         <array />
       </option>
       <option name="outputFromStdout" value="false" />
       <option name="passParentEnvs" value="true" />
-      <option name="program" value="C:/Program Files (x86)/ruby-1.9.2/bin/compass.bat" />
+      <option name="program" value="compass.bat" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="true" />
-      <option name="workingDir" value="$PROJECT_DIR$" />
+      <option name="workingDir" value="$ProjectFileDir$" />
       <envs />
     </TaskOptions>
     <TaskOptions isEnabled="true">
@@ -35,7 +35,7 @@
       </option>
       <option name="outputFromStdout" value="false" />
       <option name="passParentEnvs" value="true" />
-      <option name="program" value="C:/Program Files (x86)/ruby-1.9.2/bin/sass.bat" />
+      <option name="program" value="sass.bat" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="true" />
       <option name="workingDir" value="$FileDir$" />

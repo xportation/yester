@@ -1,14 +1,15 @@
 .onepage-pagination li a
     margin-bottom: 10px
-    border: solid 2px #fff
+    border: solid 2px $menu-nav-border-color
     +border-radius(100%)
     +transition(all, 400ms)
 
     &:hover
-        color: #fff
+        color: $menu-nav-hover-color
+        border: solid 2px $menu-nav-hover-color
         opacity: 0.5
 
     &.active
         background-color: rgba(255,255,255,0.25)
-        border: solid 2px #fff
+        border: solid 2px $menu-nav-active-color
         text-decoration: none

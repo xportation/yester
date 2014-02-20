@@ -1,8 +1,25 @@
-$cyan: #1ABC9C
-$salmon: #e74c3c
-$orange: #e67e22
-$yellow: #f1c40f
-$navy: #34495e
+//$home-color: rgba(255,255,255,0.7)
+//$slide1-color: #609b8e
+//$slide2-color: #57748e
+//$slide3-color: #c1af64
+//$contact-color: #876e6e
+
+$home-color: rgba(255,255,255, 0.7)
+$solid-white: #fff
+$slide1-color: $solid-white
+$slide2-color: $solid-white
+$slide3-color: $solid-white
+$contact-color: $solid-white
+
+$home-font-color: #333
+$font-color: #333
+$text-selection: #009BA9
+
+$menu-nav-border-color: #333
+$menu-nav-hover-color: rgba(0,155,169, 0.7)
+$menu-nav-active-color: #009BA9
+
+$home-hover-color: $menu-nav-hover-color
 
 $sans: 'Raleway', sans-serif
 $cursive: 'Pacifico', cursive
@@ -20,7 +37,7 @@ select,
 textarea
     text-rendering: optimizeLegibility
     -webkit-font-smoothing: antialiased
-    color: #fff
+    color: $font-color
 
 p
     margin-bottom: 30px
@@ -37,8 +54,8 @@ p
         +line-height(32)
 a
     text-decoration: none
-    color: #fff
-    border-bottom: solid 1px #fAfafa
+    color: $font-color
+    border-bottom: solid 1px $font-color
 
     &:hover
         color: #4761e2

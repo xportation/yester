@@ -1,26 +1,25 @@
 .home
-    background-color: $salmon
-    background-color: rgba(241, 196, 15, 0.69)
+    background-color: $home-color
 
     &.full-color
-        background-color: $salmon
+        background-color: $home-color
 
 .slide-1
-    background-color: rgba(26, 188, 156, 0.7)
+    background-color: $slide1-color
     +transition(all, 400ms)
     
     &.fade-background
-        background-color: rgba(231, 76 ,60, 1)
+        background-color: $slide1-color
 
     &.full-color
-        background-color: $cyan
+        background-color: $slide1-color
 
 .slide-2
-    background-color: rgba(52, 73,94, 0.7)
+    background-color: $slide2-color
     +transition(all, 400ms)
     
     &.fade-background
-        background-color: $cyan
+        background-color: $slide2-color
 
     .iphone-2
         +breakpoint(sm)
@@ -35,14 +34,14 @@
             margin-top: 120px !important
 
     &.full-color
-        background-color: $navy
+        background-color: $slide2-color
 
 .slide-3
-    background-color: rgba(241, 196, 15, 0.7)
+    background-color: $slide3-color
     +transition(all, 400ms)
 
     &.fade-background
-        background-color: $navy
+        background-color: $slide3-color
 
     .iphone-3
         +breakpoint(sm)
@@ -53,14 +52,14 @@
             margin-top: 120px !important
 
     &.full-color
-        background-color: $yellow
+        background-color: $slide3-color
 
 .contact
-    background-color: rgba(230, 126, 34, 0.7)
+    background-color: $contact-color
     +transition(all, 400ms)
 
     &.full-color
-        background-color: $orange
+        background-color: $contact-color
 
 
 .slide
@@ -130,7 +129,7 @@
     h2,
     p,
     .scroll-down
-        color: #333
+        color: $font-color
 
 .slide-2,
 .slide-3

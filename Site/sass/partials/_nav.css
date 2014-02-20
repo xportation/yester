@@ -1,22 +1,35 @@
 /*
-Syntax error: File to import not found or unreadable: compass/css3.
-              Load path: C:/Users/leonardo/Dropbox/Projetos/Yester/Site/sass
-        on line 1 of main.sass
+Syntax error: Undefined variable: "$menu-nav-border-color".
+        on line 3 of _nav.sass
 
-1: @import "compass/css3"
-2: @import "compass/utilities/general/clearfix"
-3: 
-4: @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800,900|Pacifico)
-5: @import url(http://weloveiconfonts.com/api/?family=entypo)
+1: .onepage-pagination li a
+2:     margin-bottom: 10px
+3:     border: solid 2px $menu-nav-border-color
+4:     +border-radius(100%)
+5:     +transition(all, 400ms)
 6: 
+7:     &:hover
+8:         color: $menu-nav-hover-color
 
 Backtrace:
-main.sass:1
-C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/import_node.rb:67:in `rescue in import'
-C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/import_node.rb:45:in `import'
-C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/import_node.rb:28:in `imported_file'
-C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/import_node.rb:37:in `css_import?'
-C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:217:in `visit_import'
+_nav.sass:3
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/script/variable.rb:49:in `_perform'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/script/node.rb:40:in `perform'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/script/list.rb:71:in `block in _perform'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/script/list.rb:71:in `map'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/script/list.rb:71:in `_perform'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/script/node.rb:40:in `perform'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:298:in `visit_prop'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:37:in `visit'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:100:in `visit'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `map'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:320:in `visit_rule'
 C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:37:in `visit'
 C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:100:in `visit'
 C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
@@ -49,4 +62,4 @@ C:/Ruby200-x64/bin/sass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: File to import not found or unreadable: compass/css3.\A               Load path: C:/Users/leonardo/Dropbox/Projetos/Yester/Site/sass\A         on line 1 of main.sass\A \A 1: @import \"compass/css3\"\A 2: @import \"compass/utilities/general/clearfix\"\A 3: \A 4: @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800,900|Pacifico)\A 5: @import url(http://weloveiconfonts.com/api/?family=entypo)\A 6: "; }
+  content: "Syntax error: Undefined variable: \"$menu-nav-border-color\".\A         on line 3 of _nav.sass\A \A 1: .onepage-pagination li a\A 2:     margin-bottom: 10px\A 3:     border: solid 2px $menu-nav-border-color\A 4:     +border-radius(100%)\A 5:     +transition(all, 400ms)\A 6: \A 7:     &:hover\A 8:         color: $menu-nav-hover-color"; }
