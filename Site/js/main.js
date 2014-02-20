@@ -43,6 +43,10 @@ $(document).ready(function(){
         $('.onepage-pagination li:nth-child(2)').children().trigger('click');
     });
 
+    $('.demo').on('click',function(){
+        $.easybox([{url: "http://www.youtube.com/watch?v=bHwFlmrTTT8", caption: "Demonstration of a yester compilation"}]);
+    });
+
     /*==================================
     =            Navigation            =
     ==================================*/
