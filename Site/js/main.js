@@ -16,12 +16,12 @@ $(document).ready(function(){
 
     BV.init();
     if (Modernizr.touch) {
-        BV.show('img/background1.jpg');
+        BV.show('img/yester_background.jpg');
     } else {
-        BV.show('video/timelapse.webm',
+        BV.show('video/yester_background.ogv',
             {ambient:true,
             doLoop:true,
-            altSource:'video/timelapse.mp4'});
+            altSource:'video/yester_background.mp4'});
 
     }
 

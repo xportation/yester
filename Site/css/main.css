@@ -1821,7 +1821,7 @@ html {
 
 /* line 22, ../sass/main.sass */
 body {
-  background: url(../img/background1.jpg) black top center fixed no-repeat;
+  background: url(../img/yester_background.jpg) black top center fixed no-repeat;
   background-size: 150%;
   -webkit-background-size: cover;
   -moz-background-size: cover;

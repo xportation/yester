@@ -26,7 +26,7 @@
       <file leaf-file-name="index_en.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index_en.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="10" selection-start="860" selection-end="860" vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="3553">
+            <state line="125" column="16" selection-start="5297" selection-end="5297" vertical-scroll-proportion="-6.1538463" vertical-offset="1965" max-vertical-offset="3553">
               <folding />
             </state>
           </provider>
@@ -35,7 +35,7 @@
       <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="41" selection-start="629" selection-end="629" vertical-scroll-proportion="0.5296736" vertical-offset="102" max-vertical-offset="3638">
+            <state line="21" column="26" selection-start="520" selection-end="520" vertical-scroll-proportion="0.30307943" vertical-offset="170" max-vertical-offset="3638">
               <folding />
             </state>
           </provider>
@@ -44,16 +44,7 @@
       <file leaf-file-name="index_pt.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index_pt.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="0" selection-start="757" selection-end="757" vertical-scroll-proportion="-11.769231" vertical-offset="0" max-vertical-offset="3315">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.sass" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sass/main.sass">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="39" selection-start="941" selection-end="941" vertical-scroll-proportion="-15.038462" vertical-offset="408" max-vertical-offset="1207">
+            <state line="18" column="0" selection-start="757" selection-end="757" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="3315">
               <folding />
             </state>
           </provider>
@@ -62,7 +53,7 @@
       <file leaf-file-name="_home.sass" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sass/partials/_home.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="25" selection-start="1328" selection-end="1328" vertical-scroll-proportion="-47.73077" vertical-offset="0" max-vertical-offset="2125">
+            <state line="73" column="25" selection-start="1328" selection-end="1328" vertical-scroll-proportion="0.0" vertical-offset="1241" max-vertical-offset="2125">
               <folding />
             </state>
           </provider>
@@ -107,7 +98,7 @@
       <file leaf-file-name="_mixins.sass" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sass/_mixins.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="41" selection-start="656" selection-end="656" vertical-scroll-proportion="-19.038462" vertical-offset="15" max-vertical-offset="663">
+            <state line="30" column="41" selection-start="656" selection-end="656" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="663">
               <folding />
             </state>
           </provider>
@@ -123,7 +114,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/css/main.css" />
         <option value="$PROJECT_DIR$/sass/partials/_contact.sass" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/sass/partials/_slides.sass" />
@@ -132,8 +122,10 @@
         <option value="$PROJECT_DIR$/sass/_mixins.sass" />
         <option value="$PROJECT_DIR$/sass/partials/_home.sass" />
         <option value="$PROJECT_DIR$/sass/main.sass" />
-        <option value="$PROJECT_DIR$/index_en.html" />
         <option value="$PROJECT_DIR$/index_pt.html" />
+        <option value="$PROJECT_DIR$/index_en.html" />
+        <option value="$PROJECT_DIR$/css/main.css" />
+        <option value="$PROJECT_DIR$/css/main-min.css" />
         <option value="$PROJECT_DIR$/js/main.js" />
       </list>
     </option>
@@ -362,13 +354,13 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32881" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32881" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1890625" sideWeight="0.6700855" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18854167" sideWeight="0.6700855" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26931107" sideWeight="0.5015625" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26931107" sideWeight="0.4984375" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32881" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26931107" sideWeight="0.4984375" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -407,13 +399,6 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1836" column="0" selection-start="45942" selection-end="45942" vertical-scroll-proportion="0.0" vertical-offset="31212" max-vertical-offset="32045">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="71" selection-start="1303" selection-end="1303" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3808">
@@ -465,9 +450,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/partials/_contact.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="23" selection-start="2231" selection-end="2231" vertical-scroll-proportion="0.0" vertical-offset="1989" max-vertical-offset="2856">
-          <folding />
-        </state>
+        <state line="117" column="23" selection-start="2231" selection-end="2231" vertical-scroll-proportion="0.0" vertical-offset="1989" max-vertical-offset="2856" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/main.css">
@@ -528,9 +511,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/partials/_contact.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="23" selection-start="2231" selection-end="2231" vertical-scroll-proportion="0.0" vertical-offset="1989" max-vertical-offset="2856">
-          <folding />
-        </state>
+        <state line="117" column="23" selection-start="2231" selection-end="2231" vertical-scroll-proportion="0.0" vertical-offset="1989" max-vertical-offset="2856" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/main.css">
@@ -591,9 +572,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/partials/_contact.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="57" selection-start="2258" selection-end="2258" vertical-scroll-proportion="0.0" vertical-offset="1853" max-vertical-offset="2703">
-          <folding />
-        </state>
+        <state line="117" column="57" selection-start="2258" selection-end="2258" vertical-scroll-proportion="0.0" vertical-offset="1853" max-vertical-offset="2703" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/main.css">
@@ -648,13 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1882" column="0" selection-start="37087" selection-end="37087" vertical-scroll-proportion="0.8551136" vertical-offset="31392" max-vertical-offset="32096">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sass/partials/_nav.sass">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="1" selection-start="1" selection-end="19" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="357">
@@ -695,7 +667,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/_mixins.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="41" selection-start="656" selection-end="656" vertical-scroll-proportion="-19.038462" vertical-offset="15" max-vertical-offset="663">
+        <state line="30" column="41" selection-start="656" selection-end="656" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="663">
           <folding />
         </state>
       </provider>
@@ -709,49 +681,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/partials/_home.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="25" selection-start="1328" selection-end="1328" vertical-scroll-proportion="-47.73077" vertical-offset="0" max-vertical-offset="2125">
+        <state line="73" column="25" selection-start="1328" selection-end="1328" vertical-scroll-proportion="0.0" vertical-offset="1241" max-vertical-offset="2125">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/partials/_contact.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="23" selection-start="734" selection-end="734" vertical-scroll-proportion="0.49069375" vertical-offset="407" max-vertical-offset="2856">
-          <folding />
-        </state>
+        <state line="41" column="23" selection-start="734" selection-end="734" vertical-scroll-proportion="0.49069375" vertical-offset="407" max-vertical-offset="2856" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/main-min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="604">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="604" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/main.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="39" selection-start="941" selection-end="941" vertical-scroll-proportion="-15.038462" vertical-offset="408" max-vertical-offset="1207">
+        <state line="47" column="39" selection-start="941" selection-end="941" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1207">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index_pt.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="757" selection-end="757" vertical-scroll-proportion="-11.769231" vertical-offset="0" max-vertical-offset="3315">
+        <state line="18" column="0" selection-start="757" selection-end="757" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="3315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main-min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="18534" selection-start="18534" selection-end="18534" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="579">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index_en.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="10" selection-start="860" selection-end="860" vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="3553">
+        <state line="125" column="16" selection-start="5297" selection-end="5297" vertical-scroll-proportion="-6.1538463" vertical-offset="1965" max-vertical-offset="3553">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1823" column="25" selection-start="36098" selection-end="36098" vertical-scroll-proportion="0.33225283" vertical-offset="30786" max-vertical-offset="32147">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="41" selection-start="629" selection-end="629" vertical-scroll-proportion="0.5296736" vertical-offset="102" max-vertical-offset="3638">
+        <state line="21" column="26" selection-start="520" selection-end="520" vertical-scroll-proportion="0.30307943" vertical-offset="170" max-vertical-offset="3638">
           <folding />
         </state>
       </provider>
