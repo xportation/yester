@@ -57,7 +57,7 @@ a {
 }
 /* line 60, ../sass/_type.sass */
 a:hover {
-  color: #4761e2;
+  color: #009ba9;
   text-decoration: none;
   -webkit-transition: all, 300ms;
   -moz-transition: all, 300ms;
@@ -1821,7 +1821,7 @@ html {
 
 /* line 22, ../sass/main.sass */
 body {
-  background: url(../img/yester_background.jpg) black top center fixed no-repeat;
+  background: url(../img/background1.jpg) black top center fixed no-repeat;
   background-size: 150%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
