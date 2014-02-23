@@ -16,8 +16,9 @@ using Android.Content.Res;
 using System.Threading;
 using System.Text.RegularExpressions;
 
- // tive que adicionar essa dependencia por causa de um util para criar o thumbnail.. se for necessário podemos remover
+// tive que adicionar essa dependencia por causa de um util para criar o thumbnail.. se for necessario podemos remover
 using iSeconds.Domain;
+using System.Globalization;
 
 
 namespace iSeconds.Droid
@@ -172,7 +173,7 @@ namespace iSeconds.Droid
 				                             fileListPath,
 				                             subtitlePath,
 				                             (int)videoAttributes.maxBitrate,
-				                             videoAttributes.maxFps,
+													  getFpsAsString(videoAttributes.maxFps),
 				                             outputFilePath);
 
 				NativeCommandResult res = executeNativeCommand (command, envp);
@@ -191,6 +192,12 @@ namespace iSeconds.Droid
 
 			saveThumbnail(outputFilePath);
 			notifyEnd(outputFilePath);
+		}
+
+		string getFpsAsString(double fps)
+		{
+			string fpsString = fps.ToString();
+			return fpsString.Replace(',', '.');
 		}
 
 		void writeSubtitleEntry (
@@ -229,7 +236,7 @@ namespace iSeconds.Droid
 			                     videoAttributes.maxWidth, 
 			                     videoAttributes.maxHeight,
 			                     (int)videoAttributes.maxBitrate,
-			                     videoAttributes.maxFps,
+										getFpsAsString(videoAttributes.maxFps),
 			                     filePath);
 		}
 
@@ -444,7 +451,7 @@ namespace iSeconds.Droid
 			double kb = 0.0;
 			if (m.Success) {
 				System.Console.WriteLine (m.Groups [1].Value);
-				System.Double.TryParse (m.Groups [1].Value, out kb);
+				kb = double.Parse(m.Groups[1].Value, CultureInfo.InvariantCulture);
 			}
 			videoInfo.BitRate = kb;
 
@@ -461,7 +468,7 @@ namespace iSeconds.Droid
 				videoInfo.VideoFormat = m.Value;
 
 			//get the video format
-			re = new Regex("(\\d{2,3})x(\\d{2,3})");
+			re = new Regex("(\\d{2,4})x(\\d{2,4})");
 			m = re.Match(result.stderr);
 			if (m.Success)
 			{
@@ -478,7 +485,7 @@ namespace iSeconds.Droid
 			double fps = 0.0;
 			if (m.Success) {
 				System.Console.WriteLine(m.Groups [1].Value);
-				System.Double.TryParse (m.Groups [1].Value, out fps);
+				fps = double.Parse(m.Groups[1].Value, CultureInfo.InvariantCulture);
 			}
 			videoInfo.Fps = fps;
 

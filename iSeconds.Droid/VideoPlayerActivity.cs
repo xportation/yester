@@ -266,7 +266,7 @@ namespace iSeconds.Droid
             string filePath = videos[currentVideo].Path;
 				videoView.SetVideoPath(filePath);
          } else {
-            showPlayButton(true);
+				showPlayButton(true);
          }
       }
 
