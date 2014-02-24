@@ -39,12 +39,15 @@ $(document).ready(function(){
 
     //UI handle
     $('.take-a-look').on('click', function () {
-
         $('.onepage-pagination li:nth-child(2)').children().trigger('click');
     });
 
-    $('.demo').on('click',function(){
-        $.easybox([{url: "http://www.youtube.com/watch?v=bHwFlmrTTT8", caption: "Demonstration of a yester compilation"}]);
+    $('.demo_en').on('click',function(){
+        $.easybox([{url: "http://www.youtube.com/watch?v=U_SkxEIigVc", caption: "Yester Demonstration"}]);
+    });
+
+    $('.demo_pt').on('click',function(){
+        $.easybox([{url: "http://www.youtube.com/watch?v=Yn4Npsisrc8", caption: "Demonstraçao do Yester"}]);
     });
 
     /*==================================
