@@ -95,7 +95,9 @@ namespace iSeconds.Droid
 		private struct VideoAttributes
 		{
 			public int maxWidth;
+			public int minWidth;
 			public int maxHeight;
+			public int minHeight;
 			public double maxFps;
 			public double maxBitrate;
 		}
@@ -116,7 +118,7 @@ namespace iSeconds.Droid
 			int subtitleIndex = 1;
 			long accumulatedTimeMs = 0L;
 			string previousTimeLabel = "00:00:00,000";
-			VideoAttributes videoAttributes = GetMaxVideoAttributes(videoFiles);
+			VideoAttributes videoAttributes = GetVideoAttributes(videoFiles);
 
 			// create a filelist (to make ffmpeg executable happy)
 			// as stated in the docs this is the most general concatenation option, using the demuxer.
@@ -143,6 +145,8 @@ namespace iSeconds.Droid
 						filePath = Path.Combine(tempDir, Path.GetFileName (filePath));
 
 						var cmd = GenerateCommandVideoMaximumSizeWithBlackPaddings (videoAttributes, file, filePath);
+
+						System.Console.WriteLine (cmd);
 
 						NativeCommandResult result = executeNativeCommand(cmd, envp);
 						if (result.exitValue != 0) {
@@ -175,6 +179,8 @@ namespace iSeconds.Droid
 				                             (int)videoAttributes.maxBitrate,
 													  getFpsAsString(videoAttributes.maxFps),
 				                             outputFilePath);
+
+				System.Console.WriteLine (command);
 
 				NativeCommandResult res = executeNativeCommand (command, envp);
 				if (res.exitValue != 0) {
@@ -222,25 +228,23 @@ namespace iSeconds.Droid
 		{
 			//-loglevel debug 
 			return string.Format (".{0} -y -i {1} -vf " +
-				"scale=iw*min({2}/iw\\,{3}/ih):ih*min({4}/iw\\,{5}/ih)," +
-				"pad={6}:{7}:({8}-iw)/2:({9}-ih)/2:black " +
-			    "-strict -2 -c:v mpeg4 -b {10}k -r {11} -c:a copy -sn {12}",
+			    "scale=iw*sar*min({2}/(iw*sar)\\,{3}/ih):ih*min({4}/(iw*sar)\\,{5}/ih)," + 
+			    "pad={6}:{7}:(ow-iw)/2:(oh-ih)/2:black " +
+			    "-strict -2 -c:v mpeg4 -b {8}k -r {9} -c:a copy -sn {10}",
 			                     Path.Combine (basePathAbsolute, "ffmpeg"),
 			                     file.Path, 
-			                     videoAttributes.maxWidth,
-			                     videoAttributes.maxHeight,
-			                     videoAttributes.maxWidth, 
-			                     videoAttributes.maxHeight,
-			                     videoAttributes.maxWidth, 
-			                     videoAttributes.maxHeight,
-			                     videoAttributes.maxWidth, 
-			                     videoAttributes.maxHeight,
+			                     videoAttributes.minWidth,
+			                     videoAttributes.minHeight,
+			                     videoAttributes.minWidth, 
+			                     videoAttributes.minHeight,
+			                     videoAttributes.minWidth, 
+			                     videoAttributes.minHeight,
 			                     (int)videoAttributes.maxBitrate,
-										getFpsAsString(videoAttributes.maxFps),
+								getFpsAsString(videoAttributes.maxFps),
 			                     filePath);
 		}
 
-		VideoAttributes GetMaxVideoAttributes (IList<VideoFileInformation> videoFiles)
+		VideoAttributes GetVideoAttributes (IList<VideoFileInformation> videoFiles)
 		{
 			VideoAttributes videoAttributes = new VideoAttributes();
 
@@ -252,8 +256,14 @@ namespace iSeconds.Droid
 				if (videoFile.Width > videoAttributes.maxWidth)
 					videoAttributes.maxWidth = videoFile.Width;
 
+				if (videoFile.Width < videoAttributes.minWidth || videoAttributes.minWidth == 0)
+					videoAttributes.minWidth = videoFile.Width;
+
 				if (videoFile.Height > videoAttributes.maxHeight)
 					videoAttributes.maxHeight = videoFile.Height;
+
+				if (videoFile.Height < videoAttributes.minHeight || videoAttributes.minHeight == 0)
+					videoAttributes.minHeight = videoFile.Height;
 
 				if (videoFile.Fps > videoAttributes.maxFps)
 					videoAttributes.maxFps = videoFile.Fps;
