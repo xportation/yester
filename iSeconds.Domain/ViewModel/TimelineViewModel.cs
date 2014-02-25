@@ -385,6 +385,7 @@ namespace iSeconds.Domain
 			compilation.TimelineName = timeline.Name;
 			compilation.Path = compilationPath;
 			compilation.ThumbnailPath = thumbnailPath;
+			compilation.Done = false;
 			user.AddCompilation (compilation);
 
 			dialogService.ShowMessage(

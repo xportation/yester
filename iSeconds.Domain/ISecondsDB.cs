@@ -28,6 +28,7 @@ namespace iSeconds.Domain
 
 		public event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
 		public event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
+		public event EventHandler<GenericEventArgs<Compilation>> OnSaveCompilation;
 
 		public void SaveTimeline (Timeline timeline)
 		{
@@ -187,6 +188,14 @@ namespace iSeconds.Domain
 			return (from i in Table<Compilation> () where i.UserId == userId select i).ToList ();
 		}
 
+		public void SaveCompilation(Compilation compilation)
+		{
+			this.SaveItem(compilation);
+
+			if (OnSaveCompilation != null)
+				OnSaveCompilation(this, new GenericEventArgs<Compilation>(compilation));
+		}
+
 		public void DeleteCompilation (Compilation compilation)
 		{
 			this.DeleteItem (compilation);
@@ -197,6 +206,15 @@ namespace iSeconds.Domain
 			lock (locker) {
 				Compilation compilation =
 					(from i in Table<Compilation> () where i.UserId == userId && i.Id == compilationId select i).FirstOrDefault();
+				return compilation;
+			}
+		}
+
+		public Compilation GetUserCompilation(int userId, string compilationFilename)
+		{
+			lock (locker) {
+				Compilation compilation =
+					(from i in Table<Compilation> () where i.UserId == userId && i.Path == compilationFilename select i).FirstOrDefault();
 				return compilation;
 			}
 		}

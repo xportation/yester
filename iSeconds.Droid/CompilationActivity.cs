@@ -28,7 +28,7 @@ namespace iSeconds.Droid
 
 			ISecondsApplication app = (ISecondsApplication)this.Application;
 			viewModel = new CompilationViewModel (app.GetUserService ().CurrentUser, app.GetMediaService(),
-				app.GetOptionsDialogService(), app.GetNavigator(), app.GetI18nService());
+				app.GetOptionsDialogService(), app.GetNavigator(), app.GetI18nService(), app.GetRepository());
 
 			ListView list = this.FindViewById<ListView>(Resource.Id.compilationsList);
 			ISecondsListViewAdapter adapter = new ISecondsListViewAdapter (this, viewModel.Compilations);
@@ -56,6 +56,12 @@ namespace iSeconds.Droid
 
 				TextView fileSize = view.FindViewById<TextView>(Resource.Id.textViewCompilationSize);
 				fileSize.Text= compilationModel.CompilationSize;
+
+				ProgressBar progress= view.FindViewById<ProgressBar>(Resource.Id.compilationSpin);
+				if (compilationModel.Done)
+					progress.Visibility = ViewStates.Gone;
+				else
+					progress.Visibility = ViewStates.Visible;
 
 				return view;
 			};

@@ -19,6 +19,7 @@ namespace iSeconds.Domain
 		public DateTime End { get; set; }
 
 		public int UserId { get; set; }
+		public bool Done { get; set; }
 
 		#endregion
 	}

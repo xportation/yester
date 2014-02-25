@@ -19,11 +19,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout2">
-            <ImageView
-                android:id="@+id/compilationThumbnail"
-                android:layout_width="96px"
-                android:layout_height="96px"
-                android:layout_marginRight="10dp" />
+            <FrameLayout
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:id="@+id/relativeLayout1">
+                <ImageView
+                    android:id="@+id/compilationThumbnail"
+                    android:layout_width="96px"
+                    android:layout_height="96px" />
+                <ProgressBar
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/compilationSpin" />
+            </FrameLayout>
             <TextView
                 android:text="File Size"
                 android:textAppearance="?android:attr/textAppearanceSmall"

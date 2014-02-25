@@ -14,6 +14,7 @@ namespace iSeconds.Domain
 		private I18nService i18n = null;
 
 		private INavigator navigator = null;
+		private IRepository repository = null;
 
 		public class CompilationItemViewModel : ListItemViewModel
 		{
@@ -31,6 +32,8 @@ namespace iSeconds.Domain
 
 			public string ThumbnailPath { get; set; }
 
+			public bool Done { get; set; }
+
 			public string CompilationSize { 
 				get {
 					return ISecondsUtils.FileSizeFormated(this.Path);
@@ -43,7 +46,7 @@ namespace iSeconds.Domain
 			}
 
 			public CompilationItemViewModel(int id, string name, string description, string path
-				, string beginDate, string endDate, string thumbnail, Compilation model)
+				, string beginDate, string endDate, string thumbnail, bool done, Compilation model)
 				: base("", null)
 			{
 				this.Id = id;
@@ -54,6 +57,7 @@ namespace iSeconds.Domain
 				this.EndDate = endDate;
 				this.ThumbnailPath = thumbnail;
 				this.Model = model;
+				this.Done = done;
 			}
 		}
 
@@ -66,13 +70,18 @@ namespace iSeconds.Domain
 		}
 
 		public CompilationViewModel(User user, IMediaService mediaService, IOptionsDialogService dialogService, 
-			INavigator navigator, I18nService i18n) 
+			INavigator navigator, I18nService i18n, IRepository repository) 
 		{
 			this.user = user;
 			this.mediaService = mediaService;
 			this.dialogService = dialogService;
 			this.i18n = i18n;
 			this.navigator = navigator;
+			this.repository = repository;
+
+			this.repository.OnSaveCompilation += (sender, e) => {
+				this.loadCompilations();
+			};
 
 			loadCompilations();
 		}
@@ -89,7 +98,7 @@ namespace iSeconds.Domain
 				string begin = ISecondsUtils.DateToString(c.Begin, false);
 				string end = ISecondsUtils.DateToString(c.End, false);
 
-				compilations.Add (new CompilationItemViewModel(c.Id, c.Name, c.Description, c.Path, begin, end, c.ThumbnailPath, c));
+				compilations.Add (new CompilationItemViewModel(c.Id, c.Name, c.Description, c.Path, begin, end, c.ThumbnailPath, c.Done, c));
 			}
 			notifyChanges();
 		}
@@ -178,9 +187,8 @@ namespace iSeconds.Domain
 							compilationModel.Name = name;
 							compilationModel.Description = description;
 
+							//repository notifies on compilation update
 							user.UpdateCompilation(compilation);
-
-							notifyChanges();
 						}, 
 						null);
 				});

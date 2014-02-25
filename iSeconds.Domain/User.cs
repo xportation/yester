@@ -176,7 +176,14 @@ namespace iSeconds.Domain
 			if (compilation.UserId != this.Id)
 				return;
 
-			repository.SaveItem(compilation);
+			repository.SaveCompilation(compilation);
+		}
+
+		public void SetCompilationDone(string compilationFilename, bool isDone)
+		{
+			Compilation compilation= repository.GetUserCompilation(this.Id, compilationFilename);
+			compilation.Done = isDone;
+			this.UpdateCompilation(compilation);
 		}
 
 		public Compilation GetCompilationById(int id)

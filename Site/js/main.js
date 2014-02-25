@@ -1,3 +1,19 @@
+function bestHeight() {
+    var viewportwidth = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) - 80;
+    var viewportheight = (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) - 120;
+    var newHeight= 720;
+    if (viewportheight/720 < 1)
+        newHeight= viewportheight;
+
+    if (viewportwidth/1280 < 1) {
+        var heightByWidth= 600 * (viewportwidth/1280);
+        if (heightByWidth < newHeight)
+            newHeight= heightByWidth;
+    }
+
+    return newHeight;
+}
+
 $(document).ready(function(){
 
     //for use within settings
@@ -43,11 +59,13 @@ $(document).ready(function(){
     });
 
     $('.demo_en').on('click',function(){
-        $.easybox([{url: "http://www.youtube.com/watch?v=U_SkxEIigVc", caption: "Yester Demonstration"}]);
+        var newHeight= bestHeight();
+        $.easybox([{url: "http://www.youtube.com/watch?v=U_SkxEIigVc", caption: "Yester Demonstration", height: newHeight }]);
     });
 
     $('.demo_pt').on('click',function(){
-        $.easybox([{url: "http://www.youtube.com/watch?v=Yn4Npsisrc8", caption: "Demonstraçao do Yester"}]);
+        var newHeight= bestHeight();
+        $.easybox([{url: "http://www.youtube.com/watch?v=Yn4Npsisrc8", caption: "Demonstraçao do Yester", height: newHeight }]);
     });
 
     /*==================================

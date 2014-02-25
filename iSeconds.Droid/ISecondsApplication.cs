@@ -21,11 +21,12 @@ namespace iSeconds.Droid
       private IPathService pathService = null;
 		private IOptionsDialogService optionsDialogService = null;
 		private I18nService i18nService = null;
+		private CompileFinishedNotificationReceiver compileFinishedReceiver;
 
       public ISecondsApplication (IntPtr javaReference, JniHandleOwnership transfer)
          : base(javaReference, transfer)
       {
-			pathService = new PathServiceAndroid();
+			pathService = new PathServiceAndroid(this.ApplicationContext);
 			repository = new ISecondsDB (pathService.GetDbPath());
 
 			i18nService = new I18nServiceAndroid(this.BaseContext);
@@ -52,6 +53,32 @@ namespace iSeconds.Droid
 
 			optionsDialogService = new OptionDialogServiceAndroid (activityTracker);
       }
+
+		public override void OnCreate()
+		{
+			base.OnCreate();
+
+			registerFFMpegServiceReceive();
+		}
+
+		public override void OnTerminate()
+		{
+			this.UnregisterReceiver(compileFinishedReceiver);
+
+			base.OnTerminate();
+		}
+
+		private void registerFFMpegServiceReceive()
+		{
+			compileFinishedReceiver = new CompileFinishedNotificationReceiver(userService.CurrentUser);
+
+			IntentFilter intentFilter = new IntentFilter();
+			intentFilter.AddAction(FFMpegService.ConcatFinishedIntent);
+			intentFilter.Priority = (int)IntentFilterPriority.HighPriority;
+//			intentFilter.AddAction("com.broditech.iseconds.FFMpegService");
+
+			this.RegisterReceiver(compileFinishedReceiver, intentFilter);
+		}
 
       public UserService GetUserService ()
       {

@@ -7,6 +7,7 @@ namespace iSeconds.Domain
    {
       event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
       event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
+		event EventHandler<GenericEventArgs<Compilation>> OnSaveCompilation;
 
       //User GetUser(int id);
 
@@ -37,9 +38,11 @@ namespace iSeconds.Domain
 
 		IList<Compilation> GetUserCompilations (int userId);
 
+		void SaveCompilation(Compilation compilation);
 		void DeleteCompilation (Compilation compilation);
 
 		Compilation GetUserCompilation(int userId, int compilationId);
+		Compilation GetUserCompilation(int userId, string compilationFilename);
 
 	}
 }
