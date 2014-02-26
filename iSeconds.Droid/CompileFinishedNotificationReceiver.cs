@@ -25,12 +25,15 @@ namespace iSeconds.Droid
 		{
 			var nMgr = (NotificationManager)context.GetSystemService (Context.NotificationService);
 
+			bool hasErrors = intent.GetBooleanExtra ("ffmpeg.concat.result.errors", true);
 			string compilationResultFilename= intent.GetStringExtra("ffmpeg.concat.result");
-			//check errors
+
 			user.SetCompilationDone(compilationResultFilename, true);
 
 			string title = context.Resources.GetString(Resource.String.compilation_notification_title);
-			string description = context.Resources.GetString(Resource.String.compilation_notification_description);
+			string description = hasErrors ? 
+				context.Resources.GetString(Resource.String.compilation_error_label) :  // we need an Icon too... 
+				context.Resources.GetString(Resource.String.compilation_notification_description);
 
 			var notification = new Notification (Resource.Drawable.Icon, title);
 			var pendingIntent = PendingIntent.GetActivity (context, 0, new Intent (context, typeof(CompilationActivity)), 0);

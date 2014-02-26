@@ -62,12 +62,13 @@ namespace iSeconds.Droid
 			}
 		}
 
-		void notifyEnd (string filename)
+		void notifyEnd (string filename, bool errors)
 		{
 			var stocksIntent = new Intent (ConcatFinishedIntent); 
 
 			Bundle bundle = new Bundle ();	
-			bundle.PutString ("ffmpeg.concat.result", filename);
+			bundle.PutString("ffmpeg.concat.result", filename);
+			bundle.PutBoolean("ffmpeg.concat.result.errors", errors);
 
 			stocksIntent.PutExtras (bundle);
 			SendOrderedBroadcast (stocksIntent, null);
@@ -144,13 +145,14 @@ namespace iSeconds.Droid
 
 						filePath = Path.Combine(tempDir, Path.GetFileName (filePath));
 
-						var cmd = GenerateCommandVideoMaximumSizeWithBlackPaddings (videoAttributes, file, filePath);
+						var cmd = GenerateCommandScaleVideoWithBlackPaddings (videoAttributes, file, filePath);
 
 						System.Console.WriteLine (cmd);
 
 						NativeCommandResult result = executeNativeCommand(cmd, envp);
 						if (result.exitValue != 0) {
 							//TODO: [ronald] what to do with errors?... eg.: out of memory
+							//for now we are just returning that an error occurred
 							errors = true;
 							break;
 						}
@@ -184,9 +186,9 @@ namespace iSeconds.Droid
 
 				NativeCommandResult res = executeNativeCommand (command, envp);
 				if (res.exitValue != 0) {
+					errors = true;
 					//TODO: [ronald] what to do with errors?... eg.: out of memory
-					// or unable to generate output... we have to report than fallback to 
-					// the lines below for cleaning up used resources
+					//for now we are just returning that an error occurred
 				}
 			}
 
@@ -197,7 +199,7 @@ namespace iSeconds.Droid
 				System.IO.File.Delete(file);
 
 			saveThumbnail(outputFilePath);
-			notifyEnd(outputFilePath);
+			notifyEnd(outputFilePath, errors);
 		}
 
 		string getFpsAsString(double fps)
@@ -220,7 +222,7 @@ namespace iSeconds.Droid
 			subtitleWriter.WriteLine ();
 		}
 
-		string GenerateCommandVideoMaximumSizeWithBlackPaddings (
+		string GenerateCommandScaleVideoWithBlackPaddings (
 			VideoAttributes videoAttributes, 
 			VideoFileInformation file, 
 			string filePath
