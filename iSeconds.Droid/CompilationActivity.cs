@@ -68,7 +68,9 @@ namespace iSeconds.Droid
 
 			list.ItemClick += (sender, e) => viewModel.ShowCompilationOptionsCommand.Execute(e.Position);
 
-			viewModel.OnCompilationViewModelChanged += (sender, args) => adapter.Invalidate();
+			viewModel.OnCompilationViewModelChanged += (sender, args) => {
+				RunOnUiThread(delegate { adapter.Invalidate(); });
+			};
 		}
 	}
 }

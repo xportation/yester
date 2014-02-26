@@ -148,12 +148,11 @@ namespace iSeconds.Domain
 
 					string msg = i18n.Msg("Are you sure? This operation cannot be undone.");
 					dialogService.AskForConfirmation(msg, () => {
-						user.DeleteCompilation(compilation.Model);
-						loadCompilations();
-					}
-						, () => {} // cancel callback
-					);
-
+						dialogService.ShowProgressDialog(() => {
+							user.DeleteCompilation(compilation.Model);
+							loadCompilations();
+						}, i18n.Msg("Please wait..."));
+					}, null);
 				});
 
 			}

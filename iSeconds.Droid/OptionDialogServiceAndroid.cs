@@ -42,14 +42,16 @@ namespace iSeconds.Droid
 		{
 			new AlertDialog.Builder(tracker.GetCurrentActivity())
 				.SetTitle(String.Empty)
-					.SetMessage(msg)
-					.SetPositiveButton(Resource.String.ok, delegate	{
+				.SetMessage(msg)
+				.SetPositiveButton(Resource.String.ok, delegate	{
+					if (userConfirmedCallback != null)
 						userConfirmedCallback.Invoke();
-					})
-					.SetNegativeButton(Resource.String.cancel, delegate {
+				})
+				.SetNegativeButton(Resource.String.cancel, delegate {
+					if (userCanceledCallback != null)
 						userCanceledCallback.Invoke();
-					})
-					.Show();
+				})
+				.Show();
 		}
 
 		public void AskForCompilationNameAndDescription(string defaultName, string defaultDescription, 
