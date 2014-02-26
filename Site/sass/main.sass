@@ -30,22 +30,41 @@ body
 section
     overflow: hidden
 
+.icon-google-play-mobile
+    display: inline-block
+    +breakpoint(sm)
+        display: none
+
 .icon-google-play
-    position: absolute
-    top: 15px
-    right: 15px
+    display: none
+
+    +breakpoint(sm)
+        display: inline
+        position: absolute
+        top: 15px
+        right: 15px
+
+.icon-mobile
+    display: inline-block
+
+    +breakpoint(sm)
+        display: none
 
 .icon
-    position: absolute
-    top: 15px
-    left: 15px
+    display: none
 
-    span
-        display: block
-        font-family: $cursive
-        color: #333
-        @include font-size(18)
-        @include transition(all, 400ms)
+    +breakpoint(sm)
+        display: inline
+        position: absolute
+        top: 15px
+        left: 15px
+
+        span
+            display: block
+            font-family: $cursive
+            color: #333
+            @include font-size(18)
+            @include transition(all, 400ms)
 
 // .fixed-overlay
 //     background-color: $salmon

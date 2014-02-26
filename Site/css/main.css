@@ -1028,16 +1028,16 @@ h1 {
 @media (min-width: 992px) {
   /* line 5, ../sass/partials/_home.sass */
   h1 {
-    margin-top: 200px;
+    margin-top: 180px;
     margin-bottom: 60px;
-    font-size: 65px;
-    font-size: 6.5rem;
+    font-size: 50px;
+    font-size: 5rem;
   }
 }
 
 /* line 27, ../sass/partials/_home.sass */
 p {
-  margin-bottom: 60px;
+  margin-bottom: 18px;
   padding: 0 15px;
   text-align: center;
   color: #333333;
@@ -1106,7 +1106,7 @@ p span {
   cursor: pointer;
   display: inline-block;
   width: 160px;
-  margin-left: 230px;
+  margin-left: 20px;
   padding: 8px 16px;
   border: solid 2px #333333;
   text-align: center;
@@ -1128,13 +1128,25 @@ p span {
 .take-a-look i {
   margin-right: 5px;
 }
+@media (min-width: 768px) {
+  /* line 76, ../sass/partials/_home.sass */
+  .take-a-look {
+    margin-left: 50px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 76, ../sass/partials/_home.sass */
+  .take-a-look {
+    margin-left: 230px;
+  }
+}
 
-/* line 97, ../sass/partials/_home.sass */
+/* line 104, ../sass/partials/_home.sass */
 .home-phone {
   margin-top: 100px;
 }
 
-/* line 100, ../sass/partials/_home.sass */
+/* line 107, ../sass/partials/_home.sass */
 .home-copy {
   -webkit-transition: position, 700ms;
   -moz-transition: position, 700ms;
@@ -1142,7 +1154,7 @@ p span {
   transition: position, 700ms;
 }
 
-/* line 103, ../sass/partials/_home.sass */
+/* line 110, ../sass/partials/_home.sass */
 #big-video-wrap {
   position: fixed;
   height: 100%;
@@ -1152,12 +1164,12 @@ p span {
   opacity: 0;
   overflow: hidden;
 }
-/* line 112, ../sass/partials/_home.sass */
+/* line 119, ../sass/partials/_home.sass */
 #big-video-wrap.hide-video {
   opacity: 0 !important;
 }
 
-/* line 115, ../sass/partials/_home.sass */
+/* line 122, ../sass/partials/_home.sass */
 #big-video-vid,
 #big-video-image {
   position: absolute;
@@ -1847,37 +1859,73 @@ section {
 }
 
 /* line 33, ../sass/main.sass */
-.icon-google-play {
-  position: absolute;
-  top: 15px;
-  right: 15px;
+.icon-google-play-mobile {
+  display: inline-block;
+}
+@media (min-width: 768px) {
+  /* line 33, ../sass/main.sass */
+  .icon-google-play-mobile {
+    display: none;
+  }
 }
 
 /* line 38, ../sass/main.sass */
-.icon {
-  position: absolute;
-  top: 15px;
-  left: 15px;
+.icon-google-play {
+  display: none;
 }
-/* line 43, ../sass/main.sass */
-.icon span {
-  display: block;
-  font-family: "Pacifico", cursive;
-  color: #333333;
-  font-size: 18px;
-  font-size: 1.8rem;
-  -webkit-transition: all, 400ms;
-  -moz-transition: all, 400ms;
-  -o-transition: all, 400ms;
-  transition: all, 400ms;
+@media (min-width: 768px) {
+  /* line 38, ../sass/main.sass */
+  .icon-google-play {
+    display: inline;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
 }
 
-/* line 58, ../sass/main.sass */
+/* line 47, ../sass/main.sass */
+.icon-mobile {
+  display: inline-block;
+}
+@media (min-width: 768px) {
+  /* line 47, ../sass/main.sass */
+  .icon-mobile {
+    display: none;
+  }
+}
+
+/* line 53, ../sass/main.sass */
+.icon {
+  display: none;
+}
+@media (min-width: 768px) {
+  /* line 53, ../sass/main.sass */
+  .icon {
+    display: inline;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+  /* line 62, ../sass/main.sass */
+  .icon span {
+    display: block;
+    font-family: "Pacifico", cursive;
+    color: #333333;
+    font-size: 18px;
+    font-size: 1.8rem;
+    -webkit-transition: all, 400ms;
+    -moz-transition: all, 400ms;
+    -o-transition: all, 400ms;
+    transition: all, 400ms;
+  }
+}
+
+/* line 77, ../sass/main.sass */
 .slide {
   opacity: 0;
 }
 
-/* line 61, ../sass/main.sass */
+/* line 80, ../sass/main.sass */
 .hide {
   position: absolute;
   left: -9999px;
