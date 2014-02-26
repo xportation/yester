@@ -84,6 +84,10 @@ namespace iSeconds.Domain
 				this.loadCompilations();
 			};
 
+			this.repository.OnDeleteCompilation += (sender, e) => {
+				this.loadCompilations();
+			};
+
 			checkCompilationsAreDoneByThumbnails();
 			loadCompilations();
 		}
@@ -149,8 +153,8 @@ namespace iSeconds.Domain
 					string msg = i18n.Msg("Are you sure? This operation cannot be undone.");
 					dialogService.AskForConfirmation(msg, () => {
 						dialogService.ShowProgressDialog(() => {
+							//repository notifies on compilation delete
 							user.DeleteCompilation(compilation.Model);
-							loadCompilations();
 						}, i18n.Msg("Please wait..."));
 					}, null);
 				});

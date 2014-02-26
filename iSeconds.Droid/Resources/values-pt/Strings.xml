@@ -85,7 +85,8 @@
    <string name="tutorial_done">Feito</string>
    <string name="tutorial_access_about">Este tutorial está disponível em \"Sobre\".</string>
 
-    <string name="compilation_error_label">Erro interno na geração da compilação!</string>
+   <string name="compilation_error_title">Erro na compilação</string>
+   <string name="compilation_error_description">Erro interno na geração da compilação.</string>
 	<string name="compilation_name_label">Nome da Compilação</string>
 	<string name="compilation_description_label">Descrição da Compilação</string>
 	<string name="compilation_notification_title">Compilação finalizada</string>

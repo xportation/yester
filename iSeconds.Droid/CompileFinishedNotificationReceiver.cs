@@ -25,21 +25,25 @@ namespace iSeconds.Droid
 		{
 			var nMgr = (NotificationManager)context.GetSystemService (Context.NotificationService);
 
-			bool hasErrors = intent.GetBooleanExtra ("ffmpeg.concat.result.errors", true);
+			bool hasErrors = intent.GetBooleanExtra("ffmpeg.concat.result.errors", true);
 			string compilationResultFilename= intent.GetStringExtra("ffmpeg.concat.result");
 
-			int iconId = Resource.Drawable.Icon;
+			int iconId;
+			string title;
+			string description;
+
 			if (hasErrors) {
 				iconId = Resource.Drawable.ic_action_error;
-//				user.DeleteCompilation(compilationResultFilename);
+				title = context.Resources.GetString(Resource.String.compilation_error_title);
+				description = context.Resources.GetString(Resource.String.compilation_error_description);
+
+				user.DeleteCompilation(compilationResultFilename);
 			} else {
+				iconId = Resource.Drawable.Icon;
+				title = context.Resources.GetString(Resource.String.compilation_notification_title);
+				description = 	context.Resources.GetString(Resource.String.compilation_notification_description);
 				user.SetCompilationDone(compilationResultFilename, true);
 			}
-
-			string title = context.Resources.GetString(Resource.String.compilation_notification_title);
-			string description = hasErrors ? 
-				context.Resources.GetString(Resource.String.compilation_error_label) :  // we need an Icon too... 
-				context.Resources.GetString(Resource.String.compilation_notification_description);
 
 			var notification = new Notification (iconId, title);
 			var pendingIntent = PendingIntent.GetActivity (context, 0, new Intent (context, typeof(CompilationActivity)), 0);

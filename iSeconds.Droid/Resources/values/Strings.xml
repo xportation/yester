@@ -85,7 +85,8 @@
    <string name="tutorial_done">Done</string>
    <string name="tutorial_access_about">This tutorial is available on the \"About\" option on the app\'s menu.</string>
 
-   <string name="compilation_error_label">There was an internal error while generating the compilation.</string>
+   <string name="compilation_error_title">Compilation failed</string>
+   <string name="compilation_error_description">There was an internal error while generating the compilation.</string>
    <string name="compilation_name_label">Compilation Name</string>
    <string name="compilation_description_label">Compilation Description</string>
    <string name="compilation_notification_title">Compilation is finished</string>

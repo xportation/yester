@@ -29,6 +29,7 @@ namespace iSeconds.Domain
 		public event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
 		public event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
 		public event EventHandler<GenericEventArgs<Compilation>> OnSaveCompilation;
+		public event EventHandler<GenericEventArgs<Compilation>> OnDeleteCompilation;
 
 		public void SaveTimeline (Timeline timeline)
 		{
@@ -199,6 +200,9 @@ namespace iSeconds.Domain
 		public void DeleteCompilation (Compilation compilation)
 		{
 			this.DeleteItem (compilation);
+
+			if (OnDeleteCompilation != null)
+				OnDeleteCompilation(this, new GenericEventArgs<Compilation>(compilation));
 		}
 
 		public Compilation GetUserCompilation(int userId, int compilationId)

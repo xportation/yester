@@ -8,6 +8,7 @@ namespace iSeconds.Domain
       event EventHandler<GenericEventArgs<Timeline>> OnSaveTimeline;
       event EventHandler<GenericEventArgs<Timeline>> OnDeleteTimeline;
 		event EventHandler<GenericEventArgs<Compilation>> OnSaveCompilation;
+		event EventHandler<GenericEventArgs<Compilation>> OnDeleteCompilation;
 
       //User GetUser(int id);
 
