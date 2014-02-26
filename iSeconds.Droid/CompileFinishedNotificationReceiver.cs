@@ -28,14 +28,20 @@ namespace iSeconds.Droid
 			bool hasErrors = intent.GetBooleanExtra ("ffmpeg.concat.result.errors", true);
 			string compilationResultFilename= intent.GetStringExtra("ffmpeg.concat.result");
 
-			user.SetCompilationDone(compilationResultFilename, true);
+			int iconId = Resource.Drawable.Icon;
+			if (hasErrors) {
+				iconId = Resource.Drawable.ic_action_error;
+//				user.DeleteCompilation(compilationResultFilename);
+			} else {
+				user.SetCompilationDone(compilationResultFilename, true);
+			}
 
 			string title = context.Resources.GetString(Resource.String.compilation_notification_title);
 			string description = hasErrors ? 
 				context.Resources.GetString(Resource.String.compilation_error_label) :  // we need an Icon too... 
 				context.Resources.GetString(Resource.String.compilation_notification_description);
 
-			var notification = new Notification (Resource.Drawable.Icon, title);
+			var notification = new Notification (iconId, title);
 			var pendingIntent = PendingIntent.GetActivity (context, 0, new Intent (context, typeof(CompilationActivity)), 0);
 			notification.SetLatestEventInfo (context, title, description, pendingIntent);
 			notification.Flags = NotificationFlags.AutoCancel; // isso eh para que a notificaçao saia quando o usuario clickar nela

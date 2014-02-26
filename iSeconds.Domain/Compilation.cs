@@ -1,5 +1,6 @@
 using System;
 using SQLite;
+using System.IO;
 
 namespace iSeconds.Domain
 {
@@ -22,6 +23,17 @@ namespace iSeconds.Domain
 		public bool Done { get; set; }
 
 		#endregion
+
+		public bool IsLost()
+		{
+			if (this.Done)
+				return false;
+
+			if (ISecondsUtils.FileSize(this.Path) == 0 || !File.Exists(this.ThumbnailPath))
+				return true;
+
+			return false;
+		}
 	}
 }
 

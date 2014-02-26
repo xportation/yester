@@ -28,11 +28,7 @@ namespace iSeconds.Domain
 
 		public static string FileSizeFormated(string filename)
 		{
-			long bytes = 0;
-			FileInfo fileInfo = new FileInfo(filename);
-			if (fileInfo.Exists)
-				bytes= fileInfo.Length;
-
+			long bytes = FileSize(filename);
 			const int scale = 1024;
 			string[] orders = new string[] {"GB", "MB", "KB", "Bytes"};
 			long max = (long)Math.Pow(scale, orders.Length-1);
@@ -46,6 +42,21 @@ namespace iSeconds.Domain
 			}
 
 			return "0 Bytes";
+		}
+
+		/// <summary>
+		/// Files the size.
+		/// </summary>
+		/// <returns>The file size in bytes</returns>
+		/// <param name="filename">Filename.</param>
+		public static long FileSize(string filename)
+		{
+			long bytes = 0;
+			FileInfo fileInfo = new FileInfo(filename);
+			if (fileInfo.Exists)
+				bytes= fileInfo.Length;
+
+			return bytes;
 		}
 	}
 }

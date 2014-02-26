@@ -160,15 +160,24 @@ namespace iSeconds.Domain
 
 		public void DeleteCompilation (Compilation compilation)
 		{
-			Debug.Assert (File.Exists(compilation.Path));
-			File.Delete(compilation.Path);
+			if (File.Exists(compilation.Path))
+				File.Delete(compilation.Path);
+
 			Debug.Assert (!File.Exists(compilation.Path));
 
-			Debug.Assert (File.Exists(compilation.ThumbnailPath));
-			File.Delete(compilation.ThumbnailPath);
+			if (File.Exists(compilation.ThumbnailPath))
+				File.Delete(compilation.ThumbnailPath);
+
 			Debug.Assert (!File.Exists(compilation.ThumbnailPath));
 
 			repository.DeleteCompilation (compilation);
+		}
+
+		public void DeleteCompilation (string compilationFilename)
+		{
+			Compilation compilation= repository.GetUserCompilation(this.Id, compilationFilename);
+			if (compilation != null)
+				this.DeleteCompilation(compilation);
 		}
 
 		public void UpdateCompilation(Compilation compilation)
@@ -182,8 +191,19 @@ namespace iSeconds.Domain
 		public void SetCompilationDone(string compilationFilename, bool isDone)
 		{
 			Compilation compilation= repository.GetUserCompilation(this.Id, compilationFilename);
-			compilation.Done = isDone;
-			this.UpdateCompilation(compilation);
+			if (compilation != null) {
+				compilation.Done = isDone;
+				this.UpdateCompilation(compilation);
+			}
+		}
+
+		public void RemoveLostCompilations()
+		{
+			var compilations = this.GetCompilations();
+			foreach (Compilation compilation in compilations) {
+				if (compilation.IsLost())
+					this.DeleteCompilation(compilation);
+			}
 		}
 
 		public Compilation GetCompilationById(int id)

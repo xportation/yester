@@ -31,7 +31,10 @@ namespace iSeconds.Droid
 			new AlertDialog.Builder(tracker.GetCurrentActivity())
 				.SetTitle (string.Empty)
 				.SetMessage (msg)
-				.SetPositiveButton(Resource.String.ok, delegate { callback.Invoke(); })
+				.SetPositiveButton(Resource.String.ok, delegate { 
+					if (callback != null)
+						callback.Invoke(); 
+				})
 				.Show ();
 		}
 

@@ -199,6 +199,9 @@
     <AndroidResource Include="Resources\drawable-ldpi\ic_calendar.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_calendar.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_calendar.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_error.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_error.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_error.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

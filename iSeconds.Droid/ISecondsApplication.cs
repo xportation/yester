@@ -58,6 +58,7 @@ namespace iSeconds.Droid
 		{
 			base.OnCreate();
 
+			userService.CurrentUser.RemoveLostCompilations();
 			registerFFMpegServiceReceive();
 		}
 

@@ -93,6 +93,8 @@ namespace iSeconds.Droid
 				return context.Resources.GetString(Resource.String.raw_timeline_options_dialog_also_delete_videos_alert);
 			else if (identifier == "Please wait...")
 				return context.Resources.GetString(Resource.String.raw_please_wait);
+			else if (identifier == "Please, wait for the compilation to finish")
+				return context.Resources.GetString(Resource.String.raw_please_wait_for_the_compilation_to_finish);
 
 			return "*"+identifier+"*";
 		}
