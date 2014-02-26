@@ -38,6 +38,9 @@ namespace iSeconds.Domain
 
 			DayInfo day = repository.GetDayInfoAt(date, Id);
 			day.DeleteVideo (url);
+
+			if (day.GetVideoCount() == 0)
+				repository.DeleteItem(day);
 		}
 
 		public void DeleteAllVideos()
@@ -45,8 +48,10 @@ namespace iSeconds.Domain
 			Debug.Assert (repository != null);
 
 			var days= repository.GetAllDays(this.Id);
-			foreach (DayInfo day in days)
+			foreach (DayInfo day in days) {
 				day.DeleteVideos();
+				repository.DeleteItem(day);
+			}
 		}
 
 		public IList<MediaInfo> GetVideosAt(DateTime date)

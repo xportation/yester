@@ -14,11 +14,12 @@ namespace iSeconds.Domain
 
       IList<Timeline> GetUserTimelines(int userId);
 
-      int SaveItem<T>(T item) where T : IModel;
+		int SaveItem<T>(T item) where T : IModel;
+		int DeleteItem<T>(T item) where T : IModel;
 
       void SaveTimeline(Timeline timeline);
       void DeleteTimeline(Timeline timeline);
-      
+
       DayInfo GetDayInfoAt(DateTime dateTime, int timelineId);
 
 		DayInfo GetDayInfo(int dayId);
