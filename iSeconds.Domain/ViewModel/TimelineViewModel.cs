@@ -55,8 +55,6 @@ namespace iSeconds.Domain
 			this.TimelineName = this.timeline.Name;
 		}
 
-		private DayViewModel currentDateViewModel = null;
-
 		private DateTime currentDate;
 
 		public DateTime CurrentDate
@@ -83,9 +81,6 @@ namespace iSeconds.Domain
 
 					viewModel.PresentationInfo = date;
 					viewModels.Add(viewModel);
-
-					if (currentDate == date.day)
-						currentDateViewModel = viewModel;
 				}
 
 				VisibleDays = viewModels;
@@ -191,7 +186,18 @@ namespace iSeconds.Domain
 		public ICommand TakeVideoCommand
 		{
 			get { return new Command((object arg) => {
-					currentDateViewModel.RecordVideoCommand.Execute(null);
+				DayViewModel currentDateViewModel = null;
+				foreach (DayViewModel dayViewModel in this.VisibleDays) {
+					if (dayViewModel.Model.Date == DateTime.Today) {
+						currentDateViewModel= dayViewModel;
+						break;
+					}
+				}
+
+				if (currentDateViewModel == null)
+					currentDateViewModel = new DayViewModel(this.timeline.GetDayAt(DateTime.Today), repository, this.mediaService, this.navigator);
+
+				currentDateViewModel.RecordVideoCommand.Execute(null);
 				}); 
 			}
 		}

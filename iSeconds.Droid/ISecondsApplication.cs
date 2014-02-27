@@ -35,7 +35,7 @@ namespace iSeconds.Droid
 				userService.CreateUser ("user");
          
 			activityTracker = new ActivityTracker ();
-			mediaService = new MediaServiceAndroid (this.activityTracker, repository, pathService.GetMediaPath(), userService.CurrentUser);         
+			mediaService = new MediaServiceAndroid (this.activityTracker, repository, pathService.GetMediaPath(), userService.CurrentUser);
 
 			navigator = new INavigator ();
          navigator.RegisterNavigation ("day_options", new AndroidPresenter (this.activityTracker, typeof(DayOptionsActivity)));            

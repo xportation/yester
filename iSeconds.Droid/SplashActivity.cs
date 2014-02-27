@@ -7,6 +7,7 @@ using Android.Widget;
 using iSeconds.Domain.Framework;
 using Android.Telephony;
 using Android.Accounts;
+using Android.Content;
 
 namespace iSeconds.Droid
 {

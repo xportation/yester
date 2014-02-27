@@ -114,15 +114,17 @@ namespace iSeconds.Droid
 
 		private void setProgressVisibility(bool isVisible)
 		{
-			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
+			RunOnUiThread(delegate {
+				var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
 
-			if (isVisible) {
-				if (actionBar.ProgressBarVisibility == ViewStates.Gone)
-					actionBar.ProgressBarVisibility = ViewStates.Visible;
-			} else {
-				if (actionBar.ProgressBarVisibility == ViewStates.Visible)
-					actionBar.ProgressBarVisibility = ViewStates.Gone;
-			}
+				if (isVisible) {
+					if (actionBar.ProgressBarVisibility == ViewStates.Gone)
+						actionBar.ProgressBarVisibility = ViewStates.Visible;
+				} else {
+					if (actionBar.ProgressBarVisibility == ViewStates.Visible)
+						actionBar.ProgressBarVisibility = ViewStates.Gone;
+				}
+			});
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)

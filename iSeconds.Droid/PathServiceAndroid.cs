@@ -8,7 +8,7 @@ namespace iSeconds.Droid
 {
 	internal class MemoryUtils
 	{
-		private static bool externalMemoryAvailable() 
+		public static bool ExternalMemoryAvailable() 
 		{
 			string state = Android.OS.Environment.ExternalStorageState;
 			return Android.OS.Environment.MediaMounted == state;
@@ -21,8 +21,8 @@ namespace iSeconds.Droid
 			return availableBlocks * blockSize;
 		}
 
-		public static bool IsExternalMemoryBestChoice() {
-			if (MemoryUtils.externalMemoryAvailable())
+		public static bool IsExternalMemoryHigherFreeSpace() {
+			if (MemoryUtils.ExternalMemoryAvailable())
 				return availableMemorySize (Android.OS.Environment.ExternalStorageDirectory) > 
 					availableMemorySize (Android.OS.Environment.DataDirectory);
 
@@ -38,21 +38,15 @@ namespace iSeconds.Droid
 		private string compilationPath;
 
 		private Context applicationContext;
-		private const string SharedPreferencesName = "yester_preferences";
-		private const string SharedPreferencesBaseDirectory = "base_directory";
 
 		public PathServiceAndroid(Context applicationContext)
       {
 			this.applicationContext = applicationContext;
 
-			loadPathFromPreferences();
-			if (appPath.Length == 0) {
+			if (MemoryUtils.ExternalMemoryAvailable())
+				appPath = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.Path, "iSeconds");
+			else
 				appPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "iSeconds");
-				if (MemoryUtils.IsExternalMemoryBestChoice())
-					appPath = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.Path, "iSeconds");
-
-				savePathToPreferences();
-			}
 
 			mediaPath = System.IO.Path.Combine(appPath, "Videos");
 			dbPath = System.IO.Path.Combine(appPath, "Db"); 
@@ -60,21 +54,6 @@ namespace iSeconds.Droid
 
          createPaths();
       }
-
-		private void loadPathFromPreferences()
-		{
-			ISharedPreferences prefs = applicationContext.GetSharedPreferences(SharedPreferencesName, FileCreationMode.Private);
-			appPath = prefs.GetString(SharedPreferencesBaseDirectory, "");
-			appPath = "";
-		}
-
-		private void savePathToPreferences()
-		{
-			ISharedPreferences prefs = applicationContext.GetSharedPreferences(SharedPreferencesName, FileCreationMode.Private);
-			ISharedPreferencesEditor editor = prefs.Edit();
-			editor.PutString(SharedPreferencesBaseDirectory, appPath);
-			editor.Apply();
-		}
 
       public string GetApplicationPath ()
       {
