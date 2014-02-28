@@ -21,50 +21,56 @@ namespace iSeconds.Droid
       private IPathService pathService = null;
 		private IOptionsDialogService optionsDialogService = null;
 		private I18nService i18nService = null;
-		private CompileFinishedNotificationReceiver compileFinishedReceiver;
+      private CompileFinishedNotificationReceiver compileFinishedReceiver = null;
 
       public ISecondsApplication (IntPtr javaReference, JniHandleOwnership transfer)
          : base(javaReference, transfer)
       {
-			pathService = new PathServiceAndroid(this.ApplicationContext);
-			repository = new ISecondsDB (pathService.GetDbPath());
+			pathService = new PathServiceAndroid();
 
-			i18nService = new I18nServiceAndroid(this.BaseContext);
-			userService = new UserService (repository, i18nService);
-			if (!userService.Login ("user", "password"))
-				userService.CreateUser ("user");
+         if (pathService.IsGood()) {
+            repository = new ISecondsDB(pathService.GetDbPath());
+
+            i18nService = new I18nServiceAndroid(this.BaseContext);
+            userService = new UserService(repository, i18nService);
+            if (!userService.Login("user", "password"))
+               userService.CreateUser("user");
          
-			activityTracker = new ActivityTracker ();
-			mediaService = new MediaServiceAndroid (this.activityTracker, repository, pathService.GetMediaPath(), userService.CurrentUser);
+            activityTracker = new ActivityTracker();
+            mediaService = new MediaServiceAndroid(this.activityTracker, repository, pathService.GetMediaPath(), userService.CurrentUser);
 
-			navigator = new INavigator ();
-         navigator.RegisterNavigation ("day_options", new AndroidPresenter (this.activityTracker, typeof(DayOptionsActivity)));            
-         navigator.RegisterNavigation ("timeline_options", new AndroidPresenter (this.activityTracker, typeof(TimelineOptionsActivity)));
-         navigator.RegisterNavigation ("timeline_view", new AndroidPresenter (this.activityTracker, typeof(TimelineActivity)));
-			navigator.RegisterNavigation ("settings_view", new AndroidPresenter(this.activityTracker, typeof(SettingsActivity)));
-			navigator.RegisterNavigation ("about_view", new AndroidPresenter(this.activityTracker, typeof(AboutActivity)));
-			navigator.RegisterNavigation ("video_player", new AndroidPresenter(this.activityTracker, typeof(VideoPlayerActivity)));
-			navigator.RegisterNavigation ("compilations_view", new AndroidPresenter(this.activityTracker, typeof(CompilationActivity)));
-			navigator.RegisterNavigation ("single_shot_video_player", new AndroidPresenter(this.activityTracker, typeof(SingleShotVideoPlayerActivity)));
+            navigator = new INavigator();
+            navigator.RegisterNavigation("day_options", new AndroidPresenter(this.activityTracker, typeof(DayOptionsActivity)));            
+            navigator.RegisterNavigation("timeline_options", new AndroidPresenter(this.activityTracker, typeof(TimelineOptionsActivity)));
+            navigator.RegisterNavigation("timeline_view", new AndroidPresenter(this.activityTracker, typeof(TimelineActivity)));
+            navigator.RegisterNavigation("settings_view", new AndroidPresenter(this.activityTracker, typeof(SettingsActivity)));
+            navigator.RegisterNavigation("about_view", new AndroidPresenter(this.activityTracker, typeof(AboutActivity)));
+            navigator.RegisterNavigation("video_player", new AndroidPresenter(this.activityTracker, typeof(VideoPlayerActivity)));
+            navigator.RegisterNavigation("compilations_view", new AndroidPresenter(this.activityTracker, typeof(CompilationActivity)));
+            navigator.RegisterNavigation("single_shot_video_player", new AndroidPresenter(this.activityTracker, typeof(SingleShotVideoPlayerActivity)));
 
-			var rangeNavigation = new AndroidPresenter(this.activityTracker, typeof(RangeSelectionActivity));
-			rangeNavigation.DisableAnimation();
-			navigator.RegisterNavigation ("range_selection", rangeNavigation);
+            var rangeNavigation = new AndroidPresenter(this.activityTracker, typeof(RangeSelectionActivity));
+            rangeNavigation.DisableAnimation();
+            navigator.RegisterNavigation("range_selection", rangeNavigation);
 
-			optionsDialogService = new OptionDialogServiceAndroid (activityTracker);
+            optionsDialogService = new OptionDialogServiceAndroid(activityTracker);
+         }
       }
 
 		public override void OnCreate()
 		{
 			base.OnCreate();
 
-			userService.CurrentUser.RemoveLostCompilations();
-			registerFFMpegServiceReceive();
+         if (userService != null) {
+            userService.CurrentUser.RemoveLostCompilations();
+            registerFFMpegServiceReceive();
+         }
 		}
 
 		public override void OnTerminate()
 		{
-			this.UnregisterReceiver(compileFinishedReceiver);
+         if (compileFinishedReceiver != null)
+			   this.UnregisterReceiver(compileFinishedReceiver);
 
 			base.OnTerminate();
 		}

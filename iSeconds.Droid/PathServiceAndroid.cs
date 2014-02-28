@@ -36,23 +36,28 @@ namespace iSeconds.Droid
       private string mediaPath;
       private string dbPath; 
 		private string compilationPath;
+      private bool pathsGood = false;
 
-		private Context applicationContext;
-
-		public PathServiceAndroid(Context applicationContext)
+		public PathServiceAndroid()
       {
-			this.applicationContext = applicationContext;
-
-			if (MemoryUtils.ExternalMemoryAvailable())
-				appPath = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.Path, "iSeconds");
-			else
-				appPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "iSeconds");
+         appPath = string.Empty;
+         
+         if (MemoryUtils.ExternalMemoryAvailable()) {
+            appPath = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.Path, "iSeconds");
+            pathsGood = true;
+         }
 
 			mediaPath = System.IO.Path.Combine(appPath, "Videos");
-			dbPath = System.IO.Path.Combine(appPath, "Db"); 
+         dbPath = System.IO.Path.Combine(appPath, "Db"); 
 			compilationPath = System.IO.Path.Combine(appPath, "Compilations"); 
 
-         createPaths();
+         if (pathsGood)
+            createPaths();
+      }
+
+      public bool IsGood()
+      {
+         return pathsGood;
       }
 
       public string GetApplicationPath ()
@@ -86,7 +91,7 @@ namespace iSeconds.Droid
       {
          createPath(appPath);
          createPath(mediaPath);
-			createPath(dbPath);
+         createPath(dbPath);
 			createPath(compilationPath);
       }
 

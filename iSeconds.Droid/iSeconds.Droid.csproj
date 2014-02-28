@@ -20,7 +20,7 @@
     <MandroidI18n />
     <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <AndroidStoreUncompressedFileExtensions>.so</AndroidStoreUncompressedFileExtensions>
+    <AndroidStoreUncompressedFileExtensions>.so;.2;.6;.1</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -33,7 +33,6 @@
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <DebugSymbols>true</DebugSymbols>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <AndroidSupportedAbis>armeabi;armeabi-v7a</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>

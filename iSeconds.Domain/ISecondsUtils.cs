@@ -10,12 +10,7 @@ namespace iSeconds.Domain
 		public static string StringifyDate(string prefix, System.DateTime dateTime)
 		{
 			dateTime = dateTime.Date + DateTime.Now.TimeOfDay; // setting the hour
-
-			string movieName = prefix + "_" + dateTime.ToString();
-			movieName = movieName.Replace("/", "_");
-			movieName = movieName.Replace(" ", "_");
-			movieName = movieName.Replace(":", "_");
-			return movieName;
+         return String.Format("{0}__{1}_{2}_{3}__{4}_{5}_{6}", prefix, dateTime.Day, dateTime.Month, dateTime.Year, dateTime.Hour, dateTime.Minute, dateTime.Second);
 		}
 
 		public static string DateToString(DateTime date, bool withTimeSpan)

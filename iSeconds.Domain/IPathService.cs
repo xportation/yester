@@ -8,6 +8,7 @@ namespace iSeconds.Domain
       string GetMediaPath();
       string GetDbPath();
 		string GetCompilationPath();
+      bool IsGood();
    }
 }
 

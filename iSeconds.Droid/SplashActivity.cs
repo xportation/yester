@@ -12,18 +12,26 @@ using Android.Content;
 namespace iSeconds.Droid
 {
 	[Activity (Label= "@string/app_name", MainLauncher = true, Theme = "@style/Theme.Splash", NoHistory = true)]
-	public class SplashActivity : ISecondsActivity
+	public class SplashActivity : Activity
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
-			base.OnCreate (bundle);
-         try {
-				if (isABetaTester())
-					navigator.NavigateTo("timeline_view", new Args());
-				else
-					betaTesterRestricionMessage();
-			} catch (Exception) {
-				this.Finish();
+         base.OnCreate (bundle);
+
+         ISecondsApplication application = this.Application as ISecondsApplication;
+         IPathService pathService = application.GetPathService();
+
+         if (pathService != null && pathService.IsGood()) {
+            try {
+               if (isABetaTester()) {
+                  this.StartActivity(typeof(TimelineActivity));
+               } else
+                  showMessage("Esta versão é apenas para usuários beta cadastrados.\nSe você quiser testá-la também, por favor peça para quem lhe passou indicar você.\n\nInfelizmente essa restrição é necessária para evitar usuários manjadores.");
+            } catch (Exception) {
+               this.Finish();
+            }
+         } else {
+            showMessage(Resources.GetString(Resource.String.sd_cad_not_available_error_message));
          }
 		}
 
@@ -40,11 +48,11 @@ namespace iSeconds.Droid
 			return false;
 		}
 
-		private void betaTesterRestricionMessage()
+      private void showMessage(string message)
 		{
 			new AlertDialog.Builder(this)
 				.SetTitle (string.Empty)
-				.SetMessage ("Esta versão é apenas para usuários beta cadastrados.\nSe você quiser testá-la também, por favor peça para quem lhe passou indicar você.\n\nInfelizmente essa restrição é necessária para evitar usuários manjadores.")
+            .SetMessage(message)
 				.SetPositiveButton(Resource.String.ok, delegate { this.Finish(); })
 				.Show ();
 		}
@@ -97,6 +105,8 @@ namespace iSeconds.Droid
 				return true;
 			else if (name.Contains("patyknapik@gmail.com"))
 				return true;
+         else if (name.Contains("teofleo@gmail.com"))
+            return true;
 
 			return false;
 		}

@@ -43,11 +43,8 @@ namespace iSeconds.Droid
 				IList<string> filesToConcat = intent.Extras.GetStringArrayList("ffmpeg.concat.filelist");
 				IList<string> subtitles = intent.Extras.GetStringArrayList("ffmpeg.concat.subtitles");
 
-				// this is very important because there is only one path on the entire system 
-				// that applications are able to set 'execute' permissions and this is supposed to be it.
-				// according to this http://stackoverflow.com/questions/5531289/copy-the-shared-preferences-xml-file-from-data-on-samsung-device-failed
-				// this can vary, so... we need to test it and follow that guidelines if needed.
-				basePathAbsolute = "/data/data/" + this.BaseContext.PackageName + "/shared_prefs";
+				Java.IO.File baseFilePath = this.GetDir("shared_prefs", FileCreationMode.Private);
+				basePathAbsolute = baseFilePath.Path;
 
 				// we have to set LD_LIBRARY_PATH so that linux can find the shared libraries that ffmpeg depends on, 
 				// otherwise it won't find it even if on the same path. I had to find it out the hard way :(
