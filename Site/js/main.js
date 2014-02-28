@@ -60,12 +60,12 @@ $(document).ready(function(){
 
     $('.demo_en').on('click',function(){
         var newHeight= bestHeight();
-        $.easybox([{url: "http://www.youtube.com/watch?v=U_SkxEIigVc", caption: "Yester Demonstration", height: newHeight }]);
+        $.easybox([{url: "http://www.youtube.com/watch?v=apWZ7j45NTE", caption: "Yester Demonstration", height: newHeight }]);
     });
 
     $('.demo_pt').on('click',function(){
         var newHeight= bestHeight();
-        $.easybox([{url: "http://www.youtube.com/watch?v=Yn4Npsisrc8", caption: "Demonstraçao do Yester", height: newHeight }]);
+        $.easybox([{url: "http://www.youtube.com/watch?v=BEfpNUq5Kjo", caption: "Demonstraçao do Yester", height: newHeight }]);
     });
 
     /*==================================
