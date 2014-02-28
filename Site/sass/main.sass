@@ -30,8 +30,17 @@ body
 section
     overflow: hidden
 
+
+.header-mobile
+    width: 100%
+    text-align: center
+
+    +breakpoint(sm)
+        display: none
+
 .icon-google-play-mobile
     display: inline-block
+
     +breakpoint(sm)
         display: none
 
