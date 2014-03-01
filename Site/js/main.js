@@ -34,11 +34,11 @@ $(document).ready(function(){
     if (Modernizr.touch) {
         BV.show('img/yester_background.jpg');
     } else {
-        BV.show('video/yester_background.ogv',
-            {ambient:true,
+        BV.show('video/yester_background.ogv', {
+            ambient:true,
             doLoop:true,
-            altSource:'video/yester_background.mp4'});
-
+            altSource:'video/yester_background.mp4'
+        });
     }
 
     //animate in video so you dont see resize
