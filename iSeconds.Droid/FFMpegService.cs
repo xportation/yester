@@ -171,12 +171,12 @@ namespace iSeconds.Droid
 			if (!errors) {
 				// -loglevel debug
 				var command = string.Format (".{0} -y -f concat -i {1} -vf subtitles='{2}' -strict -2 -c:v mpeg4 " +
-				              				 "-b {3}k -r {4} -c:a copy -sn {5}",
+				                             "-b {3}k -r {4} -c:a aac -strict experimental -ab 128k -sn {5}",
 				                             Path.Combine (basePathAbsolute, "ffmpeg"),
 				                             fileListPath,
 				                             subtitlePath,
 				                             (int)videoAttributes.maxBitrate,
-													  getFpsAsString(videoAttributes.maxFps),
+											 getFpsAsString(videoAttributes.maxFps),
 				                             outputFilePath);
 
 				System.Console.WriteLine (command);
@@ -229,7 +229,7 @@ namespace iSeconds.Droid
 			return string.Format (".{0} -y -i {1} -vf " +
 			    "scale=iw*sar*min({2}/(iw*sar)\\,{3}/ih):ih*min({4}/(iw*sar)\\,{5}/ih)," + 
 			    "pad={6}:{7}:(ow-iw)/2:(oh-ih)/2:black " +
-			    "-strict -2 -c:v mpeg4 -b {8}k -r {9} -c:a copy -sn {10}",
+			    "-strict -2 -c:v mpeg4 -b {8}k -r {9} -c:a aac -strict experimental -ab 128k -sn {10}",
 			                     Path.Combine (basePathAbsolute, "ffmpeg"),
 			                     file.Path, 
 			                     videoAttributes.minWidth,
@@ -239,7 +239,7 @@ namespace iSeconds.Droid
 			                     videoAttributes.minWidth, 
 			                     videoAttributes.minHeight,
 			                     (int)videoAttributes.maxBitrate,
-								getFpsAsString(videoAttributes.maxFps),
+								 getFpsAsString(videoAttributes.maxFps),
 			                     filePath);
 		}
 
@@ -500,6 +500,5 @@ namespace iSeconds.Droid
 
 			return videoInfo;
 		}
-
 	}
 }
