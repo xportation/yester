@@ -17,6 +17,8 @@ namespace iSeconds.Domain
 		private INavigator navigator = null;
 		private IRepository repository = null;
 
+		private EventHandler<GenericEventArgs<Compilation>> compilationChangedHandler;
+
 		public class CompilationItemViewModel : ListItemViewModel
 		{
 			public int Id { get; set; }
@@ -80,16 +82,19 @@ namespace iSeconds.Domain
 			this.navigator = navigator;
 			this.repository = repository;
 
-			this.repository.OnSaveCompilation += (sender, e) => {
-				this.loadCompilations();
-			};
+			compilationChangedHandler = new EventHandler<GenericEventArgs<Compilation>>((sender, e) => this.loadCompilations());
 
-			this.repository.OnDeleteCompilation += (sender, e) => {
-				this.loadCompilations();
-			};
+			this.repository.OnSaveCompilation += compilationChangedHandler;
+			this.repository.OnDeleteCompilation += compilationChangedHandler;
 
 			checkCompilationsAreDoneByThumbnails();
 			loadCompilations();
+		}
+
+		public void Disconnect()
+		{
+			this.repository.OnSaveCompilation -= compilationChangedHandler;
+			this.repository.OnDeleteCompilation -= compilationChangedHandler;
 		}
 
 		private void loadCompilations() 

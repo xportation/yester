@@ -35,6 +35,13 @@ namespace iSeconds.Droid
 			setupCalendar();
 		}
 
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+
+			viewModel.Disconnect();
+		}
+
 		protected abstract bool showHomeButton();
 		protected abstract void addActionBarItems();
 		protected abstract string getActivityTitle ();

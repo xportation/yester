@@ -59,54 +59,16 @@ namespace iSeconds.Droid
 
 		private bool isAccountAllowed(string name)
 		{
-			if (name.Contains("xportation@gmail.com"))
-				return true;
-			else if (name.Contains("martim00@gmail.com"))
-				return true;
-			else if (name.Contains("biaosiegel@gmail.com"))
-				return true;
-			else if (name.Contains("ronald.paloschi@gmail.com"))
-				return true;
-			else if (name.Contains("84090101"))
-				return true;
-			else if (name.Contains("aline@alinefranca.com.br"))
-				return true;
-			else if (name.Contains("leo.nardi.borba@gmail.com"))
-				return true;
-			else if (name.Contains("96362222"))
-				return true;
-			else if (name.Contains("maigsilva@hotmail.com"))
-				return true;
-			else if (name.Contains("luciana.oan@gmail.com"))
-				return true;
-			else if (name.Contains("gabidepaula1@gmail.com"))
-				return true;
-			else if (name.Contains("yoshidanielcwb@gmail.com"))
-				return true;
-			else if (name.Contains("c.felipe.araujo@gmail.com"))
-				return true;
-			else if (name.Contains("cris.siegel@hotmail.com"))
-				return true;
-			else if (name.Contains("turatti23@gmail.com"))
-				return true;
-			else if (name.Contains("rgoulart@live.com"))
-				return true;
-			else if (name.Contains("99738925"))
-				return true;
-			else if (name.Contains("xportation.dev@gmail.com"))
-				return true;
-			else if (name.Contains("96155056"))
-				return true;
-			else if (name.Contains("982218139"))
-				return true;
-			else if (name.Contains("88080368"))
-				return true;
-			else if (name.Contains("graziellasil90@gmail.com"))
-				return true;
-			else if (name.Contains("patyknapik@gmail.com"))
-				return true;
-         else if (name.Contains("teofleo@gmail.com"))
-            return true;
+			string[] namesSuported = { "xportation@gmail.com", "martim00@gmail.com", "biaosiegel@gmail.com", "ronald.paloschi@gmail.com", 
+				"84090101", "aline@alinefranca.com.br", "leo.nardi.borba@gmail.com", "96362222", "maigsilva@hotmail.com", "luciana.oan@gmail.com", 
+				"gabidepaula1@gmail.com", "yoshidanielcwb@gmail.com", "c.felipe.araujo@gmail.com", "cris.siegel@hotmail.com", "turatti23@gmail.com", 
+				"rgoulart@live.com", "99738925", "xportation.dev@gmail.com", "96155056", "982218139", "88080368", "graziellasil90@gmail.com", 
+				"patyknapik@gmail.com", "teofleo@gmail.com", "edjeanmsampaio@gmail.com" };
+
+			foreach (string nameSuported in namesSuported) {
+				if (name.Contains(nameSuported))
+					return true;
+			}
 
 			return false;
 		}

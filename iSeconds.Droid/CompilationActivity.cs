@@ -72,6 +72,12 @@ namespace iSeconds.Droid
 				RunOnUiThread(delegate { adapter.Invalidate(); });
 			};
 		}
+
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+			viewModel.Disconnect();
+		}
 	}
 }
 

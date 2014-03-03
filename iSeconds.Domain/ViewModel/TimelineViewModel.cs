@@ -20,6 +20,9 @@ namespace iSeconds.Domain
 		private I18nService i18n = null;
 		private IPathService pathService = null;
 
+		private EventHandler<GenericEventArgs<Timeline>> timelineUpdatedHandler;
+		private EventHandler<GenericEventArgs<Timeline>> currentTimelineChangedHandler;
+
 		public TimelineViewModel(User user, IRepository repository, IMediaService mediaService, 
 			INavigator navigator, IOptionsDialogService dialogService, I18nService i18n, IPathService pathService)
 		{
@@ -36,17 +39,25 @@ namespace iSeconds.Domain
 
 			this.CurrentDate = DateTime.Today;
 
-			this.user.OnCurrentTimelineChanged += (sender, e) => {
-				setTimeline(e.Value);
-				this.Invalidate();
-			};
-
-			this.user.OnTimelineUpdated += (sender, e) => {
+			timelineUpdatedHandler= new EventHandler<GenericEventArgs<Timeline>>((sender, e) => {
 				if (e.Value.Id == this.timeline.Id)
 					setTimeline(e.Value);
-			};
+			});
 
+			currentTimelineChangedHandler = new EventHandler<GenericEventArgs<Timeline>>((sender, e) => {
+				setTimeline(e.Value);
+				this.Invalidate();
+			});
+
+			this.user.OnTimelineUpdated += timelineUpdatedHandler;
+			this.user.OnCurrentTimelineChanged += currentTimelineChangedHandler;
 			this.onRangeSelectionMode = false;
+		}
+
+		public void Disconnect()
+		{
+			this.user.OnTimelineUpdated -= timelineUpdatedHandler;
+			this.user.OnCurrentTimelineChanged -= currentTimelineChangedHandler;
 		}
 
 		private void setTimeline(Timeline timeline)

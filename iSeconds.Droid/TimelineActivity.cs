@@ -27,6 +27,10 @@ namespace iSeconds.Droid
 
 		private const int TutorialDialogId = 15;
 
+		private IMediaService mediaService;
+		private EventHandler videoRecordedHandler;
+		private EventHandler thumbnailSavedHandler;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -43,22 +47,33 @@ namespace iSeconds.Droid
 				setProgressVisibility(false);
 			};
 
-			IMediaService mediaService = application.GetMediaService();
-			mediaService.OnVideoRecorded += (sender, e) => {
+			videoRecordedHandler = new EventHandler((sender, e) => {
 				setProgressVisibility(true);
 				singleshotUpdateView.Start();
-			};
+			});
 
-			mediaService.OnThumbnailSaved += (sender, e) => {
+			thumbnailSavedHandler = new EventHandler((sender, e) => {
 				viewModel.Invalidate();
 				setProgressVisibility(false);
-			};
+			});
+
+			mediaService = application.GetMediaService();
+			mediaService.OnVideoRecorded += videoRecordedHandler;
+			mediaService.OnThumbnailSaved += thumbnailSavedHandler;
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume(); 
 			viewModel.Invalidate();
+		}
+
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+
+			mediaService.OnVideoRecorded -= videoRecordedHandler;
+			mediaService.OnThumbnailSaved -= thumbnailSavedHandler;
 		}
 
 		protected override void OnSaveInstanceState(Bundle outState)

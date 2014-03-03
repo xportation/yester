@@ -86,6 +86,12 @@ namespace iSeconds.Droid
 			configureActionBarActions();
       }
 
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+			viewModel.Disconnect();
+		}
+
 	   private void configureActionBarActions()
       {
          var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);

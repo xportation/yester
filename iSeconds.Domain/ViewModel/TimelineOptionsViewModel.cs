@@ -9,7 +9,10 @@ namespace iSeconds.Domain
 		private User user = null;
 		private I18nService i18n = null;
 		private INavigator navigator = null;
+		private IRepository repository = null;
 		private IOptionsDialogService optionsDialog = null;
+
+		private EventHandler<GenericEventArgs<Timeline>> timelineChangedHandler;
 		
 		public TimelineOptionsViewModel(INavigator navigador, User user, IRepository repository, 
 			I18nService i18n, IOptionsDialogService optionsDialog)
@@ -17,12 +20,23 @@ namespace iSeconds.Domain
 			this.user = user;
 			this.i18n = i18n;
 			this.navigator = navigador;
+			this.repository = repository;
 			this.optionsDialog = optionsDialog;
-			
-	      this.user.OnCurrentTimelineChanged += (sender, args) => notifyChanges();
-			this.user.OnTimelineUpdated += (sender, e) => notifyChanges();
-	      repository.OnSaveTimeline += (sender, args) => notifyChanges();
-	      repository.OnDeleteTimeline += (sender, args) => notifyChanges();
+
+			timelineChangedHandler= new EventHandler<GenericEventArgs<Timeline>>((sender, e) => notifyChanges());
+
+			this.user.OnCurrentTimelineChanged += timelineChangedHandler;
+			this.user.OnTimelineUpdated += timelineChangedHandler;
+			this.repository.OnSaveTimeline += timelineChangedHandler;
+			this.repository.OnDeleteTimeline += timelineChangedHandler;
+		}
+
+		public void Disconnect()
+		{
+			this.user.OnCurrentTimelineChanged -= timelineChangedHandler;
+			this.user.OnTimelineUpdated -= timelineChangedHandler;
+			this.repository.OnSaveTimeline -= timelineChangedHandler;
+			this.repository.OnDeleteTimeline -= timelineChangedHandler;
 		}
 
 		public event EventHandler<GenericEventArgs<TimelineOptionsViewModel>> OnTimelineOptionsViewModelChanged;
