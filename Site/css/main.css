@@ -1125,21 +1125,21 @@ p span {
   -o-transition: all, 400ms;
   transition: all, 400ms;
 }
-/* line 95, ../sass/partials/_home.sass */
+/* line 94, ../sass/partials/_home.sass */
 .take-a-look:hover {
   background-color: rgba(0, 155, 169, 0.7);
 }
-/* line 98, ../sass/partials/_home.sass */
+/* line 97, ../sass/partials/_home.sass */
 .take-a-look i {
   margin-right: 5px;
 }
 
-/* line 108, ../sass/partials/_home.sass */
+/* line 101, ../sass/partials/_home.sass */
 .home-phone {
   margin-top: 100px;
 }
 
-/* line 111, ../sass/partials/_home.sass */
+/* line 104, ../sass/partials/_home.sass */
 .home-copy {
   -webkit-transition: position, 700ms;
   -moz-transition: position, 700ms;
@@ -1147,7 +1147,7 @@ p span {
   transition: position, 700ms;
 }
 
-/* line 114, ../sass/partials/_home.sass */
+/* line 107, ../sass/partials/_home.sass */
 #big-video-wrap {
   position: fixed;
   height: 100%;
@@ -1157,12 +1157,12 @@ p span {
   opacity: 0;
   overflow: hidden;
 }
-/* line 123, ../sass/partials/_home.sass */
+/* line 116, ../sass/partials/_home.sass */
 #big-video-wrap.hide-video {
   opacity: 0 !important;
 }
 
-/* line 126, ../sass/partials/_home.sass */
+/* line 119, ../sass/partials/_home.sass */
 #big-video-vid,
 #big-video-image {
   position: absolute;
