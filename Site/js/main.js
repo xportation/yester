@@ -58,14 +58,16 @@ $(document).ready(function(){
         $('.onepage-pagination li:nth-child(2)').children().trigger('click');
     });
 
-    $('.demo_en').on('click',function(){
+    $('.demo').on('click',function(){
         var newHeight= bestHeight();
-        $.easybox([{url: "http://www.youtube.com/watch?v=apWZ7j45NTE", caption: "Yester Demonstration", height: newHeight }]);
-    });
+        var youtubeUrlCaption= "Yester Demonstration";
+        var youtubeUrl= "http://www.youtube.com/watch?v=apWZ7j45NTE";
+        if (J42R.getLang() == "pt") {
+            youtubeUrl= "http://www.youtube.com/watch?v=BEfpNUq5Kjo";
+            youtubeUrlCaption= "Demonstração do Yester";
+        }
 
-    $('.demo_pt').on('click',function(){
-        var newHeight= bestHeight();
-        $.easybox([{url: "http://www.youtube.com/watch?v=BEfpNUq5Kjo", caption: "Demonstraçao do Yester", height: newHeight }]);
+        $.easybox([{url: youtubeUrl, caption: youtubeUrlCaption, height: newHeight }]);
     });
 
     /*==================================
