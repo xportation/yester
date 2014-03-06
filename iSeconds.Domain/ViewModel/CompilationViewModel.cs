@@ -172,25 +172,27 @@ namespace iSeconds.Domain
 				return new Command ((object arg) => {
 					int pos = (int)arg;
 					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[pos];
-					if (compilation.Done) {
-						OptionsList options = new OptionsList();
-						options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Play"), () => {
-							PlayVideoCommand.Execute(arg);
-						}));
-						options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Edit compilation"), () => {
-							EditCompilationCommand.Execute(arg);
-						}));
-						options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Share"), () => {
-							ShareCompilationCommand.Execute(arg);
-						}));
-						options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Delete"), () => {
-							DeleteVideoCommand.Execute(arg);
-						}));
-						options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Cancel"), () => {}));
-						dialogService.ShowModal(options);
-					} else {
-						dialogService.ShowMessage(i18n.Msg("Please, wait for the compilation to finish"), null);
-					}
+
+               OptionsList options = new OptionsList();
+               if (compilation.Done) {
+                  options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Play"), () => {
+                     PlayVideoCommand.Execute(arg);
+                  }));
+                  options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Edit compilation"), () => {
+                     EditCompilationCommand.Execute(arg);
+                  }));
+                  options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Share"), () => {
+                     ShareCompilationCommand.Execute(arg);
+                  }));
+               }
+					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Delete"), () => {
+						DeleteVideoCommand.Execute(arg);
+					}));
+					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Cancel"), () => {}));
+					dialogService.ShowModal(options);
+//					} else {
+//						dialogService.ShowMessage(i18n.Msg("Please, wait for the compilation to finish"), null);
+//					}
 				});
 			}
 		}

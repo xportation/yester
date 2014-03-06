@@ -46,5 +46,6 @@ namespace iSeconds.Domain
 		Compilation GetUserCompilation(int userId, int compilationId);
 		Compilation GetUserCompilation(int userId, string compilationFilename);
 
+      ServiceCompilation GetServiceCompilation(string compilationFilename);
 	}
 }

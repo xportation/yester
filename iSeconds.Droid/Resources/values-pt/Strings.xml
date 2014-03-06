@@ -49,6 +49,7 @@
    <string name="overflow_menu_settings">Configurações</string>
    <string name="overflow_menu_about">Sobre</string>
    <string name="sd_cad_not_available_error_message">Não é possível iniciar o Yester pois não existe um cartão SD disponível. \n\nPor favor insira o cartão SD ou desmonte-o como uma unidade de disco, e tente novamente.</string>
+   <string name="not_compatible_with_art_device">Yester não é compatível com dispositivo</string>
 
    <string name="raw_default_timeline">Minha vida</string>
    <string name="raw_this_is_a_default_timeline">Timeline da minha vida</string>

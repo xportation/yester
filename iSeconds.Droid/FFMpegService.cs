@@ -19,44 +19,101 @@ using System.Text.RegularExpressions;
 // tive que adicionar essa dependencia por causa de um util para criar o thumbnail.. se for necessario podemos remover
 using iSeconds.Domain;
 using System.Globalization;
+using SQLite;
 
 
 namespace iSeconds.Droid
 {
+   internal class FFMpegServiceDatabase : SQLiteConnection
+   {
+      private static object locker = new object ();
+
+      public FFMpegServiceDatabase(string path)
+         :  base(path)
+      {
+      }
+
+      public void Save(ServiceCompilation compilation)
+      {
+         lock (locker) {
+            if (compilation.Status != ServiceCompilation.Idle) {
+               if (compilation.Id != 0) {
+                  Update(compilation);
+               } else {
+                  Insert(compilation);
+               }
+            }
+         }
+      }
+   }
+
 	/// <summary>
 	/// FF MPEG service.
 	/// A service that acts as a wrapper for ffmpeg native executable.
 	/// Is is WIP and at least for now, the only operation supported is the concat.
 	/// </summary>
 	[Service]
-	[IntentFilter (new string[]{ "com.broditech.iseconds.FFMpegService" })]
+   [IntentFilter (new string[]{ "com.broditech.iseconds.FFMpegService" })]
 	public class FFMpegService : IntentService
 	{
+      private FFMpegServiceDatabase database = null;
 		public const string ConcatFinishedIntent = "ConcatFinishedIntent";
+
+      public override void OnCreate()
+      {
+         base.OnCreate();
+         createDatabase();
+      }
+
+      private void createDatabase()
+      {
+         if (database == null) {
+            var pathService = new PathServiceAndroid();
+            if (pathService.IsGood())
+               database = new FFMpegServiceDatabase(pathService.GetDbPath());
+         }
+      }
+
+      private void saveCompilation(ServiceCompilation compilation)
+      {
+         createDatabase();
+         if (database != null)
+            database.Save(compilation);         
+      }
 
 		protected override void OnHandleIntent (Intent intent)
 		{
 			string command = intent.Extras.GetString ("ffmpeg.command");
 
 			if (command == "concat") {
-				string outputFilePath = intent.Extras.GetString("ffmpeg.concat.output");
-				IList<string> filesToConcat = intent.Extras.GetStringArrayList("ffmpeg.concat.filelist");
-				IList<string> subtitles = intent.Extras.GetStringArrayList("ffmpeg.concat.subtitles");
+            string outputFilePath = intent.Extras.GetString("ffmpeg.concat.output");
+            IList<string> filesToConcat = intent.Extras.GetStringArrayList("ffmpeg.concat.filelist");
+            IList<string> subtitles = intent.Extras.GetStringArrayList("ffmpeg.concat.subtitles");
 
-				Java.IO.File baseFilePath = this.GetDir("shared_prefs", FileCreationMode.Private);
-				basePathAbsolute = baseFilePath.Path;
+            Java.IO.File baseFilePath = this.GetDir("shared_prefs", FileCreationMode.Private);
+            basePathAbsolute = baseFilePath.Path;
 
-				// we have to set LD_LIBRARY_PATH so that linux can find the shared libraries that ffmpeg depends on, 
-				// otherwise it won't find it even if on the same path. I had to find it out the hard way :(
-				envp = new string[] {
-					"LD_LIBRARY_PATH=" + basePathAbsolute + ":$LD_LIBRARY_PATH"
-				};
+            // we have to set LD_LIBRARY_PATH so that linux can find the shared libraries that ffmpeg depends on, 
+            // otherwise it won't find it even if on the same path. I had to find it out the hard way :(
+            envp = new string[] {
+               "LD_LIBRARY_PATH=" + basePathAbsolute + ":$LD_LIBRARY_PATH"
+            };
+
+            ServiceCompilation compilation = new ServiceCompilation();
+            compilation.Path = outputFilePath;
+            compilation.Status = ServiceCompilation.Compiling;
+            saveCompilation(compilation);
 
 				// this should be put at a more general place, for now it is ok to be here as this is the only function supported.
 				LoadBinariesAndChangePermissions (basePathAbsolute);
 
-				FFMpegConcat (filesToConcat, subtitles, outputFilePath);
-			}
+            if (FFMpegConcat(filesToConcat, subtitles, outputFilePath))
+               compilation.Status = ServiceCompilation.Completed;
+            else
+               compilation.Status = ServiceCompilation.Error;
+
+            saveCompilation(compilation);
+         }
 		}
 
 		void notifyEnd (string filename, bool errors)
@@ -105,11 +162,18 @@ namespace iSeconds.Droid
 		private string[] envp;
 		private string basePathAbsolute;
 
-		void FFMpegConcat (IList<string> filesToConcat, IList<string> subtitles, string outputFilePath)
+      /// <summary>
+      /// Concatenate movies
+      /// </summary>
+      /// <returns><c>true</c>, if no erros, <c>false</c> otherwise.</returns>
+      /// <param name="filesToConcat">Files to concatenate.</param>
+      /// <param name="subtitles">Subtitles.</param>
+      /// <param name="outputFilePath">Output file path.</param>
+      bool FFMpegConcat (IList<string> filesToConcat, IList<string> subtitles, string outputFilePath)
 		{
 			IList<VideoFileInformation> videoFiles = getVideoFileInformationForListOfPaths (filesToConcat);
 			if (videoFiles.Count == 0)
-				return;
+            return false;
 
 			var tempDir = Path.Combine (basePathAbsolute, "temp");
 			if (!Directory.Exists (tempDir))
@@ -201,6 +265,7 @@ namespace iSeconds.Droid
 
 			saveThumbnail(outputFilePath);
 			notifyEnd(outputFilePath, errors);
+         return errors == false;
 		}
 
 		string getFpsAsString(double fps)

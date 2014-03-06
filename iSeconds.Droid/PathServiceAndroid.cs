@@ -43,7 +43,7 @@ namespace iSeconds.Droid
          appPath = string.Empty;
          
          if (MemoryUtils.ExternalMemoryAvailable()) {
-            appPath = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.Path, "iSeconds");
+				appPath = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.Path, "Yester.Droid");
             pathsGood = true;
          }
 
@@ -72,7 +72,7 @@ namespace iSeconds.Droid
 
       public string GetDbPath ()
       {
-         return System.IO.Path.Combine(dbPath, "ISeconds.db3");
+			return System.IO.Path.Combine(dbPath, "Yester.db3");
       }
 
 		public string GetCompilationPath()
