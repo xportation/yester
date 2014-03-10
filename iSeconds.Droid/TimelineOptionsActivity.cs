@@ -6,6 +6,7 @@ using LegacyBar.Library.Bar;
 using iSeconds.Domain;
 using LegacyBar.Library.BarActions;
 using Object = Java.Lang.Object;
+using Google.Analytics.Tracking;
 
 namespace iSeconds.Droid
 {
@@ -84,6 +85,18 @@ namespace iSeconds.Droid
 
 			configureActionBar(true, "");
 			configureActionBarActions();
+      }
+
+      protected override void OnStart()
+      {
+         base.OnStart();
+         EasyTracker.GetInstance(this).ActivityStart(this);
+      }
+
+      protected override void OnStop()
+      {
+         base.OnStop();
+         EasyTracker.GetInstance(this).ActivityStop(this);
       }
 
 		protected override void OnDestroy()

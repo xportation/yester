@@ -10,6 +10,7 @@ using System.IO;
 using Android.Widget;
 using System.Windows.Input;
 using Android.Graphics;
+using Google.Analytics.Tracking;
 
 namespace iSeconds.Droid
 {
@@ -72,6 +73,18 @@ namespace iSeconds.Droid
 				RunOnUiThread(delegate { adapter.Invalidate(); });
 			};
 		}
+
+      protected override void OnStart()
+      {
+         base.OnStart();
+         EasyTracker.GetInstance(this).ActivityStart(this);
+      }
+
+      protected override void OnStop()
+      {
+         base.OnStop();
+         EasyTracker.GetInstance(this).ActivityStop(this);
+      }
 
 		protected override void OnDestroy()
 		{

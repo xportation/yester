@@ -11,6 +11,7 @@ using Android.Graphics.Drawables;
 using LegacyBar.Library.BarActions;
 using iSeconds.Domain.Framework;
 using System.Timers;
+using Google.Analytics.Tracking;
 
 namespace iSeconds.Droid
 {
@@ -61,6 +62,18 @@ namespace iSeconds.Droid
 			mediaService.OnVideoRecorded += videoRecordedHandler;
 			mediaService.OnThumbnailSaved += thumbnailSavedHandler;
 		}
+
+      protected override void OnStart()
+      {
+         base.OnStart();
+         EasyTracker.GetInstance(this).ActivityStart(this);
+      }
+
+      protected override void OnStop()
+      {
+         base.OnStop();
+         EasyTracker.GetInstance(this).ActivityStop(this);
+      }
 
 		protected override void OnResume()
 		{
@@ -119,7 +132,11 @@ namespace iSeconds.Droid
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
 
-			var takeVideoAction = new ActionLegacyBarAction (this, () => viewModel.TakeVideoCommand.Execute (null), Resource.Drawable.ic_camera);
+         var takeVideoAction = new ActionLegacyBarAction (this, () => {
+            AnalyticsUtils.LogButtonEvent(this, "take_video");
+            viewModel.TakeVideoCommand.Execute (null);
+         }, Resource.Drawable.ic_camera);
+
 			takeVideoAction.ActionType = ActionType.Always;
 			actionBar.AddAction (takeVideoAction);			
 			var menuAction = new ActionLegacyBarAction (this, () => showPopup (), Resource.Drawable.ic_menu);

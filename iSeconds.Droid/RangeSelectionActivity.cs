@@ -10,6 +10,7 @@ using Android.Views;
 using Android.Widget;
 using LegacyBar.Library.BarActions;
 using iSeconds.Domain;
+using Google.Analytics.Tracking;
 
 namespace iSeconds.Droid
 {
@@ -27,6 +28,18 @@ namespace iSeconds.Droid
 			actionbarBottomLine.SetBackgroundColor(Resources.GetColor(Resource.Color.actionbar_bottom_line_color_alt));
 		}
 
+      protected override void OnStart()
+      {
+         base.OnStart();
+         EasyTracker.GetInstance(this).ActivityStart(this);
+      }
+
+      protected override void OnStop()
+      {
+         base.OnStop();
+         EasyTracker.GetInstance(this).ActivityStop(this);
+      }
+
 		protected override bool showHomeButton()
 		{
 			return true;
@@ -41,15 +54,23 @@ namespace iSeconds.Droid
 		{
 			var actionBar = FindViewById<LegacyBar.Library.Bar.LegacyBar>(Resource.Id.actionbar);
 
-			var playAction = new ActionLegacyBarAction (this, () => viewModel.PlaySelectionCommand.Execute (null), Resource.Drawable.ic_play);
+         var playAction = new ActionLegacyBarAction (this, () => {
+            AnalyticsUtils.LogButtonEvent(this, "play_selection");
+            viewModel.PlaySelectionCommand.Execute (null);
+         }, Resource.Drawable.ic_play);
 			playAction.ActionType = ActionType.Always;
 			actionBar.AddAction (playAction);
-			var compileAction = new ActionLegacyBarAction (this, () => viewModel.CompileCommand.Execute (null), Resource.Drawable.ic_compile);
+			
+         var compileAction = new ActionLegacyBarAction (this, () => {
+            AnalyticsUtils.LogButtonEvent(this, "compile_selection");
+            viewModel.CompileCommand.Execute (null);
+         }, Resource.Drawable.ic_compile);
 			compileAction.ActionType = ActionType.Always;
 			actionBar.AddAction (compileAction);
-			var rangeSelector = new ActionLegacyBarAction (this, () => { 
+			
+         var rangeSelector = new ActionLegacyBarAction (this, () => { 
+            AnalyticsUtils.LogButtonEvent(this, "open_range_selector");
 				TimelineOptionsPopup.OpenRangeSelector (this, viewModel);
-
 			}, Resource.Drawable.ic_calendar);
 			rangeSelector.ActionType = ActionType.Always;
 			actionBar.AddAction (rangeSelector);
