@@ -9,7 +9,7 @@
    <string name="timeline_default">My life</string>
    <string name="timeline_options_title">Timelines</string>
    <string name="timeline_menu_options">Timeline Settings</string>
-   <string name="timeline_options_message">Hold on a timeline for the options menu</string>
+   <string name="timeline_options_message">Hold on a timeline for the options\' menu</string>
    <string name="timeline_options_dialog_textName">Name</string>
    <string name="timeline_options_dialog_textDescription">Description</string>
    <string name="timeline_options_dialog_new_timeline">New Timeline</string>
