@@ -6,7 +6,6 @@ using iSeconds.Domain;
 namespace iSeconds.Droid
 {
 	[BroadcastReceiver]
-//	[IntentFilter(new string[]{FFMpegService.ConcatFinishedIntent}, Priority = (int)IntentFilterPriority.HighPriority)]
 	public class CompileFinishedNotificationReceiver : BroadcastReceiver
 	{
 		private User user = null;

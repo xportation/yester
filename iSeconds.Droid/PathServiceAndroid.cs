@@ -47,6 +47,7 @@ namespace iSeconds.Droid
             pathsGood = true;
          }
 
+			System.Console.WriteLine("External Memory Available: " + pathsGood.ToString());
 			mediaPath = System.IO.Path.Combine(appPath, "Videos");
          dbPath = System.IO.Path.Combine(appPath, "Db"); 
 			compilationPath = System.IO.Path.Combine(appPath, "Compilations"); 

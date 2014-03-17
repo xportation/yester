@@ -10,7 +10,11 @@ using iSeconds.Domain.Framework;
 
 namespace iSeconds.Droid
 {
-   [Application(Debuggable=true)]
+   #if DEBUG
+	[Application(Debuggable=true)]
+	#else
+	[Application(Debuggable=false)]
+	#endif
    public class ISecondsApplication : Application
    {
       private UserService userService = null;
@@ -27,6 +31,8 @@ namespace iSeconds.Droid
          : base(javaReference, transfer)
       {
 			pathService = new PathServiceAndroid();
+			activityTracker = new ActivityTracker();
+			navigator = new INavigator();
 
          if (pathService.IsGood()) {
             repository = new ISecondsDB(pathService.GetDbPath());
@@ -36,10 +42,8 @@ namespace iSeconds.Droid
             if (!userService.Login("user", "password"))
                userService.CreateUser("user");
          
-            activityTracker = new ActivityTracker();
             mediaService = new MediaServiceAndroid(this.activityTracker, repository, pathService.GetMediaPath(), userService.CurrentUser);
 
-            navigator = new INavigator();
             navigator.RegisterNavigation("day_options", new AndroidPresenter(this.activityTracker, typeof(DayOptionsActivity)));            
             navigator.RegisterNavigation("timeline_options", new AndroidPresenter(this.activityTracker, typeof(TimelineOptionsActivity)));
             navigator.RegisterNavigation("timeline_view", new AndroidPresenter(this.activityTracker, typeof(TimelineActivity)));

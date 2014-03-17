@@ -35,15 +35,20 @@ namespace iSeconds.Droid
 
       public void Save(ServiceCompilation compilation)
       {
-         lock (locker) {
-            if (compilation.Status != ServiceCompilation.Idle) {
-               if (compilation.Id != 0) {
-                  Update(compilation);
-               } else {
-                  Insert(compilation);
-               }
-            }
-         }
+			try {
+	         lock (locker) {
+					System.Console.WriteLine("ServiceCompilation: " + compilation.Path);
+	            if (compilation.Status != ServiceCompilation.Idle) {
+	               if (compilation.Id != 0) {
+	                  Update(compilation);
+	               } else {
+	                  Insert(compilation);
+	               }
+	            }
+	         }
+			} catch (System.Exception e) {
+				System.Console.WriteLine("ServiceCompilation Exception: " + e.ToString());
+			}
       }
    }
 
@@ -71,6 +76,8 @@ namespace iSeconds.Droid
             var pathService = new PathServiceAndroid();
             if (pathService.IsGood())
                database = new FFMpegServiceDatabase(pathService.GetDbPath());
+
+				System.Console.WriteLine("FFMpegServiceDatabase: " + pathService.GetDbPath());
          }
       }
 
@@ -118,6 +125,7 @@ namespace iSeconds.Droid
 
 		void notifyEnd (string filename, bool errors)
 		{
+			System.Console.WriteLine("Compilation ends - result: " + filename + "error: " + errors.ToString());
 			var stocksIntent = new Intent (ConcatFinishedIntent); 
 
 			Bundle bundle = new Bundle ();	
