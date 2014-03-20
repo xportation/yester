@@ -53,6 +53,41 @@ namespace iSeconds.Domain
 
 			return bytes;
 		}
+
+		public static bool FileExists(string filename)
+		{
+			return File.Exists(filename);
+		}
+
+		/// <summary>
+		/// Determines if the file is locked for the specified filename.
+		/// </summary>
+		/// <returns><c>true</c> if is file locked; otherwise, <c>false</c>.</returns>
+		/// <param name="filename">Filename.</param>
+		public static bool IsFileLocked(string filename)
+		{
+			FileInfo fileInfo = new FileInfo(filename);
+			FileStream stream = null;
+			try {
+				stream = fileInfo.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+			}
+			catch (IOException)
+			{
+				//the file is unavailable because it is:
+				//still being written to
+				//or being processed by another thread
+				//or does not exist (has already been processed)
+				return true;
+			}
+			finally
+			{
+				if (stream != null)
+					stream.Close();
+			}
+
+			//file is not locked
+			return false;
+		}
 	}
 }
 

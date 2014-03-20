@@ -171,14 +171,6 @@ namespace iSeconds.Domain
 			Debug.Assert (!File.Exists(compilation.ThumbnailPath));
 
 			repository.DeleteCompilation (compilation);
-
-         if (!compilation.Done) {
-            var serviceCompilation = repository.GetServiceCompilation(compilation.Path);
-            if (serviceCompilation != null) {
-               serviceCompilation.Status = ServiceCompilation.Error;
-               repository.SaveItem(serviceCompilation);
-            }
-         }
 		}
 
 		public void DeleteCompilation (string compilationFilename)
@@ -210,16 +202,12 @@ namespace iSeconds.Domain
 			var compilations = this.GetCompilations();
 			foreach (Compilation compilation in compilations) {
             if (!compilation.Done) {
-               var serviceCompilation = repository.GetServiceCompilation(compilation.Path);
-               if (serviceCompilation == null) {
-                  this.DeleteCompilation(compilation);
-                  continue;
-               }
-
-               if (serviceCompilation.Status == ServiceCompilation.Error)
-                  this.DeleteCompilation(compilation);
-               else if (serviceCompilation.Status == ServiceCompilation.Completed)
-                  this.SetCompilationDone(serviceCompilation.Path, true);
+					if (!ISecondsUtils.FileExists(compilation.LockPath())) {
+						this.SetCompilationDone(compilation.Path, true);
+					} else {
+						if (!ISecondsUtils.IsFileLocked(compilation.LockPath()))
+							this.DeleteCompilation(compilation);
+					}
             }
 			}
 		}

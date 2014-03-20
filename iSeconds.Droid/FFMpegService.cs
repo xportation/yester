@@ -8,50 +8,18 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using System.IO;
 using Java.Lang;
-using Java.IO;
 using Android.Util;
 using Android.Content.Res;
 using System.Threading;
 using System.Text.RegularExpressions;
-
-// tive que adicionar essa dependencia por causa de um util para criar o thumbnail.. se for necessario podemos remover
-using iSeconds.Domain;
 using System.Globalization;
 using SQLite;
+using iSeconds.Domain;
 
 
 namespace iSeconds.Droid
 {
-   internal class FFMpegServiceDatabase : SQLiteConnection
-   {
-      private static object locker = new object ();
-
-      public FFMpegServiceDatabase(string path)
-         :  base(path)
-      {
-      }
-
-      public void Save(ServiceCompilation compilation)
-      {
-			try {
-	         lock (locker) {
-					System.Console.WriteLine("ServiceCompilation: " + compilation.Path);
-	            if (compilation.Status != ServiceCompilation.Idle) {
-	               if (compilation.Id != 0) {
-	                  Update(compilation);
-	               } else {
-	                  Insert(compilation);
-	               }
-	            }
-	         }
-			} catch (System.Exception e) {
-				System.Console.WriteLine("ServiceCompilation Exception: " + e.ToString());
-			}
-      }
-   }
-
 	/// <summary>
 	/// FF MPEG service.
 	/// A service that acts as a wrapper for ffmpeg native executable.
@@ -61,32 +29,7 @@ namespace iSeconds.Droid
    [IntentFilter (new string[]{ "com.broditech.iseconds.FFMpegService" })]
 	public class FFMpegService : IntentService
 	{
-      private FFMpegServiceDatabase database = null;
 		public const string ConcatFinishedIntent = "ConcatFinishedIntent";
-
-      public override void OnCreate()
-      {
-         base.OnCreate();
-         createDatabase();
-      }
-
-      private void createDatabase()
-      {
-         if (database == null) {
-            var pathService = new PathServiceAndroid();
-            if (pathService.IsGood())
-               database = new FFMpegServiceDatabase(pathService.GetDbPath());
-
-				System.Console.WriteLine("FFMpegServiceDatabase: " + pathService.GetDbPath());
-         }
-      }
-
-      private void saveCompilation(ServiceCompilation compilation)
-      {
-         createDatabase();
-         if (database != null)
-            database.Save(compilation);         
-      }
 
 		protected override void OnHandleIntent (Intent intent)
 		{
@@ -98,7 +41,7 @@ namespace iSeconds.Droid
             IList<string> subtitles = intent.Extras.GetStringArrayList("ffmpeg.concat.subtitles");
 
             Java.IO.File baseFilePath = this.GetDir("shared_prefs", FileCreationMode.Private);
-            basePathAbsolute = baseFilePath.Path;
+				basePathAbsolute = baseFilePath.Path;
 
             // we have to set LD_LIBRARY_PATH so that linux can find the shared libraries that ffmpeg depends on, 
             // otherwise it won't find it even if on the same path. I had to find it out the hard way :(
@@ -106,26 +49,28 @@ namespace iSeconds.Droid
                "LD_LIBRARY_PATH=" + basePathAbsolute + ":$LD_LIBRARY_PATH"
             };
 
-            ServiceCompilation compilation = new ServiceCompilation();
-            compilation.Path = outputFilePath;
-            compilation.Status = ServiceCompilation.Compiling;
-            saveCompilation(compilation);
+				System.IO.FileStream fileLock = createFilelock(outputFilePath);
 
 				// this should be put at a more general place, for now it is ok to be here as this is the only function supported.
 				LoadBinariesAndChangePermissions (basePathAbsolute);
 
-            if (FFMpegConcat(filesToConcat, subtitles, outputFilePath))
-               compilation.Status = ServiceCompilation.Completed;
-            else
-               compilation.Status = ServiceCompilation.Error;
+				FFMpegConcat(filesToConcat, subtitles, outputFilePath);
 
-            saveCompilation(compilation);
+				fileLock.Close();
+				System.IO.File.Delete(fileLock.Name);
          }
+		}
+
+		System.IO.FileStream createFilelock(string outputFilePath)
+		{
+			System.IO.FileStream fileLock = new System.IO.FileStream(outputFilePath + ".lock", System.IO.FileMode.CreateNew, 
+					System.IO.FileAccess.Write, System.IO.FileShare.None);
+			return fileLock;
 		}
 
 		void notifyEnd (string filename, bool errors)
 		{
-			System.Console.WriteLine("Compilation ends - result: " + filename + "error: " + errors.ToString());
+			System.Console.WriteLine("Compilation ends - result: " + filename + " - error: " + errors.ToString());
 			var stocksIntent = new Intent (ConcatFinishedIntent); 
 
 			Bundle bundle = new Bundle ();	
@@ -177,15 +122,15 @@ namespace iSeconds.Droid
       /// <param name="filesToConcat">Files to concatenate.</param>
       /// <param name="subtitles">Subtitles.</param>
       /// <param name="outputFilePath">Output file path.</param>
-      bool FFMpegConcat (IList<string> filesToConcat, IList<string> subtitles, string outputFilePath)
+		void FFMpegConcat (IList<string> filesToConcat, IList<string> subtitles, string outputFilePath)
 		{
 			IList<VideoFileInformation> videoFiles = getVideoFileInformationForListOfPaths (filesToConcat);
 			if (videoFiles.Count == 0)
-            return false;
+            return;
 
-			var tempDir = Path.Combine (basePathAbsolute, "temp");
-			if (!Directory.Exists (tempDir))
-				Directory.CreateDirectory (tempDir);
+			var tempDir = System.IO.Path.Combine (basePathAbsolute, "temp");
+			if (!System.IO.Directory.Exists (tempDir))
+				System.IO.Directory.CreateDirectory (tempDir);
 
 			int subtitleIndex = 1;
 			long accumulatedTimeMs = 0L;
@@ -194,8 +139,8 @@ namespace iSeconds.Droid
 
 			// create a filelist (to make ffmpeg executable happy)
 			// as stated in the docs this is the most general concatenation option, using the demuxer.
-			string fileListPath = Path.Combine(basePathAbsolute, "filelist.txt");
-			string subtitlePath = Path.Combine(basePathAbsolute, "subtitle.srt");
+			string fileListPath = System.IO.Path.Combine(basePathAbsolute, "filelist.txt");
+			string subtitlePath = System.IO.Path.Combine(basePathAbsolute, "subtitle.srt");
 
 			// for the files that needs padding due to multiple orientations/sizes.
 			// we'll accumulate the names here in order to remove them at the end of the process.
@@ -203,8 +148,8 @@ namespace iSeconds.Droid
 
 			bool errors = false;
 
-			using (StreamWriter fileListWriter = new StreamWriter(fileListPath, false),
-			                    subtitleWriter = new StreamWriter(subtitlePath, false)) {
+			using (System.IO.StreamWriter fileListWriter = new System.IO.StreamWriter(fileListPath, false),
+			                    				subtitleWriter = new System.IO.StreamWriter(subtitlePath, false)) {
 
 				for (int i = 0; i < videoFiles.Count; i++) {
 
@@ -214,7 +159,7 @@ namespace iSeconds.Droid
 
 					if ((videoAttributes.maxWidth != file.Width) || (videoAttributes.maxHeight != file.Height)) {
 
-						filePath = Path.Combine(tempDir, Path.GetFileName (filePath));
+						filePath = System.IO.Path.Combine(tempDir, System.IO.Path.GetFileName (filePath));
 
 						var cmd = GenerateCommandScaleVideoWithBlackPaddings (videoAttributes, file, filePath);
 
@@ -246,7 +191,7 @@ namespace iSeconds.Droid
 				// -loglevel debug
 				var command = string.Format (".{0} -y -f concat -i {1} -vf subtitles='{2}' -strict -2 -c:v mpeg4 " +
 				                             "-b:v {3}k -r {4} -c:a aac -strict experimental -ar {5} -b:a {6}k -sn {7}",
-				                             Path.Combine (basePathAbsolute, "ffmpeg"),
+				                             System.IO.Path.Combine (basePathAbsolute, "ffmpeg"),
 				                             fileListPath,
 				                             subtitlePath,
 				                             (int)videoAttributes.maxBitrate,
@@ -273,7 +218,6 @@ namespace iSeconds.Droid
 
 			saveThumbnail(outputFilePath);
 			notifyEnd(outputFilePath, errors);
-         return errors == false;
 		}
 
 		string getFpsAsString(double fps)
@@ -283,7 +227,7 @@ namespace iSeconds.Droid
 		}
 
 		void writeSubtitleEntry (
-			StreamWriter subtitleWriter, 
+			System.IO.StreamWriter subtitleWriter, 
 			int subtitleIndex, 
 			string previousTimeLabel, 
 			string subtitle, 
@@ -307,7 +251,7 @@ namespace iSeconds.Droid
 			    "scale=iw*sar*min({2}/(iw*sar)\\,{3}/ih):ih*min({4}/(iw*sar)\\,{5}/ih)," + 
 			    "pad={6}:{7}:(ow-iw)/2:(oh-ih)/2:black " +
 			    "-strict -2 -c:v mpeg4 -b:v {8}k -r {9} -c:a aac -strict experimental -ar {10} -b:a {11}k -sn {12}",
-			                     Path.Combine (basePathAbsolute, "ffmpeg"),
+			                     System.IO.Path.Combine (basePathAbsolute, "ffmpeg"),
 			                     file.Path, 
 			                     videoAttributes.minWidth,
 			                     videoAttributes.minHeight,
@@ -372,9 +316,9 @@ namespace iSeconds.Droid
 		void saveThumbnail (string outputFilePath)
 		{
 			string extension = ".png";
-			string directory = Path.GetDirectoryName(outputFilePath);
-			string thumbnailPath = Path.GetFileNameWithoutExtension(outputFilePath);
-			AndroidMediaUtils.SaveVideoThumbnail(Path.Combine(directory, thumbnailPath + extension), outputFilePath);
+			string directory = System.IO.Path.GetDirectoryName(outputFilePath);
+			string thumbnailPath = System.IO.Path.GetFileNameWithoutExtension(outputFilePath);
+			AndroidMediaUtils.SaveVideoThumbnail(System.IO.Path.Combine(directory, thumbnailPath + extension), outputFilePath);
 		}
 
 
@@ -398,22 +342,22 @@ namespace iSeconds.Droid
 
 		void LoadBinaryAndChangePermissions (string basePath, string file)
 		{
-			string filename = Path.Combine (basePath, file);
+			string filename = System.IO.Path.Combine (basePath, file);
 
-			// otimizaçao... nao precisamos fazer todo o processo se o arquivo ja foi extraido
+			// otimizacao... nao precisamos fazer todo o processo se o arquivo ja foi extraido
 			if (new Java.IO.File (filename).Exists ())
 				return;
 
 			var stream = Assets.Open (file);
 
-			using (var streamWriter = new StreamWriter (filename, false)) {
+			using (var streamWriter = new System.IO.StreamWriter (filename, false)) {
 				ReadWriteStream (stream, streamWriter.BaseStream);
 			}
 
 			ChangeFilePermissions (filename);
 		}
 
-		private void ReadWriteStream (Stream readStream, Stream writeStream)
+		private void ReadWriteStream (System.IO.Stream readStream, System.IO.Stream writeStream)
 		{
 			int Length = 256;
 			byte[] buffer = new byte[Length];
@@ -459,11 +403,11 @@ namespace iSeconds.Droid
 				result.stdout = "";
 
 				// Reads stderr.
-				BufferedReader reader = new BufferedReader(new InputStreamReader(process.ErrorStream));
+				Java.IO.BufferedReader reader = new Java.IO.BufferedReader(new Java.IO.InputStreamReader(process.ErrorStream));
 				result.stderr = readOutputStream(reader);
 
 				// Reads stdout.
-				reader = new BufferedReader(new InputStreamReader(process.InputStream));
+				reader = new Java.IO.BufferedReader(new Java.IO.InputStreamReader(process.InputStream));
 				result.stdout = readOutputStream(reader);
 
 				// Waits for the command to finish.
@@ -479,7 +423,7 @@ namespace iSeconds.Droid
 			}
 		}
 
-		static string readOutputStream(BufferedReader reader)
+		static string readOutputStream(Java.IO.BufferedReader reader)
 		{
 			int bytesRead;
 			string output = "";
@@ -516,7 +460,7 @@ namespace iSeconds.Droid
 			videoInfo.Path = file;
 
 			var command = string.Format(".{0} -y -i {1}", 
-			                            Path.Combine(basePathAbsolute, "ffmpeg"), 
+			                            System.IO.Path.Combine(basePathAbsolute, "ffmpeg"), 
 			                            file);
 
 			System.Console.WriteLine(command);

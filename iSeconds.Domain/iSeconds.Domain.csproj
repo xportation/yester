@@ -73,7 +73,6 @@
     <Compile Include="ISecondsUtils.cs" />
     <Compile Include="Compilation.cs" />
     <Compile Include="ViewModel\CompilationViewModel.cs" />
-    <Compile Include="ServiceCompilation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

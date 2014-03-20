@@ -29,6 +29,8 @@ namespace iSeconds.Domain
 
 			public string Path { get; set; }
 
+			public string LockPath { get; set; }
+
 			public string BeginDate { get; set; }
 
 			public string EndDate { get; set; }
@@ -48,19 +50,19 @@ namespace iSeconds.Domain
 				set;
 			}
 
-			public CompilationItemViewModel(int id, string name, string description, string path
-				, string beginDate, string endDate, string thumbnail, bool done, Compilation model)
+			public CompilationItemViewModel(Compilation model, string beginDate, string endDate)
 				: base("", null)
 			{
-				this.Id = id;
-				this.Name = name;
-				this.Description = description;
-				this.Path = path;
+				this.Id = model.Id;
+				this.Name = model.Name;
+				this.Description = model.Description;
+				this.Path = model.Path;
+				this.LockPath = model.LockPath();
 				this.BeginDate = beginDate;
 				this.EndDate = endDate;
-				this.ThumbnailPath = thumbnail;
+				this.ThumbnailPath = model.ThumbnailPath;
 				this.Model = model;
-				this.Done = done;
+				this.Done = model.Done;
 			}
 		}
 
@@ -104,12 +106,12 @@ namespace iSeconds.Domain
 			// reverse iterating to show the last compilations first
 			compilations.Clear();
 			for (int i = savedCompilations.Count - 1; i >= 0; i--) {
-				Compilation c = savedCompilations [i];
+				Compilation compilation = savedCompilations [i];
 
-				string begin = ISecondsUtils.DateToString(c.Begin, false);
-				string end = ISecondsUtils.DateToString(c.End, false);
+				string begin = ISecondsUtils.DateToString(compilation.Begin, false);
+				string end = ISecondsUtils.DateToString(compilation.End, false);
 
-				compilations.Add (new CompilationItemViewModel(c.Id, c.Name, c.Description, c.Path, begin, end, c.ThumbnailPath, c.Done, c));
+				compilations.Add (new CompilationItemViewModel(compilation, begin, end));
 			}
 			notifyChanges();
 		}
@@ -173,7 +175,14 @@ namespace iSeconds.Domain
 					int pos = (int)arg;
 					CompilationItemViewModel compilation = (CompilationItemViewModel)compilations[pos];
 
-               OptionsList options = new OptionsList();
+					if (!compilation.Done) {
+						if (ISecondsUtils.IsFileLocked(compilation.Path+".lock")) {
+							dialogService.ShowMessage(i18n.Msg("Please, wait for the compilation to finish"), null);
+							return;
+						}
+					} 
+
+					OptionsList options = new OptionsList();
                if (compilation.Done) {
                   options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Play"), () => {
                      PlayVideoCommand.Execute(arg);
@@ -190,9 +199,6 @@ namespace iSeconds.Domain
 					}));
 					options.AddEntry(new OptionsList.OptionsEntry(i18n.Msg("Cancel"), () => {}));
 					dialogService.ShowModal(options);
-//					} else {
-//						dialogService.ShowMessage(i18n.Msg("Please, wait for the compilation to finish"), null);
-//					}
 				});
 			}
 		}

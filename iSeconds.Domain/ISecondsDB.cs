@@ -23,7 +23,6 @@ namespace iSeconds.Domain
 			CreateTable<DayInfo> ();
 			CreateTable<MediaInfo> ();
          CreateTable<Compilation> ();
-         CreateTable<ServiceCompilation> ();
 			//#endif
 		}
 
@@ -224,15 +223,6 @@ namespace iSeconds.Domain
 			}
 		}
 
-      public ServiceCompilation GetServiceCompilation(string compilationFilename)
-      {
-         lock (locker) {
-            ServiceCompilation serviceCompilation =
-               (from i in Table<ServiceCompilation> () where i.Path == compilationFilename select i).FirstOrDefault();
-            return serviceCompilation;
-         }
-      }
-
 		public IList<T> GetItems<T> () where T : IModel, new()
 		{
 			lock (locker) {
@@ -276,8 +266,6 @@ namespace iSeconds.Domain
 			this.DeleteAll<DayInfo> ();
 			this.DeleteAll<MediaInfo> ();
          this.DeleteAll<Compilation> ();
-         this.DeleteAll<ServiceCompilation> ();
-
 #endif
 		}
 	}

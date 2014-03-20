@@ -23,6 +23,11 @@ namespace iSeconds.Domain
 		public bool Done { get; set; }
 
 		#endregion
+
+		public string LockPath()
+		{
+			return Path + ".lock";
+		}
 	}
 }
 

@@ -38,7 +38,7 @@ namespace iSeconds.Droid
             repository = new ISecondsDB(pathService.GetDbPath());
 
             i18nService = new I18nServiceAndroid(this.BaseContext);
-            userService = new UserService(repository, i18nService);
+				userService = new UserService(repository, i18nService);
             if (!userService.Login("user", "password"))
                userService.CreateUser("user");
          
@@ -66,7 +66,7 @@ namespace iSeconds.Droid
 			base.OnCreate();
 
          if (userService != null) {
-            userService.CurrentUser.RemoveLostCompilations();
+				userService.CurrentUser.RemoveLostCompilations();
             registerFFMpegServiceReceive();
          }
 		}

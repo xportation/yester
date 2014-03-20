@@ -76,6 +76,11 @@ namespace iSeconds.Droid
 			return System.IO.Path.Combine(dbPath, "Yester.db3");
       }
 
+		public string GetFFMpegDbPath()
+		{
+			return System.IO.Path.Combine(dbPath, "Yester.FFMpeg.db3");
+		}
+
 		public string GetCompilationPath()
 		{
 			return compilationPath;
