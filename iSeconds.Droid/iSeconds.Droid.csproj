@@ -116,11 +116,11 @@
     <AndroidResource Include="Resources\drawable\splash_title.png" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
     <AndroidResource Include="Resources\values\Styles.xml" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_add.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_check.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_home.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\ic_uncheck.png" />
-    <AndroidResource Include="Resources\Drawable-hdpi\splash_title.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_add.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_check.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_home.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_uncheck.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\splash_title.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_add.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_check.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_home.png" />
@@ -146,7 +146,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\ic_uncheck.png" />
     <AndroidResource Include="Resources\drawable-mdpi\splash_title.png" />
     <AndroidResource Include="Resources\layout\SettingsView.axml" />
-    <AndroidResource Include="Resources\Menu\menu.xml" />
+    <AndroidResource Include="Resources\menu\menu.xml" />
     <AndroidResource Include="Resources\drawable\ic_camera.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_camera.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_camera.png" />
@@ -174,8 +174,6 @@
     <AndroidResource Include="Resources\drawable-ldpi\ic_compile.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_compile.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_compile.png" />
-    <AndroidResource Include="Resources\drawable\fling.png" />
-    <AndroidResource Include="Resources\drawable\hold.png" />
     <AndroidResource Include="Resources\values-pt\Strings.xml" />
     <AndroidResource Include="Resources\layout\SingleShotVideoPlayer.axml" />
     <AndroidResource Include="Resources\drawable\roundrect_item_background.xml" />
@@ -208,6 +206,16 @@
     <AndroidResource Include="Resources\drawable\ic_action_error.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_action_error.png" />
     <AndroidResource Include="Resources\values\analytics.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_next.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_next.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_next.png" />
+    <AndroidResource Include="Resources\drawable\ic_next.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_next.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_previous.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_previous.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_previous.png" />
+    <AndroidResource Include="Resources\drawable\ic_previous.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_previous.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -224,10 +232,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml">

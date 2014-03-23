@@ -1,12 +1,12 @@
 Array PathsToExport 'drawable':'drawable-hdpi':'drawable-ldpi':'drawable-mdpi':'drawable-xhdpi'
-Array ExportSizes 48:72:32:48:96
+Array ExportSizes 48:72:36:48:96
 
 PathClear false
 FileFormat png
 FilePrefix ''
 
-Array MySvgFiles 'camera_icon.svg':'compile_icon.svg':'home_icon.svg':'play_icon.svg':'check_icon.svg':'add_icon.svg':'menu_icon.svg':'calendar_icon.svg':'yester_icon.svg':'action_error.svg'
-Array MyExportFiles 'ic_camera':'ic_compile':'ic_home':ic_'play':'ic_check':'ic_add':'ic_menu':'ic_calendar':'Icon':'ic_action_error'
+Array MySvgFiles 'camera_icon.svg':'compile_icon.svg':'home_icon.svg':'play_icon.svg':'check_icon.svg':'add_icon.svg':'menu_icon.svg':'calendar_icon.svg':'yester_icon.svg':'action_error.svg':'previous_icon.svg':'next_icon.svg'
+Array MyExportFiles 'ic_camera':'ic_compile':'ic_home':ic_'play':'ic_check':'ic_add':'ic_menu':'ic_calendar':'Icon':'ic_action_error':'ic_previous':'ic_next'
 
 // Conversion 1
 PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:1

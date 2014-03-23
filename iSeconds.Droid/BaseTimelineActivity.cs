@@ -77,15 +77,13 @@ namespace iSeconds.Droid
 				if (e.PropertyName == "TimelineName") {
 					RunOnUiThread(() => setActionBarTitle());
 				}
-
-				/*if (e.PropertyName == "RangeSelection") {
-
-					if (this.viewModel.OnRangeSelectionMode)
-						addActionBarItems(true);
-					else
-						addActionBarItems(false);
-				}*/
 			};
+
+			var previousButton = FindViewById<ImageButton>(Resource.Id.calendarPreviousButton);
+			previousButton.Click += (sender, e) => viewModel.PreviousMonthCommand.Execute(null);
+
+			var nextButton = FindViewById<ImageButton>(Resource.Id.calendarNextButton);
+			nextButton.Click += (sender, e) => viewModel.NextMonthCommand.Execute(null);
 		}
 
 
