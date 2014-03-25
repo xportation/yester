@@ -18,7 +18,7 @@
    inkscape:export-filename="C:\Users\leonardo\Dropbox\Projetos\iSeconds\iSeconds.Droid\Resources\drawable\ic_home.png"
    inkscape:export-xdpi="33.75"
    inkscape:export-ydpi="33.75"
-   sodipodi:docname="home_icon.svg">
+   sodipodi:docname="next_icon.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -72,14 +72,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="63.157032"
-     inkscape:cy="66.355317"
+     inkscape:zoom="2.8"
+     inkscape:cx="66.272161"
+     inkscape:cy="96.118225"
      inkscape:document-units="px"
-     inkscape:current-layer="g2995"
+     inkscape:current-layer="g3790-7"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="715"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
@@ -110,34 +110,19 @@
         <g
            id="g4417"
            transform="matrix(0.03912844,0,0,-0.03912844,-9.2983604,-0.2109118)">
-          <rect
-             ry="4.7982244"
-             y="111.82986"
-             x="135.5993"
-             height="31.946075"
-             width="31.946075"
-             id="rect3877"
-             style="fill:#07afde;fill-opacity:1;stroke:none" />
           <g
-             transform="translate(126.8664,99.984498)"
+             id="g3013-1"
              style="stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none"
-             id="g3013">
+             transform="matrix(0.78670782,0,0,0.78654137,128.02451,105.0563)">
             <g
-               style="stroke:#ffffff;stroke-opacity:1"
+               id="g3790-7"
                transform="translate(-35.567254,-118.4277)"
-               id="g3790">
+               style="stroke:#3486d2;stroke-opacity:1">
               <path
-                 sodipodi:nodetypes="cc"
-                 inkscape:connector-curvature="0"
-                 id="path3007"
-                 d="m 67.510683,146.38002 -13.41432,0"
-                 style="fill:none;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-              <path
-                 sodipodi:nodetypes="ccc"
-                 inkscape:connector-curvature="0"
-                 id="path3011"
-                 d="m 58.749999,140.75502 -5.714285,5.625 5.625,5.35715"
-                 style="fill:none;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+                 style="fill:none;stroke:#808080;stroke-width:2.43669534000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+                 d="m 69.053934,134.91725 11.63588,11.63588 -12.450391,12.45041"
+                 id="path3011-0"
+                 inkscape:connector-curvature="0" />
             </g>
           </g>
         </g>
