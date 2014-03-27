@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="284.17795"
+   height="508.38669"
+   id="svg6669"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="main_yester_pt.svg"
+   inkscape:export-filename="C:\Users\Leonardo\Dropbox\Projetos\Yester.Droid\Site\img\main_yester_pt.png"
+   inkscape:export-xdpi="181.27933"
+   inkscape:export-ydpi="181.27933">
+  <defs
+     id="defs6671">
+    <inkscape:path-effect
+       effect="envelope"
+       id="path-effect6772"
+       is_visible="true"
+       yy="true"
+       xx="true"
+       bendpath1="m 257.85188,303.10968 234.29625,0"
+       bendpath2="m 492.14813,303.10968 0,458.505"
+       bendpath3="m 257.85188,761.61468 234.29625,0"
+       bendpath4="m 257.85188,303.10968 0,458.505" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect6763"
+       is_visible="true"
+       bendpath="m 257.85188,532.36218 234.29625,0"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false" />
+    <inkscape:path-effect
+       effect="envelope"
+       id="path-effect6757"
+       is_visible="true"
+       yy="true"
+       xx="true"
+       bendpath1="m 257.85188,303.10968 234.29625,0"
+       bendpath2="m 492.14813,303.10968 0,458.505"
+       bendpath3="m 257.85188,761.61468 234.29625,0"
+       bendpath4="m 257.85188,303.10968 0,458.505" />
+    <filter
+       inkscape:collect="always"
+       id="filter4737"
+       x="-0.10645004"
+       width="1.2129"
+       y="-0.054396015"
+       height="1.1087919"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="8.313615"
+         id="feGaussianBlur4739" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="93.560768"
+     inkscape:cy="277.06623"
+     inkscape:document-units="px"
+     inkscape:current-layer="g3197"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="715"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata6674">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-4.6417239e-7,-543.9755)">
+    <g
+       id="g3197"
+       inkscape:export-filename="C:\Users\leonardo\Dropbox\Projetos\Yester.Droid\Site\img\main_yester_pt.png"
+       inkscape:export-xdpi="181.15411"
+       inkscape:export-ydpi="181.15411"
+       transform="translate(-15.176445,565.2744)">
+      <g
+         id="g6778"
+         transform="translate(-217.73459,-299.46774)">
+        <g
+           style="fill:#808080"
+           transform="matrix(1.25,0,0,-1.25,489.22938,385.86093)"
+           id="g6780">
+          <path
+             inkscape:connector-curvature="0"
+             id="path4735"
+             d="m 0,0 0,36.201 c 0,16.569 -13.432,30 -30,30 l -125.102,0 c -16.569,0 -30,-13.431 -30,-30 l 0,-306.804 c 0,-16.568 13.431,-30 30,-30 l 125.102,0 c 16.568,0 30,13.432 30,30 l 0,166.556 c 0.147,-0.086 0.318,-0.134 0.5,-0.134 l 0.835,0 c 0.552,0 1,0.448 1,1 l 0,45.055 c 0,0.553 -0.448,1 -1,1 l -0.835,0 c -0.182,0 -0.353,-0.049 -0.5,-0.134 l 0,30.099 c 0.147,-0.085 0.318,-0.134 0.5,-0.134 l 0.835,0 c 0.552,0 1,0.447 1,1 l 0,25.429 c 0,0.553 -0.448,1 -1,1 l -0.835,0 C 0.318,0.134 0.147,0.085 0,0 z"
+             style="fill:#4d4d4d;fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter4737)" />
+          <path
+             style="fill:#333333;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 0,0 0,36.201 c 0,16.569 -13.432,30 -30,30 l -125.102,0 c -16.569,0 -30,-13.431 -30,-30 l 0,-306.804 c 0,-16.568 13.431,-30 30,-30 l 125.102,0 c 16.568,0 30,13.432 30,30 l 0,166.556 c 0.147,-0.086 0.318,-0.134 0.5,-0.134 l 0.835,0 c 0.552,0 1,0.448 1,1 l 0,45.055 c 0,0.553 -0.448,1 -1,1 l -0.835,0 c -0.182,0 -0.353,-0.049 -0.5,-0.134 l 0,30.099 c 0.147,-0.085 0.318,-0.134 0.5,-0.134 l 0.835,0 c 0.552,0 1,0.447 1,1 l 0,25.429 c 0,0.553 -0.448,1 -1,1 l -0.835,0 C 0.318,0.134 0.147,0.085 0,0 z"
+             id="path6782"
+             inkscape:connector-curvature="0" />
+        </g>
+        <path
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           d="m 268.49801,350.96883 210.06125,0 0,373.82 -210.06125,0 0,-373.82 z"
+           id="path6784"
+           inkscape:connector-curvature="0" />
+        <g
+           transform="matrix(1.25,0,0,-1.25,354.00238,316.59963)"
+           id="g6786">
+          <path
+             style="fill:#c4c3c7;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 0,0 30.331,0 c 0.783,0 1.417,-0.634 1.417,-1.417 0,-0.783 -0.634,-1.417 -1.417,-1.417 L 0,-2.834 c -0.783,0 -1.417,0.634 -1.417,1.417 C -1.417,-0.634 -0.783,0 0,0 z"
+             id="path6788"
+             inkscape:connector-curvature="0" />
+        </g>
+        <g
+           transform="matrix(1.25,0,0,-1.25,451.22401,314.34733)"
+           id="g6790">
+          <path
+             style="fill:#c4c3c7;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="M 0,0 C 2.114,0 3.827,-1.714 3.827,-3.827 3.827,-5.94 2.114,-7.654 0,-7.654 c -2.113,0 -3.826,1.714 -3.826,3.827 C -3.826,-1.714 -2.113,0 0,0 z"
+             id="path6792"
+             inkscape:connector-curvature="0" />
+        </g>
+        <g
+           transform="matrix(1.25,0,0,-1.25,326.06226,313.72233)"
+           id="g6794">
+          <path
+             style="fill:#c4c3c7;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 0,0 7.937,0 c 1.957,0 3.543,-1.587 3.543,-3.543 0,-1.957 -1.586,-3.544 -3.543,-3.544 l -7.937,0 c -1.957,0 -3.543,1.587 -3.543,3.544 C -3.543,-1.587 -1.957,0 0,0 z"
+             id="path6796"
+             inkscape:connector-curvature="0" />
+        </g>
+        <g
+           transform="matrix(1.25,0,0,-1.25,343.20526,735.41783)"
+           id="g6798">
+          <path
+             style="fill:#c4c3c7;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="M 0,0 C 1.096,0 1.984,-0.889 1.984,-1.984 1.984,-3.08 1.096,-3.969 0,-3.969 c -1.096,0 -1.984,0.889 -1.984,1.985 C -1.984,-0.889 -1.096,0 0,0 z"
+             id="path6800"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+      <image
+         y="50.373981"
+         x="49.635746"
+         id="image3009"
+         xlink:href="file:///C:/Users/Leonardo/Dropbox/Projetos/Yester.Droid/Site/glyphs/main_yester_pt.png"
+         height="375.43649"
+         width="211.18303" />
+    </g>
+  </g>
+</svg>

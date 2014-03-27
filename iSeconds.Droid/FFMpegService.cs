@@ -82,7 +82,23 @@ namespace iSeconds.Droid
             SendOrderedBroadcast(stocksIntent, null);
         }
 
-        private readonly string CHMOD_755_COMMAND = "/system/bin/chmod 755";
+		private readonly string CHMOD_COMMAND_BIN = "/system/bin/chmod";
+		private readonly string CHMOD_COMMAND_XBIN = "/system/xbin/chmod";
+
+		/// <summary>
+		/// Gets the chmod755 command.
+		/// </summary>
+		/// <returns>The chmod755 command.</returns>
+		private string getChmod755Command()
+		{
+			if (System.IO.File.Exists(CHMOD_COMMAND_BIN))
+				return CHMOD_COMMAND_BIN + " 755";
+
+			if (System.IO.File.Exists(CHMOD_COMMAND_XBIN))
+				return CHMOD_COMMAND_XBIN + " 755";
+
+			return "chmod 755";
+		}
 
         /// <summary>
         /// This is the list of ffmpeg binaries, the ffmpeg executable 
@@ -447,9 +463,12 @@ namespace iSeconds.Droid
 
         void ChangeFilePermissions(string filename)
         {
-            var command = CHMOD_755_COMMAND + " " + filename;
+			   string chmodCommand = this.getChmod755Command();
+				if (chmodCommand.Length > 0) {
+				   var command = chmodCommand + " " + filename;
 
-            executeNativeCommand(command);
+				   executeNativeCommand(command);
+			   }
         }
 
         struct NativeCommandResult
