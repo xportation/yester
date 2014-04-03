@@ -6,10 +6,13 @@ using System.Collections.Generic;
 using Android.Widget;
 using Android.Util;
 using Android.Media;
+using System.Diagnostics;
+using Java.Lang;
+using Java.IO;
 
 namespace Yester_Camcorder
 {
-    public class CamcorderView : SurfaceView, ISurfaceHolderCallback
+   public class CamcorderView : SurfaceView, ISurfaceHolderCallback, MediaRecorder.IOnInfoListener
     {
         private Activity activity;
         private ISurfaceHolder holder;
@@ -31,13 +34,13 @@ namespace Yester_Camcorder
             holder.AddCallback (this);
             holder.SetType (SurfaceType.PushBuffers);
 
-            initializeCamera (cameraId);
+            this.cameraId = cameraId;
         }
 
         public void initializeCamera (int cameraId)
         {
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Gingerbread) {
-                if (Camera.NumberOfCameras > cameraId)
+                if (Camera.NumberOfCameras > cameraId) // TODO: ver essa logica cameraId
                     this.cameraId = cameraId;
                 else
                     this.cameraId = 0;
@@ -52,7 +55,11 @@ namespace Yester_Camcorder
             Camera.Parameters cameraParams = camera.GetParameters ();
             previewSizeList = cameraParams.SupportedPreviewSizes;
             pictureSizeList = cameraParams.SupportedPictureSizes;
+
+           OnCameraReady.Invoke (this, null);
         }
+
+      public event EventHandler OnCameraReady;
 
       public IList<Camera.Size> CameraSizes {
          get {
@@ -69,6 +76,7 @@ namespace Yester_Camcorder
         public void SurfaceCreated (ISurfaceHolder holder)
         {
             try {
+                initializeCamera (cameraId);
                 camera.SetPreviewDisplay (holder);
             } catch (Java.IO.IOException) {
                 camera.Release ();
@@ -106,7 +114,7 @@ namespace Yester_Camcorder
                     camera.StartPreview ();
                     cameraSizeOk = true;
                     break;
-                } catch (Exception e) {
+                } catch (Java.Lang.Exception e) {
                     Log.Warn (LogYesterCamcorder, "Failed to start preview: " + e.Message);
 
                     // Remove failed size
@@ -153,7 +161,7 @@ namespace Yester_Camcorder
             Camera.Size retangleSize = null;
             foreach (Camera.Size size in sizes) {
                 float currentRatio = ((float)size.Width) / size.Height;
-                float deltaRatio = Math.Abs (ratio - currentRatio);
+                float deltaRatio = System.Math.Abs (ratio - currentRatio);
                 if (deltaRatio < deltaRatioMin) {
                     deltaRatioMin = deltaRatio;
                     retangleSize = size;
@@ -239,47 +247,93 @@ namespace Yester_Camcorder
 
          try {
             camera.StartPreview ();
-         } catch (Exception e) {
+         } catch (Java.Lang.Exception e) {
             Log.Warn (LogYesterCamcorder, "Failed to start preview: " + e.Message);
          }          
       }
 
-        public void StartRecording (string filename)
+      private bool prepareMediaRecorder(string filename, int duration) {
+
+         initializeCamera (this.cameraId);
+         mediaRecorder = new MediaRecorder();
+
+         mediaRecorder.SetOnInfoListener (this);
+
+         camera.Unlock();
+         mediaRecorder.SetCamera(camera);
+
+         mediaRecorder.SetAudioSource(AudioSource.Camcorder);
+         mediaRecorder.SetVideoSource(VideoSource.Camera);
+
+         mediaRecorder.SetProfile (CamcorderProfile.Get(CamcorderQuality.Low));
+
+         mediaRecorder.SetOutputFile(filename);
+         mediaRecorder.SetMaxDuration(duration); // Set max duration 60 sec.
+         //mediaRecorder.SetMaxFileSize(5000000); // Set max file size 5M
+
+         mediaRecorder.SetPreviewDisplay(Holder.Surface);
+
+         try {
+            mediaRecorder.Prepare();
+         } catch (IllegalStateException) {
+            releaseMediaRecorder();
+            return false;
+         } catch (IOException) {
+            releaseMediaRecorder();
+            return false;
+         }
+         return true;
+
+      }
+
+      public void StartRecording (string filename, int duration)
         {
-            if (camera == null)
-                return;
 
-            if (mediaRecorder == null)
-                mediaRecorder = new MediaRecorder ();
+         // Release Camera before MediaRecorder start
+         releaseCamera();
 
-            camera.Unlock ();
-           
-            mediaRecorder.SetCamera (camera);
-            mediaRecorder.SetOrientationHint (this.cameraAngle); 
-            mediaRecorder.SetVideoSource (VideoSource.Camera);
-            mediaRecorder.SetAudioSource (AudioSource.Mic);
-            mediaRecorder.SetOutputFormat (OutputFormat.Mpeg4);
-            mediaRecorder.SetVideoEncoder (VideoEncoder.Mpeg4Sp);
-            mediaRecorder.SetAudioEncoder (AudioEncoder.AmrNb);
+         if (!prepareMediaRecorder(filename, duration)) {
+            return;
+         }
 
-//            mediaRecorder.SetVideoFrameRate (30);
-//            mediaRecorder.SetVideoSize (this.previewSize.Width, this.previewSize.Height);
-
-//            mediaRecorder.SetPreviewDisplay (this.holder.Surface);
-            mediaRecorder.SetOutputFile (filename);
-            
-            mediaRecorder.Prepare ();
-            mediaRecorder.Start ();
+         mediaRecorder.Start();
         }
 
-        public void StopRecording ()
-        {
-            if (mediaRecorder != null) {
-                camera.StopPreview ();
-                mediaRecorder.Stop ();
-                mediaRecorder.Release ();
-            }
-        }
+      private void releaseMediaRecorder() {
+         if (mediaRecorder != null) {
+            mediaRecorder.Reset(); // clear recorder configuration
+            mediaRecorder.Release(); // release the recorder object
+            mediaRecorder = null;
+            camera.Lock(); // lock camera for later use
+         }
+      }
+
+      private void releaseCamera() {
+         if (camera != null) {
+            camera.Release(); // release the camera for other applications
+            camera = null;
+         }
+      }
+
+      public void StopRecording ()
+      {
+         if (mediaRecorder != null) {
+            camera.StopPreview ();
+            mediaRecorder.Stop ();
+            mediaRecorder.Release ();
+         }
+      }
+        
+      public void OnInfo (MediaRecorder mr, MediaRecorderInfo what, int extra)
+      {
+         if (what == MediaRecorderInfo.MaxDurationReached) {
+            this.releaseMediaRecorder ();
+            this.releaseCamera ();
+            this.activity.StartActivity(typeof(CamcorderPreview));
+         }
+
+
+      }
     }
 }
 

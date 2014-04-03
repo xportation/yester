@@ -20,7 +20,7 @@ namespace Yester_Camcorder
 
          SetContentView(Resource.Layout.CamcorderPreview);
          var videoView = FindViewById<VideoView> (Resource.Id.camcorderPreviewVideo);
-         videoView.SetVideoPath ("/sdcard/caralho.mp4");
+         videoView.SetVideoPath ("/sdcard/Camcoder/video.mp4");
          videoView.Start ();
       }
    }
