@@ -24,6 +24,7 @@ namespace iSeconds.Droid
 		private string mediaPath;
 		private User user;
 		private int cameraFPS= 15;
+		private bool usingNativeCamera = false;
 
 		public event EventHandler OnVideoRecorded;
 		public event EventHandler OnThumbnailSaved;
@@ -36,38 +37,13 @@ namespace iSeconds.Droid
 			this.user = user;
 		}
 
+
 		public void TakeVideo(DateTime date, Action<string> resultAction)
 		{
-			lock(obj) {
-				Activity currentActivity = this.activityTracker.GetCurrentActivity();
-				var picker = new MediaPicker(currentActivity);
-
-				if(!picker.IsCameraAvailable || !picker.VideosSupported)
-					return;
-
-				picker.TakeVideoAsync(new StoreVideoOptions {											
-					Name = ISecondsUtils.StringifyDate("movie", date),
-	            DesiredLength = System.TimeSpan.FromMilliseconds(user.RecordDuration*1000 + 1000/cameraFPS)
-				}).ContinueWith(t => {
-					if (t.IsCanceled)
-                  return;
-
-					currentActivity.RunOnUiThread(() => {
-						string path = t.Result.Path;
-						string filename = System.IO.Path.GetFileName(path);
-
-						string newPath = System.IO.Path.Combine(mediaPath, filename);
-
-						System.IO.File.Copy(t.Result.Path, newPath, true);
-						System.IO.File.Delete(t.Result.Path);
-
-						resultAction.Invoke(newPath);
-
-						if (OnVideoRecorded != null)
-							OnVideoRecorded(this, EventArgs.Empty);
-					});
-				});
-			}
+			if (usingNativeCamera)
+				recordWithNativeCamera (date, resultAction);
+			else
+				recordWithYesterCamera (date, resultAction);
 		}
 
 		public void PlayVideo(string videoPath)
@@ -140,5 +116,40 @@ namespace iSeconds.Droid
 			intent.PutExtra(Intent.ExtraStream, Android.Net.Uri.FromFile(filePath));
 			currentActivity.StartActivity(Intent.CreateChooser(intent, dialogTitle));
 		}
+
+		void recordWithNativeCamera (DateTime date, Action<string> resultAction)
+		{
+			lock (obj) {
+				Activity currentActivity = this.activityTracker.GetCurrentActivity ();
+				var picker = new MediaPicker (currentActivity);
+				if (!picker.IsCameraAvailable || !picker.VideosSupported)
+					return;
+				picker.TakeVideoAsync (new StoreVideoOptions {
+					Name = ISecondsUtils.StringifyDate ("movie", date),
+					DesiredLength = System.TimeSpan.FromMilliseconds (user.RecordDuration * 1000 + 1000 / cameraFPS)
+				}).ContinueWith (t =>  {
+					if (t.IsCanceled)
+						return;
+					currentActivity.RunOnUiThread (() =>  {
+						string path = t.Result.Path;
+						string filename = System.IO.Path.GetFileName (path);
+						string newPath = System.IO.Path.Combine (mediaPath, filename);
+						System.IO.File.Copy (t.Result.Path, newPath, true);
+						System.IO.File.Delete (t.Result.Path);
+						resultAction.Invoke (newPath);
+						if (OnVideoRecorded != null)
+							OnVideoRecorded (this, EventArgs.Empty);
+					});
+				});
+			}
+		}
+
+		void recordWithYesterCamera (DateTime date, Action<string> resultAction)
+		{
+			Activity currentActivity = this.activityTracker.GetCurrentActivity ();
+
+			currentActivity.StartActivity (typeof(CamcorderActivity));
+		}
+
 	}
 }

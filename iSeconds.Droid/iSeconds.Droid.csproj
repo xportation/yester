@@ -18,8 +18,8 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <MandroidI18n />
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
-    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AndroidStoreUncompressedFileExtensions>.so;.2;.6;.1</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -91,6 +91,9 @@
     <Compile Include="BaseTimelineActivity.cs" />
     <Compile Include="ffmpeg_wrapper\VideoFileInformation.cs" />
     <Compile Include="AnalyticsUtils.cs" />
+    <Compile Include="Camcorder\CamcorderPreview.cs" />
+    <Compile Include="Camcorder\CamcorderView.cs" />
+    <Compile Include="Camcorder\CamcorderActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -217,6 +220,10 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_previous.png" />
     <AndroidResource Include="Resources\drawable\ic_previous.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_previous.png" />
+    <AndroidResource Include="Resources\layout\Camcorder.axml" />
+    <AndroidResource Include="Resources\layout\CamcorderPreview.axml" />
+    <AndroidResource Include="Resources\drawable\ic_change_camera.png" />
+    <AndroidResource Include="Resources\drawable\ic_record_media.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -277,6 +284,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ffmpeg_wrapper\" />
+    <Folder Include="Camcorder\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="googleanalytics">
