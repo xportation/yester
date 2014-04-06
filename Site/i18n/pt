@@ -1,6 +1,6 @@
 {
-    "Watch" : "Demo",
-    "Do you remember  what you did yesterday?  " : "Você lembra  o que fez ontem?",
+    "Watch" : "Assista",
+    "Do you remember what you did yesterday?" : "Você lembra  o que fez ontem?",
     "And last year" : "E no ano passado? A vida passa e nada mais importa se você não puder recordar. Quer uma ajuda?",
     "Take a tour" : "Saiba mais",
     "Get Yester" : "Conheça Yester",
@@ -13,6 +13,7 @@
     "Film of your life" : "Você já pensou em assistir a um filme de sua vida?",
     "With Yester" : "Com o Yester isso é possível!",
     "Make compilations" : "Faça compilações de seus vídeos em meses, anos ou um período que você escolher.",
+    "Make compilations with Yester": "Com o Yester isso é possível! Faça compilações de seus vídeos em meses, anos ou um período que você escolher.",
     "Share" : "Assista ou compartilhe um pequeno resumo de sua vida.",
     "Get now" : "O que você está esperando? Baixe agora!",
     "The best way to record your moments" : "A melhor maneira de registrar seus momentos!!"

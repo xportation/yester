@@ -1,6 +1,6 @@
 {
-    "Watch" : "Demo",
-    "Do you remember  what you did yesterday?  " : "Do you remember what you did yesterday?",
+    "Watch" : "Watch",
+    "Do you remember what you did yesterday?" : "Do you remember what you did yesterday?",
     "And last year" : "And last year? The life goes on and nothing makes sense if you can't record the good moments. Do you need a hand?",
     "Take a tour" : "Take a tour",
     "Get Yester" : "Get Yester",
@@ -13,6 +13,7 @@
     "Film of your life" : "Have you ever imagined watching a movie of your life?",
     "With Yester" : "You can do it with Yester!",
     "Make compilations" : "Make compilations of days, months, years or whatever timespan you may want.",
+    "Make compilations with Yester": "You can do it with Yester! Make compilations of days, months, years or whatever timespan you may want.",
     "Share" : "Watch or share a brief fragments of your life.",
     "Get now" : "What are you waiting for? Get Yester now!",
     "The best way to record your moments" : "The best way to record your memories!!"

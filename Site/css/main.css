@@ -1011,7 +1011,7 @@ h1 {
   color: #333333;
   font-family: "Raleway", sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.1em;
   font-size: 28px;
   font-size: 2.8rem;
@@ -1043,7 +1043,7 @@ p {
   color: #333333;
   font-family: "Raleway", sans-serif;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.05em;
   font-size: 15px;
   font-size: 1.5rem;
@@ -1089,7 +1089,7 @@ p span {
   border: solid 2px #333333;
   text-align: center;
   color: #333333;
-  text-transform: uppercase;
+  text-transform: none;
   font-family: "Raleway", sans-serif;
   font-weight: 900 !important;
   letter-spacing: 0.1em;
@@ -1116,7 +1116,7 @@ p span {
   border: solid 2px #333333;
   text-align: center;
   color: #333333;
-  text-transform: uppercase;
+  text-transform: none;
   font-family: "Raleway", sans-serif;
   font-weight: 900 !important;
   letter-spacing: 0.1em;
@@ -1402,7 +1402,7 @@ p span {
 /* line 3, ../sass/partials/_contact.sass */
 .contact h2 {
   margin-top: 50px;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.1em;
   text-align: center;
   font-size: 26px;
@@ -1723,7 +1723,7 @@ p span {
   font-size: 1.6rem;
   margin: 15px;
   margin-bottom: 20px;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.2em;
 }
 /* line 31, ../sass/partials/_settings.sass */
@@ -1734,7 +1734,7 @@ p span {
   font-family: "Raleway", sans-serif;
   font-weight: 700;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  text-transform: none;
   background-color: rgba(30, 30, 30, 0.63);
   text-align: center;
   font-size: 12px;

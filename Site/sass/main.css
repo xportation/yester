@@ -1,6 +1,6 @@
 /*
 Syntax error: File to import not found or unreadable: compass/css3.
-              Load path: C:/Users/Aniceto/workspace/iseconds3/Site/sass
+              Load path: C:/Users/leonardo/Dropbox/Projetos/yester-site/sass
         on line 1 of main.sass
 
 1: @import "compass/css3"
@@ -12,41 +12,41 @@ Syntax error: File to import not found or unreadable: compass/css3.
 
 Backtrace:
 main.sass:1
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/import_node.rb:67:in `rescue in import'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/import_node.rb:45:in `import'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/import_node.rb:28:in `imported_file'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/import_node.rb:37:in `css_import?'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:217:in `visit_import'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:37:in `visit'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:100:in `visit'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:53:in `map'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:53:in `visit_children'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:37:in `block in visit'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:128:in `visit_root'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/base.rb:37:in `visit'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:100:in `visit'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/visitors/perform.rb:7:in `visit'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/tree/root_node.rb:20:in `render'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/engine.rb:315:in `_render'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/engine.rb:262:in `render'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin/compiler.rb:362:in `update_stylesheet'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin/compiler.rb:201:in `each'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/plugin.rb:81:in `update_stylesheets'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/exec.rb:443:in `watch_or_update'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/exec.rb:326:in `process_result'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/exec.rb:41:in `parse'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/lib/sass/exec.rb:21:in `parse!'
-C:/Program Files (x86)/ruby-1.9.2/lib/ruby/gems/1.9.1/gems/sass-3.2.13/bin/sass:13:in `<top (required)>'
-C:/Program Files (x86)/ruby-1.9.2/bin/sass:19:in `load'
-C:/Program Files (x86)/ruby-1.9.2/bin/sass:19:in `<main>'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/import_node.rb:67:in `rescue in import'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/import_node.rb:45:in `import'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/import_node.rb:28:in `imported_file'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/import_node.rb:37:in `css_import?'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:217:in `visit_import'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/base.rb:37:in `visit'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:100:in `visit'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/base.rb:53:in `map'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:128:in `visit_root'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/base.rb:37:in `visit'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:100:in `visit'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:7:in `visit'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/root_node.rb:20:in `render'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/engine.rb:315:in `_render'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/engine.rb:262:in `render'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/plugin/compiler.rb:362:in `update_stylesheet'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/plugin/compiler.rb:201:in `each'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/plugin.rb:81:in `update_stylesheets'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/exec.rb:443:in `watch_or_update'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/exec.rb:326:in `process_result'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/exec.rb:41:in `parse'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/lib/sass/exec.rb:21:in `parse!'
+C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.2.19/bin/sass:13:in `<top (required)>'
+C:/Ruby200-x64/bin/sass:23:in `load'
+C:/Ruby200-x64/bin/sass:23:in `<main>'
 */
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: File to import not found or unreadable: compass/css3.\A               Load path: C:/Users/Aniceto/workspace/iseconds3/Site/sass\A         on line 1 of main.sass\A \A 1: @import \"compass/css3\"\A 2: @import \"compass/utilities/general/clearfix\"\A 3: \A 4: @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800,900|Pacifico)\A 5: @import url(http://weloveiconfonts.com/api/?family=entypo)\A 6: "; }
+  content: "Syntax error: File to import not found or unreadable: compass/css3.\A               Load path: C:/Users/leonardo/Dropbox/Projetos/yester-site/sass\A         on line 1 of main.sass\A \A 1: @import \"compass/css3\"\A 2: @import \"compass/utilities/general/clearfix\"\A 3: \A 4: @import url(http://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800,900|Pacifico)\A 5: @import url(http://weloveiconfonts.com/api/?family=entypo)\A 6: "; }
