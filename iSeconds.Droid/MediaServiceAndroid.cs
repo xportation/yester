@@ -25,6 +25,7 @@ namespace iSeconds.Droid
 		private User user;
 		private int cameraFPS= 15;
 		private bool usingNativeCamera = false;
+		private Action<string> resultAction = null;
 
 		public event EventHandler OnVideoRecorded;
 		public event EventHandler OnThumbnailSaved;
@@ -136,19 +137,42 @@ namespace iSeconds.Droid
 						string newPath = System.IO.Path.Combine (mediaPath, filename);
 						System.IO.File.Copy (t.Result.Path, newPath, true);
 						System.IO.File.Delete (t.Result.Path);
-						resultAction.Invoke (newPath);
-						if (OnVideoRecorded != null)
-							OnVideoRecorded (this, EventArgs.Empty);
+
+						CommitVideo(newPath);
 					});
 				});
 			}
 		}
 
-		void recordWithYesterCamera (DateTime date, Action<string> resultAction)
-		{
-			Activity currentActivity = this.activityTracker.GetCurrentActivity ();
 
-			currentActivity.StartActivity (typeof(CamcorderActivity));
+
+		public void CommitVideo (string videoPath)
+		{
+			System.Diagnostics.Debug.Assert (resultAction != null);
+
+			resultAction.Invoke (videoPath);
+			if (OnVideoRecorded != null)
+				OnVideoRecorded (this, EventArgs.Empty);
+		}
+
+		public void RevertVideo() {
+			resultAction = null;
+		}
+
+		void recordWithYesterCamera (DateTime date, Action<string> _resultAction)
+		{
+			this.resultAction = _resultAction;
+
+			Activity currentActivity = this.activityTracker.GetCurrentActivity ();
+			Intent intent = new Intent (currentActivity, typeof(CamcorderActivity));
+
+			string filename = ISecondsUtils.StringifyDate ("movie", date) + ".mp4";
+			string path = System.IO.Path.Combine (mediaPath, filename);
+
+			Bundle bundle = new Bundle ();
+			bundle.PutString ("video.path", path);			
+			intent.PutExtras (bundle);
+			currentActivity.StartActivity (intent);
 		}
 
 	}
