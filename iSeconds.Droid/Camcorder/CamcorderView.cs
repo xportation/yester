@@ -9,6 +9,8 @@ using Android.Media;
 using System.Diagnostics;
 using Java.Lang;
 using Java.IO;
+using Java.Util;
+using iSeconds.Domain;
 
 namespace iSeconds.Droid
 {
@@ -26,8 +28,12 @@ namespace iSeconds.Droid
 				private MediaRecorder mediaRecorder;
 				private const string LogYesterCamcorder = "Yester Camcorder";
 
-			public event EventHandler OnCameraReady;
-			public event EventHandler OnVideoRecorded;
+				public event EventHandler OnCameraReady;
+				public event EventHandler OnVideoRecorded;
+				public event EventHandler OnSecondChange;
+
+				private Timer timer = null;
+				private SecondsTimerTask secondsTimerTask = null;
 
 				public CamcorderView (Activity activity, int cameraId)
 			:	base (activity)
@@ -288,17 +294,25 @@ namespace iSeconds.Droid
 			}
 
 			public void StartRecording (string filename, int duration)
-				{
+			{
 
-				 // Release Camera before MediaRecorder start
-				 releaseCamera();
+				// Release Camera before MediaRecorder start
+				releaseCamera();
 
-				 if (!prepareMediaRecorder(filename, duration)) {
-						return;
-				 }
-
-				 mediaRecorder.Start();
+				if (!prepareMediaRecorder(filename, duration)) {
+					return;
 				}
+
+				if (timer != null)
+					timer.Cancel ();
+
+				timer = new Timer ();
+				secondsTimerTask = new SecondsTimerTask (this);
+				
+				timer.Schedule (secondsTimerTask, 1000, 1000);
+
+				mediaRecorder.Start();
+			}
 
 			private void releaseMediaRecorder() {
 				 if (mediaRecorder != null) {
@@ -328,14 +342,36 @@ namespace iSeconds.Droid
 			public void OnInfo (MediaRecorder mr, MediaRecorderInfo what, int extra)
 			{
 				if (what == MediaRecorderInfo.MaxDurationReached) {
-						this.releaseMediaRecorder ();
-						this.releaseCamera ();
 
-				if (OnVideoRecorded != null)
-					OnVideoRecorded.Invoke (this, null);            
+					this.releaseMediaRecorder ();
+					this.releaseCamera ();
+
+					timer.Cancel ();
+					timer = null;
+
+					if (OnVideoRecorded != null)
+						OnVideoRecorded.Invoke (this, null);
 				}
 
 
+			}
+
+			class SecondsTimerTask : TimerTask
+			{
+				private int seconds = 0;
+				private CamcorderView view;
+
+				public SecondsTimerTask(CamcorderView view)
+				{
+					this.view = view;
+				}
+
+				public override void Run() 
+				{
+					seconds++;
+					System.Console.WriteLine ("seconds " + seconds);
+					view.OnSecondChange.Invoke (this, new GenericEventArgs<int>(seconds));
+				}
 			}
 		}
 }
