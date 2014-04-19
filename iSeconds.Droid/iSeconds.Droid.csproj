@@ -18,8 +18,8 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <MandroidI18n />
-    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AndroidStoreUncompressedFileExtensions>.so;.2;.6;.1</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -269,8 +269,6 @@
     <AndroidResource Include="Resources\drawable\ic_uncheck.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\fonts\augie.ttf" />
-    <AndroidAsset Include="Assets\fonts\123Marker.ttf" />
     <AndroidAsset Include="Assets\ffmpeg" />
     <AndroidAsset Include="Assets\libavfilter-3.so" />
     <AndroidAsset Include="Assets\libavformat-55.so" />
