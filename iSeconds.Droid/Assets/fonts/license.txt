@@ -1,5 +1,0 @@
-augie:
-http://www.dafont.com/augie.font
-
-123Marker:
-http://www.dafont.com/123marker.font

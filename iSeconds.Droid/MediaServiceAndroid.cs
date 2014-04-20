@@ -24,7 +24,7 @@ namespace iSeconds.Droid
 		private string mediaPath;
 		private User user;
 		private int cameraFPS= 15;
-		private bool usingNativeCamera = false;
+      //private bool usingNativeCamera = false;
 		private Action<string> resultAction = null;
 
 		public event EventHandler OnVideoRecorded;
@@ -41,10 +41,10 @@ namespace iSeconds.Droid
 
 		public void TakeVideo(DateTime date, Action<string> resultAction)
 		{
-			if (usingNativeCamera)
+         //if (usingNativeCamera)
 				recordWithNativeCamera (date, resultAction);
-			else
-				recordWithYesterCamera (date, resultAction);
+         //else
+         //	recordWithYesterCamera (date, resultAction);
 		}
 
 		public void PlayVideo(string videoPath)
@@ -89,9 +89,9 @@ namespace iSeconds.Droid
 
 			foreach (iSeconds.Domain.MediaInfo mediaInfo in videos) {
 				filesToConcat.Add(mediaInfo.Path);
-
 				subtitles.Add(generateSubtitleForMediaInfo(mediaInfo));
 			}
+
 			b.PutStringArrayList("ffmpeg.concat.filelist", filesToConcat);
 			b.PutStringArrayList("ffmpeg.concat.subtitles", subtitles);
 

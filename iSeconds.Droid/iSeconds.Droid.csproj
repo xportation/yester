@@ -20,7 +20,6 @@
     <MandroidI18n />
     <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <AndroidStoreUncompressedFileExtensions>.so;.2;.6;.1</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -34,6 +33,7 @@
     <DebugSymbols>true</DebugSymbols>
     <AndroidLinkMode>None</AndroidLinkMode>
     <AndroidSupportedAbis>armeabi;armeabi-v7a</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions>.so;.2;.6;.1;.mp4</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -45,6 +45,7 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <AndroidSupportedAbis>armeabi;armeabi-v7a</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions>.so;.2;.6;.1</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -279,10 +280,12 @@
     <AndroidAsset Include="Assets\libxml2.so.2" />
     <AndroidAsset Include="Assets\libexpat.so.1" />
     <AndroidAsset Include="Assets\libfreetype.so.6" />
+    <AndroidAsset Include="Assets\yester_movie\yester_watermark.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ffmpeg_wrapper\" />
     <Folder Include="Camcorder\" />
+    <Folder Include="Assets\yester_movie\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="googleanalytics">
