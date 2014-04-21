@@ -95,6 +95,10 @@ namespace iSeconds.Droid
 				return context.Resources.GetString(Resource.String.raw_please_wait);
 			else if (identifier == "Please, wait for the compilation to finish")
 				return context.Resources.GetString(Resource.String.raw_please_wait_for_the_compilation_to_finish);
+			else if (identifier == "The lite version is limited to only one timeline")
+				return context.Resources.GetString(Resource.String.yester_lite_only_one_timeline_message);
+			else if (identifier == "The lite version is limited to only seven days by compilation")
+				return context.Resources.GetString(Resource.String.yester_lite_only_seven_days_compilation_message);
 
 			return "*"+identifier+"*";
 		}

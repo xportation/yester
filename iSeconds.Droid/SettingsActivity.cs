@@ -52,9 +52,17 @@ namespace iSeconds.Droid
 		void configureCheckBox()
 		{
 			CheckBox checkOnlyDefaultVideo = FindViewById<CheckBox>(Resource.Id.settingsOnlyDefaultVideos);
+			TextView liteMessage = FindViewById<TextView>(Resource.Id.settingsLiteWarning);
+			#if YESTER_LITE
+			checkOnlyDefaultVideo.Checked = true;
+			checkOnlyDefaultVideo.Enabled = false;
+			checkOnlyDefaultVideo.SetTextColor(Android.Graphics.Color.Gray);
+			liteMessage.Visibility = ViewStates.Visible;
+			#else
 			checkOnlyDefaultVideo.Checked = viewModel.UsesOnlyDefaultVideo();
-
 			checkOnlyDefaultVideo.CheckedChange+= (sender, e) => viewModel.ChangeUsesOnlyDefaultVideoCommand.Execute(e.IsChecked);
+			liteMessage.Visibility = ViewStates.Gone;
+			#endif
 		}
 	}
 }

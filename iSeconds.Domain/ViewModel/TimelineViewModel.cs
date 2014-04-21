@@ -369,12 +369,25 @@ namespace iSeconds.Domain
 			}
 		}
 
+		int getRangeCount(Tuple<DateTime, DateTime> rangeDelimiters)
+		{
+			var medias= repository.GetMediaInfoByPeriod(rangeDelimiters.Item1, rangeDelimiters.Item2, this.timeline.Id, true);
+			return medias.Count;
+		}
 
 		public ICommand CompileCommand {
 			get { 
 				return new Command((object arg) => {
 					Tuple<DateTime, DateTime> rangeDelimiters = getRangeDelimiters();
 					if (rangeDelimiters != null) {
+						#if YESTER_LITE
+						int daysCount= getRangeCount(rangeDelimiters);
+						if (daysCount > 7) {
+							dialogService.ShowMessage(i18n.Msg("The lite version is limited to only seven days by compilation"), null);
+							return;
+						}
+						#endif
+
 						string defaultName = timeline.Name;
 						string defaultDescription = string.Format(i18n.Msg("A compilation for timeline {0} from {1} to {2}"), timelineName, 
 							ISecondsUtils.DateToString(rangeDelimiters.Item1, false), ISecondsUtils.DateToString(rangeDelimiters.Item2, false));

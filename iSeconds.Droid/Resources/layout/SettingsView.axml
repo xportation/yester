@@ -110,6 +110,16 @@
                     android:id="@+id/settingsOnlyDefaultVideos"
                     android:textColor="@color/first_item_color"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settingsLiteWarning"
+                    android:textColor="@color/second_item_color"
+                    android:text="@string/yester_lite_only_default_movies_message"
+                    android:layout_marginTop="10px"
+                    android:textStyle="italic"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="bottom" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

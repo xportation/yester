@@ -123,4 +123,8 @@
    <string name="raw_friday">friday</string>
    <string name="raw_saturday">saturday</string>
 
+   <string name="yester_lite_only_one_timeline_message">The lite version is limited to only one timeline</string>
+   <string name="yester_lite_only_seven_days_compilation_message">The lite version is limited to only seven days by compilation</string>
+   <string name="yester_lite_only_default_movies_message">The lite version is limited to only default movie by day when compile</string>
+
 </resources>
