@@ -383,7 +383,7 @@ namespace iSeconds.Domain
 						#if YESTER_LITE
 						int daysCount= getRangeCount(rangeDelimiters);
 						if (daysCount > 7) {
-							dialogService.ShowMessage(i18n.Msg("The lite version is limited to only seven days by compilation"), null);
+							dialogService.ShowMessageLite(i18n.Msg("The lite version is limited to only seven days by compilation"), null);
 							return;
 						}
 						#endif

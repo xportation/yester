@@ -38,6 +38,34 @@ namespace iSeconds.Droid
 				.Show ();
 		}
 
+		#if YESTER_LITE
+		public void ShowMessageLite(string msg, Action callback)
+		{
+			Activity activity = tracker.GetCurrentActivity();
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			View layout = activity.LayoutInflater.Inflate(Resource.Layout.MessageBoxLite, null);
+			builder.SetView(layout);
+			builder.SetPositiveButton(Resource.String.ok, delegate { 
+				if (callback != null)
+					callback.Invoke(); 
+			});
+
+			Dialog dialog = builder.Create();
+			dialog.ShowEvent += (sender, e) => {
+				TextView message = dialog.FindViewById<TextView>(Resource.Id.messagebox_lite_message);
+				message.Text = msg;
+
+				Button buttonFullVersion = dialog.FindViewById<Button>(Resource.Id.button_messagebox_lite_full_link);
+				buttonFullVersion.Click += (sender2, e2) => {
+					Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://play.google.com/store/apps/details?id=iSeconds.Droid"));
+					activity.StartActivity(intent);
+				};
+			};
+
+			dialog.Show();
+		}
+		#endif
+
 		public void AskForConfirmation(string msg, Action userConfirmedCallback, Action userCanceledCallback )
 		{
 			new AlertDialog.Builder(tracker.GetCurrentActivity())

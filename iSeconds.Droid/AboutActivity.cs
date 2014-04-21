@@ -30,6 +30,11 @@ namespace iSeconds.Droid
 
 			configureActionBar(true, "");
 			configureHyperlinks();
+
+			#if !YESTER_LITE
+			LinearLayout liteLayout= FindViewById<LinearLayout>(Resource.Id.layout_about_yester_lite);
+			liteLayout.Visibility= ViewStates.Gone;
+			#endif
 		}
 
 		void configureHyperlinks()
@@ -51,6 +56,14 @@ namespace iSeconds.Droid
 				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("http://www.broditech.com"));
 				StartActivity(intent);
 			};
+
+			#if YESTER_LITE
+			Button buttonFullVersion = FindViewById<Button>(Resource.Id.button_about_lite_full_link);
+			buttonFullVersion.Click += (sender, e) => {
+				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://play.google.com/store/apps/details?id=iSeconds.Droid"));
+				StartActivity(intent);
+			};
+			#endif
 		}
 	}
 }

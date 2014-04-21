@@ -247,6 +247,7 @@
     <AndroidResource Include="Resources\drawable\ic_change_camera.png" />
     <AndroidResource Include="Resources\drawable\ic_record_media.png" />
     <AndroidResource Include="Resources\drawable-hdpi\cb_checked_disable.png" />
+    <AndroidResource Include="Resources\layout\MessageBoxLite.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

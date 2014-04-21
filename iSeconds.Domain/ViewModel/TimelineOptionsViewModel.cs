@@ -136,7 +136,7 @@ namespace iSeconds.Domain
 			get { return new Command((object arg) => {
 				#if YESTER_LITE
 				if (this.TimelinesCount() >= 1) {
-					optionsDialog.ShowMessage(i18n.Msg("The lite version is limited to only one timeline"), null);
+					optionsDialog.ShowMessageLite(i18n.Msg("The lite version is limited to only one timeline"), null);
 					return;
 				}
 				#endif

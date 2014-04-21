@@ -126,5 +126,7 @@
    <string name="yester_lite_only_one_timeline_message">A versão lite é limitada em apenas uma timeline</string>
    <string name="yester_lite_only_seven_days_compilation_message">A versão lite é limitada em apenas sete dias por compilação</string>
    <string name="yester_lite_only_default_movies_message">A versão lite é limitada em apenas o vídeo default do dia ao compilar</string>
+   <string name="yester_lite_get_full"><u>Baixe a versão completa</u></string>
+   <string name="about_yester_lite">Você pode atualizar seu Yester Lite para versão completa a qualquer hora. Nenhum dado será perdido.</string>
 
 </resources>

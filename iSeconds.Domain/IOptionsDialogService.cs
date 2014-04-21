@@ -8,6 +8,11 @@ namespace iSeconds.Domain
 
 		/*Shows a message with only an ok button*/
 		void ShowMessage(string msg, Action callback);
+
+		#if YESTER_LITE
+		void ShowMessageLite(string msg, Action callback);
+		#endif
+
 		void AskForConfirmation(string msg, Action userConfirmedCallback, Action userCanceledCallback);
 
 		void AskForCompilationNameAndDescription(string defaultName, string defaultDescription, 

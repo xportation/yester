@@ -52,6 +52,35 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/roundrect_item_background"
                 android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/layout_about_yester_lite">
+                <TextView
+                    android:text="@string/about_yester_lite"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textAbout"
+                    android:textColor="@color/second_item_color" />
+                <Button
+                    android:text="@string/yester_lite_get_full"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15.0dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/button_about_lite_full_link"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:textStyle="bold"
+                    android:textColor="#ff000000" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundrect_item_background"
+                android:padding="5dp"
                 android:id="@+id/linearLayout5"
                 android:layout_marginTop="10dp">
                 <TextView
