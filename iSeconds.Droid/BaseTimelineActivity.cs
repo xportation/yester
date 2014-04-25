@@ -33,6 +33,8 @@ namespace iSeconds.Droid
 			configureActionBar(showHomeButton(), "");
 			addActionBarItems();
 			setupCalendar();
+
+			setupAds();
 		}
 
 		protected override void OnDestroy()

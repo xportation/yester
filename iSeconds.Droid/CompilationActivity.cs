@@ -72,6 +72,8 @@ namespace iSeconds.Droid
 			viewModel.OnCompilationViewModelChanged += (sender, args) => {
 				RunOnUiThread(delegate { adapter.Invalidate(); });
 			};
+
+			setupAds();
 		}
 
       protected override void OnStart()

@@ -85,6 +85,7 @@ namespace iSeconds.Droid
 
 			configureActionBar(true, "");
 			configureActionBarActions();
+			setupAds();
       }
 
       protected override void OnStart()

@@ -17,8 +17,9 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <MandroidI18n />
-    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -34,7 +35,6 @@
     <AndroidSupportedAbis>armeabi;armeabi-v7a</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions>.so;.2;.6;.1;.mp4</AndroidStoreUncompressedFileExtensions>
     <AssemblyName>Yester.Droid</AssemblyName>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -48,7 +48,6 @@
     <AndroidSupportedAbis>armeabi;armeabi-v7a</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions>.so;.2;.6;.1</AndroidStoreUncompressedFileExtensions>
     <AssemblyName>Yester.Droid</AssemblyName>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Lite|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -58,7 +57,8 @@
     <AssemblyName>iSeconds.Droid</AssemblyName>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>TRACE;DEBUG;YESTER_LITE;</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;__MOBILE__;__ANDROID__;YESTER_LITE;</DefineConstants>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Lite|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -67,10 +67,10 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <AssemblyName>iSeconds.Droid</AssemblyName>
     <DefineConstants>YESTER_LITE;</DefineConstants>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
-    <Reference Include="Mono.Android.Support.v4" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -79,6 +79,18 @@
     </Reference>
     <Reference Include="GoogleAnalytics.Android">
       <HintPath>..\Components\googleanalytics-3.0.3.1\lib\android\GoogleAnalytics.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="GooglePlayServicesLib">
+      <HintPath>..\Components\googleplayservicesgingerbread-16.0.0.1\lib\android\GooglePlayServicesLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\Components\googleplayservicesgingerbread-16.0.0.1\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\Components\googleplayservicesgingerbread-16.0.0.1\lib\android\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
+      <HintPath>..\Components\googleplayservicesgingerbread-16.0.0.1\lib\android\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +128,7 @@
     <Compile Include="Camcorder\CamcorderPreview.cs" />
     <Compile Include="Camcorder\CamcorderView.cs" />
     <Compile Include="Camcorder\CamcorderActivity.cs" />
+    <Compile Include="YesterAdView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -248,6 +261,7 @@
     <AndroidResource Include="Resources\drawable\ic_record_media.png" />
     <AndroidResource Include="Resources\drawable-hdpi\cb_checked_disable.png" />
     <AndroidResource Include="Resources\layout\MessageBoxLite.axml" />
+    <AndroidResource Include="Resources\layout\YesterAdsLayout.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -313,6 +327,10 @@
   <ItemGroup>
     <XamarinComponentReference Include="googleanalytics">
       <Version>3.0.3.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="googleplayservicesgingerbread">
+      <Version>16.0.0.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

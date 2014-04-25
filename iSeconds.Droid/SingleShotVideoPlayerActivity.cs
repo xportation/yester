@@ -69,6 +69,7 @@ namespace iSeconds.Droid
 				videoView.Start();
 		
 			startingPaused= false;
+			setupAds();
 		}
 
 		private void loadState(Bundle bundle)

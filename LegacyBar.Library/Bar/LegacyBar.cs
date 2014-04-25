@@ -272,7 +272,7 @@ namespace LegacyBar.Library.Bar
 
             _overflowLegacyBarAction.SetIconColor(LightIcons);
 
-            var title = a.GetString(Resource.Styleable.actionbar_title);
+			var title = a.GetString(Resource.Styleable.actionbar_lb_title);
             if (null != title)
                 Title = title;
 
@@ -283,7 +283,7 @@ namespace LegacyBar.Library.Bar
             _actionsView.SetBackgroundColor(separatorColor);
             _homeLayout.SetBackgroundColor(separatorColor);
 
-            using (var background = a.GetDrawable(Resource.Styleable.actionbar_background)) //recycling the drawable immediately
+			using (var background = a.GetDrawable(Resource.Styleable.actionbar_lb_background)) //recycling the drawable immediately
             {
                 if (null != background)
                     BackgroundDrawable = background;

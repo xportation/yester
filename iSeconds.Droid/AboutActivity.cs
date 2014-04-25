@@ -35,6 +35,7 @@ namespace iSeconds.Droid
 			LinearLayout liteLayout= FindViewById<LinearLayout>(Resource.Id.layout_about_yester_lite);
 			liteLayout.Visibility= ViewStates.Gone;
 			#endif
+			setupAds();
 		}
 
 		void configureHyperlinks()

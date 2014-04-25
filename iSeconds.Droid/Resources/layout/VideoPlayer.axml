@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/activity_background">
-    <legacybar.library.bar.LegacyBar
-        android:id="@+id/actionbar"
-        style="@style/actionbar"
-        ab:title="@string/video_player" />
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/actionbar_bottom_line_color" />
     <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/linearLayout">
-        <LinearLayout
-            android:orientation="vertical"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="82dp"
-            android:layout_height="fill_parent"
-            android:padding="@dimen/activity_padding"
-            android:layout_margin="4dp"
-            android:background="@drawable/roundrect_item_background"
-            android:id="@+id/linearLayout1">
-            <ListView
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="wrap_content"
-                android:id="@+id/videoThumbnails"
-                android:layout_height="wrap_content"
-                android:choiceMode="none"
-                android:divider="@android:color/transparent"
-                android:background="@android:color/transparent"
-                android:cacheColorHint="@android:color/transparent"
-                android:drawSelectorOnTop="true"
-                android:listSelector="@drawable/list_selector" />
-        </LinearLayout>
-        <FrameLayout
+        android:orientation="vertical" >
+        <legacybar.library.bar.LegacyBar
+            android:id="@+id/actionbar"
+            style="@style/actionbar"
+            ab:lb_title="@string/video_player" />
+        <View
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/surfaceLayout"
-            android:padding="5dp"
-            android:background="@drawable/roundrect_item_background"
-            android:layout_margin="4dp">
-            <VideoView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/videoView" />
-            <ImageView
-                android:src="@drawable/ic_play_video"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imagePausePlay"
-                android:layout_gravity="center" />
-            <TextView
-                android:text="Date"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_height="1dp"
+            android:background="@color/actionbar_bottom_line_color" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/linearLayout">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="82dp"
+                android:layout_height="fill_parent"
+                android:padding="@dimen/activity_padding"
+                android:layout_margin="4dp"
+                android:background="@drawable/roundrect_item_background"
+                android:id="@+id/linearLayout1">
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/videoThumbnails"
+                    android:layout_height="wrap_content"
+                    android:choiceMode="none"
+                    android:divider="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:drawSelectorOnTop="true"
+                    android:listSelector="@drawable/list_selector" />
+            </LinearLayout>
+            <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewDate"
-                android:layout_gravity="bottom"
-                android:shadowColor="#ffffffff"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:textColor="#ff000000"
-                android:gravity="center" />
-        </FrameLayout>
-    </LinearLayout>
+                android:id="@+id/surfaceLayout"
+                android:padding="5dp"
+                android:background="@drawable/roundrect_item_background"
+                android:layout_margin="4dp">
+                <VideoView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/videoView" />
+                <ImageView
+                    android:src="@drawable/ic_play_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imagePausePlay"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:text="Date"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewDate"
+                    android:layout_gravity="bottom"
+                    android:shadowColor="#ffffffff"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:textColor="#ff000000"
+                    android:gravity="center" />
+            </FrameLayout>
+        </LinearLayout>
+        <include layout="@layout/YesterAdsLayout" />
+    </LinearLayout>  
 </LinearLayout>

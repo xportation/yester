@@ -107,7 +107,7 @@ namespace iSeconds.Droid
 		}
 	}
 
-	[Activity (Label = "VideoPlayerActivity", ConfigurationChanges = ConfigChanges.KeyboardHidden|ConfigChanges.Orientation|ConfigChanges.Keyboard)]
+	[Activity (Label = "VideoPlayerActivity", ConfigurationChanges = ConfigChanges.KeyboardHidden|ConfigChanges.Keyboard)]
 	public class VideoPlayerActivity : ISecondsActivity, VideoViewPreparer
 	{
 		private IPathService pathService = null;
@@ -175,6 +175,7 @@ namespace iSeconds.Droid
 
 			configureActions();
 			Prepare();
+			setupAds();
 		}
 
 		protected override void OnDestroy()

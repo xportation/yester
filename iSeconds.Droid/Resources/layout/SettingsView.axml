@@ -1,143 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/activity_background">
-    <legacybar.library.bar.LegacyBar
-        android:id="@+id/actionbar"
-        style="@style/actionbar"
-        ab:title="@string/settings" />
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/actionbar_bottom_line_color" />
-    <ScrollView
-        android:minWidth="25px"
-        android:minHeight="25px"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:padding="@dimen/activity_padding"
-        android:id="@+id/scrollView1">
-        <LinearLayout
-            android:orientation="vertical"
-            android:minWidth="25px"
-            android:minHeight="25px"
+        android:orientation="vertical" >
+        <legacybar.library.bar.LegacyBar
+            android:id="@+id/actionbar"
+            style="@style/actionbar"
+            ab:lb_title="@string/settings" />
+        <View
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/linearLayout1">
+            android:layout_height="1dp"
+            android:background="@color/actionbar_bottom_line_color" />
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/activity_padding"
+            android:id="@+id/scrollView1">
             <LinearLayout
                 android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundrect_item_background"
-                android:padding="5dp"
-                android:id="@+id/linearLayout2">
-                <TextView
-                    android:text="@string/settings_movies_size_title"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/settingsTitle"
-                    android:textColor="@color/first_item_color"
-                    android:padding="5px"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <TextView
-                    android:text="@string/settings_movies_size_description"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/settingsDescription"
-                    android:layout_marginBottom="10px"
-                    android:padding="5px"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/second_item_color" />
-                <RadioGroup
-                    android:minWidth="25px"
-                    android:minHeight="25px"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/settingsVideoSizeGroup"
-                    android:layout_marginBottom="@dimen/dim_20"
-                    android:padding="5px">
-                    <RadioButton
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/settings_movies_size_small"
-                        android:id="@+id/settingsVideoSizeSmall"
-                        android:layout_marginBottom="@dimen/dim_10"
-                        android:textColor="@color/first_item_color"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                    <RadioButton
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_movies_size_medium"
-                        android:id="@+id/settingsVideoSizeMedium"
-                        android:layout_marginBottom="@dimen/dim_10"
-                        android:textColor="@color/first_item_color"
-                        android:checked="true"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                    <RadioButton
-                        style="@style/RadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_movies_size_large"
-                        android:id="@+id/settingsVideoSizeLarge"
-                        android:layout_marginBottom="@dimen/dim_10"
-                        android:textColor="@color/first_item_color"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </RadioGroup>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundrect_item_background"
-                android:padding="5dp"
-                android:id="@+id/linearLayout3"
-                android:layout_marginTop="10dp">
-                <CheckBox
-                    style="@style/CheckBox"
-                    android:text="@string/settings_only_default_video_of_the_day"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/linearLayout1">
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/settingsOnlyDefaultVideos"
-                    android:textColor="@color/first_item_color"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:background="@drawable/roundrect_item_background"
+                    android:padding="5dp"
+                    android:id="@+id/linearLayout2">
+                    <TextView
+                        android:text="@string/settings_movies_size_title"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/settingsTitle"
+                        android:textColor="@color/first_item_color"
+                        android:padding="5px"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                    <TextView
+                        android:text="@string/settings_movies_size_description"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/settingsDescription"
+                        android:layout_marginBottom="10px"
+                        android:padding="5px"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/second_item_color" />
+                    <RadioGroup
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/settingsVideoSizeGroup"
+                        android:layout_marginBottom="@dimen/dim_20"
+                        android:padding="5px">
+                        <RadioButton
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/settings_movies_size_small"
+                            android:id="@+id/settingsVideoSizeSmall"
+                            android:layout_marginBottom="@dimen/dim_10"
+                            android:textColor="@color/first_item_color"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                        <RadioButton
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_movies_size_medium"
+                            android:id="@+id/settingsVideoSizeMedium"
+                            android:layout_marginBottom="@dimen/dim_10"
+                            android:textColor="@color/first_item_color"
+                            android:checked="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                        <RadioButton
+                            style="@style/RadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_movies_size_large"
+                            android:id="@+id/settingsVideoSizeLarge"
+                            android:layout_marginBottom="@dimen/dim_10"
+                            android:textColor="@color/first_item_color"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/roundrect_item_background"
+                    android:padding="5dp"
+                    android:id="@+id/linearLayout3"
+                    android:layout_marginTop="10dp">
+                    <CheckBox
+                        style="@style/CheckBox"
+                        android:text="@string/settings_only_default_video_of_the_day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/settingsOnlyDefaultVideos"
+                        android:textColor="@color/first_item_color"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/settingsLiteWarning"
+                        android:textColor="@color/second_item_color"
+                        android:text="@string/yester_lite_only_default_movies_message"
+                        android:layout_marginTop="10px"
+                        android:textStyle="italic"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:layout_gravity="bottom" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/view1"
+                    android:layout_weight="1"
+                    android:minHeight="15dp"
+                    android:minWidth="20dp" />
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/settingsLiteWarning"
+                    android:id="@+id/settingWarning"
                     android:textColor="@color/second_item_color"
-                    android:text="@string/yester_lite_only_default_movies_message"
+                    android:text="@string/settings_movies_size_warning"
                     android:layout_marginTop="10px"
                     android:textStyle="italic"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_gravity="bottom" />
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/view1"
-                android:layout_weight="1"
-                android:minHeight="15dp"
-                android:minWidth="20dp" />
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/settingWarning"
-                android:textColor="@color/second_item_color"
-                android:text="@string/settings_movies_size_warning"
-                android:layout_marginTop="10px"
-                android:textStyle="italic"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_gravity="bottom" />
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+        <include layout="@layout/YesterAdsLayout" />
+    </LinearLayout>
 </LinearLayout>

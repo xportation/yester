@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/activity_background">
-    <legacybar.library.bar.LegacyBar
-        android:id="@+id/actionbar"
-        style="@style/actionbar"
-        ab:title="@string/timeline_default" />
-    <View
+    <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:id="@+id/actionbar_bottom_line"
-        android:background="@color/actionbar_bottom_line_color" />
-    <include
-        layout="@layout/CalendarMonthViewLayout" />
-</LinearLayout>
+        android:layout_height="fill_parent">    
+        <TableRow
+        	android:id="@+id/timelineViewTableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">                
+            <LinearLayout
+                android:id="@+id/timelineview_calendar_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+                <legacybar.library.bar.LegacyBar
+                    android:id="@+id/actionbar"
+                    style="@style/actionbar"
+                    ab:lb_title="@string/timeline_default" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/actionbar_bottom_line"
+                    android:background="@color/actionbar_bottom_line_color" />
+                <include layout="@layout/CalendarMonthViewLayout" />    
+            </LinearLayout>
+        </TableRow>    
+        <TableRow
+        	android:id="@+id/timelineViewTableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >    
+            <include layout="@layout/YesterAdsLayout" />    
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

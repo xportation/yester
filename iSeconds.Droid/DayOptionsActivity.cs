@@ -116,6 +116,7 @@ namespace iSeconds.Droid
 
 			configureActionBar(true, getTitle());
 			addActionBarItems ();
+			setupAds();
       }
 
 		private void addActionBarItems ()

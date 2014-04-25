@@ -1,38 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ab="http://schemas.android.com/apk/res/iSeconds.Droid"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/activity_background">
-    <legacybar.library.bar.LegacyBar
-        android:id="@+id/actionbar"
-        style="@style/actionbar"
-        ab:title="@string/compilation_view_title" />
-    <View
+    <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/actionbar_bottom_line_color" />
-    <LinearLayout
-        android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/linearLayout1">
-        <ListView
-            android:minWidth="25px"
-            android:minHeight="100px"
+        android:layout_height="fill_parent">
+        <TableRow
+            android:id="@+id/timelineViewTableRow1"
             android:layout_width="fill_parent"
-            android:id="@+id/compilationsList"
-            android:layout_height="wrap_content"
-            android:choiceMode="singleChoice"
-            android:padding="@dimen/activity_padding"
-            android:dividerHeight="@dimen/listview_divider"
-            android:divider="@android:color/transparent"
-            android:background="@android:color/transparent"
-            android:cacheColorHint="@android:color/transparent"
-            android:drawSelectorOnTop="true"
-            android:listSelector="@drawable/list_selector" />
-    </LinearLayout>
-</LinearLayout>
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+                <legacybar.library.bar.LegacyBar
+                    android:id="@+id/actionbar"
+                    style="@style/actionbar"
+                    ab:lb_title="@string/compilation_view_title" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/actionbar_bottom_line_color" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/linearLayout1">
+                    <ListView
+                        android:minWidth="25px"
+                        android:minHeight="100px"
+                        android:layout_width="fill_parent"
+                        android:id="@+id/compilationsList"
+                        android:layout_height="wrap_content"
+                        android:choiceMode="singleChoice"
+                        android:padding="@dimen/activity_padding"
+                        android:dividerHeight="@dimen/listview_divider"
+                        android:divider="@android:color/transparent"
+                        android:background="@android:color/transparent"
+                        android:cacheColorHint="@android:color/transparent"
+                        android:drawSelectorOnTop="true"
+                        android:listSelector="@drawable/list_selector" />
+                </LinearLayout>
+            </LinearLayout>  
+        </TableRow>
+        <TableRow
+            android:id="@+id/timelineViewTableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >    
+            <include layout="@layout/YesterAdsLayout" />    
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

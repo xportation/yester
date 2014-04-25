@@ -27,6 +27,7 @@ namespace iSeconds.Droid
 			configureActionBar(true, "");
 			configureRadioButton();
 			configureCheckBox();
+			setupAds();
 		}
 
 		void configureRadioButton()

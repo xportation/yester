@@ -5,11 +5,16 @@ using Android.Widget;
 using LegacyBar.Library.Bar;
 using iSeconds.Domain.Framework;
 using LegacyBar.Library.BarActions;
+using Android.Views;
 
 namespace iSeconds.Droid
 {
 	public class ISecondsActivity : Activity
 	{
+		#if YESTER_LITE
+		private YesterAdView adView = null;
+		#endif
+
 		protected INavigator navigator = null;
 		protected ActivityTracker activityTracker = null;
 
@@ -24,20 +29,44 @@ namespace iSeconds.Droid
 			activityTracker.SetCurrentActivity(this);
 		}
 
+		protected void setupAds()
+		{
+			#if YESTER_LITE
+			LinearLayout layout= FindViewById<LinearLayout>(Resource.Id.yester_ads_layout);
+			adView= new YesterAdView(this, layout);
+			#endif
+		}
+
 		protected override void OnResume()
 		{
 			base.OnResume();
+
+			#if YESTER_LITE
+			if (adView != null)
+				adView.OnResume();
+			#endif
+
 			activityTracker.SetCurrentActivity(this);
 		}
 
 		protected override void OnPause()
 		{
+			#if YESTER_LITE
+			if (adView != null)
+				adView.OnPause();
+			#endif
+
 			clearReferences();
 			base.OnPause();
 		}
 
 		protected override void OnDestroy()
 		{
+			#if YESTER_LITE
+			if (adView != null)
+				adView.OnDestroy();
+			#endif
+
 			clearReferences();
 			base.OnDestroy();
 		}
