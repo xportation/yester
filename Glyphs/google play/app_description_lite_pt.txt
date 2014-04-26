@@ -1,0 +1,24 @@
+﻿Yester, um novo app que irá lhe ajudar a guardar os bons momentos da vida.
+
+Aconteceu algo inesperado? 
+Um acontecimento legal marcou seu dia? 
+Não perca tempo. 
+Faça vídeos de 1, 3 ou 5 segundos deste fato marcante.
+Os vídeos são organizados em um calendário. Facilmente você pode acessar qualquer dia e lembrar um momento especial.
+
+Crie múltiplas timelines.
+Você pode criar quantas você quiser, não há limites.
+
+Você já pensou em assistir a um filme de sua vida?
+Com Yester isso é possível!
+Faça compilações de seus vídeos em meses, anos ou um período que você escolher.
+Assista ou compartilhe um pequeno resumo de sua vida.
+
+
+A versão lite possui algumas limitações:
+- É permitido apenas uma timeline;
+- A compilação é apenas dos vídeos default de cada dia e de apenas 7 dias por vez; e
+- Possui anúncios.
+
+
+Se você tem dúvidas ou sugestões, por favor contate-nos em broditech@broditech.com

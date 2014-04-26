@@ -1,0 +1,61 @@
+PathClear false
+FileFormat png
+FilePrefix ''
+
+Array FacebookSvgFiles 'facebook_banner_en.svg':'facebook_banner_lite_en.svg':'facebook_banner_en.svg':'facebook_banner_lite_pt.svg'
+Array FacebookExportFiles 'facebook_banner_en':'facebook_banner_lite_en':'facebook_banner_pt':'facebook_banner_lite_pt'
+
+PathExport 'facebook_banners'
+
+ExportWidth 1200
+ExportHeight 627
+
+Loop FacebookSvgFiles 3
+    FileSvg FacebookSvgFiles:Index
+    FileName FacebookExportFiles:Index
+    Convert
+
+//------------------
+
+Array FeatureGraphicSvgFiles 'feature_graphic.svg':'feature_graphic_lite.svg':'feature_graphic_pt.svg':'feature_graphic_lite_pt.svg'
+Array FeatureGraphicExportFiles 'feature_graphic_en':'feature_graphic_lite_en':'feature_graphic_pt':'feature_graphic_lite_pt'
+
+PathExport 'google_play_feature_graphics'
+
+ExportWidth 1024
+ExportHeight 500
+
+Loop FeatureGraphicSvgFiles 3
+    FileSvg FeatureGraphicSvgFiles:Index
+    FileName FeatureGraphicExportFiles:Index
+    Convert
+
+//------------------
+
+PathExport 'google_play_promotional_graphic'
+
+ExportWidth 180
+ExportHeight 120
+
+FileSvg 'promotional_graphic.svg'
+FileName 'promotional_graphic'
+Convert
+
+FileSvg 'promotional_graphic_lite.svg'
+FileName 'promotional_graphic_lite'
+Convert
+
+//------------------
+
+PathExport 'google_play_icon'
+
+ExportWidth 512
+ExportHeight 512
+
+FileSvg 'yester_icon.svg'
+FileName 'yester_icon'
+Convert
+
+FileSvg 'yester_icon_lite.svg'
+FileName 'yester_icon_lite'
+Convert
