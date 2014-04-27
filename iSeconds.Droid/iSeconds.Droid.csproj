@@ -126,6 +126,7 @@
     <Compile Include="Camcorder\CamcorderView.cs" />
     <Compile Include="Camcorder\CamcorderActivity.cs" />
     <Compile Include="YesterAdView.cs" />
+    <Compile Include="AppRater.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <string name="app_name">Yester</string>
+   <string name="app_name_lite">Yester Lite</string>
    <string name="app_description">Registre seus momentos criando incríveis timelines.</string>
    <string name="library_name">Yester.Droid</string>
    <string name="add_timeline">Adicionar</string>
@@ -128,5 +129,11 @@
    <string name="yester_lite_only_default_movies_message">A versão lite é limitada em apenas compilar o vídeo default do dia</string>
    <string name="yester_lite_get_full"><u>Baixe a versão completa</u></string>
    <string name="about_yester_lite">Você pode atualizar seu Yester Lite para versão completa a qualquer momento. Todos os seus dados serão preservados.</string>
+
+   <string name="rating_rate">Avaliar agora</string>
+   <string name="rating_later">Depois</string>
+   <string name="rating_no_thanks">Não, obrigado</string>
+   <string name="rating_title">Avalie-nos</string>
+   <string name="rating_message">Se você gosta de usar o Yester, por favor tire um momento para nos avaliar. \nObrigado pelo apoio.</string>
 
 </resources>

@@ -61,6 +61,8 @@ namespace iSeconds.Droid
 			mediaService = application.GetMediaService();
 			mediaService.OnVideoRecorded += videoRecordedHandler;
 			mediaService.OnThumbnailSaved += thumbnailSavedHandler;
+
+			AppRater.AppLaunched(this);
 		}
 
       protected override void OnStart()
