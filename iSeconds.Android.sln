@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSeconds.Droid", "iSeconds.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyBar.Library", "LegacyBar.Library\LegacyBar.Library.csproj", "{371657B5-2C38-4D23-B7C1-6C053EB55FB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Mobile.Android", "Xamarin.Mobile\MonoDroid\Xamarin.Mobile.Android.csproj", "{32DFF77E-AE38-48D6-B067-CF555798EA32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,14 @@ Global
 		Release Lite|Any CPU = Release Lite|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32DFF77E-AE38-48D6-B067-CF555798EA32}.Debug Lite|Any CPU.ActiveCfg = Debug|Any CPU
+		{32DFF77E-AE38-48D6-B067-CF555798EA32}.Debug Lite|Any CPU.Build.0 = Debug|Any CPU
+		{32DFF77E-AE38-48D6-B067-CF555798EA32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32DFF77E-AE38-48D6-B067-CF555798EA32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32DFF77E-AE38-48D6-B067-CF555798EA32}.Release Lite|Any CPU.ActiveCfg = Release|Any CPU
+		{32DFF77E-AE38-48D6-B067-CF555798EA32}.Release Lite|Any CPU.Build.0 = Release|Any CPU
+		{32DFF77E-AE38-48D6-B067-CF555798EA32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32DFF77E-AE38-48D6-B067-CF555798EA32}.Release|Any CPU.Build.0 = Release|Any CPU
 		{371657B5-2C38-4D23-B7C1-6C053EB55FB8}.Debug Lite|Any CPU.ActiveCfg = Debug|Any CPU
 		{371657B5-2C38-4D23-B7C1-6C053EB55FB8}.Debug Lite|Any CPU.Build.0 = Debug|Any CPU
 		{371657B5-2C38-4D23-B7C1-6C053EB55FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

@@ -36,11 +36,6 @@ namespace iSeconds.Domain
 			get { return model.GetDefaultThumbnail(); }
       }
 
-      public ICommand PlayVideoCommand
-      {
-         get { return new Command((object arg) => { mediaService.PlayVideo(model.GetDefaultVideoPath()); }); }
-      }
-
       public ICommand RecordVideoCommand
       {
          get

@@ -1,5 +1,5 @@
-Array PathsToExport 'drawable':'drawable-hdpi':'drawable-ldpi':'drawable-mdpi':'drawable-xhdpi'
-Array ExportSizes 48:72:36:48:96
+Array PathsToExport 'drawable':'drawable-hdpi':'drawable-ldpi':'drawable-mdpi':'drawable-xhdpi':'drawable-xxhdpi'
+Array ExportSizes 48:72:36:48:96:144
 
 PathClear false
 FileFormat png
@@ -30,7 +30,7 @@ Loop MySvgFiles 3
     FileName MyExportFiles:Index
     Convert
 
-// Conversion 1
+// Conversion 3
 PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:3
 
 ExportWidth ExportSizes:3
@@ -41,7 +41,7 @@ Loop MySvgFiles 3
     FileName MyExportFiles:Index
     Convert
 
-// Conversion 1
+// Conversion 4
 PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:4
 
 ExportWidth ExportSizes:4
@@ -63,6 +63,17 @@ Loop MySvgFiles 3
     FileName MyExportFiles:Index
     Convert
 
+// Conversion 6
+PathExport '..\..\iSeconds.Droid\Resources\'PathsToExport:6
+
+ExportWidth ExportSizes:6
+ExportHeight ExportSizes:6
+
+Loop MySvgFiles 3
+    FileSvg MySvgFiles:Index
+    FileName MyExportFiles:Index
+    Convert
+
 // Play video player
 PathExport '..\..\iSeconds.Droid\Resources\drawable'
 ExportWidth 96
@@ -73,8 +84,8 @@ FileName 'ic_play_video'
 Convert
 
 // Splash Screen
-Array ExportSplashWidth 320:480:240:320:640
-Array ExportSplashHeight 480:800:320:480:960
+Array ExportSplashWidth 320:480:240:320:640:800
+Array ExportSplashHeight 480:800:320:480:960:1280
 
 // Portrait
 Loop PathsToExport 6

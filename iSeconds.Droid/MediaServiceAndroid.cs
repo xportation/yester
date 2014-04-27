@@ -47,14 +47,6 @@ namespace iSeconds.Droid
          //	recordWithYesterCamera (date, resultAction);
 		}
 
-		public void PlayVideo(string videoPath)
-		{
-			Activity currentActivity = this.activityTracker.GetCurrentActivity();
-			Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(videoPath));
-			intent.SetDataAndType(Android.Net.Uri.Parse(videoPath), "video/mp4");
-			currentActivity.StartActivity(intent);
-		}
-
 		public void SaveVideoThumbnail(string thumbnailPath, string videoPath)
 		{
 			AndroidMediaUtils.SaveVideoThumbnail (thumbnailPath, videoPath);
@@ -121,6 +113,7 @@ namespace iSeconds.Droid
 		void recordWithNativeCamera (DateTime date, Action<string> resultAction)
 		{
 			lock (obj) {
+				this.resultAction = resultAction;
 				Activity currentActivity = this.activityTracker.GetCurrentActivity ();
 				var picker = new MediaPicker (currentActivity);
 				if (!picker.IsCameraAvailable || !picker.VideosSupported)

@@ -74,9 +74,6 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="Xamarin.Mobile">
-      <HintPath>..\Third_Party\XamarinMobileApi_Android\Xamarin.Mobile.dll</HintPath>
-    </Reference>
     <Reference Include="GoogleAnalytics.Android">
       <HintPath>..\Components\googleanalytics-3.0.3.1\lib\android\GoogleAnalytics.Android.dll</HintPath>
     </Reference>
@@ -262,6 +259,20 @@
     <AndroidResource Include="Resources\drawable-hdpi\cb_checked_disable.png" />
     <AndroidResource Include="Resources\layout\MessageBoxLite.axml" />
     <AndroidResource Include="Resources\layout\YesterAdsLayout.axml" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_error.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_add.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_calendar.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_camera.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_check.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_compile.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_home.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_menu.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_next.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_play.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_previous.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\splash_title.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\splash_title_land.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -275,6 +286,10 @@
     <ProjectReference Include="..\LegacyBar.Library\LegacyBar.Library.csproj">
       <Project>{371657B5-2C38-4D23-B7C1-6C053EB55FB8}</Project>
       <Name>LegacyBar.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Mobile\MonoDroid\Xamarin.Mobile.Android.csproj">
+      <Project>{32DFF77E-AE38-48D6-B067-CF555798EA32}</Project>
+      <Name>Xamarin.Mobile.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -323,6 +338,7 @@
     <Folder Include="ffmpeg_wrapper\" />
     <Folder Include="Camcorder\" />
     <Folder Include="Assets\yester_movie\" />
+    <Folder Include="Resources\drawable-xxhdpi\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="googleanalytics">
