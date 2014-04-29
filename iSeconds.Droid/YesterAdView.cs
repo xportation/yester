@@ -16,7 +16,7 @@ namespace iSeconds.Droid
 	public class YesterAdView
 	{
 		private AdView adView;
-		private const string AD_UNIT_ID = "ca-app-pub-8299239170483597/9927382265";
+		private const string AD_UNIT_ID = "ca-app-pub-8971432608429357/7344891624";
 
 		public YesterAdView(Context context, ViewGroup layout)
 		{
