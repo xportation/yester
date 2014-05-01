@@ -15,8 +15,9 @@ Watch or share a brief fragments of your life.
 
 
 The lite version has some restrictions:
-- It's allow only a timeline;
-- The compilation is only for the default movie of each day and limited to seven dias by once per; 
-- It has ads.
+- Only one timeline;
+- Only default movie is allowed on compilations;
+- Each compilation is limited by seven days;
+- Ads.
 
 If you have any questions or suggestions, please contact us at broditech@broditech.com

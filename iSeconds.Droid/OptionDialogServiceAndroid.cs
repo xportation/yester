@@ -57,8 +57,10 @@ namespace iSeconds.Droid
 
 				Button buttonFullVersion = dialog.FindViewById<Button>(Resource.Id.button_messagebox_lite_full_link);
 				buttonFullVersion.Click += (sender2, e2) => {
-					Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://play.google.com/store/apps/details?id=iSeconds.Droid"));
+					Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(Utils.YesterFullMarketUrl()));
 					activity.StartActivity(intent);
+
+					dialog.Dismiss();
 				};
 			};
 

@@ -61,7 +61,7 @@ namespace iSeconds.Droid
 			#if YESTER_LITE
 			Button buttonFullVersion = FindViewById<Button>(Resource.Id.button_about_lite_full_link);
 			buttonFullVersion.Click += (sender, e) => {
-				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://play.google.com/store/apps/details?id=iSeconds.Droid"));
+				Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(Utils.YesterFullMarketUrl()));
 				StartActivity(intent);
 			};
 			#endif

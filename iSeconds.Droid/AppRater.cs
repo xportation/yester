@@ -7,13 +7,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using iSeconds.Domain;
 
 namespace iSeconds.Droid
 {
 	public static class AppRater
 	{
-		private const string APP_PNAME = "iSeconds.Droid";
-
 		private const int DAYS_UNTIL_PROMPT = 10;
 		private const int LAUNCHES_UNTIL_PROMPT = 15;
 
@@ -57,7 +56,7 @@ namespace iSeconds.Droid
 					editor.PutBoolean("dontshowagain", true);
 					editor.Commit();
 				}
-				context.StartActivity(new Intent(Intent.ActionView, Android.Net.Uri.Parse("market://details?id=" + APP_PNAME)));
+				context.StartActivity(new Intent(Intent.ActionView, Android.Net.Uri.Parse(Utils.YesterFullMarketUrl())));
 			});
 			builder.SetNeutralButton(Resource.String.rating_later, delegate {});
 			builder.SetNegativeButton(Resource.String.rating_no_thanks, delegate {

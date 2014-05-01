@@ -3,7 +3,8 @@
 
     <item android:drawable="@drawable/cb_checked" 
         android:state_checked="true" 
-        android:state_pressed="false"/>
+        android:state_pressed="false"
+        android:state_enabled="true"/>
     <item android:drawable="@drawable/cb_hover" 
         android:state_checked="false" 
         android:state_pressed="false"/>
@@ -14,6 +15,12 @@
         android:state_checked="false" 
         android:state_pressed="true"/>
     <item android:drawable="@drawable/cb_normal" 
+		  android:state_checked="false" 
+        android:state_pressed="false"
+        android:state_enabled="false"/>
+    <item android:drawable="@drawable/cb_checked_disable" 
+        android:state_checked="true" 
+        android:state_pressed="false"
         android:state_enabled="false"/>
 
 </selector>

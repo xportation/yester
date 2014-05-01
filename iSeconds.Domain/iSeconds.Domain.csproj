@@ -92,6 +92,7 @@
     <Compile Include="ISecondsUtils.cs" />
     <Compile Include="Compilation.cs" />
     <Compile Include="ViewModel\CompilationViewModel.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
