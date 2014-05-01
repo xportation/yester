@@ -134,12 +134,6 @@ namespace iSeconds.Domain
 		public ICommand AddTimelineCommand
 		{
 			get { return new Command((object arg) => {
-				#if YESTER_LITE
-				if (this.TimelinesCount() >= 1) {
-					optionsDialog.ShowMessageLite(i18n.Msg("The lite version is limited to only one timeline"), null);
-					return;
-				}
-				#endif
 				optionsDialog.AskForTimelineNameAndDescription("","",	(string name, string description) => 
 					this.AddTimeline(name, description),
 					null);
