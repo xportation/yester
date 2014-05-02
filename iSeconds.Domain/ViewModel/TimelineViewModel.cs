@@ -369,11 +369,13 @@ namespace iSeconds.Domain
 			}
 		}
 
+      #if YESTER_LITE
 		int getRangeCount(Tuple<DateTime, DateTime> rangeDelimiters)
 		{
 			var medias= repository.GetMediaInfoByPeriod(rangeDelimiters.Item1, rangeDelimiters.Item2, this.timeline.Id, true);
 			return medias.Count;
 		}
+      #endif
 
 		public ICommand CompileCommand {
 			get { 
@@ -418,9 +420,14 @@ namespace iSeconds.Domain
 			compilation.Done = false;
 			user.AddCompilation (compilation);
 
+         bool onlyDefaultVideo = user.UsesOnlyDefaultVideo;
+         #if YESTER_LITE
+         onlyDefaultVideo= true;
+         #endif
+
 			dialogService.ShowMessage(
 				i18n.Msg("Your compilation is now being processed..."), 
-				() => mediaService.ConcatMovies(compilationPath, startDate, endDate, timeline.Id, user.UsesOnlyDefaultVideo)
+               () => mediaService.ConcatMovies(compilationPath, startDate, endDate, timeline.Id, onlyDefaultVideo)
 			);
 		}
 

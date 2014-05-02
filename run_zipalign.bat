@@ -1,1 +1,1 @@
-"C:\Users\Leonardo\AppData\Local\Android\android-sdk\tools\zipalign.exe" -f -v 4 "iSeconds.Droid/bin/Release/Yester.Droid-Signed.apk" Yester.Droid.apk
+"%AppData%\..\Local\Android\android-sdk\tools\zipalign.exe" -f -v 4 "iSeconds.Droid/bin/Release/Yester.Droid-Signed.apk" Yester.Droid.apk
