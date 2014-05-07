@@ -15,7 +15,6 @@ Watch or share a brief fragments of your life.
 
 
 The lite version has some restrictions:
-- Only one timeline;
 - Only default movie is allowed on compilations;
 - Each compilation is limited by seven days;
 - Ads.

@@ -16,8 +16,7 @@ Assista ou compartilhe um pequeno resumo de sua vida.
 
 
 A versão lite possui algumas limitações:
-- É permitido apenas uma timeline;
-- A compilação é apenas dos vídeos default de cada dia;
+- A compilação é apenas do vídeo default de cada dia;
 - Cada compilação é limitada em apenas 7 dias por vez;
 - Possui anúncios.
 
