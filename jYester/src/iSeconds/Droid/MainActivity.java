@@ -1,5 +1,11 @@
 package iSeconds.Droid;
 
+import java.util.List;
+
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.query.Select;
+
+import iSeconds.Domain.User;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -25,6 +31,12 @@ public class MainActivity extends ActionBarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		User user = new User();
+		user.name = "Martim";
+		user.save();
+		
+		
 
 		// Set up the action bar to show a dropdown list.
 		final ActionBar actionBar = getSupportActionBar();
