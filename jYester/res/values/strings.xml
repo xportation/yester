@@ -2,9 +2,35 @@
 <resources>
 
     <string name="app_name">Yester</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name_lite">Yester Lite</string>
+
+    <string name="session_timeline">Timeline</string>
+    <string name="session_range_selector">Range Selector</string>
+    <string name="session_my_timelines">Minhas timelines</string>
+    <string name="session_compilations">Compilations</string>
+    <string name="session_settings">Settings</string>
+    <string name="session_about">About</string>
+
+    <string name="navigation_drawer_title">Options</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="settings">Configurações</string>
+    <string name="settings_movies_size_title">Tamanho do vídeo:</string>
+    <string name="settings_movies_size_description">Este é o tamanho default da gravação dos vídeos. Você pode mudá-lo a qualquer hora.</string>
+    <string name="settings_movies_size_warning">Atenção: Alguns dispositivos não são compatíveis com o contador ao gravar. Nestes casos você terá que parar a gravação manualmente.</string>
+    <string name="settings_movies_size_small">Pequeno (1 segundo)</string>
+    <string name="settings_movies_size_medium">Médio (3 segundos)</string>
+    <string name="settings_movies_size_large">Grande (5 segundos)</string>
+    <string name="settings_only_default_video_of_the_day">Usar apenas o vídeo default do dia ao criar uma compilação</string>
+
+    <string name="about_us">Broditech é uma empresa focada no desenvolvimento de jogos casuais e aplicações móveis.</string>
+    <string name="about_iseconds">Yester é a melhor maneira de gravar suas memórias. Você pode fazer isso através de pequenos vídeos.</string>
+    <string name="about_stay_in_touch">Fique conectado(a):</string>
+    <string name="about_tutorial">Tutorial</string>
+
+    <string name="yester_lite_only_default_movies_message">A versão lite é limitada em apenas compilar o vídeo default do dia</string>
+    <string name="yester_lite_get_full"><u>Baixe a versão completa</u></string>
+    <string name="about_yester_lite">Você pode atualizar seu Yester Lite para versão completa a qualquer momento. Todos os seus dados serão preservados.</string>
 
 </resources>
