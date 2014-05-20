@@ -107,9 +107,11 @@ public class TimelineFragment extends Fragment {
 	private List<TimelineItem> buildItems() {
 		List<TimelineItem> items= new ArrayList<TimelineItem>();
 		
+		int qtds[] = { 12, 23, 30, 31, 18, 25, 20, 12, 23, 30, 31, 18, 25, 20, 12, 23, 30, 31, 18, 25, 20, 12, 23, 30, 31, 18, 25, 20, 12, 23, 30, 31, 18, 25, 20 }; 
 		File file= new File(android.os.Environment.getExternalStorageDirectory() + "/Yester.Droid/Videos");
 		if (file.exists()) {
 			int counter= 0;
+			int index= 0;
 			TimelineItem item= null;
 			for (File image: file.listFiles()) {
 				if (counter == 0) { 
@@ -127,9 +129,10 @@ public class TimelineFragment extends Fragment {
 					counter++;
 				}
 				
-				if (counter >= 10) {
+				if (counter >= qtds[index]) {
 					counter= 0;
 					items.add(item);
+					index++;
 				}
 			}
 			
