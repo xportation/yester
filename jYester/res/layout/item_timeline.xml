@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -14,8 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="Month - Year"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/itemTimelineCount"
@@ -23,8 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
     </RelativeLayout>
 
@@ -32,7 +30,7 @@
         android:id="@+id/itemTimelineDays"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="4" >
+        android:numColumns="5" >
     </GridView>
 
 </LinearLayout>

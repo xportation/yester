@@ -1,85 +1,89 @@
 package iSeconds.Droid;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class TimelineFragment extends Fragment {
 
+	private class DayItem {
+		public String thumbnail;
+	}
+	
+	class DayItemHolder implements ItemHolder<DayItem> {    
+		private ImageView thumbnail;
+		private AsyncImageLoader imageLoader;
+				
+	    public DayItemHolder(View base) {
+	    	thumbnail = (ImageView) base.findViewById(R.id.itemTimelineDayImage);
+	    	imageLoader= new AsyncImageLoader();
+	    } 
+	    
+	    public void Update(DayItem item) {
+	    	if (item.thumbnail != null && !item.thumbnail.isEmpty())
+	    		loadThumbnail(item.thumbnail);
+	    }
+
+		private void loadThumbnail(String thumbnailPath) {
+			imageLoader.load(thumbnailPath, thumbnail);
+		}
+	    
+	}
+	
+	public class DayItemHolderFactory implements ItemHolderFactory<DayItem> {
+		@Override
+		public ItemHolder<DayItem> Build(View view) {
+			return new DayItemHolder(view);
+		}		
+	}
+	
 	private class TimelineItem {
 		public String title;
-		public List<String> days;
+		public List<DayItem> days;
 	}
 	
 	class TimelineItemHolder implements ItemHolder<TimelineItem> {  
-		private TimelineItemView itemView;
+		private TextView title;
+		private TextView count;
+		private GridView days;
+		
+		private ListItemsAdapter<DayItem> adapter;
 		
 	    public TimelineItemHolder(View base) {
-	    	itemView = new TimelineItemView(base.getContext());
+	    	title= (TextView) base.findViewById(R.id.itemTimelineMonthYear);
+	    	count= (TextView) base.findViewById(R.id.itemTimelineCount);
+	    	days= (GridView) base.findViewById(R.id.itemTimelineDays);
+	    	
+	    	adapter= new ListItemsAdapter<DayItem>(base.getContext(), null, 
+	    			new DayItemHolderFactory(), R.layout.item_timeline_day);
+	    	days.setAdapter(adapter);
 	    } 
 	    
 	    public void Update(TimelineItem item) {
-	    	itemView.setTitle(item.title);
-	    	itemView.setDays(item.days);	    	
+	    	title.setText(item.title);
+	    	count.setText(Integer.valueOf(item.days.size()).toString());
+	    	
+	    	adapter.setItems(item.days);
 	    }	    
 	}
 	
-	public class TimelineItemsAdapter extends BaseAdapter {
-
-		private Context context;
-		private List<TimelineItem> items;
-
-		public TimelineItemsAdapter(Context context, List<TimelineItem> items)
-		{
-			this.context= context;
-			this.items= items;
-		}
-		
+	public class TimelineItemHolderFactory implements ItemHolderFactory<TimelineItem> {
 		@Override
-		public int getCount() {			
-			return items.size();
-		}
-
-		@Override
-		public Object getItem(int index) {
-			return items.get(index);
-		}
-
-		@Override
-		public long getItemId(int index) {
-			return index;
-		}
-
-		@Override
-		public View getView(int index, View convertView, ViewGroup parent) {
-			View view = convertView;
-			TimelineItemHolder itemHolder = null;
-			if (convertView == null) {  
-	            view = new TimelineItemView(context);  
-	            itemHolder = new TimelineItemHolder(view);  
-	            view.setTag(itemHolder);  
-			} else {  
-				itemHolder = (TimelineItemHolder) view.getTag();
-			}  
-			
-			if (itemHolder != null)
-				itemHolder.Update(items.get(index));
-			
-			return view;  
-		}
+		public ItemHolder<TimelineItem> Build(View view) {
+			return new TimelineItemHolder(view);
+		}		
 	}
-
-	
+		
 	public TimelineFragment() {		
 	}
 	
@@ -92,7 +96,9 @@ public class TimelineFragment extends Fragment {
 		ListView listView= (ListView) rootView.findViewById(R.id.timelineDays);  
 		
 		List<TimelineItem> items= buildItems();
-		TimelineItemsAdapter adapter= new TimelineItemsAdapter(rootView.getContext(), items);
+		ListItemsAdapter<TimelineItem> adapter= new ListItemsAdapter<TimelineItem>(
+				rootView.getContext(), items, new TimelineItemHolderFactory(), R.layout.item_timeline);
+		
 		listView.setAdapter(adapter);
 		
 		return rootView;
@@ -108,21 +114,27 @@ public class TimelineFragment extends Fragment {
 			for (File image: file.listFiles()) {
 				if (counter == 0) { 
 					item= new TimelineItem();
-					item.days= new ArrayList<String>();
-					item.title = "Coisa";
-					items.add(item);
+					item.days= new ArrayList<DayItem>();
+					item.title = "Coisa";					
 				}
 				
 				String path= image.getAbsolutePath();
 				if (path.contains(".png")) {
-					item.days.add(path);
+					DayItem day= new DayItem(); 
+					day.thumbnail= path;
+					item.days.add(day);
 				
 					counter++;
 				}
 				
-				if (counter >= 10)
+				if (counter >= 10) {
 					counter= 0;
+					items.add(item);
+				}
 			}
+			
+			if (counter > 0)
+				items.add(item);
 		}
 		
 		return items;

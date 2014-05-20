@@ -28,7 +28,7 @@ public class CompilationFragment extends Fragment {
 		private TextView fileSize;
 		private ProgressBar progressBar;
 		
-		private ImageViewAsyncLoader imageLoader;
+		private AsyncImageLoader imageLoader;
 		
 	    public CompilationItemHolder(View base) {
 	    	name = (TextView) base.findViewById(R.id.itemCompilationName);
@@ -38,7 +38,7 @@ public class CompilationFragment extends Fragment {
 	    	thumbnail = (ImageView) base.findViewById(R.id.itemCompilationThumbnail);
 	    	progressBar = (ProgressBar) base.findViewById(R.id.itemCompilationSpin);
 	    	
-	    	imageLoader= new ImageViewAsyncLoader(thumbnail);
+	    	imageLoader= new AsyncImageLoader();
 	    } 
 	    
 	    public void Update(CompilationItem item) {
@@ -56,7 +56,7 @@ public class CompilationFragment extends Fragment {
 	    }
 
 		private void loadThumbnail(String thumbnailPath) {
-			imageLoader.execute(thumbnailPath);
+			imageLoader.load(thumbnailPath, thumbnail);
 		}
 	    
 	}
