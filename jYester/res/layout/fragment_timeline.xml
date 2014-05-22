@@ -5,12 +5,16 @@
     android:layout_height="match_parent"
     tools:context="iSeconds.Droid.TimelineActivity$PlaceholderFragment" 
     android:baselineAligned="false">
-
-    <ListView
+    
+    <GridView
         android:id="@+id/timelineDays"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_weight="1" >
-    </ListView>
+        android:numColumns="3"
+        android:horizontalSpacing="1px"
+        android:verticalSpacing="1px"
+        android:adjustViewBounds="true"
+        android:background="#FFFFFF"
+        android:layout_weight="1" />
 
 </LinearLayout>

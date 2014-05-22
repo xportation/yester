@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class TimelineFragment extends Fragment {
 
@@ -46,43 +44,6 @@ public class TimelineFragment extends Fragment {
 			return new DayItemHolder(view);
 		}		
 	}
-	
-	private class TimelineItem {
-		public String title;
-		public List<DayItem> days;
-	}
-	
-	class TimelineItemHolder implements ItemHolder<TimelineItem> {  
-		private TextView title;
-		private TextView count;
-		private GridView days;
-		
-		private ListItemsAdapter<DayItem> adapter;
-		
-	    public TimelineItemHolder(View base) {
-	    	title= (TextView) base.findViewById(R.id.itemTimelineMonthYear);
-	    	count= (TextView) base.findViewById(R.id.itemTimelineCount);
-	    	days= (GridView) base.findViewById(R.id.itemTimelineDays);
-	    	
-	    	adapter= new ListItemsAdapter<DayItem>(base.getContext(), null, 
-	    			new DayItemHolderFactory(), R.layout.item_timeline_day);
-	    	days.setAdapter(adapter);
-	    } 
-	    
-	    public void Update(TimelineItem item) {
-	    	title.setText(item.title);
-	    	count.setText(Integer.valueOf(item.days.size()).toString());
-	    	
-	    	adapter.setItems(item.days);
-	    }	    
-	}
-	
-	public class TimelineItemHolderFactory implements ItemHolderFactory<TimelineItem> {
-		@Override
-		public ItemHolder<TimelineItem> Build(View view) {
-			return new TimelineItemHolder(view);
-		}		
-	}
 		
 	public TimelineFragment() {		
 	}
@@ -93,51 +54,30 @@ public class TimelineFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_timeline,
 				container, false);
 		
-		ListView listView= (ListView) rootView.findViewById(R.id.timelineDays);  
+		GridView listView= (GridView) rootView.findViewById(R.id.timelineDays);
 		
-		List<TimelineItem> items= buildItems();
-		ListItemsAdapter<TimelineItem> adapter= new ListItemsAdapter<TimelineItem>(
-				rootView.getContext(), items, new TimelineItemHolderFactory(), R.layout.item_timeline);
+		List<DayItem> items= buildItems();
+		ListItemsAdapter<DayItem> adapter= new ListItemsAdapter<DayItem>(rootView.getContext(), items, 
+    			new DayItemHolderFactory(), R.layout.item_timeline_day);
 		
 		listView.setAdapter(adapter);
 		
 		return rootView;
 	}
 
-	private List<TimelineItem> buildItems() {
-		List<TimelineItem> items= new ArrayList<TimelineItem>();
+	private List<DayItem> buildItems() {
+		List<DayItem> items= new ArrayList<DayItem>();
 		
-		int qtds[] = { 12, 23, 30, 31, 18, 25, 20, 12, 23, 30, 31, 18, 25, 20, 12, 23, 30, 31, 18, 25, 20, 12, 23, 30, 31, 18, 25, 20, 12, 23, 30, 31, 18, 25, 20 }; 
 		File file= new File(android.os.Environment.getExternalStorageDirectory() + "/Yester.Droid/Videos");
 		if (file.exists()) {
-			int counter= 0;
-			int index= 0;
-			TimelineItem item= null;
 			for (File image: file.listFiles()) {
-				if (counter == 0) { 
-					item= new TimelineItem();
-					item.days= new ArrayList<DayItem>();
-					item.title = "Coisa";					
-				}
-				
 				String path= image.getAbsolutePath();
 				if (path.contains(".png")) {
 					DayItem day= new DayItem(); 
 					day.thumbnail= path;
-					item.days.add(day);
-				
-					counter++;
-				}
-				
-				if (counter >= qtds[index]) {
-					counter= 0;
-					items.add(item);
-					index++;
+					items.add(day);
 				}
 			}
-			
-			if (counter > 0)
-				items.add(item);
 		}
 		
 		return items;
