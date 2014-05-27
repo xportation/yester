@@ -12,8 +12,11 @@ import com.activeandroid.annotation.Table;
 public class User extends Model {
 
 	private IRepository repository = null;
+	
+	public EventSource onCurrentTimelineChanged = new EventSource();
+	public EventSource onTimelineUpdated = new EventSource();
 
-	public User(String name, ISecondsDb repository) {
+	public User(String name, IRepository repository) {
 		this.name = name;
 		this.currentTimelineId = -1;
 		this.recordDuration = 3;
@@ -33,8 +36,8 @@ public class User extends Model {
 		repository.saveItem(timeline);
 
 		// TODO: ver a property currentTimeline
-		// if (currentTimelineId == -1)
-		// currentTimeline = timeline;
+		 if (currentTimelineId == -1)
+			 this.setCurrentTimeline(timeline);
 
 		return timeline;
 
@@ -80,9 +83,19 @@ public class User extends Model {
 			repository.saveUser(this);
 
 			// TODO: ver se precisa notificar ainda...
-			/*if (OnCurrentTimelineChanged != null)
-				OnCurrentTimelineChanged(this, new GenericEventArgs<Timeline>(value));*/
+			onCurrentTimelineChanged.notify(this, timeline);
 		} 	
+	}
+
+	public boolean updateTimeline(Timeline timeline) {
+		if (timeline.userId != this.getId())
+	         return false;
+  
+        repository.saveTimeline(timeline);
+        
+        onTimelineUpdated.notify(this, timeline);
+
+        return true;
 	}
 
 	@Column(name = "Name")
@@ -99,5 +112,6 @@ public class User extends Model {
 
 	@Column(name = "TutorialShown")
 	public boolean tutorialShown;
+
 
 }

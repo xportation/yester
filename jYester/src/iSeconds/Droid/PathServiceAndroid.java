@@ -1,6 +1,7 @@
 package iSeconds.Droid;
 
 import java.io.File;
+import java.io.IOException;
 
 import com.activeandroid.util.Log;
 
@@ -79,6 +80,17 @@ public class PathServiceAndroid implements IPathService {
 		createPath(mediaPath);
 		createPath(dbPath);
 		createPath(compilationPath);
+		
+		File dbFile = new File(dbPath + "/Yester.db3");
+		if (!dbFile.exists())
+			try {
+				dbFile.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
 	}
 
 	class MemoryUtils {

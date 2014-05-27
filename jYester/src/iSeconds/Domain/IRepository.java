@@ -1,5 +1,6 @@
 package iSeconds.Domain;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IRepository {
@@ -12,5 +13,8 @@ public interface IRepository {
 	List<Timeline> getUserTimelines(long userId);
 	void deleteTimeline(Timeline timeline);
 	void saveUser(User user);
+	void saveTimeline(Timeline timeline);
+	DayInfo getDayInfoAt(Date date, long id);
+	List<MediaInfo> getMediasForDay(DayInfo dayInfo);
 
 }

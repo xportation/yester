@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Yester"/>
+	<classpathentry kind="lib" path="/Yester/libs/test/robolectric-2.3-jar-with-dependencies.jar" sourcepath="/Yester/libs/test/robolectric-2.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Windows.old/Users/Aniceto/workspace/adt-bundle-windows-x86_64/adt-bundle-windows/sdk/platforms/android-18/android.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

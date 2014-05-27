@@ -1,5 +1,8 @@
 package iSeconds.Domain;
 
+import java.util.Date;
+import java.util.List;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -19,10 +22,25 @@ public class Timeline extends Model {
 		this.repository = repository;
 	}
 	
+	public void addVideoAt(Date date, String url) {
+		
+		assert(repository != null);
+
+		DayInfo day = repository.getDayInfoAt(date, this.getId());
+		day.addVideo(url);
+	}
+    
 	public void deleteAllVideos() {
 		
 	} 
 	
+	public List<MediaInfo> getVideosAt(Date date) {
+		assert(repository != null);
+
+		DayInfo day = repository.getDayInfoAt(date, this.getId());
+		return day.getVideos();
+	}
+
 	@Column(name = "Name")
 	public String name;
 	
