@@ -1,5 +1,7 @@
 package iSeconds.Droid.Test;
 
+import iSeconds.Domain.EventSource;
+import iSeconds.Domain.EventSource.EventSourceListener;
 import iSeconds.Domain.Timeline;
 import iSeconds.Domain.User;
 import iSeconds.Droid.ISecondsDb;
@@ -8,8 +10,6 @@ import android.test.mock.MockContext;
 
 public class UserTest extends AndroidTestCase {
 
-	MockContext context = new MockContext();
-
 	User user = null;
 	ISecondsDb repository = null;
 
@@ -17,11 +17,6 @@ public class UserTest extends AndroidTestCase {
 
 	@Override
 	public void setUp() {
-		// Configuration conf = new Configuration.Builder(getContext())
-		// .setDatabaseName("CacheTest")
-		// .create();
-		//
-		// ActiveAndroid.initialize(conf, true);
 
 		repository = new ISecondsDb(getContext(), dbPath);
 		repository.open();
@@ -80,7 +75,60 @@ public class UserTest extends AndroidTestCase {
 		Timeline newTimelineCreated = user.createTimeline("my life2",
 				"timeline_description2");
 		assertEquals(timelineCreated.getId(), user.getCurrentTimeline().getId());
-		assertTrue(newTimelineCreated.getId() != user.getCurrentTimeline().getId());
+		assertTrue(newTimelineCreated.getId() != user.getCurrentTimeline()
+				.getId());
 	}
 
+	private boolean notified = false;
+	public void testNotifyCurrentTimelineChangedOnlyIfTimelineWasChanged() {
+		
+		notified = false;
+		
+		user.onCurrentTimelineChanged.addListener(new EventSourceListener() {
+			
+			@Override
+			public void handleEvent(Object sender, Object args) {
+				notified = true;
+			}
+		}); 
+
+		Timeline timelineCreated = user.createTimeline("my life", "timeline_description");
+		assertEquals(true, notified);
+		notified = false;
+
+		user.setCurrentTimeline(timelineCreated);
+		assertEquals(false, notified);
+
+		Timeline newTimelineCreated = user.createTimeline("my life2", "timeline_description2");
+		assertEquals(false, notified);
+
+		user.setCurrentTimeline(newTimelineCreated);
+		assertEquals(true, notified);
+		notified = false;
+
+		User user2 = new User("test2", repository);
+		repository.saveItem(user2);
+		Timeline timelineUser2 = user2.createTimeline("2", "2");
+
+		user.setCurrentTimeline(timelineUser2);
+		assertEquals(false, notified);
+	}
+
+	public void testNotifyWhenTimelineWasUpdated() {
+		notified = false;
+		user.onTimelineUpdated.addListener(new EventSourceListener() {
+			
+			@Override
+			public void handleEvent(Object sender, Object args) {
+				notified = true;
+			}
+		});
+
+		Timeline timelineToUpdate = user.createTimeline("my life", "timeline_description");
+		assertEquals(false, notified);
+
+		timelineToUpdate.name = "Nome lindo";
+		user.updateTimeline(timelineToUpdate);
+		assertEquals(true, notified);
+	}
 }
