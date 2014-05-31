@@ -17,7 +17,7 @@
         android:layout_gravity="bottom"
         android:background="#55000000"
         android:gravity="right"
-        android:text="11/11/2011"
+        android:text="@string/item_timeline_day_sample"
         android:textColor="@android:color/white" />
 
 </FrameLayout>

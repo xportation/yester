@@ -1,5 +1,6 @@
 package iSeconds.Domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +42,23 @@ public class Timeline extends Model {
 		return day.getVideos();
 	}
 
+//	public List<MediaInfo> getAllVideos() {
+//		assert(repository != null);
+//		
+//		List<MediaInfo> medias= new ArrayList<MediaInfo>();
+//		List<DayInfo> days= repository.getDays(this.getId());
+//		for (DayInfo day: days) {
+//			medias.addAll(day.getVideos());
+//		}
+//		
+//		return medias;
+//	}
+	
+	public List<DayInfo> getAllVideos() {
+		assert(repository != null);		
+		return repository.getDays(this.getId());
+	}
+	
 	@Column(name = "Name")
 	public String name;
 	
@@ -49,7 +67,5 @@ public class Timeline extends Model {
 
 	@Column(name = "Description")
 	public String description;
-
-
 
 }

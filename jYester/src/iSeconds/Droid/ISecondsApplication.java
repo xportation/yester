@@ -2,13 +2,14 @@ package iSeconds.Droid;
 
 import iSeconds.Domain.IPathService;
 import iSeconds.Domain.IRepository;
-
+import iSeconds.Domain.User;
 import android.app.Application;
+
 import com.activeandroid.ActiveAndroid;
 
 public class ISecondsApplication extends Application {
 	
-	
+	private User user = null;
 	private IPathService pathService = null;
 	private IRepository repository = null;
 	
@@ -21,16 +22,27 @@ public class ISecondsApplication extends Application {
         super.onCreate();
         
         pathService = new PathServiceAndroid();
-        
-
         repository = new ISecondsDb(this, pathService.getDbPath());
         repository.open();
-    }
         
-        
+        login();
     }
 	
-    @Override
+	public User getUser() {
+		return user;
+	}
+	
+    private void login() {
+		user= repository.getUser("user");
+		if (user == null) {
+			user= new User("user", repository);
+			repository.saveUser(user);			
+			user.createTimeline(this.getString(R.string.default_timeline_name), 
+					this.getString(R.string.default_timeline_description));
+		}
+	}
+
+	@Override
     public void onTerminate() {
         super.onTerminate();
         

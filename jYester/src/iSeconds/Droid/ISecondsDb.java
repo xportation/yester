@@ -90,6 +90,15 @@ public class ISecondsDb implements IRepository {
 	public void saveUser(User user) {
 		this.saveItem(user);
 	}
+	
+	@Override
+	public User getUser(String userName) {
+		User user = new Select().from(User.class)
+				.where("Name == ?", userName).executeSingle();
+		if (user != null)
+			user.setRepository(this);
+		return user;
+	}
 
 	// temos que colocar 0 na frente quando o mes ou o dia sao menores que 10
 	// ex: 2013-1-1 tem que virar 2013-01-01
@@ -125,7 +134,7 @@ public class ISecondsDb implements IRepository {
 		return dayInfo;
 	}
 
-	@Override
+	@Override	
 	public List<MediaInfo> getMediasForDay(DayInfo dayInfo) {
 		return new Select().from(MediaInfo.class)
 				.where("DayId == ?", dayInfo.getId()).execute();
@@ -134,6 +143,16 @@ public class ISecondsDb implements IRepository {
 	private <T extends Model> void deleteItem(T item) {
 		new Delete().from(item.getClass()).where("Id == ?", item.getId())
 				.execute();
+	}
+
+	@Override
+	public List<DayInfo> getDays(long timelineId) {
+		List<DayInfo> days= new Select().from(DayInfo.class)
+				.where("TimelineId == ?", timelineId).execute();
+		for (DayInfo day: days)
+			day.setRepository(this);
+		
+		return days;
 	}
 
 }

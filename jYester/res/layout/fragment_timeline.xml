@@ -15,6 +15,8 @@
         android:verticalSpacing="1px"
         android:adjustViewBounds="true"
         android:background="#FFFFFF"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/timeline_selector" />
 
 </LinearLayout>

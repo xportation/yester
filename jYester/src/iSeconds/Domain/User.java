@@ -17,16 +17,23 @@ public class User extends Model {
 	public EventSource onTimelineUpdated = new EventSource();
 
 	public User(String name, IRepository repository) {
+		this();
 		this.name = name;
-		this.currentTimelineId = -1;
-		this.recordDuration = 3;
-		this.tutorialShown = false;
 		this.repository = repository;
 	}
 
 	public User() {
+		this.name = null;
+		this.currentTimelineId = -1;
+		this.recordDuration = 3;
+		this.tutorialShown = false;
+		this.repository = null;
 	}
-
+	
+	public void setRepository(IRepository repository) {
+		this.repository = repository;
+	}
+	
 	public Timeline createTimeline(String name, String description) {
 
 		Timeline timeline = new Timeline(name, this.getId().intValue());

@@ -16,6 +16,22 @@ public class MediaInfo extends Model {
 	}
 	
 	public MediaInfo() {}
+
+	public String getThumbnailPath() {
+		if (path == null)
+			return new String();
+		
+		return removeExtension(path) + ".png";
+	}
+	
+	//TODO extrair isso.
+	public String removeExtension(String filename) {
+		int extensionIndex = filename.lastIndexOf(".");
+	    if (extensionIndex == -1)
+	        return filename;
+
+	    return filename.substring(0, extensionIndex);
+	}
 	
 	@Column(name = "DayId")
 	public long dayId; 

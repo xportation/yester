@@ -16,5 +16,7 @@ public interface IRepository {
 	void saveTimeline(Timeline timeline);
 	DayInfo getDayInfoAt(Date date, long id);
 	List<MediaInfo> getMediasForDay(DayInfo dayInfo);
+	List<DayInfo> getDays(long timelineId);
+	User getUser(String userName);
 
 }

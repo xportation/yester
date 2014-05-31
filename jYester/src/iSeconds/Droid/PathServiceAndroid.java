@@ -99,22 +99,6 @@ public class PathServiceAndroid implements IPathService {
 			String state = Environment.getExternalStorageState();
 			return Environment.MEDIA_MOUNTED.equals(state);
 		}
-
-		private long availableMemorySize(File path) {
-			StatFs stat = new StatFs(path.getPath());
-			long blockSize = stat.getBlockSize();
-			long availableBlocks = stat.getAvailableBlocks();
-			return availableBlocks * blockSize;
-		}
-
-		public boolean isExternalMemoryHigherFreeSpace() {
-			if (new MemoryUtils().externalMemoryAvailable())
-				return availableMemorySize(Environment
-						.getExternalStorageDirectory()) > availableMemorySize(Environment
-						.getDataDirectory());
-
-			return false;
-		}
 	}
 
 }

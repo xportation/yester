@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Yester</string>
     <string name="app_name_lite">Yester Lite</string>
 
-    <string name="session_timeline">Timeline</string>
+	<string name="session_timeline">Timeline</string>
     <string name="session_range_selector">Selecionar período</string>
     <string name="session_my_timelines">My timelines</string>
     <string name="session_compilations">Compilações</string>
@@ -15,22 +15,27 @@
     <string name="navigation_drawer_open">Abrir navegação lateral</string>
     <string name="navigation_drawer_close">Fechar navegação lateral</string>
 
-    <string name="settings">Settings</string>
-    <string name="settings_movies_size_title">Movie length:</string>
-    <string name="settings_movies_size_description">Default movie length. This can be changed anytime you want.</string>
-    <string name="settings_movies_size_warning">Note: Some devices are not compatible with this feature. If that is your case you\'ll need to stop the recording manually.</string>
-    <string name="settings_movies_size_small">Small (1 second)</string>
-    <string name="settings_movies_size_medium">Medium (3 seconds)</string>
-    <string name="settings_movies_size_large">Large (5 seconds)</string>
-    <string name="settings_only_default_video_of_the_day">Use only the default video of the day on compilations</string>
+    <string name="settings">Configurações</string>
+    <string name="settings_movies_size_title">Tamanho do vídeo:</string>
+    <string name="settings_movies_size_description">Este é o tamanho default da gravação dos vídeos. Você pode mudá-lo a qualquer hora.</string>
+    <string name="settings_movies_size_warning">Atenção: Alguns dispositivos não são compatíveis com o contador ao gravar. Nestes casos você terá que parar a gravação manualmente.</string>
+    <string name="settings_movies_size_small">Pequeno (1 segundo)</string>
+    <string name="settings_movies_size_medium">Médio (3 segundos)</string>
+    <string name="settings_movies_size_large">Grande (5 segundos)</string>
+    <string name="settings_only_default_video_of_the_day">Usar apenas o vídeo default do dia ao criar uma compilação</string>
 
-    <string name="about_us">Broditech is a company devoted to the development of casual games and mobile apps. </string>
-    <string name="about_iseconds">Yester is the best way to record your memories! You can do it in series of short movies.</string>
-    <string name="about_stay_in_touch">Stay in touch:</string>
+    <string name="about_us">Broditech é uma empresa focada no desenvolvimento de jogos casuais e aplicações móveis.</string>
+    <string name="about_iseconds">Yester é a melhor maneira de gravar suas memórias. Você pode fazer isso através de pequenos vídeos.</string>
+    <string name="about_stay_in_touch">Fique conectado(a):</string>
     <string name="about_tutorial">Tutorial</string>
 
-    <string name="yester_lite_only_default_movies_message">The lite version is limited to only default movie by day when compile</string>
-    <string name="yester_lite_get_full"><u>Get full version</u></string>
-    <string name="about_yester_lite">You can upgrade your Yester Lite to full version anytime. No data will be lost.</string>
+    <string name="yester_lite_only_default_movies_message">A versão lite é limitada em apenas compilar o vídeo default do dia</string>
+    <string name="yester_lite_get_full"><u>Baixe a versão completa</u></string>
+    <string name="about_yester_lite">Você pode atualizar seu Yester Lite para versão completa a qualquer momento. Todos os seus dados serão preservados.</string>
 
+    <string name="item_timeline_day_sample">12</string>
+    
+    <string name="default_timeline_name">Minha vida</string>
+    <string name="default_timeline_description">Esta é minha vida!!</string>
+    
 </resources>
