@@ -1,3 +1,8 @@
+Tags revisions:
+Tag 1.00.01 - 225/224
+Tag 1.01.01 - 252/251
+
+--------------------
 Passos para gerar uma versão release.
 Antes de gerar a versão conferir se precisa aumentar a versão do app nas suas configurações.
 NÃO fazer commit da versão lite. Ou seja, se vc rodar o script para versão lite, não fazer o commit. Isso não é regra, é um convenção. Afinal vc pode desenvolver com a Lite só usando as configurações de build no Xamarin Studio.
