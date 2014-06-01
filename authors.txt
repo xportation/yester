@@ -1,3 +1,0 @@
-user1 = Leonardo Vitor da Silva <xportation@gmail.com>
-user2 = Martim Nascimento <martim00@gmail.com>
-user3 = Ronald Paloschi <ronald.paloschi@gmail.com>
