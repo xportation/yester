@@ -13,7 +13,7 @@ public class DayInfo extends Model {
 	private IRepository repository = null;
 
 	public DayInfo(Date date, long timelineId) {
-		this.date = date;
+		this.date = SqlUtils.formatToSqliteDate(date);
 		this.timelineId = timelineId;
 		this.defaultVideoId = -1;
 	}
@@ -44,14 +44,23 @@ public class DayInfo extends Model {
         this.repository.saveItem(this); 
 	}
 	
+	public Date getDate() throws Exception {
+		return SqlUtils.parseDate(date);
+	}
+	
+	public void setDate(Date d) {
+		this.date = SqlUtils.formatToSqliteDate(d);
+	}
+	
 	@Column(name = "TimelineId")
 	public long timelineId;
 	
 	@Column(name = "Date")
-	public Date date;
+	private String date;
 	
 	@Column(name = "DefaultVideoId")
 	public long defaultVideoId;
+
 
 
 

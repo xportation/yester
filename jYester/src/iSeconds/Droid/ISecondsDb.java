@@ -13,6 +13,7 @@ import android.content.Context;
 import iSeconds.Domain.DayInfo;
 import iSeconds.Domain.IRepository;
 import iSeconds.Domain.MediaInfo;
+import iSeconds.Domain.SqlUtils;
 import iSeconds.Domain.Timeline;
 import iSeconds.Domain.User;
 
@@ -100,29 +101,11 @@ public class ISecondsDb implements IRepository {
 		return user;
 	}
 
-	// temos que colocar 0 na frente quando o mes ou o dia sao menores que 10
-	// ex: 2013-1-1 tem que virar 2013-01-01
-	private String prependZero(int value) {
-		String valueAsString = "" + value;
-		if (valueAsString.length() == 1)
-			valueAsString = "0" + valueAsString;
-
-		return valueAsString;
-	}
-
-	// convert o DateTime para o formato do sqlite
-	String formatToSqliteDate(Date date) {
-		String w = "" + (1900 + date.getYear()) + "-" + prependZero(date.getMonth()) + "-"
-				+ prependZero(date.getDay());
-		return w;
-	}
-
 	@Override
 	public DayInfo getDayInfoAt(Date date, long timelineId) {
 
 		DayInfo dayInfo = new Select().from(DayInfo.class)
-//				.where("TimelineId == ?", timelineId).and("Date == ?", formatToSqliteDate(date))
-				.where("TimelineId == ?", timelineId).and("Date == ?", date.getTime())
+				.where("TimelineId == ?", timelineId).and("Date == ?", SqlUtils.formatToSqliteDate(date))
 				.executeSingle();
 
 		if (dayInfo == null) {
@@ -139,6 +122,22 @@ public class ISecondsDb implements IRepository {
 		return new Select().from(MediaInfo.class)
 				.where("DayId == ?", dayInfo.getId()).execute();
 	}
+	
+	@Override
+	public List<DayInfo> getAllDays(long timelineId) {
+		
+		List<DayInfo> days = new Select()
+			.from(DayInfo.class)
+			.where("TimelineId == ?", timelineId)
+			.execute();
+		
+		for (DayInfo day : days) {
+			day.setRepository(this);
+		}
+		
+		return days;
+	}
+	
 
 	private <T extends Model> void deleteItem(T item) {
 		new Delete().from(item.getClass()).where("Id == ?", item.getId())

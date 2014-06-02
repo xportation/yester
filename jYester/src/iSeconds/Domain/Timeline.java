@@ -41,6 +41,10 @@ public class Timeline extends Model {
 		DayInfo day = repository.getDayInfoAt(date, this.getId());
 		return day.getVideos();
 	}
+	
+	public List<DayInfo> getDays() {
+		return repository.getAllDays(this.getId());
+	}
 
 //	public List<MediaInfo> getAllVideos() {
 //		assert(repository != null);
@@ -67,5 +71,6 @@ public class Timeline extends Model {
 
 	@Column(name = "Description")
 	public String description;
+
 
 }
