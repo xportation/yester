@@ -44,8 +44,12 @@ public class DayInfo extends Model {
         this.repository.saveItem(this); 
 	}
 	
-	public Date getDate() throws Exception {
-		return SqlUtils.parseDate(date);
+	public Date getDate() {
+		try {
+			return SqlUtils.parseDate(date);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public void setDate(Date d) {

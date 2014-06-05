@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="iSeconds.Droid.TimelineActivity$PlaceholderFragment" 
+    android:baselineAligned="false">
+    
+    <GridView
+        android:id="@+id/timelineDays"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:numColumns="5"
+        android:horizontalSpacing="1px"
+        android:verticalSpacing="1px"
+        android:adjustViewBounds="true"
+        android:background="#FFFFFF"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/timeline_selector" />
+
+</LinearLayout>

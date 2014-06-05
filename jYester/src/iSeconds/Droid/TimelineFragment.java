@@ -6,18 +6,26 @@ import iSeconds.Domain.Timeline;
 import iSeconds.Domain.User;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TimelineFragment extends Fragment {
 
@@ -61,8 +69,12 @@ public class TimelineFragment extends Fragment {
 		}		
 	}
 		
-	private User user;
+	private User user = null;
+	private List<DayItem> items = null;
 	
+	private Toast toast = null;
+	private String currentToastText = null;
+		
 	public TimelineFragment(){	
 	}
 	
@@ -73,15 +85,45 @@ public class TimelineFragment extends Fragment {
 				container, false);
 		
 		user = App.getUser(this);
-		GridView listView= (GridView) rootView.findViewById(R.id.timelineDays);
+		GridView listView= (GridView) rootView.findViewById(R.id.timelineDays);		
+		setupMonthViewer(listView);
 		
-		List<DayItem> items= buildItems();
+		items = buildItems();
+		Collections.reverse(items);
 		ListItemsAdapter<DayItem> adapter= new ListItemsAdapter<DayItem>(rootView.getContext(), items, 
     			new DayItemHolderFactory(), R.layout.item_timeline_day);
 		
 		listView.setAdapter(adapter);
 		
 		return rootView;
+	}
+
+	private void setupMonthViewer(GridView listView) {
+		currentToastText = new String();
+		toast = Toast.makeText(this.getActivity(), currentToastText, Toast.LENGTH_SHORT);			
+		toast.setGravity(Gravity.TOP, 0, 100);
+		listView.setOnScrollListener(new OnScrollListener() {
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+
+				if (items != null && items.size() > 0) {
+					SimpleDateFormat format = new SimpleDateFormat("MMMM, yyyy", Locale.US);
+					String text = format.format(items.get(firstVisibleItem).date);
+					if (!currentToastText.equals(text)) {
+						currentToastText = text;
+						toast.setText(currentToastText);
+						toast.cancel();
+						toast.show();
+					}
+				}
+			}
+
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {				
+			}
+			
+		});
 	}
 
 	private List<DayItem> buildItems() {
@@ -92,7 +134,7 @@ public class TimelineFragment extends Fragment {
 			for (MediaInfo media: day.getVideos()) {
 				DayItem dayItem= new DayItem(); 
 				dayItem.thumbnail= media.getThumbnailPath();
-				dayItem.date= day.date;
+				dayItem.date= day.getDate();
 				items.add(dayItem);
 			}
 		}
@@ -110,5 +152,5 @@ public class TimelineFragment extends Fragment {
 //		}
 		
 		return items;
-	}	
+	}
 }
