@@ -1,6 +1,10 @@
 package iSeconds.Domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -33,6 +37,14 @@ public class MediaInfo extends Model {
 	    return filename.substring(0, extensionIndex);
 	}
 	
+	public String getTimeSpanFormatted() {
+		final long TicksPerMillisecond = 10000L;
+		Date date = new Date(timeOfDay / TicksPerMillisecond);
+		DateFormat format= DateFormat.getTimeInstance(DateFormat.SHORT);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return format.format(date);
+	}
+	
 	@Column(name = "DayId")
 	public long dayId; 
 	
@@ -41,7 +53,7 @@ public class MediaInfo extends Model {
 	public String path;
 	
 	// TODO: ver como tratar issokkkk 
-//	@Column(name = "TimeOfDay")
-//	public TimeSpan timeOfDay { get; set; }
+	@Column(name = "TimeOfDay")
+	public long timeOfDay;
 
 }

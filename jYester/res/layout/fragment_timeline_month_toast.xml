@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragmentTimelineMonthToastLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="8dp">
+	<!-- TODO: Cores hard aqui mano -->    
+    <TextView 
+        android:id="@+id/fragmentTimelineMonthToastText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FBFBFB"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="3" />
+
+</LinearLayout>

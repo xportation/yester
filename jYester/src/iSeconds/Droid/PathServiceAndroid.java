@@ -22,7 +22,7 @@ public class PathServiceAndroid implements IPathService {
 		if (new MemoryUtils().externalMemoryAvailable()) {
 
 			appPath = Environment.getExternalStorageDirectory().getPath()
-					+ "/Yester.Droid2";
+					+ "/Yester.Droid";
 			pathsGood = true;
 		}
 

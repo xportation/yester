@@ -52,8 +52,8 @@ public class DayInfo extends Model {
 		}
 	}
 	
-	public void setDate(Date d) {
-		this.date = SqlUtils.formatToSqliteDate(d);
+	public void setDate(Date date) {
+		this.date = SqlUtils.formatToSqliteDate(date);
 	}
 	
 	@Column(name = "TimelineId")

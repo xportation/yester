@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -72,8 +71,9 @@ public class TimelineFragment extends Fragment {
 	private User user = null;
 	private List<DayItem> items = null;
 	
-	private Toast toast = null;
-	private String currentToastText = null;
+	private Toast toast = null;	
+	private View rootView = null;
+	private TextView toasTextView = null;
 		
 	public TimelineFragment(){	
 	}
@@ -81,7 +81,7 @@ public class TimelineFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_timeline,
+		rootView = inflater.inflate(R.layout.fragment_timeline,
 				container, false);
 		
 		user = App.getUser(this);
@@ -97,11 +97,17 @@ public class TimelineFragment extends Fragment {
 		
 		return rootView;
 	}
+	
+	@Override
+	public void onPause() {
+		if (toast != null)
+			toast.cancel();
+		
+		super.onPause();
+	};
 
 	private void setupMonthViewer(GridView listView) {
-		currentToastText = new String();
-		toast = Toast.makeText(this.getActivity(), currentToastText, Toast.LENGTH_SHORT);			
-		toast.setGravity(Gravity.TOP, 0, 100);
+		buildToast();
 		listView.setOnScrollListener(new OnScrollListener() {
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
@@ -110,12 +116,8 @@ public class TimelineFragment extends Fragment {
 				if (items != null && items.size() > 0) {
 					SimpleDateFormat format = new SimpleDateFormat("MMMM, yyyy", Locale.US);
 					String text = format.format(items.get(firstVisibleItem).date);
-					if (!currentToastText.equals(text)) {
-						currentToastText = text;
-						toast.setText(currentToastText);
-						toast.cancel();
-						toast.show();
-					}
+					toasTextView.setText(text);						
+					toast.show();
 				}
 			}
 
@@ -124,6 +126,20 @@ public class TimelineFragment extends Fragment {
 			}
 			
 		});
+	}
+
+	private void buildToast() {
+		LayoutInflater inflater = this.getActivity().getLayoutInflater();
+		ViewGroup toastLayout = (ViewGroup) rootView.findViewById(R.id.fragmentTimelineMonthToastLayout); 
+		View layout = inflater.inflate(R.layout.fragment_timeline_month_toast, toastLayout);
+
+		toasTextView = (TextView) layout.findViewById(R.id.fragmentTimelineMonthToastText);
+		toasTextView.setText("");
+		
+		toast = new Toast(this.getActivity());
+		toast.setDuration(Toast.LENGTH_SHORT);
+		toast.setGravity(Gravity.TOP, 0, 80);
+		toast.setView(layout);
 	}
 
 	private List<DayItem> buildItems() {
@@ -138,7 +154,7 @@ public class TimelineFragment extends Fragment {
 				items.add(dayItem);
 			}
 		}
-		
+	
 //		File file= new File(android.os.Environment.getExternalStorageDirectory() + "/Yester.Droid/Videos");
 //		if (file.exists()) {
 //			for (File image: file.listFiles()) {
@@ -153,4 +169,5 @@ public class TimelineFragment extends Fragment {
 		
 		return items;
 	}
+	
 }

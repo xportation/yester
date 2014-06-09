@@ -69,11 +69,12 @@ public class AsyncImageLoader
         }	
 	}
 	
+	//TODO Usar cor em color.xml para ser a cor de fundo
     static class LoadedDrawable extends ColorDrawable {
         private final WeakReference<BitmapLoaderTask> bitmapLoaderTaskReference;
 
         public LoadedDrawable(BitmapLoaderTask bitmapLoaderTask) {
-            super(Color.BLUE);
+            super(Color.WHITE);
             bitmapLoaderTaskReference =
                 new WeakReference<BitmapLoaderTask>(bitmapLoaderTask);
         }

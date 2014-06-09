@@ -36,7 +36,7 @@ public class SqlUtils {
 		int month = Integer.parseInt(s[1]);
 		int day = Integer.parseInt(s[2]);
 		
-		Date date = new GregorianCalendar(year, month, day).getTime();
+		Date date = new GregorianCalendar(year, month - 1, day).getTime();
 		return date;
 	}
 

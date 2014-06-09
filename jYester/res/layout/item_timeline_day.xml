@@ -10,14 +10,19 @@
         android:scaleType="centerCrop"
         />
 
-    <TextView
+	<!-- TODO: Cores hard aqui mano -->    
+    <TextView 
         android:id="@+id/itemTimelineDayText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="#55000000"
-        android:gravity="right"
-        android:text="@string/item_timeline_day_sample"
-        android:textColor="@android:color/white" />
+        android:layout_gravity="bottom" 
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#FBFBFB"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2" />
 
 </FrameLayout>
