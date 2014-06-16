@@ -4,8 +4,9 @@
     tools:context="iSeconds.Droid.TimelineActivity" >
 
     <item
-        android:id="@+id/action_example"
-        android:title="Temporario"
-        app:showAsAction="withText|ifRoom"/>
+        android:id="@+id/action_camera"
+        android:title="@string/action_camera"
+        android:icon="@drawable/ic_camera"
+        app:showAsAction="ifRoom"/>
 
 </menu>
