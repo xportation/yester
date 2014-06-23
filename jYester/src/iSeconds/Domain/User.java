@@ -1,9 +1,7 @@
 package iSeconds.Domain;
 
+import java.util.Date;
 import java.util.List;
-
-import iSeconds.Droid.ISecondsDb;
-
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -15,6 +13,7 @@ public class User extends Model {
 	
 	public EventSource onCurrentTimelineChanged = new EventSource();
 	public EventSource onTimelineUpdated = new EventSource();
+	public EventSource onNewVideo = new EventSource();
 
 	public User(String name, IRepository repository) {
 		this();
@@ -71,7 +70,7 @@ public class User extends Model {
 	public Timeline getCurrentTimeline() {
 		List<Timeline> timelines = getTimelines();
 		for (Timeline timeline : timelines) {
-			if (timeline.getId() == currentTimelineId)
+			if (timeline.getId().intValue() == currentTimelineId)
 				return timeline;
 		}
 
@@ -90,7 +89,7 @@ public class User extends Model {
 			repository.saveUser(this);
 
 			// TODO: ver se precisa notificar ainda...
-			onCurrentTimelineChanged.notify(this, timeline);
+			onCurrentTimelineChanged.trigger(this, timeline);
 		} 	
 	}
 
@@ -100,9 +99,14 @@ public class User extends Model {
   
         repository.saveTimeline(timeline);
         
-        onTimelineUpdated.notify(this, timeline);
+        onTimelineUpdated.trigger(this, timeline);
 
         return true;
+	}
+	
+	public void addVideoAt(Date date, String url) {
+		this.getCurrentTimeline().addVideoAt(date, url);
+		this.onNewVideo.trigger(this, null);
 	}
 
 	@Column(name = "Name")
@@ -119,6 +123,7 @@ public class User extends Model {
 
 	@Column(name = "TutorialShown")
 	public boolean tutorialShown;
+
 
 
 }

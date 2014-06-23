@@ -1,5 +1,6 @@
 package iSeconds.Domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -7,8 +8,10 @@ public class SqlUtils {
 	
 	// convert o DateTime para o formato do sqlite
 	public static String formatToSqliteDate(Date date) {
-		String w = "" + (1900 + date.getYear()) + "-" + prependZero(date.getMonth()) + "-"
-				+ prependZero(date.getDay());
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		String w = "" + (calendar.get(Calendar.YEAR)) + "-" + prependZero(calendar.get(Calendar.MONTH) + 1) + "-"
+				+ prependZero(calendar.get(Calendar.DAY_OF_MONTH));
 		return w;
 	}
 	
@@ -25,7 +28,7 @@ public class SqlUtils {
 	public static Date parseDate(String dateAsStr) throws Exception {
 		
 		int space = dateAsStr.indexOf(" "); // isso eh para tratar o formato de data do db antigo (2013-08-08 00:00:00).. temos que remover o horário
-		if (space != 0)
+		if (space > 0)
 			dateAsStr = dateAsStr.substring(0, space);
 		
 		String[] s = dateAsStr.split("-");

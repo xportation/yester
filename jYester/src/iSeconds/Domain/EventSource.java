@@ -15,7 +15,7 @@ public class EventSource {
 		this.listeners.add(eventSourceListener);
 	}
 	
-	public void notify(Object sender, Object args) {
+	public void trigger(Object sender, Object args) {
 		for (EventSourceListener l : listeners) {
 			l.handleEvent(sender, args);
 		}

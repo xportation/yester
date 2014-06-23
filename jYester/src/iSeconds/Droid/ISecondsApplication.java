@@ -17,6 +17,10 @@ public class ISecondsApplication extends Application {
 		return repository;
 	}
 	
+	public IPathService getPathService() {
+		return pathService;
+	}
+	
 	@Override
     public void onCreate() {
         super.onCreate();

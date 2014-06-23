@@ -61,7 +61,7 @@ public class TimelineFragment extends Fragment {
 	    
 	    public void Update(MediaItem item) {
 	    	date.setText(item.dateString());
-	    	if (item.thumbnail != null && !item.thumbnail.isEmpty())
+	    	if (item.thumbnail != null && item.thumbnail.length() > 0)
 	    		loadThumbnail(item.thumbnail);
 	    }
 
@@ -84,6 +84,7 @@ public class TimelineFragment extends Fragment {
 	private Toast toast = null;	
 	private View rootView = null;
 	private TextView toasTextView = null;
+	private GridView listView;
 		
 	public TimelineFragment(){	
 	}
@@ -95,7 +96,7 @@ public class TimelineFragment extends Fragment {
 				container, false);
 		
 		user = App.getUser(this);
-		GridView listView= (GridView) rootView.findViewById(R.id.timelineDays);		
+		listView= (GridView) rootView.findViewById(R.id.timelineDays);		
 		setupMonthViewer(listView);
 		
 		items = buildItems();
@@ -104,6 +105,15 @@ public class TimelineFragment extends Fragment {
     			new MediaItemHolderFactory(), R.layout.item_timeline_day);
 		
 		listView.setAdapter(adapter);
+		
+//		user.onNewVideo.addListener(new EventSourceListener() {
+//			
+//			@Override
+//			public void handleEvent(Object sender, Object args) {
+//				TimelineFragment.this.listView.invalidateViews();
+//				
+//			}
+//		});
 		
 		return rootView;
 	}

@@ -37,5 +37,7 @@
     
     <string name="default_timeline_name">My Life</string>
     <string name="default_timeline_description">This is my life!!</string>
+    
+    <string name="action_camera">Record a video</string>
 
 </resources>

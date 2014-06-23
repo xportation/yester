@@ -6,7 +6,6 @@ import java.io.IOException;
 import com.activeandroid.util.Log;
 
 import android.os.Environment;
-import android.os.StatFs;
 import iSeconds.Domain.IPathService;
 
 public class PathServiceAndroid implements IPathService {
