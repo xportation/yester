@@ -44,6 +44,10 @@ public class MediaInfo extends Model {
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return format.format(date);
 	}
+
+	public String getVideoPath() {
+		return path;
+	}
 	
 	@Column(name = "DayId")
 	public long dayId; 
@@ -55,5 +59,4 @@ public class MediaInfo extends Model {
 	// TODO: ver como tratar issokkkk 
 	@Column(name = "TimeOfDay")
 	public long timeOfDay;
-
 }

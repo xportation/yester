@@ -12,7 +12,7 @@ import iSeconds.Domain.Timeline;
 import iSeconds.Domain.User;
 import iSeconds.Droid.ISecondsApplication;
 import iSeconds.Droid.ISecondsDb;
-import iSeconds.Droid.TimelineActivity;
+import iSeconds.Droid.MainActivity;
 
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;

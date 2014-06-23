@@ -19,5 +19,6 @@ public interface IRepository {
 	List<DayInfo> getAllDays(long id);
 	List<DayInfo> getDays(long timelineId);
 	User getUser(String userName);
+	MediaInfo getMedia(long id);
 
 }

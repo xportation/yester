@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+        
+			<FrameLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content">
+		
+			    <VideoView
+			        android:id="@+id/mediaVideoView"
+			        android:layout_width="wrap_content"
+			        android:layout_height="720dp"
+			        android:layout_gravity="center" />
+		
+			    <ImageView
+			        android:id="@+id/mediaImagePausePlay"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:src="@drawable/ic_launcher" />
+		
+			</FrameLayout>
+		    
+		    <org.apmem.tools.layouts.FlowLayout
+		        xmlns:f="http://schemas.android.com/apk/res/iSeconds.Droid"
+		        xmlns:android="http://schemas.android.com/apk/res/android"
+				f:horizontalSpacing="12dip"
+				f:verticalSpacing="6dip"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:minHeight="50dp"
+		        android:paddingTop="20dp"
+		        android:id="@+id/mediaTags">
+			</org.apmem.tools.layouts.FlowLayout>
+			
+		</LinearLayout>
+        
+    </ScrollView>
+
+</LinearLayout>
