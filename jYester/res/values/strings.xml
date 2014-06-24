@@ -4,6 +4,11 @@
     <string name="app_name">Yester</string>
     <string name="app_name_lite">Yester Lite</string>
     
+    <string name="media_date">Date:</string>
+    <string name="media_duration">Duration:</string>
+    <string name="media_file_size">File size:</string>
+    <string name="media_tags">Tags</string>
+    
     <string name="session_timeline">Timeline</string>
     <string name="session_range_selector">Range Selector</string>
     <string name="session_my_timelines">Minhas timelines</string>

@@ -38,21 +38,17 @@ public class MediaActivity extends ActionBarActivity {
 		videoView.setVideoPath(media.getVideoPath());
 		videoView.seekTo(100);
 		
-		final ImageView imagePlay = (ImageView) this.findViewById(R.id.mediaImagePausePlay);
-		videoView.setOnTouchListener(new OnTouchListener() {
+		final ImageButton imagePlay = (ImageButton) this.findViewById(R.id.mediaPlayButton);
+		imagePlay.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public boolean onTouch(View view, MotionEvent motionEvent) {
-				if ((motionEvent.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_DOWN)
-					if (!videoView.isPlaying()) {
-						imagePlay.setVisibility(View.GONE);
-						videoView.seekTo(0);
-						videoView.start();
-						return true;
-					}
-				return false;
+			public void onClick(View view) {
+				if (!videoView.isPlaying()) {
+					imagePlay.setVisibility(View.GONE);
+					videoView.seekTo(0);
+					videoView.start();
+				}
 			}
-		
 		});
 		
 		videoView.setOnCompletionListener(new OnCompletionListener() {
