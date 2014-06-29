@@ -1,11 +1,7 @@
 package iSeconds.Droid;
 
-import iSeconds.Domain.DayInfo;
 import iSeconds.Domain.IRepository;
 import iSeconds.Domain.Media;
-import iSeconds.Domain.MediaInfo;
-import iSeconds.Domain.Timeline;
-import iSeconds.Domain.User;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,13 +16,10 @@ import java.util.TimeZone;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -213,12 +206,9 @@ public class TimelineFragment extends Fragment {
 		toast.setView(layout);
 	}
 
-	private List<MediaItem> buildItems() {
-//		Timeline timeline= user.getCurrentTimeline();
-		
+	private List<MediaItem> buildItems() {		
 		List<Media> medias = repository.getAllMedias();
 		List<MediaItem> items= new ArrayList<MediaItem>();
-//		for (DayInfo day: timeline.getAllVideos()) {
 		for (Media media: medias) {
 			MediaItem mediaItem= new MediaItem(); 
 			mediaItem.thumbnail= media.getThumbnailPath();
@@ -227,7 +217,6 @@ public class TimelineFragment extends Fragment {
 			mediaItem.mediaId = media.getId();
 			items.add(mediaItem);
 		}
-//		}
 		
 		Collections.sort(items, new Comparator<MediaItem>() {
 			@Override

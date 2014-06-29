@@ -3,7 +3,6 @@ package iSeconds.Droid;
 import iSeconds.Domain.EventSource.EventSourceListener;
 import iSeconds.Domain.ISecondsUtils;
 import iSeconds.Domain.Media;
-import iSeconds.Domain.User;
 
 import java.io.File;
 import java.util.Date;

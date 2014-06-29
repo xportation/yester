@@ -1,21 +1,13 @@
 package iSeconds.Droid;
 
-import java.io.File;
-import java.util.Date;
 import java.util.Locale;
 
-import iSeconds.Domain.ISecondsUtils;
-import iSeconds.Domain.User;
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;

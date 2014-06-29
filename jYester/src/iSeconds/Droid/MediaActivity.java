@@ -1,8 +1,6 @@
 package iSeconds.Droid;
 
-import iSeconds.Domain.IRepository;
 import iSeconds.Domain.Media;
-import iSeconds.Domain.MediaInfo;
 
 import org.apmem.tools.layouts.FlowLayout;
 
@@ -11,13 +9,9 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -33,8 +27,6 @@ public class MediaActivity extends ActionBarActivity {
 
 	private void setupVideo() {
 		long mediaId = this.getIntent().getExtras().getLong("MediaId");
-//		IRepository repository = App.getRepository(this);
-//		MediaInfo media = repository.getMedia(mediaId);
 		Media media = Media.load(Media.class, mediaId);
 		final VideoView videoView = (VideoView) this.findViewById(R.id.mediaVideoView);
 		videoView.setVideoPath(media.getVideoPath());
