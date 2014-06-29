@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*
+ * TODO:
+ * resolver countdown (esta ficando sempre um segundo a mais)
+ * orientation do video resultante esta errado
+ * fazer com que a camera ja esteja iniciada ao começar a fazer o drop no fragment
+ */
 public class TimelineFragment extends Fragment {
 
 	private class DayItem {
@@ -75,7 +82,7 @@ public class TimelineFragment extends Fragment {
 	private View rootView = null;
 	private TextView toasTextView = null;
 	private GridView listView;
-		
+	private ListItemsAdapter<DayItem> adapter;
 	public TimelineFragment(){	
 	}
 	
@@ -90,20 +97,10 @@ public class TimelineFragment extends Fragment {
 		setupMonthViewer(listView);
 		
 		items = buildItems();
-		Collections.reverse(items);
-		ListItemsAdapter<DayItem> adapter= new ListItemsAdapter<DayItem>(rootView.getContext(), items, 
+		adapter= new ListItemsAdapter<DayItem>(rootView.getContext(), items, 
     			new DayItemHolderFactory(), R.layout.item_timeline_day);
 		
 		listView.setAdapter(adapter);
-		
-//		user.onNewVideo.addListener(new EventSourceListener() {
-//			
-//			@Override
-//			public void handleEvent(Object sender, Object args) {
-//				TimelineFragment.this.listView.invalidateViews();
-//				
-//			}
-//		});
 		
 		return rootView;
 	}
@@ -116,6 +113,13 @@ public class TimelineFragment extends Fragment {
 		super.onPause();
 	};
 
+	public void updateItems() {
+		items = buildItems();
+		this.adapter.setItems(items);
+		this.listView.invalidateViews();
+		this.listView.invalidate();
+		
+	}
 	private void setupMonthViewer(GridView listView) {
 		buildToast();
 		listView.setOnScrollListener(new OnScrollListener() {
@@ -164,20 +168,11 @@ public class TimelineFragment extends Fragment {
 				items.add(dayItem);
 			}
 		}
-	
-//		File file= new File(android.os.Environment.getExternalStorageDirectory() + "/Yester.Droid/Videos");
-//		if (file.exists()) {
-//			for (File image: file.listFiles()) {
-//				String path= image.getAbsolutePath();
-//				if (path.contains(".png")) {
-//					DayItem day= new DayItem(); 
-//					day.thumbnail= path;
-//					items.add(day);
-//				}
-//			}
-//		}
+		
+		Collections.reverse(items);
 		
 		return items;
 	}
+
 	
 }

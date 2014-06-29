@@ -5,10 +5,13 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="8"
         android:targetSdkVersion="19" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name="iSeconds.Droid.ISecondsApplication"
@@ -16,7 +19,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <activity
             android:name="iSeconds.Droid.TimelineActivity"
             android:label="@string/app_name" >
@@ -25,6 +27,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="iSeconds.Droid.CamcorderActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="iSeconds.Droid.CamcorderPreview"
+            android:label="@string/app_name" >
         </activity>
     </application>
 
