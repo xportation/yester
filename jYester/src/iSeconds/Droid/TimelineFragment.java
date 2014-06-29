@@ -11,13 +11,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +36,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*
+ * TODO:
+ * resolver countdown (esta ficando sempre um segundo a mais)
+ * orientation do video resultante esta errado
+ * fazer com que a camera ja esteja iniciada ao começar a fazer o drop no fragment
+ */
 public class TimelineFragment extends Fragment {
 
 	private class MediaItem {
@@ -46,6 +55,8 @@ public class TimelineFragment extends Fragment {
 		public String dateString() {
 			DateFormat format= DateFormat.getDateInstance(DateFormat.SHORT);
 //			DateFormat format = new SimpleDateFormat("E, dd", Locale.getDefault());
+//			DateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.getDefault());
+			format.setTimeZone(TimeZone.getTimeZone("UTC"));
 			return format.format(date);
 		}
 	}
@@ -80,7 +91,7 @@ public class TimelineFragment extends Fragment {
 		}		
 	}
 		
-	private User user = null;
+//	private User user = null;
 	private List<MediaItem> items = null;
 	private IRepository repository = null;
 	
@@ -88,36 +99,29 @@ public class TimelineFragment extends Fragment {
 	private View rootView = null;
 	private TextView toasTextView = null;
 	private GridView listView;
-		
+	private ListItemsAdapter<MediaItem> adapter;
+	
 	public TimelineFragment(){	
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
+		
 		rootView = inflater.inflate(R.layout.fragment_timeline,
 				container, false);
 		
-		user = App.getUser(this);
+//		user = App.getUser(this);
 		repository = App.getRepository(this);
 		listView= (GridView) rootView.findViewById(R.id.timelineDays);		
 		setupMonthViewer(listView);
 		
 		items = buildItems();
-		Collections.reverse(items);
 		ListItemsAdapter<MediaItem> adapter= new ListItemsAdapter<MediaItem>(rootView.getContext(), items, 
     			new MediaItemHolderFactory(), R.layout.item_timeline_day);
 		
 		listView.setAdapter(adapter);
-		
-//		user.onNewVideo.addListener(new EventSourceListener() {
-//			
-//			@Override
-//			public void handleEvent(Object sender, Object args) {
-//				TimelineFragment.this.listView.invalidateViews();
-//				
-//			}
-//		});
 		
 		return rootView;
 	}
@@ -133,6 +137,13 @@ public class TimelineFragment extends Fragment {
 			toast.cancel();
 	};
 
+	public void updateItems() {
+		items = buildItems();
+		this.adapter.setItems(items);
+		this.listView.invalidateViews();
+		this.listView.invalidate();
+		
+	}
 	private void setupMonthViewer(GridView listView) {
 		buildToast();
 		listView.setOnScrollListener(new OnScrollListener() {
@@ -204,20 +215,10 @@ public class TimelineFragment extends Fragment {
 
 	private List<MediaItem> buildItems() {
 //		Timeline timeline= user.getCurrentTimeline();
-//		
-//		List<MediaItem> items= new ArrayList<MediaItem>();
-//		for (DayInfo day: timeline.getAllVideos()) {
-//			for (MediaInfo media: day.getVideos()) {
-//				MediaItem mediaItem= new MediaItem(); 
-//				mediaItem.thumbnail= media.getThumbnailPath();
-//				mediaItem.date= day.getDate();
-//				mediaItem.videoPath = media.getVideoPath();
-//				mediaItem.mediaId = media.getId();
-//				items.add(mediaItem);
-//			}
-//		}
-		List<MediaItem> items= new ArrayList<MediaItem>();
+		
 		List<Media> medias = repository.getAllMedias();
+		List<MediaItem> items= new ArrayList<MediaItem>();
+//		for (DayInfo day: timeline.getAllVideos()) {
 		for (Media media: medias) {
 			MediaItem mediaItem= new MediaItem(); 
 			mediaItem.thumbnail= media.getThumbnailPath();
@@ -226,7 +227,19 @@ public class TimelineFragment extends Fragment {
 			mediaItem.mediaId = media.getId();
 			items.add(mediaItem);
 		}
+//		}
+		
+		Collections.sort(items, new Comparator<MediaItem>() {
+			@Override
+			public int compare(MediaItem item1, MediaItem item2) {
+				return item1.date.compareTo(item2.date);
+			}
+			
+		});
+		
+		Collections.reverse(items);		
 		return items;
 	}
+
 	
 }

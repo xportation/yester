@@ -12,23 +12,23 @@ import com.activeandroid.annotation.Table;
 public class Media extends Model
 {
 	@Column(name = "Date")
-	private String date;
+	private Date date;
 	
 	@Column(name = "Path")
 	private String path;
 	
-	@Column(name = "Time")
-	private long time;
+//	@Column(name = "Time")
+//	private long time;
 
 	private List<Tag> tags = new ArrayList<Tag>();
 	
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;		
 	}
 
-	public void setTime(long time) {
-		this.time = time;
-	}
+//	public void setTime(long time) {
+//		this.time = time;
+//	}
 
 	public void setPath(String path) {
 		this.path = path;		
@@ -66,11 +66,12 @@ public class Media extends Model
 	}
 	
 	public Date getDate() {
-		try {
-			return SqlUtils.parseDate(date);
-		} catch (Exception e) {
-			return null;
-		}
+//		try {
+//			return SqlUtils.parseDate(date);
+//		} catch (Exception e) {
+//			return null;
+//		}
+		return date;
 	}
 
 	public String getVideoPath() {

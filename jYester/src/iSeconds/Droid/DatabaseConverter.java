@@ -3,9 +3,11 @@ package iSeconds.Droid;
 import iSeconds.Domain.IPathService;
 import iSeconds.Domain.IRepository;
 import iSeconds.Domain.Media;
+import iSeconds.Domain.SqlUtils;
 import iSeconds.Domain.Tag;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -155,8 +157,8 @@ public class DatabaseConverter {
 		try {
 			for (MediaInfoCompat mediaInfo : medias) {
 				Media media = new Media();
-				media.setDate(mediaInfo.date);
-				media.setTime(toMiliseconds(mediaInfo.timeOfDay));
+				media.setDate(toDate(mediaInfo.date, toMiliseconds(mediaInfo.timeOfDay)));
+//				media.setTime(toMiliseconds(mediaInfo.timeOfDay));
 				media.setPath(mediaInfo.path);
 				media.save();
 				
@@ -168,6 +170,21 @@ public class DatabaseConverter {
 		finally {
 			ActiveAndroid.endTransaction();
 		}
+	}
+
+	private Date toDate(String date, long timeMiliseconds) {
+		Date dateTime;
+		try {
+			dateTime= SqlUtils.parseDate(date);
+		} catch (Exception e) {
+			return null;
+		}
+		
+		Date time = new Date(timeMiliseconds);
+		dateTime.setHours(time.getHours());
+		dateTime.setMinutes(time.getMinutes());
+		dateTime.setSeconds(time.getSeconds());
+		return dateTime;
 	}
 
 	private long toMiliseconds(long ticks) {
