@@ -116,13 +116,13 @@ public class CamcorderFragment extends Fragment {
 			case Activity.RESULT_OK:
 				// mediaService.CommitVideo (videoPath);
 				commitVideo();
-				((TimelineActivity)this.getActivity()).showTimeline();
+				((MainActivity)this.getActivity()).showTimeline();
 				break;
 
 			case Activity.RESULT_CANCELED:
 				deleteVideo(videoPath);
 				// mediaService.RevertVideo ();
-				((TimelineActivity)this.getActivity()).showTimeline();
+				((MainActivity)this.getActivity()).showTimeline();
 				break;
 
 			case CamcorderPreview.RetakeResult:

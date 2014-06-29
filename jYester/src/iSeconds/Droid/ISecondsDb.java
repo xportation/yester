@@ -154,4 +154,10 @@ public class ISecondsDb implements IRepository {
 		return days;
 	}
 
+	@Override
+	public MediaInfo getMedia(long id) {
+		return new Select().from(MediaInfo.class)
+				.where("Id == ?", id).executeSingle();
+	}
+
 }

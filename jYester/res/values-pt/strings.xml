@@ -3,6 +3,11 @@
 
     <string name="app_name">Yester</string>
     <string name="app_name_lite">Yester Lite</string>
+    
+    <string name="media_date">Data:</string>
+    <string name="media_duration">Duração:</string>
+    <string name="media_file_size">Tamanho do arquivo:</string>
+    <string name="media_tags">Tags</string>
 
 	<string name="session_timeline">Timeline</string>
     <string name="session_range_selector">Selecionar período</string>
