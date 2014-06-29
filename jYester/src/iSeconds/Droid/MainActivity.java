@@ -161,7 +161,7 @@ public class MainActivity extends ActionBarActivity implements
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
 	        User user = App.getUser(this);
-	        user.addVideoAt(videoDate, videoUri.getPath());
+//	        user.addVideoAt(videoDate, videoUri.getPath());
 	        
 	        // TODO: fazer isso em background
 	        try {

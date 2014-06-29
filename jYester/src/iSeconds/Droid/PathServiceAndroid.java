@@ -15,13 +15,12 @@ public class PathServiceAndroid implements IPathService {
 	private String dbPath = "";
 	private String compilationPath = "";
 	private boolean pathsGood = false;
+	private boolean firstExecution = false;
 
 	public PathServiceAndroid() {
 
-		if (new MemoryUtils().externalMemoryAvailable()) {
-
-			appPath = Environment.getExternalStorageDirectory().getPath()
-					+ "/Yester.Droid";
+		if (MemoryUtils.externalMemoryAvailable()) {
+			appPath = combine(Environment.getExternalStorageDirectory().getPath(),"Yester.Droid");
 			pathsGood = true;
 		}
 
@@ -29,14 +28,21 @@ public class PathServiceAndroid implements IPathService {
 		// pathsGood.ToString());
 		Log.t("Yester", "External Memory Available: " + pathsGood);
 
-		mediaPath = appPath + "/Videos";
-		dbPath = appPath + "/Db";
-		compilationPath = appPath + "/Compilations";
+		mediaPath = combine(appPath, "Videos");
+		dbPath = combine(appPath, "Db");
+		compilationPath = combine(appPath, "Compilations");
 
-		if (pathsGood)
+		if (pathsGood) {
+			firstExecution = !fileExists(getDbPath());
 			createPaths();
+		}
 	}
 
+	private String combine(String path1, String path2) {
+		File file = new File(path1, path2);
+		return file.getPath();
+	}
+	
 	@Override
 	public boolean isGood() {
 		return pathsGood;
@@ -54,12 +60,12 @@ public class PathServiceAndroid implements IPathService {
 
 	@Override
 	public String getDbPath() {
-		return dbPath + "/Yester.db3";
+		return combine(dbPath, "YesterDroid.db3");
 	}
 
 	@Override
 	public String getFFMpegDbPath() {
-		return dbPath + "/Yester.FFMpeg.db3";
+		return combine(dbPath, "Yester.FFMpeg.db3");
 	}
 
 	@Override
@@ -67,6 +73,28 @@ public class PathServiceAndroid implements IPathService {
 		return compilationPath;
 	}
 
+	@Override
+	public String getLegacyDbPath() {
+		return combine(dbPath, "Yester.db3");
+	}
+
+	private boolean fileExists(String filename) {
+		File file = new File(filename);
+		return file.exists();
+	}
+	
+	@Override
+	public boolean isLegacyDb() {
+		return fileExists(this.getLegacyDbPath()) && firstExecution;
+	}
+	
+	@Override
+	public void turnLegacyDbDisabled() {
+		File file= new File(this.getLegacyDbPath());
+		File newPath= new File(this.getLegacyDbPath() + ".disabled");
+		file.renameTo(newPath);
+	}
+	
 	void createPath(String path) {
 		File file = new File(path);
 		if (!file.exists()) {
@@ -79,25 +107,14 @@ public class PathServiceAndroid implements IPathService {
 		createPath(mediaPath);
 		createPath(dbPath);
 		createPath(compilationPath);
-		
-		File dbFile = new File(dbPath + "/Yester.db3");
-		if (!dbFile.exists())
-			try {
-				dbFile.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-		
 	}
 
-	class MemoryUtils {
-		public boolean externalMemoryAvailable() {
-
+	static class MemoryUtils {
+		public static boolean externalMemoryAvailable() {
 			String state = Environment.getExternalStorageState();
 			return Environment.MEDIA_MOUNTED.equals(state);
 		}
 	}
+
 
 }

@@ -1,6 +1,7 @@
 package iSeconds.Droid;
 
 import iSeconds.Domain.IRepository;
+import iSeconds.Domain.Media;
 import iSeconds.Domain.MediaInfo;
 
 import org.apmem.tools.layouts.FlowLayout;
@@ -32,8 +33,9 @@ public class MediaActivity extends ActionBarActivity {
 
 	private void setupVideo() {
 		long mediaId = this.getIntent().getExtras().getLong("MediaId");
-		IRepository repository = App.getRepository(this);
-		MediaInfo media = repository.getMedia(mediaId);
+//		IRepository repository = App.getRepository(this);
+//		MediaInfo media = repository.getMedia(mediaId);
+		Media media = Media.load(Media.class, mediaId);
 		final VideoView videoView = (VideoView) this.findViewById(R.id.mediaVideoView);
 		videoView.setVideoPath(media.getVideoPath());
 		videoView.seekTo(100);

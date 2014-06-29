@@ -20,7 +20,7 @@ public class DayInfo extends Model {
 	
 	public DayInfo() {}
 
-	public void setRepository(IRepository repository) {
+	/*public void setRepository(IRepository repository) {
 		this.repository = repository;
 	}
 	
@@ -54,7 +54,7 @@ public class DayInfo extends Model {
 	
 	public void setDate(Date date) {
 		this.date = SqlUtils.formatToSqliteDate(date);
-	}
+	}*/
 	
 	@Column(name = "TimelineId")
 	public long timelineId;
@@ -64,8 +64,6 @@ public class DayInfo extends Model {
 	
 	@Column(name = "DefaultVideoId")
 	public long defaultVideoId;
-
-
 
 
 }

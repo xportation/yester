@@ -18,7 +18,7 @@ public class Timeline extends Model {
 	}
 	public Timeline() {}
 	
-	public void setRepository(IRepository repository) {
+	/*public void setRepository(IRepository repository) {
 		this.repository = repository;
 	}
 	
@@ -60,7 +60,7 @@ public class Timeline extends Model {
 	public List<DayInfo> getAllVideos() {
 		assert(repository != null);		
 		return repository.getDays(this.getId());
-	}
+	}*/
 	
 	@Column(name = "Name")
 	public String name;

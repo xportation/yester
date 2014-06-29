@@ -6,7 +6,7 @@ import java.util.List;
 public interface IRepository {
 
 	void open();
-	void close();
+	/*void close();
 	
 	<T> void deleteAll(Class<T> klass);
 	<T> void saveItem(T entity);
@@ -19,6 +19,10 @@ public interface IRepository {
 	List<DayInfo> getAllDays(long id);
 	List<DayInfo> getDays(long timelineId);
 	User getUser(String userName);
-	MediaInfo getMedia(long id);
+	MediaInfo getMedia(long id);*/
+	
+	void addMediaTag(Media media);
+
+	List<Media> getAllMedias();
 
 }

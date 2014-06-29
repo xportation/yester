@@ -26,31 +26,32 @@ public class ISecondsApplication extends Application {
         super.onCreate();
         
         pathService = new PathServiceAndroid();
-        repository = new ISecondsDb(this, pathService.getDbPath());
+//        repository = new ISecondsDb(this, pathService.getLegacyDbPath());
+        repository = new ISecondsDb(this, pathService);
         repository.open();
         
-        login();
+//        login();
     }
 	
 	public User getUser() {
 		return user;
 	}
 	
-    private void login() {
-		user= repository.getUser("user");
-		if (user == null) {
-			user= new User("user", repository);
-			repository.saveUser(user);			
-			user.createTimeline(this.getString(R.string.default_timeline_name), 
-					this.getString(R.string.default_timeline_description));
-		}
-	}
+//    private void login() {
+//		user= repository.getUser("user");
+//		if (user == null) {
+//			user= new User("user", repository);
+//			repository.saveUser(user);			
+//			user.createTimeline(this.getString(R.string.default_timeline_name), 
+//					this.getString(R.string.default_timeline_description));
+//		}
+//	}
 
 	@Override
     public void onTerminate() {
         super.onTerminate();
         
-        repository.close();
+//        repository.close();
         
         ActiveAndroid.dispose();
     }

@@ -9,7 +9,7 @@ import com.activeandroid.annotation.Table;
 @Table(name = "User")
 public class User extends Model {
 
-	private IRepository repository = null;
+	/*private IRepository repository = null;
 	
 	public EventSource onCurrentTimelineChanged = new EventSource();
 	public EventSource onTimelineUpdated = new EventSource();
@@ -123,7 +123,7 @@ public class User extends Model {
 
 	@Column(name = "TutorialShown")
 	public boolean tutorialShown;
-
+*/
 
 
 }

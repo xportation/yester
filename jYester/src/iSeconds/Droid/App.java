@@ -22,4 +22,8 @@ public class App {
 		ISecondsApplication app= (ISecondsApplication) activity.getApplication();
 		return app.getRepository();
 	}
+
+	public static IRepository getRepository(Fragment fragment) {
+		return App.getRepository(fragment.getActivity());
+	}
 }

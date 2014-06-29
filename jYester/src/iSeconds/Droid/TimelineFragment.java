@@ -1,6 +1,8 @@
 package iSeconds.Droid;
 
 import iSeconds.Domain.DayInfo;
+import iSeconds.Domain.IRepository;
+import iSeconds.Domain.Media;
 import iSeconds.Domain.MediaInfo;
 import iSeconds.Domain.Timeline;
 import iSeconds.Domain.User;
@@ -80,6 +82,7 @@ public class TimelineFragment extends Fragment {
 		
 	private User user = null;
 	private List<MediaItem> items = null;
+	private IRepository repository = null;
 	
 	private Toast toast = null;	
 	private View rootView = null;
@@ -96,6 +99,7 @@ public class TimelineFragment extends Fragment {
 				container, false);
 		
 		user = App.getUser(this);
+		repository = App.getRepository(this);
 		listView= (GridView) rootView.findViewById(R.id.timelineDays);		
 		setupMonthViewer(listView);
 		
@@ -199,20 +203,29 @@ public class TimelineFragment extends Fragment {
 	}
 
 	private List<MediaItem> buildItems() {
-		Timeline timeline= user.getCurrentTimeline();
-		
+//		Timeline timeline= user.getCurrentTimeline();
+//		
+//		List<MediaItem> items= new ArrayList<MediaItem>();
+//		for (DayInfo day: timeline.getAllVideos()) {
+//			for (MediaInfo media: day.getVideos()) {
+//				MediaItem mediaItem= new MediaItem(); 
+//				mediaItem.thumbnail= media.getThumbnailPath();
+//				mediaItem.date= day.getDate();
+//				mediaItem.videoPath = media.getVideoPath();
+//				mediaItem.mediaId = media.getId();
+//				items.add(mediaItem);
+//			}
+//		}
 		List<MediaItem> items= new ArrayList<MediaItem>();
-		for (DayInfo day: timeline.getAllVideos()) {
-			for (MediaInfo media: day.getVideos()) {
-				MediaItem mediaItem= new MediaItem(); 
-				mediaItem.thumbnail= media.getThumbnailPath();
-				mediaItem.date= day.getDate();
-				mediaItem.videoPath = media.getVideoPath();
-				mediaItem.mediaId = media.getId();
-				items.add(mediaItem);
-			}
+		List<Media> medias = repository.getAllMedias();
+		for (Media media: medias) {
+			MediaItem mediaItem= new MediaItem(); 
+			mediaItem.thumbnail= media.getThumbnailPath();
+			mediaItem.date= media.getDate();
+			mediaItem.videoPath = media.getVideoPath();
+			mediaItem.mediaId = media.getId();
+			items.add(mediaItem);
 		}
-		
 		return items;
 	}
 	
