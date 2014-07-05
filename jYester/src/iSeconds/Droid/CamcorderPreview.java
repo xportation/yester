@@ -20,7 +20,7 @@ public class CamcorderPreview extends Activity {
 
 		String videoPath = this.getIntent().getExtras().getString ("video.path");
 
-		setContentView(R.layout.camcorder_preview);
+		setContentView(R.layout.fragment_camcorder_preview);
 		VideoView videoView = (VideoView) findViewById (R.id.camcorderPreviewVideo);
 		videoView.setVideoPath (videoPath);
 		videoView.start ();

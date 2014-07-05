@@ -18,6 +18,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -47,13 +49,13 @@ public class CamcorderFragment extends Fragment {
 		
 //		setContentView(R.layout.camcorder);
 		
-		View rootView = inflater.inflate(R.layout.camcorder,
+		View rootView = inflater.inflate(R.layout.fragment_camcorder,
 				container, false);
 
 		configureServicesAndParameters();
 		configureCamcorderView(rootView);
 		configureRecordButton(rootView);
-		configureResolutionDropdown(rootView);
+		configureResolutionButton(rootView);
 		configureCountdown(rootView);
 		configureDurationGroup(rootView);
 		
@@ -93,6 +95,7 @@ public class CamcorderFragment extends Fragment {
 		Media media = new Media();
 		media.setDate(videoDate);
 		media.setPath(videoPath);
+		media.save();
 
 		// TODO: fazer isso em background
 		try {
@@ -185,14 +188,14 @@ public class CamcorderFragment extends Fragment {
 
 	}
 
-	void configureResolutionDropdown(View rootView) {
-		RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.layoutCamcorder);
+	void configureResolutionButton(View rootView) {
+//		RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.layoutCamcorder);
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
-				android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		Spinner spinner = (Spinner) rootView.findViewById(R.id.camcorderResolution);
-		spinner.setAdapter(adapter);
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
+//				android.R.layout.simple_spinner_item);
+//		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//		Spinner spinner = (Spinner) rootView.findViewById(R.id.camcorderResolution);
+//		spinner.setAdapter(adapter);
 
 		// spinner.ItemSelected += (s, evt) => {
 		// Android.Graphics.Rect rect = new Android.Graphics.Rect ();
@@ -210,11 +213,11 @@ public class CamcorderFragment extends Fragment {
 	}
 
 	void configureCamcorderView(View rootView) {
-		RelativeLayout layout = (RelativeLayout)rootView.findViewById(R.id.layoutCamcorder);
+		LinearLayout layout = (LinearLayout)rootView.findViewById(R.id.layoutCamcorder);
 		camcorderView = new CamcorderView(this.getActivity(), 0);
 		ViewGroup.LayoutParams camcorderLayoutParams = new ViewGroup.LayoutParams(
-				ViewGroup.LayoutParams.WRAP_CONTENT,
-				ViewGroup.LayoutParams.WRAP_CONTENT);
+				ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.MATCH_PARENT);
 		layout.addView(camcorderView, 0, camcorderLayoutParams);
 		camcorderView.onVideoRecorded.addListener(new EventSourceListener() {
 

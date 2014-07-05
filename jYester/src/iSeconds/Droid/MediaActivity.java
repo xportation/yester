@@ -63,7 +63,7 @@ public class MediaActivity extends ActionBarActivity {
 		
 		String tags[] = { "Bagualo", "Avestruz", "Tiberio", "Bosta", "Fiz Coco", "I s2 coco" };
 		for (String tag: tags) {
-			View view = inflater.inflate(R.layout.closable_textview, null);
+			View view = inflater.inflate(R.layout.item_closable_textview, null);
 	        TextView textView = (TextView)view.findViewById(R.id.closableTextViewText);
 	        textView.setText(tag);
 	        layout.addView(view, 0);

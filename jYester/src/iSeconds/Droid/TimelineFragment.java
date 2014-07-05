@@ -16,6 +16,8 @@ import java.util.TimeZone;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -147,8 +149,10 @@ public class TimelineFragment extends Fragment {
 				if (items != null && items.size() > 0) {
 					SimpleDateFormat format = new SimpleDateFormat("MMMM, yyyy", Locale.getDefault());
 					String text = format.format(items.get(firstVisibleItem).date);
-					toasTextView.setText(text);						
-					toast.show();
+					//toasTextView.setText(text);						
+					//toast.show();
+					ActionBar actionBar = ((ActionBarActivity)getActivity()).getSupportActionBar();
+					actionBar.setTitle(text);
 				}
 			}
 

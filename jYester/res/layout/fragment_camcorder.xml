@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:id="@+id/layoutCamcorder"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:id="@+id/layoutCamcorder"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#000"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/camcorderLayoutResolution"
         android:background="#64000000">
 
-        <Spinner
-            android:id="@+id/camcorderResolution"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+        <ImageButton
+            android:id="@+id/camcorderHD"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:padding="5dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_change_camera" />
 
         <TextView
-            android:text="00:03"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/camcorderCountdown"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/camcorderCountdown"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="1" />
+            android:text="00:03"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
 
         <ImageButton
             android:id="@+id/camcorderSwapCamera"
@@ -40,8 +53,6 @@
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -54,33 +65,35 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:minHeight="25px"
-            android:minWidth="25px" >
+            android:gravity="center">
 
             <RadioButton
+                android:id="@+id/camcorder1sec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="1 sec"
-                android:id="@+id/camcorder1sec" />
+                android:textColor="#fff" />
+
             <RadioButton
+                android:id="@+id/camcorder3sec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3 sec"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:id="@+id/camcorder3sec" />
+                android:text="3 sec"
+                android:textColor="#fff" />
+
             <RadioButton
+                android:id="@+id/camcorder5sec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5 sec"
-                android:id="@+id/camcorder5sec" />
+                android:textColor="#fff" />
+
         </RadioGroup>
         <LinearLayout
             android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:gravity="center"

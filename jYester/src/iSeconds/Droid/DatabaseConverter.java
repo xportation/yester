@@ -1,6 +1,5 @@
 package iSeconds.Droid;
 
-import iSeconds.Domain.IPathService;
 import iSeconds.Domain.IRepository;
 import iSeconds.Domain.Media;
 import iSeconds.Domain.SqlUtils;
@@ -16,9 +15,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.activeandroid.ActiveAndroid;
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
 
 public class DatabaseConverter {
 

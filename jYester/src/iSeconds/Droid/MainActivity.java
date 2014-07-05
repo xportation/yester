@@ -29,8 +29,10 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_timeline);
+		setContentView(R.layout.activity_main);
 
+		this.getSupportActionBar().hide();
+		
 		mTitle = getTitle();
 
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -124,6 +126,10 @@ public class MainActivity extends ActionBarActivity implements
 
 	@Override
 	public void onPageSelected(int position) {
+		if (position == 0)
+			this.getSupportActionBar().hide();
+		else
+			this.getSupportActionBar().show();
 //		if (position != 0)
 //			this.camcorderFragment.stopCamera();
 //		else
