@@ -76,12 +76,16 @@ public class TimelineFragment extends Fragment {
 		private String dateText;
 		private ImageView thumbnail;
 		
-	    public MediaItemHolder(View base, String dateText) {
+	    public MediaItemHolder(View base) {
 	    	thumbnail = (ImageView) base.findViewById(R.id.itemTimelineDayImage);
 	    	date = (TextView) base.findViewById(R.id.itemTimelineDayText);
 	    	
-	    	this.dateText = dateText;
+	    	setLoading();
 	    } 
+	    
+	    public void setDateText(String date) {
+	    	this.dateText = date;
+	    }
 	    
 		public void setFailed() {
 			date.setText("Fail");
@@ -135,14 +139,16 @@ public class TimelineFragment extends Fragment {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context).inflate(R.layout.item_timeline_day, parent, false);
 				
-				holder = new MediaItemHolder(convertView, items.get(position).dateString());
+				holder = new MediaItemHolder(convertView);
+		        holder.setImageDrawable(null);
+		        holder.setLoading();
+		        
 				convertView.setTag(holder);
 			} else {
 			    holder = (MediaItemHolder) convertView.getTag();
+			    holder.setDateText(items.get(position).dateString());
 			}
-
-	        holder.setImageDrawable(null);
-	        holder.setLoading();
+			
 
 			return convertView;
 		}
