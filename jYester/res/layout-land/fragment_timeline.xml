@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="iSeconds.Droid.TimelineActivity$PlaceholderFragment" 
-    android:baselineAligned="false">
+<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!--     xmlns:tools="http://schemas.android.com/tools" -->
+<!--     android:layout_width="match_parent" -->
+<!--     android:layout_height="match_parent" -->
+<!--     tools:context="iSeconds.Droid.TimelineActivity$PlaceholderFragment"  -->
+<!--     android:baselineAligned="false"> -->
+    <org.lucasr.smoothie.AsyncGridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/timelineDays"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:columnWidth="@dimen/image_width"
+        android:horizontalSpacing="1dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/timeline_selector" />
     
-    <GridView
+    <!-- GridView
         android:id="@+id/timelineDays"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
@@ -17,6 +28,6 @@
         android:background="#FFFFFF"
         android:layout_weight="1"
         android:drawSelectorOnTop="true"
-        android:listSelector="@drawable/timeline_selector" />
+        android:listSelector="@drawable/timeline_selector" / -->
 
-</LinearLayout>
+<!-- </LinearLayout> -->

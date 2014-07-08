@@ -10,7 +10,6 @@
         android:scaleType="centerCrop"
         />
 
-	<!-- TODO: Cores hard aqui mano -->    
     <TextView 
         android:id="@+id/itemTimelineDayText"
         android:layout_width="match_parent"

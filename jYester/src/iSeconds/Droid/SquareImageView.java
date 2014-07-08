@@ -1,11 +1,11 @@
 package iSeconds.Droid;
 
+import uk.co.senab.bitmapcache.CacheableImageView;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
-public class SquareImageView extends ImageView {
-	
+public class SquareImageView extends CacheableImageView {
+
     public SquareImageView(Context context)
     {
         super(context);

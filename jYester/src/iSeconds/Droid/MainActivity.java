@@ -138,7 +138,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	public void showTimeline() {
-		this.timelineFragment.updateItems();
+//		this.timelineFragment.updateItems();
 		mViewPager.setCurrentItem(1);
 		
 	}
