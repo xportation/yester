@@ -73,35 +73,18 @@ public class TimelineFragment extends Fragment {
 	
 	class MediaItemHolder {    
 		private TextView date;
-		private String dateText;
 		private ImageView thumbnail;
 		
-	    public MediaItemHolder(View base) {
+	    public MediaItemHolder(View base, String dateText) {
 	    	thumbnail = (ImageView) base.findViewById(R.id.itemTimelineDayImage);
 	    	date = (TextView) base.findViewById(R.id.itemTimelineDayText);
-	    	
-	    	setLoading();
+	    	date.setText(dateText);
 	    } 
 	    
-	    public void setDateText(String date) {
-	    	this.dateText = date;
-	    }
-	    
-		public void setFailed() {
-			date.setText("Fail");
-		}
-		
-		public void setLoaded() {
-			date.setText(dateText);
-		}
-
 		public void setImageDrawable(Drawable drawable) {
 			thumbnail.setImageDrawable(drawable);			
 		}
 
-		public void setLoading() {
-			date.setText("Loading");
-		}
 	}
 	
 	public class MediaAdapter extends BaseAdapter {
@@ -134,21 +117,14 @@ public class TimelineFragment extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-		    MediaItemHolder holder = null;
-
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context).inflate(R.layout.item_timeline_day, parent, false);
 				
-				holder = new MediaItemHolder(convertView);
+				MediaItemHolder holder = new MediaItemHolder(convertView, items.get(position).dateString());
 		        holder.setImageDrawable(null);
-		        holder.setLoading();
 		        
 				convertView.setTag(holder);
-			} else {
-			    holder = (MediaItemHolder) convertView.getTag();
-			    holder.setDateText(items.get(position).dateString());
-			}
-			
+			}		
 
 			return convertView;
 		}
@@ -185,10 +161,8 @@ public class TimelineFragment extends Fragment {
 	    public void displayItem(View itemView, CacheableBitmapDrawable result, boolean fromMemory) {
 	    	MediaItemHolder holder = (MediaItemHolder) itemView.getTag();
 
-	        if (result == null) {
-	            holder.setFailed();
+	        if (result == null)
 	            return;
-	        }
 
 	        if (fromMemory) {
 	            holder.setImageDrawable(result);
@@ -201,8 +175,6 @@ public class TimelineFragment extends Fragment {
 	            holder.setImageDrawable(fadeInDrawable);
 	            fadeInDrawable.startTransition(200);
 	        }
-
-	        holder.setLoaded();
 	    }
 	}
 	
@@ -268,8 +240,8 @@ public class TimelineFragment extends Fragment {
 		MediaListLoader loader = new MediaListLoader(cache);
 
         ItemManager.Builder builder = new ItemManager.Builder(loader);
-        builder.setPreloadItemsEnabled(true).setPreloadItemsCount(15);
-        builder.setThreadPoolSize(4);
+        builder.setPreloadItemsEnabled(true).setPreloadItemsCount(12);
+        builder.setThreadPoolSize(6);
 
         timelineGridView.setItemManager(builder.build());
         

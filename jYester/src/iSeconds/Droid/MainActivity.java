@@ -3,6 +3,7 @@ package iSeconds.Droid;
 import java.util.Locale;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity implements
 		ViewPager.OnPageChangeListener {
@@ -43,13 +45,19 @@ public class MainActivity extends ActionBarActivity implements
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
 		mViewPager.setOnPageChangeListener(this);
+		
+
+		final int actionBarTitle = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+	    final TextView title = (TextView)getWindow().findViewById(actionBarTitle);
+	    if ( title != null )
+	        title.setEllipsize(null);
 	}
 
 	public void restoreActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setTitle(mTitle);
+		actionBar.setTitle(mTitle);		
 	}
 
 	@Override
@@ -138,7 +146,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	public void showTimeline() {
-//		this.timelineFragment.updateItems();
+		this.timelineFragment.updateItems();
 		mViewPager.setCurrentItem(1);
 		
 	}
